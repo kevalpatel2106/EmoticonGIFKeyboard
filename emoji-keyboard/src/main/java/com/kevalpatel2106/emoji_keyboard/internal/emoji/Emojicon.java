@@ -22,7 +22,7 @@ import android.os.Parcelable;
 /**
  * @author Hieu Rocker (rockerhieu@gmail.com)
  */
-public  final class Emojicon implements Parcelable {
+public final class Emojicon implements Parcelable {
 
     public static final Creator<Emojicon> CREATOR = new Creator<Emojicon>() {
         @Override

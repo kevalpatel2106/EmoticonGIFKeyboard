@@ -40,7 +40,10 @@ public class EmoticonFragment extends Fragment {
     //Adapter to display emoticon grids.
     private EmoticonGridAdapter mEmoticonGridAdapter;
 
+    //Listener to notify when emoticons selected.
     private EmoticonSelectListener mEmoticonSelectListener;
+
+    private EmojiconRecentManager mEmojiconRecentManager;
 
     //set the emoticon click listener
     private AdapterView.OnItemClickListener mOnEmoticonSelectedListener = new AdapterView.OnItemClickListener() {
@@ -66,8 +69,17 @@ public class EmoticonFragment extends Fragment {
         return new EmoticonFragment();
     }
 
-    public void setEmoticonSelectListener(EmoticonSelectListener emoticonSelectListener) {
+    @SuppressWarnings("ConstantConditions")
+    public void setEmoticonSelectListener(@NonNull EmoticonSelectListener emoticonSelectListener) {
+        if (emoticonSelectListener == null)
+            throw new IllegalArgumentException("EmoticonSelectListener cannot be null.");
         mEmoticonSelectListener = emoticonSelectListener;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mEmojiconRecentManager = EmojiconRecentManager.getInstance(mContext);
     }
 
     @Override
@@ -83,13 +95,16 @@ public class EmoticonFragment extends Fragment {
 
         //Set the grid view
         GridView gridView = view.findViewById(R.id.emoji_gridView);
-        mEmoticons = getEmoticonsList(0);
+        mEmoticons = getEmoticonsList(mEmojiconRecentManager.getRecentPage());
         mEmoticonGridAdapter = new EmoticonGridAdapter(mContext, mEmoticons, false);
         gridView.setAdapter(mEmoticonGridAdapter);
         gridView.setOnItemClickListener(mOnEmoticonSelectedListener);
 
         //Set headers
         setTabHeaders(view);
+
+        //Set back space key
+        setBackSpace(view);
     }
 
     /**
@@ -99,14 +114,14 @@ public class EmoticonFragment extends Fragment {
      */
     private void setTabHeaders(@NonNull View view) {
         final View[] emojiTabs = new View[8];
-        emojiTabs[0] = view.findViewById(R.id.emojis_tab_0_recents);
-        emojiTabs[1] = view.findViewById(R.id.emojis_tab_1_people);
-        emojiTabs[2] = view.findViewById(R.id.emojis_tab_2_nature);
-        emojiTabs[3] = view.findViewById(R.id.emojis_tab_3_food);
-        emojiTabs[4] = view.findViewById(R.id.emojis_tab_4_sport);
-        emojiTabs[5] = view.findViewById(R.id.emojis_tab_5_cars);
-        emojiTabs[6] = view.findViewById(R.id.emojis_tab_6_elec);
-        emojiTabs[7] = view.findViewById(R.id.emojis_tab_7_sym);
+        emojiTabs[EmoticonsCategories.RECENTS] = view.findViewById(R.id.emojis_tab_0_recents);
+        emojiTabs[EmoticonsCategories.PEOPLE] = view.findViewById(R.id.emojis_tab_1_people);
+        emojiTabs[EmoticonsCategories.NATURE] = view.findViewById(R.id.emojis_tab_2_nature);
+        emojiTabs[EmoticonsCategories.FOOD] = view.findViewById(R.id.emojis_tab_3_food);
+        emojiTabs[EmoticonsCategories.SPORT] = view.findViewById(R.id.emojis_tab_4_sport);
+        emojiTabs[EmoticonsCategories.CARS] = view.findViewById(R.id.emojis_tab_5_cars);
+        emojiTabs[EmoticonsCategories.ELECTRIC] = view.findViewById(R.id.emojis_tab_6_elec);
+        emojiTabs[EmoticonsCategories.SYMBOLS] = view.findViewById(R.id.emojis_tab_7_sym);
 
         //Set the click listener in each tab
         for (int i = 0; i < emojiTabs.length; i++) {
@@ -127,31 +142,39 @@ public class EmoticonFragment extends Fragment {
         }
 
         //Select recent tabs selected while creating new instance
-        emojiTabs[0].setSelected(true);
+        emojiTabs[mEmojiconRecentManager.getRecentPage()].setSelected(true);
+    }
 
-        //TODO handle back space
+    private void setBackSpace(@NonNull View view) {
+        view.findViewById(R.id.emojis_backspace)
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (mEmoticonSelectListener != null) mEmoticonSelectListener.onBackSpace();
+                    }
+                });
     }
 
     private List<Emojicon> getEmoticonsList(int position) {
         switch (position) {
-            case 0:
+            case EmoticonsCategories.RECENTS:
                 return new ArrayList<>();
-            case 1:
+            case EmoticonsCategories.PEOPLE:
                 return Arrays.asList(People.DATA);
-            case 2:
+            case EmoticonsCategories.NATURE:
                 return Arrays.asList(Nature.DATA);
-            case 3:
+            case EmoticonsCategories.FOOD:
                 return Arrays.asList(Food.DATA);
-            case 4:
+            case EmoticonsCategories.SPORT:
                 return Arrays.asList(Sport.DATA);
-            case 5:
+            case EmoticonsCategories.CARS:
                 return Arrays.asList(Cars.DATA);
-            case 6:
+            case EmoticonsCategories.ELECTRIC:
                 return Arrays.asList(Electr.DATA);
-            case 7:
+            case EmoticonsCategories.SYMBOLS:
                 return Arrays.asList(Symbols.DATA);
             default:
-                return new ArrayList<>(0);
+                throw new IllegalStateException("Invalid position.");
         }
     }
 }
