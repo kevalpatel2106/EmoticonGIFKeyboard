@@ -20,9 +20,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.text.style.DynamicDrawableSpan;
 import android.util.AttributeSet;
-import android.widget.EditText;
 
-import com.kevalpatel2106.emoji_keyboard.Helper.EmojiconHandler;
 import com.kevalpatel2106.emoji_keyboard.R;
 
 /**

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.kevalpatel2106.emoji_keyboard.Helper;
+package com.kevalpatel2106.emoji_keyboard.views;
 
 import android.content.Context;
 import android.graphics.Canvas;

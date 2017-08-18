@@ -14,18 +14,18 @@
  * limitations under the License.
  */
 
-package com.kevalpatel2106.emoji_keyboard.Helper;
+package com.kevalpatel2106.emoji_keyboard.views;
 
 import android.content.Context;
 import android.text.Spannable;
 import android.util.SparseIntArray;
 
+import com.kevalpatel2106.emoji_keyboard.R;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-
-import com.kevalpatel2106.emoji_keyboard.R;
 
 /**
  * @author Hani Al Momani (hani.momanii@gmail.com)
@@ -33,9 +33,6 @@ import com.kevalpatel2106.emoji_keyboard.R;
 
 
 public final class EmojiconHandler {
-    private EmojiconHandler() {
-    }
-
     private static final SparseIntArray sEmojisMap = new SparseIntArray(1029);
     private static final SparseIntArray sSoftbanksMap = new SparseIntArray(471);
     private static Map<String, Integer> sEmojisModifiedMap = new HashMap<>();
@@ -1059,6 +1056,9 @@ public final class EmojiconHandler {
         sEmojisMap.put(0x1f566, R.drawable.emoji_1f566);
 
 
+    }
+
+    private EmojiconHandler() {
     }
 
     private static boolean isSoftBankEmoji(char c) {

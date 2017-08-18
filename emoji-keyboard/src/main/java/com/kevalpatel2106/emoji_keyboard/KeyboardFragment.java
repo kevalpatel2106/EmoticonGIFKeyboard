@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.kevalpatel2106.emoji_keyboard.internal.EmoticonFragment;
+import com.kevalpatel2106.emoji_keyboard.internal.emoticons.EmoticonFragment;
 
 
 /**

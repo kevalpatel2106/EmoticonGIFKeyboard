@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.kevalpatel2106.emoji_keyboard.internal.EmoticonFragment">
+    tools:context="com.kevalpatel2106.emoji_keyboard.internal.emoticons.EmoticonFragment">
 
     <!--Tab titles of emoticons category-->
     <include layout="@layout/tab_emoticons"/>

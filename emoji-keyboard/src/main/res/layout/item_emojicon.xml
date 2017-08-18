@@ -16,7 +16,7 @@
 
 <com.kevalpatel2106.emoji_keyboard.views.EmojiconTextView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:emojicon="http://schemas.android.com/apk/res-auto"
+    xmlns:emoticon="http://schemas.android.com/apk/res-auto"
     android:id="@+id/emojicon_icon"
     android:layout_width="36dip"
     android:layout_height="36dip"
@@ -24,4 +24,4 @@
     android:gravity="center"
     android:textColor="#000000"
     android:textSize="20sp"
-    emojicon:emojiconSize="30dip"/>
+    emoticon:emojiconSize="30dip"/>

@@ -22,9 +22,7 @@ import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.text.style.DynamicDrawableSpan;
 import android.util.AttributeSet;
-import android.widget.TextView;
 
-import com.kevalpatel2106.emoji_keyboard.Helper.EmojiconHandler;
 import com.kevalpatel2106.emoji_keyboard.R;
 
 /**
