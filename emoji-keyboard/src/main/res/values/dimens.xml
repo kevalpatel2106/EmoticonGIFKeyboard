@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="keyboard_tabs_container_height">40dp</dimen>
+    <dimen name="gif_image_view_height">100dp</dimen>
+    <dimen name="gif_grid_view_item_spacing">6dp</dimen>
+    <dimen name="emoticon_grid_view_item_spacing">2dp</dimen>
+    <dimen name="image_btn_padding">6dp</dimen>
+</resources>

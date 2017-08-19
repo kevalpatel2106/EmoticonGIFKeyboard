@@ -21,17 +21,16 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 
-import com.kevalpatel2106.emoji_keyboard.internal.emoticons.emoji.Emoticon;
-
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 /**
- * @author Daniele Ricci
- * @author Hani Al Momani (hani.momanii@gmail.com)
+ * This is singleton class to handle the recent emoticons and recently selected categories.
+ *
+ * @author <a href='https://github.com/kevalpatel2106'>Kevalpatel2106</a>
  */
 
-class EmoticonRecentManager {
+final class EmoticonRecentManager {
 
     /**
      * Name of the preference file to store all the emoticons data.
@@ -95,21 +94,26 @@ class EmoticonRecentManager {
         return sInstance;
     }
 
+    private SharedPreferences getPreferences() {
+        return mContext.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
+    }
+
     /**
      * @return Last opened {@link EmoticonsCategories}.
      */
     @SuppressWarnings("WrongConstant")
     @EmoticonsCategories.EmoticonsCategory
-    int getRecentPage() {
+    int getLastCategory() {
         return getPreferences().getInt(KEY_PREF_PAGE, EmoticonsCategories.RECENT);
     }
 
-    void setRecentPage(@EmoticonsCategories.EmoticonsCategory int page) {
-        getPreferences().edit().putInt(KEY_PREF_PAGE, page).apply();
-    }
-
-    private SharedPreferences getPreferences() {
-        return mContext.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
+    /**
+     * Set the recently opened category.
+     *
+     * @param recentCategory recently opened category from {@link EmoticonsCategories}.
+     */
+    void setLastCategory(@EmoticonsCategories.EmoticonsCategory int recentCategory) {
+        getPreferences().edit().putInt(KEY_PREF_PAGE, recentCategory).apply();
     }
 
     /**
@@ -135,9 +139,11 @@ class EmoticonRecentManager {
 
     /**
      * Add new emoticons to the recent list. This will always add new emoticon to the first position
-     * to keep most recent emoticons first.
+     * to keep most recent emoticons first. Once the list gets updated {@link #saveRecentEmoticons()}
+     * method will be called to save updated list.
      *
      * @param emoticon {@link Emoticon} to add.
+     * @see #saveRecentEmoticons()
      */
     void add(@NonNull Emoticon emoticon) {
         //Check if the emoticon is  already present?
@@ -160,7 +166,8 @@ class EmoticonRecentManager {
     }
 
     /**
-     * Save the recent emoticons.
+     * Save the recent emoticons list. This will save first 100 emoticons unicode to the shared
+     * preference with '~' saturation character.
      */
     private void saveRecentEmoticons() {
         StringBuilder str = new StringBuilder();

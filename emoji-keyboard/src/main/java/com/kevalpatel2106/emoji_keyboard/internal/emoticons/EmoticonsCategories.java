@@ -7,6 +7,9 @@ import java.lang.annotation.RetentionPolicy;
 
 /**
  * Created by Keval on 18-Aug-17.
+ * This class has the list of all the emoticons categories.
+ *
+ * @author <a href='https://github.com/kevalpatel2106'>Kevalpatel2106</a>
  */
 
 final class EmoticonsCategories {

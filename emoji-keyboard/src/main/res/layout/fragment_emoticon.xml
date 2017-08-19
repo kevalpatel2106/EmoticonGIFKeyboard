@@ -3,16 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_light"
     android:orientation="vertical"
     tools:context="com.kevalpatel2106.emoji_keyboard.internal.emoticons.EmoticonFragment">
 
     <!--Tab titles of emoticons category-->
-    <include layout="@layout/tab_emoticons"/>
+    <include
+        layout="@layout/tab_emoticons"
+        android:background="@color/background_dark"/>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="#ffffff"/>
+    <include layout="@layout/layout_divider"/>
 
     <!--Emoticons grid-->
     <GridView
@@ -22,8 +22,8 @@
         android:background="@android:color/transparent"
         android:cacheColorHint="@android:color/transparent"
         android:columnWidth="40dip"
-        android:horizontalSpacing="0dip"
+        android:horizontalSpacing="@dimen/emoticon_grid_view_item_spacing"
         android:numColumns="auto_fit"
         android:scrollbars="none"
-        android:verticalSpacing="0dip"/>
+        android:verticalSpacing="@dimen/emoticon_grid_view_item_spacing"/>
 </LinearLayout>

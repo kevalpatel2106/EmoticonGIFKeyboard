@@ -16,6 +16,8 @@
 
 package com.kevalpatel2106.emoji_keyboard.internal.emoticons.emoji;
 
+import com.kevalpatel2106.emoji_keyboard.internal.emoticons.Emoticon;
+
 /**
  * @author Hieu Rocker (rockerhieu@gmail.com)
  */

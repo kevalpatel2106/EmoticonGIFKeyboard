@@ -3,34 +3,47 @@ package com.kevalpatel2106.emoji_keyboard;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.kevalpatel2106.emoji_keyboard.internal.EmoticonGifImageView;
 import com.kevalpatel2106.emoji_keyboard.internal.emoticons.EmoticonFragment;
+import com.kevalpatel2106.emoji_keyboard.internal.gifs.GifFragment;
+import com.kevalpatel2106.emoji_keyboard.internal.gifs.GifLoaderProtocol;
 
 
 /**
  * A simple {@link Fragment} subclass. This fragment will host the smiles and gifs.
  */
-public class KeyboardFragment extends Fragment {
+public final class KeyboardFragment extends Fragment {
+    //Fragments to load.
+    private final EmoticonFragment mEmoticonFragment;
+    private final GifFragment mGifFragment;
     private Context mContext;
-    private View mRootView;
+    //View pager to load Emoticons and GIFs
+    private ViewPager mMainViewPager;
 
-    private EmoticonFragment mEmoticonFragment;
+    //Tabs
+    private View mEmoticonTab;
+    private View mGifTab;
+
+    //Backspace button
+    private EmoticonGifImageView mBackSpaceBtn;
+
+    //Listener to notify when emoticons selected.
+    private EmoticonSelectListener mEmoticonSelectListener;
 
     public KeyboardFragment() {
-        // Required empty public constructor
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
         //Initiate emoticon fragment.
         mEmoticonFragment = EmoticonFragment.getNewInstance();
+        mGifFragment = GifFragment.getNewInstance();
     }
 
     @Override
@@ -50,33 +63,159 @@ public class KeyboardFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mRootView = view.findViewById(R.id.root_view);
+        mEmoticonTab = view.findViewById(R.id.btn_emoji_tab);
+        mGifTab = view.findViewById(R.id.btn_gif_tab);
+
+        //Set backspace button
+        setBackSpace(view);
+
+        //Set the search button
+        setSearchBtn(view);
+
+        setViewPager(view);
 
         //Set the click listener for Emoticons
-        view.findViewById(R.id.btn_emoji_tab)
-                .setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        getChildFragmentManager()
-                                .beginTransaction()
-                                .replace(R.id.main_container, mEmoticonFragment)
-                                .commit();
-                    }
-                });
+        mEmoticonTab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mMainViewPager.setCurrentItem(ViewPagerAdapter.POS_EMOTICON);
+                setTabIcons();
+            }
+        });
 
         //Set the click listener for GIF
-        view.findViewById(R.id.btn_gif_tab)
+        mGifTab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mMainViewPager.setCurrentItem(ViewPagerAdapter.POS_GIF);
+                setTabIcons();
+            }
+        });
+    }
+
+    /**
+     * Set the viewpager. There will be two pages in view pager.
+     *
+     * @param rootView Root view.
+     */
+    private void setViewPager(@NonNull View rootView) {
+        mMainViewPager = rootView.findViewById(R.id.main_view_pager);
+        mMainViewPager.setAdapter(new ViewPagerAdapter(getChildFragmentManager()));
+        mMainViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                //Do nothing
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                setTabIcons();
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                //Do nothing
+            }
+        });
+
+        //Select Emoticon fragment by default
+        mMainViewPager.setCurrentItem(ViewPagerAdapter.POS_EMOTICON);
+        setTabIcons();
+    }
+
+    /**
+     * Set the tab icons tint and backspace button visibility based on the currently selected page in
+     * {@link #mMainViewPager}.
+     */
+    private void setTabIcons() {
+        mGifTab.setSelected(mMainViewPager.getCurrentItem() == ViewPagerAdapter.POS_GIF);
+        mBackSpaceBtn.setVisibility(mMainViewPager.getCurrentItem() == ViewPagerAdapter.POS_EMOTICON ?
+                View.VISIBLE : View.GONE);
+        mEmoticonTab.setSelected(mMainViewPager.getCurrentItem() == ViewPagerAdapter.POS_EMOTICON);
+    }
+
+    /**
+     * Set the click lister for the backspace.
+     *
+     * @param rootView Root view.
+     */
+    private void setBackSpace(@NonNull View rootView) {
+        mBackSpaceBtn = rootView.findViewById(R.id.emojis_backspace);
+        mBackSpaceBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mEmoticonSelectListener != null) mEmoticonSelectListener.onBackSpace();
+            }
+        });
+    }
+
+    /**
+     * Set the click lister for the backspace.
+     *
+     * @param rootView Root view.
+     */
+    private void setSearchBtn(@NonNull View rootView) {
+        rootView.findViewById(R.id.search_btn)
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        //TODO display GIF.
-                        getChildFragmentManager()
-                                .beginTransaction()
-                                .replace(R.id.main_container, mEmoticonFragment)
-                                .commit();
+                        //TODO search button
                     }
                 });
     }
 
+    /**
+     * Set the {@link EmoticonSelectListener} to get notify whenever the emoticon is selected or deleted.
+     *
+     * @param emoticonSelectListener {@link EmoticonSelectListener}
+     */
+    @SuppressWarnings("ConstantConditions")
+    public void setEmoticonSelectListener(@NonNull EmoticonSelectListener emoticonSelectListener) {
+        if (emoticonSelectListener == null)
+            throw new IllegalArgumentException("EmoticonSelectListener cannot be null.");
 
+        mEmoticonSelectListener = emoticonSelectListener;
+        mEmoticonFragment.setEmoticonSelectListener(emoticonSelectListener);
+    }
+
+    /**
+     * Set the GIF loader adapter.
+     *
+     * @param gifLoader Loader class that extends {@link GifLoaderProtocol}.
+     */
+    public void setGifLoader(@NonNull GifLoaderProtocol gifLoader) {
+        mGifFragment.setGifLoader(gifLoader);
+    }
+
+    /**
+     * {@link FragmentStatePagerAdapter} for view pager. There are two tabs:
+     * <li>Emoticon</li>
+     * <li>GIFs</li>
+     */
+    private class ViewPagerAdapter extends FragmentStatePagerAdapter {
+
+        private static final int POS_EMOTICON = 0;
+        private static final int POS_GIF = 1;
+
+        ViewPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            switch (position) {
+                case POS_EMOTICON:  //Emoticons
+                    return mEmoticonFragment;
+                case POS_GIF:       //GIFs
+                    return mGifFragment;
+                default:
+                    throw new IllegalStateException("Invalid position.");
+            }
+        }
+
+        @Override
+        public int getCount() {
+            return 2;
+        }
+    }
 }

@@ -20,102 +20,96 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/emojis_tab"
     android:layout_width="match_parent"
-    android:layout_height="50dip"
+    android:layout_height="40dip"
     android:layout_alignParentTop="true"
-    android:orientation="horizontal">
+    android:background="@color/background_dark"
+    android:elevation="2dp"
+    android:orientation="horizontal"
+    tools:ignore="UnusedAttribute">
 
-    <ImageButton
+    <com.kevalpatel2106.emoji_keyboard.internal.EmoticonGifImageView
         android:id="@+id/emojis_tab_0_recents"
         android:layout_width="0dip"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="@null"
-        android:scaleType="center"
-        android:src="@drawable/selector_emoji_recent"
+        android:background="?selectableItemBackground"
+        android:padding="@dimen/image_btn_padding"
+        android:src="@drawable/emoji_recent"
         tools:ignore="ContentDescription"/>
 
-    <ImageButton
+    <com.kevalpatel2106.emoji_keyboard.internal.EmoticonGifImageView
         android:id="@+id/emojis_tab_1_people"
         android:layout_width="0dip"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="@null"
-        android:scaleType="center"
-        android:src="@drawable/selector_emoji_people"
+        android:background="?selectableItemBackground"
+        android:padding="@dimen/image_btn_padding"
+        android:src="@drawable/emoji_people"
         tools:ignore="ContentDescription"/>
 
 
-    <ImageButton
+    <com.kevalpatel2106.emoji_keyboard.internal.EmoticonGifImageView
         android:id="@+id/emojis_tab_2_nature"
         android:layout_width="0dip"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="@null"
-        android:scaleType="center"
-        android:src="@drawable/selector_emoji_nature"
+        android:background="?selectableItemBackground"
+        android:padding="@dimen/image_btn_padding"
+        android:src="@drawable/emoji_nature"
         tools:ignore="ContentDescription"/>
 
 
-    <ImageButton
+    <com.kevalpatel2106.emoji_keyboard.internal.EmoticonGifImageView
         android:id="@+id/emojis_tab_3_food"
         android:layout_width="0dip"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="@null"
-        android:scaleType="center"
-        android:src="@drawable/selector_emoji_food"
+        android:background="?selectableItemBackground"
+        android:padding="@dimen/image_btn_padding"
+        android:src="@drawable/emoji_food"
         tools:ignore="ContentDescription"/>
 
 
-    <ImageButton
+    <com.kevalpatel2106.emoji_keyboard.internal.EmoticonGifImageView
         android:id="@+id/emojis_tab_4_sport"
         android:layout_width="0dip"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="@null"
-        android:scaleType="center"
-        android:src="@drawable/selector_emoji_activity"
+        android:background="?selectableItemBackground"
+        android:padding="@dimen/image_btn_padding"
+        android:src="@drawable/emoji_activity"
         tools:ignore="ContentDescription"/>
 
 
-    <ImageButton
+    <com.kevalpatel2106.emoji_keyboard.internal.EmoticonGifImageView
         android:id="@+id/emojis_tab_5_cars"
         android:layout_width="0dip"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="@null"
-        android:scaleType="center"
-        android:src="@drawable/selector_emoji_travel"
+        android:background="?selectableItemBackground"
+        android:padding="@dimen/image_btn_padding"
+        android:src="@drawable/emoji_travel"
         tools:ignore="ContentDescription"/>
 
 
-    <ImageButton
+    <com.kevalpatel2106.emoji_keyboard.internal.EmoticonGifImageView
         android:id="@+id/emojis_tab_6_elec"
         android:layout_width="0dip"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="@null"
-        android:scaleType="center"
-        android:src="@drawable/selector_emoji_objects"
+        android:background="?selectableItemBackground"
+        android:padding="@dimen/image_btn_padding"
+        android:src="@drawable/emoji_objects"
         tools:ignore="ContentDescription"/>
 
 
-    <ImageButton
+    <com.kevalpatel2106.emoji_keyboard.internal.EmoticonGifImageView
         android:id="@+id/emojis_tab_7_sym"
         android:layout_width="0dip"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="@null"
-        android:scaleType="center"
-        android:src="@drawable/selector_emoji_symbols"
+        android:background="?selectableItemBackground"
+        android:padding="@dimen/image_btn_padding"
+        android:src="@drawable/emoji_symbols"
         tools:ignore="ContentDescription"/>
-
-
-    <ImageButton
-        android:id="@+id/emojis_backspace"
-        android:layout_width="0dip"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="@null"
-        android:src="@drawable/emoji_x"/>
 </LinearLayout>

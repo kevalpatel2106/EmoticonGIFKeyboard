@@ -1,4 +1,4 @@
-package com.kevalpatel2106.emoji_keyboard.internal.emoticons;
+package com.kevalpatel2106.emoji_keyboard.internal.gifs;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -7,8 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.TextView;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.kevalpatel2106.emoji_keyboard.R;
 
 import java.util.List;
@@ -17,14 +18,14 @@ import java.util.List;
  * Created by Keval on 18-Aug-17.
  */
 
-final class EmoticonGridAdapter extends ArrayAdapter<Emoticon> {
+final class GifGridAdapter extends ArrayAdapter<Gif> {
     private final Context mContext;
-    private List<Emoticon> mData;
+    private List<Gif> mData;
     private boolean mUseSystemDefault = false;
 
-    EmoticonGridAdapter(@NonNull Context context,
-                        @NonNull List<Emoticon> data,
-                        boolean useSystemDefault) {
+    GifGridAdapter(@NonNull Context context,
+                   @NonNull List<Gif> data,
+                   boolean useSystemDefault) {
         super(context, R.layout.item_emojicon, data);
         mContext = context;
         mData = data;
@@ -33,7 +34,7 @@ final class EmoticonGridAdapter extends ArrayAdapter<Emoticon> {
 
     @Nullable
     @Override
-    public Emoticon getItem(int position) {
+    public Gif getItem(int position) {
         return mData.get(position);
     }
 
@@ -43,21 +44,28 @@ final class EmoticonGridAdapter extends ArrayAdapter<Emoticon> {
         View v = convertView;
         ViewHolder holder;
         if (v == null) {
-            v = LayoutInflater.from(mContext).inflate(R.layout.item_emojicon, parent, false);
+            v = LayoutInflater.from(mContext).inflate(R.layout.item_gif, parent, false);
 
             holder = new ViewHolder();
-            holder.icon = v.findViewById(R.id.emojicon_icon);
+            holder.gifIv = v.findViewById(R.id.gif_iv);
             v.setTag(holder);
         } else {
             holder = (ViewHolder) v.getTag();
         }
 
-        Emoticon emoji = getItem(position);
-        if (emoji != null) holder.icon.setText(emoji.getUnicode());
+        Gif gif = getItem(position);
+        if (gif != null) {
+            Glide.with(mContext)
+                    .load(gif.getPreviewGifUrl())
+                    .asGif()
+                    .crossFade()
+                    .centerCrop()
+                    .into(holder.gifIv);
+        }
         return v;
     }
 
     private class ViewHolder {
-        private TextView icon;
+        private ImageView gifIv;
     }
 }

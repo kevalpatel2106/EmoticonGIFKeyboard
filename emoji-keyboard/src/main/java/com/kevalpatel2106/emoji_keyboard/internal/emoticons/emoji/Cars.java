@@ -17,6 +17,8 @@
 
 package com.kevalpatel2106.emoji_keyboard.internal.emoticons.emoji;
 
+import com.kevalpatel2106.emoji_keyboard.internal.emoticons.Emoticon;
+
 /**
  * @author Hani Al Momani (hani.momanii@gmail.com)
  */

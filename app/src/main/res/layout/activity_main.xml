@@ -10,7 +10,8 @@
     <TextView
         android:id="@+id/selected_emoticons_tv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:padding="10dp"/>
 
     <FrameLayout
         android:id="@+id/keyboard_container"

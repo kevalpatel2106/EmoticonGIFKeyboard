@@ -14,9 +14,9 @@ import android.widget.GridView;
 
 import com.kevalpatel2106.emoji_keyboard.EmoticonSelectListener;
 import com.kevalpatel2106.emoji_keyboard.R;
+import com.kevalpatel2106.emoji_keyboard.internal.EmoticonGifImageView;
 import com.kevalpatel2106.emoji_keyboard.internal.emoticons.emoji.Cars;
 import com.kevalpatel2106.emoji_keyboard.internal.emoticons.emoji.Electr;
-import com.kevalpatel2106.emoji_keyboard.internal.emoticons.emoji.Emoticon;
 import com.kevalpatel2106.emoji_keyboard.internal.emoticons.emoji.Food;
 import com.kevalpatel2106.emoji_keyboard.internal.emoticons.emoji.Nature;
 import com.kevalpatel2106.emoji_keyboard.internal.emoticons.emoji.People;
@@ -30,8 +30,10 @@ import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
+ *
+ * @author <a href='https://github.com/kevalpatel2106'>Kevalpatel2106</a>
  */
-public class EmoticonFragment extends Fragment {
+public final class EmoticonFragment extends Fragment implements AdapterView.OnItemClickListener {
     private Context mContext;
 
     //Array list to hold currently displaying emoticons list
@@ -45,22 +47,6 @@ public class EmoticonFragment extends Fragment {
 
     //Recently used emoticons.
     private EmoticonRecentManager mEmoticonRecentManager;
-
-    //set the emoticon click listener
-    private AdapterView.OnItemClickListener mOnEmoticonSelectedListener = new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-            Emoticon emoticonSelected = mEmoticonGridAdapter.getItem(position);
-            if (emoticonSelected == null) return;
-
-            //Notify the emoticon
-            if (mEmoticonSelectListener != null)
-                mEmoticonSelectListener.emoticonSelected(emoticonSelected);
-
-            //Save the emoticon to the recent list
-            mEmoticonRecentManager.add(emoticonSelected);
-        }
-    };
 
     public EmoticonFragment() {
         // Required empty public constructor
@@ -95,34 +81,31 @@ public class EmoticonFragment extends Fragment {
 
         //Set the grid view
         mEmoticons = new ArrayList<>();
-        mEmoticons.addAll(getEmoticonsList(mEmoticonRecentManager.getRecentPage()));
+        mEmoticons.addAll(getEmoticonsList(mEmoticonRecentManager.getLastCategory()));
         mEmoticonGridAdapter = new EmoticonGridAdapter(mContext, mEmoticons, false);
         GridView gridView = view.findViewById(R.id.emoji_gridView);
         gridView.setAdapter(mEmoticonGridAdapter);
-        gridView.setOnItemClickListener(mOnEmoticonSelectedListener);
+        gridView.setOnItemClickListener(this);
 
         //Set headers
         setTabHeaders(view);
-
-        //Set back space key
-        setBackSpace(view);
     }
 
     /**
      * Set the tab headers with categories of emoticons and back space button.
      *
-     * @param view Root view.
+     * @param rootView Root view.
      */
-    private void setTabHeaders(@NonNull View view) {
-        final View[] emojiTabs = new View[8];
-        emojiTabs[EmoticonsCategories.RECENT] = view.findViewById(R.id.emojis_tab_0_recents);
-        emojiTabs[EmoticonsCategories.PEOPLE] = view.findViewById(R.id.emojis_tab_1_people);
-        emojiTabs[EmoticonsCategories.NATURE] = view.findViewById(R.id.emojis_tab_2_nature);
-        emojiTabs[EmoticonsCategories.FOOD] = view.findViewById(R.id.emojis_tab_3_food);
-        emojiTabs[EmoticonsCategories.SPORT] = view.findViewById(R.id.emojis_tab_4_sport);
-        emojiTabs[EmoticonsCategories.CARS] = view.findViewById(R.id.emojis_tab_5_cars);
-        emojiTabs[EmoticonsCategories.ELECTRIC] = view.findViewById(R.id.emojis_tab_6_elec);
-        emojiTabs[EmoticonsCategories.SYMBOLS] = view.findViewById(R.id.emojis_tab_7_sym);
+    private void setTabHeaders(@NonNull View rootView) {
+        final EmoticonGifImageView[] emojiTabs = new EmoticonGifImageView[8];
+        emojiTabs[EmoticonsCategories.RECENT] = rootView.findViewById(R.id.emojis_tab_0_recents);
+        emojiTabs[EmoticonsCategories.PEOPLE] = rootView.findViewById(R.id.emojis_tab_1_people);
+        emojiTabs[EmoticonsCategories.NATURE] = rootView.findViewById(R.id.emojis_tab_2_nature);
+        emojiTabs[EmoticonsCategories.FOOD] = rootView.findViewById(R.id.emojis_tab_3_food);
+        emojiTabs[EmoticonsCategories.SPORT] = rootView.findViewById(R.id.emojis_tab_4_sport);
+        emojiTabs[EmoticonsCategories.CARS] = rootView.findViewById(R.id.emojis_tab_5_cars);
+        emojiTabs[EmoticonsCategories.ELECTRIC] = rootView.findViewById(R.id.emojis_tab_6_elec);
+        emojiTabs[EmoticonsCategories.SYMBOLS] = rootView.findViewById(R.id.emojis_tab_7_sym);
 
         //Set the click listener in each tab
         for (int i = 0; i < emojiTabs.length; i++) {
@@ -136,28 +119,19 @@ public class EmoticonFragment extends Fragment {
 
                     //Update the grid with emoticons for that category
                     mEmoticons.clear();
+                    //noinspection WrongConstant
                     mEmoticons.addAll(getEmoticonsList(position));
                     mEmoticonGridAdapter.notifyDataSetChanged();
 
                     //Save the selected category
                     //noinspection WrongConstant
-                    mEmoticonRecentManager.setRecentPage(position);
+                    mEmoticonRecentManager.setLastCategory(position);
                 }
             });
         }
 
         //Select recent tabs selected while creating new instance
-        emojiTabs[mEmoticonRecentManager.getRecentPage()].setSelected(true);
-    }
-
-    private void setBackSpace(@NonNull View view) {
-        view.findViewById(R.id.emojis_backspace)
-                .setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (mEmoticonSelectListener != null) mEmoticonSelectListener.onBackSpace();
-                    }
-                });
+        emojiTabs[mEmoticonRecentManager.getLastCategory()].setSelected(true);
     }
 
     /**
@@ -172,9 +146,14 @@ public class EmoticonFragment extends Fragment {
         mEmoticonSelectListener = emoticonSelectListener;
     }
 
-
-    private List<Emoticon> getEmoticonsList(int position) {
-        switch (position) {
+    /**
+     * Get the emoticons list for the selected category.
+     *
+     * @param category category id.
+     * @return List of {@link Emoticon}
+     */
+    private List<Emoticon> getEmoticonsList(@EmoticonsCategories.EmoticonsCategory int category) {
+        switch (category) {
             case EmoticonsCategories.RECENT:
                 return mEmoticonRecentManager.getRecentEmoticons();
             case EmoticonsCategories.PEOPLE:
@@ -194,5 +173,18 @@ public class EmoticonFragment extends Fragment {
             default:
                 throw new IllegalStateException("Invalid position.");
         }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+        Emoticon emoticonSelected = mEmoticonGridAdapter.getItem(position);
+        if (emoticonSelected == null) return;
+
+        //Notify the emoticon
+        if (mEmoticonSelectListener != null)
+            mEmoticonSelectListener.emoticonSelected(emoticonSelected);
+
+        //Save the emoticon to the recent list
+        mEmoticonRecentManager.add(emoticonSelected);
     }
 }

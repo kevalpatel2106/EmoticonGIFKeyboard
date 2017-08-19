@@ -1,1 +1,5 @@
-<manifest package="com.kevalpatel2106.emoji_keyboard"/>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.kevalpatel2106.emoji_keyboard">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+</manifest>
