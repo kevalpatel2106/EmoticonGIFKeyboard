@@ -1,1 +1,1 @@
-include ':app', ':emoticongifkeyboard', ':giphy-adapter', ':emoticon-ios'
+include ':app', ':emoticongifkeyboard', ':gifpack-giphy', ':emoticonpack-ios', ':emoticonpack-google', ':emoticonpack-twitter', ':emoticonpack-emojione'

@@ -7,7 +7,7 @@ import android.widget.TextView;
 import com.kevalpatel2106.emoticongifkeyboard.EmoticonSelectListener;
 import com.kevalpatel2106.emoticongifkeyboard.KeyboardFragment;
 import com.kevalpatel2106.emoticongifkeyboard.emoticons.Emoticon;
-import com.kevalpatel2106.giphyadaprer.GiphyGifLoader;
+import com.kevalpatel2106.gifpack.giphy.GiphyGifLoader;
 
 public class MainActivity extends AppCompatActivity {
 

@@ -10,6 +10,18 @@ android {
 
         consumerProguardFiles 'proguard-rules.pro'
     }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    dexOptions {
+        preDexLibraries true
+    }
+
+    aaptOptions {
+        cruncherEnabled false
+    }
 }
 
 dependencies {
