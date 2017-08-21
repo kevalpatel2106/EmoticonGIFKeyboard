@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import com.kevalpatel2106.emoticongifkeyboard.R;
 import com.kevalpatel2106.emoticongifkeyboard.emoticons.Emoticon;
 import com.kevalpatel2106.emoticongifkeyboard.emoticons.EmoticonProvider;
-import com.kevalpatel2106.emoticongifkeyboard.emoticons.widget.EmojiconTextView;
+import com.kevalpatel2106.emoticongifkeyboard.emoticons.widget.EmoticonTextView;
 
 import java.util.List;
 
@@ -68,7 +68,7 @@ final class EmoticonAdapter extends RecyclerView.Adapter<EmoticonAdapter.ViewHol
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        EmojiconTextView icon;
+        EmoticonTextView icon;
 
         ViewHolder(View itemView) {
             super(itemView);

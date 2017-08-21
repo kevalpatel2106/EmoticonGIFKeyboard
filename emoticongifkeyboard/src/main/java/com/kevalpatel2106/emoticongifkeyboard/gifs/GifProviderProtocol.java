@@ -11,7 +11,7 @@ import java.util.List;
  * @author <a href='https://github.com/kevalpatel2106'>Kevalpatel2106</a>
  */
 
-public abstract class GifLoaderProtocol {
+public interface GifProviderProtocol {
 
     /**
      * Load the trending GIFs list.
@@ -21,5 +21,5 @@ public abstract class GifLoaderProtocol {
      */
     @Nullable
     @WorkerThread
-    public abstract List<Gif> getTrendingGifs(int limit);
+    List<Gif> getTrendingGifs(int limit);
 }

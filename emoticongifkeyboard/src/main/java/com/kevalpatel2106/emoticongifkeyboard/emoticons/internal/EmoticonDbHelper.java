@@ -39,6 +39,11 @@ class EmoticonDbHelper extends SQLiteOpenHelper {
                 + EmoticonDbColumns.DESCRIPTION + " VARCHAR,"
                 + EmoticonDbColumns.CATEGORY + " INTEGER,"
                 + EmoticonDbColumns.TAGS + " VARCHAR);");
+
+
+        sqLiteDatabase.execSQL("CREATE INDEX unicode_category ON " + EmoticonDbColumns.TABLE + "("
+                + EmoticonDbColumns.CATEGORY + ", "
+                + EmoticonDbColumns.UNICODE + ");");
     }
 
     @Override
@@ -46,11 +51,11 @@ class EmoticonDbHelper extends SQLiteOpenHelper {
         //TODO Drop table
     }
 
-    synchronized void insertInDb(@NonNull SQLiteDatabase sqLiteDatabase,
-                                 @NonNull String unicode,
-                                 @EmoticonsCategories.EmoticonsCategory int category,
-                                 @NonNull String description,
-                                 @Nullable String[] tags) {
+    synchronized void insertInDb(@NonNull final SQLiteDatabase sqLiteDatabase,
+                                 @NonNull final String unicode,
+                                 @EmoticonsCategories.EmoticonsCategory final int category,
+                                 @NonNull final String description,
+                                 @Nullable final String[] tags) {
         ContentValues values = new ContentValues();
         values.put(EmoticonDbColumns.UNICODE, unicode);
         values.put(EmoticonDbColumns.CATEGORY, category);
@@ -58,6 +63,7 @@ class EmoticonDbHelper extends SQLiteOpenHelper {
         if (tags != null) values.put(EmoticonDbColumns.TAGS, TextUtils.join(",", tags));
         Log.d(TAG, "insertInDb: " + description);
         sqLiteDatabase.insert(EmoticonDbColumns.TABLE, null, values);
+        values.clear();
     }
 
     int getCount() {
@@ -75,7 +81,7 @@ class EmoticonDbHelper extends SQLiteOpenHelper {
         return count;
     }
 
-    ArrayList<Emoticon> getEmoticons(@EmoticonsCategories.EmoticonsCategory int category) {
+    ArrayList<Emoticon> getEmoticons(@EmoticonsCategories.EmoticonsCategory final int category) {
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
         Cursor cursor = sqLiteDatabase.query(EmoticonDbColumns.TABLE,
                 new String[]{EmoticonDbColumns.UNICODE, EmoticonDbColumns.CATEGORY},

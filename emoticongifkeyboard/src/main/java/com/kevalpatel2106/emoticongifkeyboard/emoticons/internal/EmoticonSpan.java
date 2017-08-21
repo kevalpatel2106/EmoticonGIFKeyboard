@@ -14,10 +14,10 @@ import android.text.style.ImageSpan;
  * @see <a href='https://github.com/rockerhieu/emojicon/blob/master/library/src/main/java/io/github/rockerhieu/emojicon/EmojiconSpan.java>EmojiconSpan.java</a>
  */
 
-final class EmoticonSpan extends ImageSpan {
+public final class EmoticonSpan extends ImageSpan {
     private final float size;
 
-    EmoticonSpan(final Context context, @DrawableRes final int drawableRes, final float size) {
+    public EmoticonSpan(final Context context, @DrawableRes final int drawableRes, final float size) {
         super(context, drawableRes);
 
         this.size = size;

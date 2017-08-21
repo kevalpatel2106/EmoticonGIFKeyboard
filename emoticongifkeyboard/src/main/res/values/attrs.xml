@@ -15,7 +15,7 @@
   -->
 
 <resources>
-    <declare-styleable name="Emojicon">
+    <declare-styleable name="Emoticon">
         <attr name="emojiconSize" format="dimension" />
     </declare-styleable>
 </resources>

@@ -3,11 +3,11 @@ package com.kevalpatel2106.emoticongifkeyboard.gifs.internal;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.AppCompatImageView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.kevalpatel2106.emoticongifkeyboard.R;
@@ -22,15 +22,12 @@ import java.util.List;
 final class GifGridAdapter extends ArrayAdapter<Gif> {
     private final Context mContext;
     private List<Gif> mData;
-    private boolean mUseSystemDefault = false;
 
-    GifGridAdapter(@NonNull Context context,
-                   @NonNull List<Gif> data,
-                   boolean useSystemDefault) {
+    GifGridAdapter(@NonNull final Context context,
+                   @NonNull final List<Gif> data) {
         super(context, R.layout.item_emojicon, data);
         mContext = context;
         mData = data;
-        mUseSystemDefault = useSystemDefault;
     }
 
     @Nullable
@@ -67,6 +64,6 @@ final class GifGridAdapter extends ArrayAdapter<Gif> {
     }
 
     private class ViewHolder {
-        private ImageView gifIv;
+        private AppCompatImageView gifIv;
     }
 }

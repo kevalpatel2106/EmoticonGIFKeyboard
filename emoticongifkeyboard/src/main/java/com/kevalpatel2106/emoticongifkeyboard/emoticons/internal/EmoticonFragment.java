@@ -17,7 +17,6 @@ import com.kevalpatel2106.emoticongifkeyboard.EmoticonSelectListener;
 import com.kevalpatel2106.emoticongifkeyboard.R;
 import com.kevalpatel2106.emoticongifkeyboard.emoticons.Emoticon;
 import com.kevalpatel2106.emoticongifkeyboard.emoticons.EmoticonProvider;
-import com.kevalpatel2106.emoticongifkeyboard.gifs.internal.EmoticonGifImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +31,7 @@ public final class EmoticonFragment extends Fragment implements EmoticonAdapter.
     private Context mContext;
 
     //Array list to hold currently displaying emoticons list
-    private List<Emoticon> mEmoticons;
+    private ArrayList<Emoticon> mEmoticons;
 
     //Adapter to display emoticon grids.
     private EmoticonAdapter mEmoticonAdapter;
@@ -46,6 +45,7 @@ public final class EmoticonFragment extends Fragment implements EmoticonAdapter.
     //Emoticon provider
     @Nullable
     private EmoticonProvider mEmoticonProvider;
+    private RecyclerView mRecyclerView;
 
     public EmoticonFragment() {
         // Required empty public constructor
@@ -67,8 +67,7 @@ public final class EmoticonFragment extends Fragment implements EmoticonAdapter.
         mEmoticonRecentManager = EmoticonRecentManager.getInstance(mContext);
 
         //Check if we need to load emoticons to the database.
-        EmoticonDbHelper emoticonDbHelper = new EmoticonDbHelper(mContext);
-        if (emoticonDbHelper.getCount() <= 0) new EmoticonLoader(mContext).execute();
+        if (new EmoticonDbHelper(mContext).getCount() <= 0) new EmoticonLoader(mContext).execute();
     }
 
     @Override
@@ -87,10 +86,10 @@ public final class EmoticonFragment extends Fragment implements EmoticonAdapter.
         mEmoticons.addAll(getEmoticonsList(mEmoticonRecentManager.getLastCategory()));
         mEmoticonAdapter = new EmoticonAdapter(mContext, mEmoticons, mEmoticonProvider, this);
 
-        RecyclerView recyclerView = view.findViewById(R.id.emoji_gridView);
-        recyclerView.setAdapter(mEmoticonAdapter);
-        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 10));
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        mRecyclerView = view.findViewById(R.id.emoji_gridView);
+        mRecyclerView.setAdapter(mEmoticonAdapter);
+        mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 8));
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
         //Set headers
         setTabHeaders(view);
@@ -102,7 +101,7 @@ public final class EmoticonFragment extends Fragment implements EmoticonAdapter.
      * @param rootView Root view.
      */
     private void setTabHeaders(@NonNull View rootView) {
-        final EmoticonGifImageView[] emojiTabs = new EmoticonGifImageView[9];
+        final View[] emojiTabs = new View[9];
         emojiTabs[EmoticonsCategories.RECENT] = rootView.findViewById(R.id.emojis_tab_0_recents);
         emojiTabs[EmoticonsCategories.PEOPLE] = rootView.findViewById(R.id.emojis_tab_1_people);
         emojiTabs[EmoticonsCategories.NATURE] = rootView.findViewById(R.id.emojis_tab_2_nature);
@@ -128,6 +127,9 @@ public final class EmoticonFragment extends Fragment implements EmoticonAdapter.
                     //noinspection WrongConstant
                     mEmoticons.addAll(getEmoticonsList(position));
                     mEmoticonAdapter.notifyDataSetChanged();
+
+                    //Scroll the list to top.
+                    mRecyclerView.scrollToPosition(0);
 
                     //Save the selected category
                     //noinspection WrongConstant
@@ -170,10 +172,7 @@ public final class EmoticonFragment extends Fragment implements EmoticonAdapter.
             case EmoticonsCategories.ELECTRIC:
             case EmoticonsCategories.SYMBOLS:
             case EmoticonsCategories.FLAGS:
-                EmoticonDbHelper emoticonDbHelper = new EmoticonDbHelper(mContext);
-                List<Emoticon> emoticons = emoticonDbHelper.getEmoticons(category);
-                emoticonDbHelper.close();
-                return emoticons;
+                return new EmoticonDbHelper(mContext).getEmoticons(category);
             default:
                 throw new IllegalStateException("Invalid position.");
         }

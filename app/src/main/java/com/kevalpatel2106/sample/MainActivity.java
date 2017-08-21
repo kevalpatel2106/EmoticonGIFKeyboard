@@ -7,7 +7,8 @@ import android.widget.TextView;
 import com.kevalpatel2106.emoticongifkeyboard.EmoticonSelectListener;
 import com.kevalpatel2106.emoticongifkeyboard.KeyboardFragment;
 import com.kevalpatel2106.emoticongifkeyboard.emoticons.Emoticon;
-import com.kevalpatel2106.gifpack.giphy.GiphyGifLoader;
+import com.kevalpatel2106.emoticonpack.ios.IosEmoticonProvider;
+import com.kevalpatel2106.gifpack.giphy.GiphyGifProvider;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         final TextView textView = (TextView) findViewById(R.id.selected_emoticons_tv);
 
         KeyboardFragment keyboardFragment = new KeyboardFragment();
-//        keyboardFragment.setEmoticonProvider(IosEmoticonProvider.create());
+        keyboardFragment.setEmoticonProvider(IosEmoticonProvider.create());
         keyboardFragment.setEmoticonSelectListener(new EmoticonSelectListener() {
             @Override
             public void emoticonSelected(Emoticon emoticon) {
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-        keyboardFragment.setGifLoader(GiphyGifLoader.create(this, "564ce7370bf347f2b7c0e4746593c179"));
+        keyboardFragment.setGifProvider(GiphyGifProvider.create(this, "564ce7370bf347f2b7c0e4746593c179"));
 
         getSupportFragmentManager()
                 .beginTransaction()

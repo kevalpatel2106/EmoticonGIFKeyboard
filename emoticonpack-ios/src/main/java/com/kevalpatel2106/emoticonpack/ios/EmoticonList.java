@@ -1,7 +1,6 @@
 package com.kevalpatel2106.emoticonpack.ios;
 
 import com.kevalpatel2106.emoticongifkeyboard.emoticons.Emoticon;
-import com.kevalpatel2106.emoticonpack.R;
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,7 +12,8 @@ import java.util.List;
  */
 
 class EmoticonList {
-        static final List<Emoticon> EMOTICONS = Arrays.asList(new Emoticon(0x26bd, R.drawable.emoji_ios_26bd),
+    static final List<Emoticon> EMOTICONS = Arrays.asList(
+            new Emoticon(0x26bd, R.drawable.emoji_ios_26bd),
                 new Emoticon(0x1f3c0, R.drawable.emoji_ios_1f3c0),
                 new Emoticon(0x1f3c8, R.drawable.emoji_ios_1f3c8),
                 new Emoticon(0x26be, R.drawable.emoji_ios_26be),

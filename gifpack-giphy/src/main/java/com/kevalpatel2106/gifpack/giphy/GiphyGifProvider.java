@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.kevalpatel2106.emoticongifkeyboard.gifs.Gif;
-import com.kevalpatel2106.emoticongifkeyboard.gifs.GifLoaderProtocol;
+import com.kevalpatel2106.emoticongifkeyboard.gifs.GifProviderProtocol;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,12 +31,12 @@ import retrofit2.Retrofit;
  * @author <a href='https://github.com/kevalpatel2106'>Kevalpatel2106</a>
  */
 
-public class GiphyGifLoader extends GifLoaderProtocol {
+public class GiphyGifProvider implements GifProviderProtocol {
     private final String mApiKey;
     private final Cache mCache;
 
     @SuppressWarnings("ConstantConditions")
-    private GiphyGifLoader(@NonNull Context context, @NonNull String apiKey) {
+    private GiphyGifProvider(@NonNull Context context, @NonNull String apiKey) {
         if (apiKey == null || apiKey.isEmpty()) throw new RuntimeException("Invalid GIPHY key.");
 
         mApiKey = apiKey;
@@ -46,8 +46,8 @@ public class GiphyGifLoader extends GifLoaderProtocol {
         mCache = new Cache(httpCacheDirectory, CacheInterceptor.CACHE_SIZE);
     }
 
-    public static GiphyGifLoader create(@NonNull Context context, @NonNull String apiKey) {
-        return new GiphyGifLoader(context, apiKey);
+    public static GiphyGifProvider create(@NonNull Context context, @NonNull String apiKey) {
+        return new GiphyGifProvider(context, apiKey);
     }
 
     /**

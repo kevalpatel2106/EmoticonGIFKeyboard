@@ -20,7 +20,7 @@ import android.widget.ViewFlipper;
 
 import com.kevalpatel2106.emoticongifkeyboard.R;
 import com.kevalpatel2106.emoticongifkeyboard.gifs.Gif;
-import com.kevalpatel2106.emoticongifkeyboard.gifs.GifLoaderProtocol;
+import com.kevalpatel2106.emoticongifkeyboard.gifs.GifProviderProtocol;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +41,7 @@ public final class GifFragment extends Fragment implements AdapterView.OnItemCli
     private ViewFlipper mViewFlipper;
 
     //Gif loader protocol
-    private GifLoaderProtocol mGifLoader;
+    private GifProviderProtocol mGifLoader;
 
     //Error text view.
     private TextView mErrorTv;
@@ -74,10 +74,10 @@ public final class GifFragment extends Fragment implements AdapterView.OnItemCli
     /**
      * Set the GIF loader. This function is for internal use only.
      *
-     * @param gifLoader {@link GifLoaderProtocol}
+     * @param gifLoader {@link GifProviderProtocol}
      */
     @SuppressWarnings("ConstantConditions")
-    public void setGifLoader(@NonNull GifLoaderProtocol gifLoader) {
+    public void setGifLoader(@NonNull GifProviderProtocol gifLoader) {
         if (gifLoader == null) throw new RuntimeException("Set GIF loader.");
         mGifLoader = gifLoader;
     }
@@ -103,7 +103,7 @@ public final class GifFragment extends Fragment implements AdapterView.OnItemCli
 
         //Set the grid view
         mGifs = new ArrayList<>();
-        mGifGridAdapter = new GifGridAdapter(mContext, mGifs, false);
+        mGifGridAdapter = new GifGridAdapter(mContext, mGifs);
         GridView gridView = view.findViewById(R.id.gif_gridView);
         gridView.setAdapter(mGifGridAdapter);
 

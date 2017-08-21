@@ -107,19 +107,6 @@ public final class Emoticon implements Parcelable {
         if (unicode == null) throw new RuntimeException("Unicode cannot be null.");
     }
 
-    @Deprecated
-    public static Emoticon fromCodePoint(int codePoint) {
-        return new Emoticon(newString(codePoint));
-    }
-
-    public static Emoticon fromChar(char ch) {
-        return new Emoticon(Character.toString(ch));
-    }
-
-    public static Emoticon fromChars(String chars) {
-        return new Emoticon(chars);
-    }
-
     private static String newString(int codePoint) {
         if (Character.charCount(codePoint) == 1) {
             return String.valueOf(codePoint);

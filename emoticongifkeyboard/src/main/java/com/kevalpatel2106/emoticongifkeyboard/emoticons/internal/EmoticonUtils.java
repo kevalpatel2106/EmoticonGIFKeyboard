@@ -51,20 +51,14 @@ public final class EmoticonUtils {
      * @see EmoticonLoader#doInBackground(Void...)
      */
     static void createAndSaveEmoticonRegex(@NonNull final Context context,
-                                           @NonNull final List<String> unicodesForPattern) {
+                                           @NonNull final ArrayList<String> unicodesForPattern) {
         // We need to sort the unicodes by length so the longest one gets matched first.
         Collections.sort(unicodesForPattern, STRING_LENGTH_COMPARATOR);
-
-        //Generate pattern by appending the string.
-        final StringBuilder patternBuilder = new StringBuilder(3000);
-        for (int i = 0, forPatternSize = unicodesForPattern.size(); i < forPatternSize; i++)
-            patternBuilder.append(Pattern.quote(unicodesForPattern.get(i))).append('|');
-        final String regex = patternBuilder.deleteCharAt(patternBuilder.length() - 1).toString();
 
         //Save the regex
         context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE)
                 .edit()
-                .putString(EMOTICON_REGEX_KEY, regex)
+                .putString(EMOTICON_REGEX_KEY, TextUtils.join("|", unicodesForPattern))
                 .apply();
     }
 
@@ -85,7 +79,7 @@ public final class EmoticonUtils {
                                               final int emoticonSize) {
 
         final EmoticonSpan[] existingSpans = text.getSpans(0, text.length(), EmoticonSpan.class);
-        final List<Integer> existingSpanPositions = new ArrayList<>(existingSpans.length);
+        final ArrayList<Integer> existingSpanPositions = new ArrayList<>(existingSpans.length);
         for (EmoticonSpan existingSpan : existingSpans)
             existingSpanPositions.add(text.getSpanStart(existingSpan));
 
@@ -154,10 +148,10 @@ public final class EmoticonUtils {
         final int end;
         final Emoticon mEmoticon;
 
-        private EmoticonRange(final int start, final int end, @NonNull final Emoticon mEmoticon) {
+        private EmoticonRange(final int start, final int end, @NonNull final Emoticon emoticon) {
             this.start = start;
             this.end = end;
-            this.mEmoticon = mEmoticon;
+            this.mEmoticon = emoticon;
         }
 
         @Override

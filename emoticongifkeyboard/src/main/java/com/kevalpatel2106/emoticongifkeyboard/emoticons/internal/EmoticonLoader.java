@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * Created by Keval on 21-Aug-17.
@@ -37,15 +37,16 @@ class EmoticonLoader extends AsyncTask<Void, Void, Void> {
     @Override
     protected Void doInBackground(Void... voids) {
         try {
-            final List<String> unicodesForPattern = new ArrayList<>(3000);
-
 
             String emoticonData = readTextFile(R.raw.emoticons_list);
             if (emoticonData != null) {
+
                 //Open the database connection
-                EmoticonDbHelper helper = new EmoticonDbHelper(mContext);
-                SQLiteDatabase sqLiteDatabase = helper.getWritableDatabase();
-                JSONArray jsonArray = new JSONArray(emoticonData);
+                final EmoticonDbHelper helper = new EmoticonDbHelper(mContext);
+                final SQLiteDatabase sqLiteDatabase = helper.getWritableDatabase();
+                final JSONArray jsonArray = new JSONArray(emoticonData);
+                final ArrayList<String> unicodesForPattern = new ArrayList<>(jsonArray.length());
+
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject object = jsonArray.getJSONObject(i);
                     if (!object.has("emoji") || !object.has("category")) continue;
@@ -64,7 +65,7 @@ class EmoticonLoader extends AsyncTask<Void, Void, Void> {
                             object.getString("description"),
                             tags);
 
-                    unicodesForPattern.add(object.getString("emoji"));
+                    unicodesForPattern.add(i, Pattern.quote(object.getString("emoji")));
                 }
 
                 //Close the database connection
@@ -95,6 +96,7 @@ class EmoticonLoader extends AsyncTask<Void, Void, Void> {
         } finally {
             try {
                 inputStream.close();
+                br.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }

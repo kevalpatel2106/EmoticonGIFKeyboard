@@ -20,18 +20,8 @@ import com.kevalpatel2106.emoticongifkeyboard.R;
 public final class EmoticonGifImageView extends AppCompatImageView {
     private Context mContext;
 
-    public EmoticonGifImageView(Context context) {
-        super(context);
-        init(context);
-    }
-
     public EmoticonGifImageView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init(context);
-    }
-
-    public EmoticonGifImageView(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
         init(context);
     }
 

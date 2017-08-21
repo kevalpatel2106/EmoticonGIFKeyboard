@@ -17,7 +17,7 @@ import android.widget.ViewFlipper;
 
 import com.kevalpatel2106.emoticongifkeyboard.emoticons.EmoticonProvider;
 import com.kevalpatel2106.emoticongifkeyboard.emoticons.internal.EmoticonFragment;
-import com.kevalpatel2106.emoticongifkeyboard.gifs.GifLoaderProtocol;
+import com.kevalpatel2106.emoticongifkeyboard.gifs.GifProviderProtocol;
 import com.kevalpatel2106.emoticongifkeyboard.gifs.internal.EmoticonGifImageView;
 import com.kevalpatel2106.emoticongifkeyboard.gifs.internal.GifFragment;
 
@@ -197,9 +197,9 @@ public final class KeyboardFragment extends Fragment {
     /**
      * Set the GIF loader adapter.
      *
-     * @param gifLoader Loader class that extends {@link GifLoaderProtocol}.
+     * @param gifLoader Loader class that extends {@link GifProviderProtocol}.
      */
-    public void setGifLoader(@NonNull GifLoaderProtocol gifLoader) {
+    public void setGifProvider(@NonNull GifProviderProtocol gifLoader) {
         mGifFragment.setGifLoader(gifLoader);
     }
 
