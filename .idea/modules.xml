@@ -6,7 +6,10 @@
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/emoticongifkeyboard/emoji-keyboard.iml" filepath="$PROJECT_DIR$/emoticongifkeyboard/emoji-keyboard.iml" />
       <module fileurl="file://$PROJECT_DIR$/emoticon-ios/emoticon-ios.iml" filepath="$PROJECT_DIR$/emoticon-ios/emoticon-ios.iml" />
+      <module fileurl="file://$PROJECT_DIR$/emoticon-ios/emoticon-ios.iml" filepath="$PROJECT_DIR$/emoticon-ios/emoticon-ios.iml" />
       <module fileurl="file://$PROJECT_DIR$/emoticongifkeyboard/emoticongifkeyboard.iml" filepath="$PROJECT_DIR$/emoticongifkeyboard/emoticongifkeyboard.iml" />
+      <module fileurl="file://$PROJECT_DIR$/emoticongifkeyboard/emoticongifkeyboard.iml" filepath="$PROJECT_DIR$/emoticongifkeyboard/emoticongifkeyboard.iml" />
+      <module fileurl="file://$PROJECT_DIR$/giphy-adapter/giphy-adapter.iml" filepath="$PROJECT_DIR$/giphy-adapter/giphy-adapter.iml" />
       <module fileurl="file://$PROJECT_DIR$/giphy-adapter/giphy-adapter.iml" filepath="$PROJECT_DIR$/giphy-adapter/giphy-adapter.iml" />
     </modules>
   </component>

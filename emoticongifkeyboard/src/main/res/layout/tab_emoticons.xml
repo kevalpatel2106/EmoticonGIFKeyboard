@@ -112,4 +112,14 @@
         android:padding="@dimen/image_btn_padding"
         android:src="@drawable/emoji_symbols"
         tools:ignore="ContentDescription"/>
+
+    <com.kevalpatel2106.emoticongifkeyboard.internal.EmoticonGifImageView
+        android:id="@+id/emojis_tab_8_flag"
+        android:layout_width="0dip"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="?selectableItemBackground"
+        android:padding="@dimen/image_btn_padding"
+        android:src="@drawable/emoji_flags"
+        tools:ignore="ContentDescription"/>
 </LinearLayout>

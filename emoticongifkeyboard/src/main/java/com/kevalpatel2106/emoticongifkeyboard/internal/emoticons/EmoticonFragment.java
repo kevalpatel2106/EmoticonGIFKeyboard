@@ -16,16 +16,8 @@ import android.view.ViewGroup;
 import com.kevalpatel2106.emoticongifkeyboard.EmoticonSelectListener;
 import com.kevalpatel2106.emoticongifkeyboard.R;
 import com.kevalpatel2106.emoticongifkeyboard.internal.EmoticonGifImageView;
-import com.kevalpatel2106.emoticongifkeyboard.internal.emoticons.emoji.Cars;
-import com.kevalpatel2106.emoticongifkeyboard.internal.emoticons.emoji.Electr;
-import com.kevalpatel2106.emoticongifkeyboard.internal.emoticons.emoji.Food;
-import com.kevalpatel2106.emoticongifkeyboard.internal.emoticons.emoji.Nature;
-import com.kevalpatel2106.emoticongifkeyboard.internal.emoticons.emoji.People;
-import com.kevalpatel2106.emoticongifkeyboard.internal.emoticons.emoji.Sport;
-import com.kevalpatel2106.emoticongifkeyboard.internal.emoticons.emoji.Symbols;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -67,6 +59,10 @@ public final class EmoticonFragment extends Fragment implements EmoticonAdapter.
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mEmoticonRecentManager = EmoticonRecentManager.getInstance(mContext);
+
+        //Check if we need to load emoticons to the database.
+        EmoticonDbHelper emoticonDbHelper = new EmoticonDbHelper(mContext);
+        if (emoticonDbHelper.getCount() <= 0) new EmoticonLoader(mContext).execute();
     }
 
     @Override
@@ -100,7 +96,7 @@ public final class EmoticonFragment extends Fragment implements EmoticonAdapter.
      * @param rootView Root view.
      */
     private void setTabHeaders(@NonNull View rootView) {
-        final EmoticonGifImageView[] emojiTabs = new EmoticonGifImageView[8];
+        final EmoticonGifImageView[] emojiTabs = new EmoticonGifImageView[9];
         emojiTabs[EmoticonsCategories.RECENT] = rootView.findViewById(R.id.emojis_tab_0_recents);
         emojiTabs[EmoticonsCategories.PEOPLE] = rootView.findViewById(R.id.emojis_tab_1_people);
         emojiTabs[EmoticonsCategories.NATURE] = rootView.findViewById(R.id.emojis_tab_2_nature);
@@ -109,6 +105,7 @@ public final class EmoticonFragment extends Fragment implements EmoticonAdapter.
         emojiTabs[EmoticonsCategories.CARS] = rootView.findViewById(R.id.emojis_tab_5_cars);
         emojiTabs[EmoticonsCategories.ELECTRIC] = rootView.findViewById(R.id.emojis_tab_6_elec);
         emojiTabs[EmoticonsCategories.SYMBOLS] = rootView.findViewById(R.id.emojis_tab_7_sym);
+        emojiTabs[EmoticonsCategories.FLAGS] = rootView.findViewById(R.id.emojis_tab_8_flag);
 
         //Set the click listener in each tab
         for (int i = 0; i < emojiTabs.length; i++) {
@@ -160,19 +157,17 @@ public final class EmoticonFragment extends Fragment implements EmoticonAdapter.
             case EmoticonsCategories.RECENT:
                 return mEmoticonRecentManager.getRecentEmoticons();
             case EmoticonsCategories.PEOPLE:
-                return Arrays.asList(People.DATA);
             case EmoticonsCategories.NATURE:
-                return Arrays.asList(Nature.DATA);
             case EmoticonsCategories.FOOD:
-                return Arrays.asList(Food.DATA);
             case EmoticonsCategories.SPORT:
-                return Arrays.asList(Sport.DATA);
             case EmoticonsCategories.CARS:
-                return Arrays.asList(Cars.DATA);
             case EmoticonsCategories.ELECTRIC:
-                return Arrays.asList(Electr.DATA);
             case EmoticonsCategories.SYMBOLS:
-                return Arrays.asList(Symbols.DATA);
+            case EmoticonsCategories.FLAGS:
+                EmoticonDbHelper emoticonDbHelper = new EmoticonDbHelper(mContext);
+                List<Emoticon> emoticons = emoticonDbHelper.getEmoticons(category);
+                emoticonDbHelper.close();
+                return emoticons;
             default:
                 throw new IllegalStateException("Invalid position.");
         }

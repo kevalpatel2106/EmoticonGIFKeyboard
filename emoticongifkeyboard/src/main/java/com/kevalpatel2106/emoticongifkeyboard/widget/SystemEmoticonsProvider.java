@@ -1,7 +1,5 @@
 package com.kevalpatel2106.emoticongifkeyboard.widget;
 
-import android.support.annotation.NonNull;
-
 import com.kevalpatel2106.emoticongifkeyboard.internal.emoticons.Emoticon;
 import com.kevalpatel2106.emoticongifkeyboard.internal.emoticons.EmoticonProvider;
 
@@ -13,8 +11,14 @@ import com.kevalpatel2106.emoticongifkeyboard.internal.emoticons.EmoticonProvide
 
 final class SystemEmoticonsProvider implements EmoticonProvider {
 
+
     @Override
-    public Emoticon getEmoticon(@NonNull String unicode) {
-        return new Emoticon(unicode);
+    public Emoticon getEmoticon(int codePointHex) {
+        return Emoticon.fromCodePoint(codePointHex);
+    }
+
+    @Override
+    public boolean hasEmoticon(int codePointHex) {
+        return true;
     }
 }

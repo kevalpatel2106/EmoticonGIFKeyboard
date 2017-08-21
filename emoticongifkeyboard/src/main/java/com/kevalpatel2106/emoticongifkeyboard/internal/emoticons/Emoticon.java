@@ -20,6 +20,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import java.util.List;
 
@@ -55,8 +56,10 @@ public final class Emoticon implements Parcelable {
     @DrawableRes
     private int icon;
 
-
-    @NonNull
+    /**
+     * Different variants of the emoticons. This value will be null if there is no emoticons.
+     */
+    @Nullable
     private List<Emoticon> mVariants;
 
     public Emoticon(@NonNull String unicode) {
@@ -152,4 +155,8 @@ public final class Emoticon implements Parcelable {
         return unicode.hashCode();
     }
 
+    @Nullable
+    public List<Emoticon> getVariants() {
+        return mVariants;
+    }
 }
