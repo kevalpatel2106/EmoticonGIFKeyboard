@@ -23,7 +23,7 @@
             tools:ignore="UnusedAttribute">
 
             <!--Search button-->
-            <com.kevalpatel2106.emoticongifkeyboard.internal.EmoticonGifImageView
+            <com.kevalpatel2106.emoticongifkeyboard.gifs.internal.EmoticonGifImageView
                 android:id="@+id/search_btn"
                 android:layout_width="@dimen/keyboard_tabs_container_height"
                 android:layout_height="@dimen/keyboard_tabs_container_height"
@@ -34,7 +34,7 @@
                 tools:ignore="ContentDescription,RtlHardcoded"/>
 
             <!--Backspace button-->
-            <com.kevalpatel2106.emoticongifkeyboard.internal.EmoticonGifImageView
+            <com.kevalpatel2106.emoticongifkeyboard.gifs.internal.EmoticonGifImageView
                 android:id="@+id/emojis_backspace"
                 android:layout_width="@dimen/keyboard_tabs_container_height"
                 android:layout_height="@dimen/keyboard_tabs_container_height"
@@ -54,7 +54,7 @@
                 android:orientation="horizontal">
 
                 <!--Emoticon button-->
-                <com.kevalpatel2106.emoticongifkeyboard.internal.EmoticonGifImageView
+                <com.kevalpatel2106.emoticongifkeyboard.gifs.internal.EmoticonGifImageView
                     android:id="@+id/btn_emoji_tab"
                     style="@style/Base.Widget.AppCompat.Button.Borderless"
                     android:layout_width="@dimen/keyboard_tabs_container_height"
@@ -66,7 +66,7 @@
 
 
                 <!--GIF button-->
-                <com.kevalpatel2106.emoticongifkeyboard.internal.EmoticonGifImageView
+                <com.kevalpatel2106.emoticongifkeyboard.gifs.internal.EmoticonGifImageView
                     android:id="@+id/btn_gif_tab"
                     style="@style/Base.Widget.AppCompat.Button.Borderless"
                     android:layout_width="@dimen/keyboard_tabs_container_height"
@@ -85,7 +85,7 @@
             android:orientation="horizontal">
 
             <!--Back button-->
-            <com.kevalpatel2106.emoticongifkeyboard.internal.EmoticonGifImageView
+            <com.kevalpatel2106.emoticongifkeyboard.gifs.internal.EmoticonGifImageView
                 android:id="@+id/up_arrow"
                 android:layout_width="@dimen/keyboard_tabs_container_height"
                 android:layout_height="match_parent"

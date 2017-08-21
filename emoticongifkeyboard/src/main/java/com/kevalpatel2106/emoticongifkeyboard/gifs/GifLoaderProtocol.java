@@ -1,4 +1,4 @@
-package com.kevalpatel2106.emoticongifkeyboard.internal.gifs;
+package com.kevalpatel2106.emoticongifkeyboard.gifs;
 
 import android.support.annotation.Nullable;
 import android.support.annotation.WorkerThread;

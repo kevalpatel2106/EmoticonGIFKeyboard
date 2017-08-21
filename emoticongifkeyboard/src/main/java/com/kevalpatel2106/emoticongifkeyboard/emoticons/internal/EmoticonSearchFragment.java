@@ -1,4 +1,4 @@
-package com.kevalpatel2106.emoticongifkeyboard.internal.emoticons;
+package com.kevalpatel2106.emoticongifkeyboard.emoticons.internal;
 
 
 import android.os.Bundle;
@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 
 import com.kevalpatel2106.emoticongifkeyboard.EmoticonSelectListener;
 import com.kevalpatel2106.emoticongifkeyboard.R;
+import com.kevalpatel2106.emoticongifkeyboard.emoticons.Emoticon;
 
 import java.util.ArrayList;
 
@@ -48,7 +49,7 @@ public class EmoticonSearchFragment extends Fragment implements EmoticonAdapter.
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mEmoticons = new ArrayList<>();
-        mAdapter = new EmoticonAdapter(getActivity(), mEmoticons, this);
+        mAdapter = new EmoticonAdapter(getActivity(), mEmoticons, null, this);
 
         //Set the list
         RecyclerView recyclerView = view.findViewById(R.id.emoticon_search_list);

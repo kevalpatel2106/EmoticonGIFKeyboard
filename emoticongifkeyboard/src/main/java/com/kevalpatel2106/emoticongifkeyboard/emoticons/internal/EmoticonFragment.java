@@ -1,4 +1,4 @@
-package com.kevalpatel2106.emoticongifkeyboard.internal.emoticons;
+package com.kevalpatel2106.emoticongifkeyboard.emoticons.internal;
 
 
 import android.content.Context;
@@ -15,7 +15,9 @@ import android.view.ViewGroup;
 
 import com.kevalpatel2106.emoticongifkeyboard.EmoticonSelectListener;
 import com.kevalpatel2106.emoticongifkeyboard.R;
-import com.kevalpatel2106.emoticongifkeyboard.internal.EmoticonGifImageView;
+import com.kevalpatel2106.emoticongifkeyboard.emoticons.Emoticon;
+import com.kevalpatel2106.emoticongifkeyboard.emoticons.EmoticonProvider;
+import com.kevalpatel2106.emoticongifkeyboard.gifs.internal.EmoticonGifImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +42,10 @@ public final class EmoticonFragment extends Fragment implements EmoticonAdapter.
 
     //Recently used emoticons.
     private EmoticonRecentManager mEmoticonRecentManager;
+
+    //Emoticon provider
+    @Nullable
+    private EmoticonProvider mEmoticonProvider;
 
     public EmoticonFragment() {
         // Required empty public constructor
@@ -79,7 +85,7 @@ public final class EmoticonFragment extends Fragment implements EmoticonAdapter.
         //Set the grid view
         mEmoticons = new ArrayList<>();
         mEmoticons.addAll(getEmoticonsList(mEmoticonRecentManager.getLastCategory()));
-        mEmoticonAdapter = new EmoticonAdapter(mContext, mEmoticons, this);
+        mEmoticonAdapter = new EmoticonAdapter(mContext, mEmoticons, mEmoticonProvider, this);
 
         RecyclerView recyclerView = view.findViewById(R.id.emoji_gridView);
         recyclerView.setAdapter(mEmoticonAdapter);
@@ -182,5 +188,15 @@ public final class EmoticonFragment extends Fragment implements EmoticonAdapter.
 
         //Save the emoticon to the recent list
         mEmoticonRecentManager.add(emoticon);
+    }
+
+    /**
+     * Set the {@link EmoticonProvider} to render different images for unicode. If the value is null,
+     * system emoticon images will render.
+     *
+     * @param emoticonProvider {@link EmoticonProvider}
+     */
+    public void setEmoticonProvider(@Nullable EmoticonProvider emoticonProvider) {
+        mEmoticonProvider = emoticonProvider;
     }
 }

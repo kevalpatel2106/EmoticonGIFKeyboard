@@ -14,12 +14,14 @@
  * limitations under the License.
  */
 
-package com.kevalpatel2106.emoticongifkeyboard.internal.emoticons;
+package com.kevalpatel2106.emoticongifkeyboard.emoticons.internal;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
+
+import com.kevalpatel2106.emoticongifkeyboard.emoticons.Emoticon;
 
 import java.util.ArrayList;
 import java.util.StringTokenizer;

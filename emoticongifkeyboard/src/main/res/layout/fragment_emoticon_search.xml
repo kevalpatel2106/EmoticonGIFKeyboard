@@ -4,6 +4,6 @@
     android:id="@+id/emoticon_search_list"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context="com.kevalpatel2106.emoticongifkeyboard.internal.emoticons.EmoticonSearchFragment"/>
+    tools:context=".emoticons.internal.EmoticonSearchFragment"/>
 
 

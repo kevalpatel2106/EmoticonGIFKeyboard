@@ -1,4 +1,4 @@
-package com.kevalpatel2106.emoticongifkeyboard.internal.gifs;
+package com.kevalpatel2106.emoticongifkeyboard.gifs;
 
 import android.os.Parcel;
 import android.os.Parcelable;

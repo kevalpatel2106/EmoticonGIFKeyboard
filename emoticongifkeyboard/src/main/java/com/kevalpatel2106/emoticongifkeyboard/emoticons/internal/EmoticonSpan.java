@@ -1,9 +1,10 @@
-package com.kevalpatel2106.emoticongifkeyboard.widget;
+package com.kevalpatel2106.emoticongifkeyboard.emoticons.internal;
 
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.DrawableRes;
 import android.text.style.ImageSpan;
 
 /**
@@ -13,10 +14,10 @@ import android.text.style.ImageSpan;
  * @see <a href='https://github.com/rockerhieu/emojicon/blob/master/library/src/main/java/io/github/rockerhieu/emojicon/EmojiconSpan.java>EmojiconSpan.java</a>
  */
 
-final class EmojiSpan extends ImageSpan {
+final class EmoticonSpan extends ImageSpan {
     private final float size;
 
-    EmojiSpan(final Context context, final int drawableRes, final float size) {
+    EmoticonSpan(final Context context, @DrawableRes final int drawableRes, final float size) {
         super(context, drawableRes);
 
         this.size = size;

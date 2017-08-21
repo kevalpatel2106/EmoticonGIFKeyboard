@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.kevalpatel2106.emoticongifkeyboard.internal.emoticons;
+package com.kevalpatel2106.emoticongifkeyboard.emoticons;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -71,6 +71,10 @@ public final class Emoticon implements Parcelable {
     public Emoticon(@NonNull String unicode, @DrawableRes int icon) {
         this(unicode);
         this.icon = icon;
+    }
+
+    public Emoticon(int codePoint) {
+        this(newString(codePoint));
     }
 
     public Emoticon(int codePoint, @DrawableRes int icon) {

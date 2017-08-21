@@ -1,4 +1,4 @@
-package com.kevalpatel2106.emoticongifkeyboard.internal;
+package com.kevalpatel2106.emoticongifkeyboard.gifs.internal;
 
 import android.content.Context;
 import android.graphics.PorterDuff;
@@ -17,7 +17,7 @@ import com.kevalpatel2106.emoticongifkeyboard.R;
  * @author <a href='https://github.com/kevalpatel2106'>Kevalpatel2106</a>
  */
 
-public class EmoticonGifImageView extends AppCompatImageView {
+public final class EmoticonGifImageView extends AppCompatImageView {
     private Context mContext;
 
     public EmoticonGifImageView(Context context) {

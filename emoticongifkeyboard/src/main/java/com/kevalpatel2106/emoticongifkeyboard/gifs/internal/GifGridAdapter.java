@@ -1,4 +1,4 @@
-package com.kevalpatel2106.emoticongifkeyboard.internal.gifs;
+package com.kevalpatel2106.emoticongifkeyboard.gifs.internal;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -11,6 +11,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.kevalpatel2106.emoticongifkeyboard.R;
+import com.kevalpatel2106.emoticongifkeyboard.gifs.Gif;
 
 import java.util.List;
 

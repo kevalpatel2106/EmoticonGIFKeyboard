@@ -1,4 +1,4 @@
-package com.kevalpatel2106.emoticongifkeyboard.internal.emoticons;
+package com.kevalpatel2106.emoticongifkeyboard.emoticons.internal;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -16,6 +16,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Keval on 21-Aug-17.
@@ -35,8 +37,10 @@ class EmoticonLoader extends AsyncTask<Void, Void, Void> {
     @Override
     protected Void doInBackground(Void... voids) {
         try {
-            String emoticonData = readTextFile(R.raw.emoticons_list);
+            final List<String> unicodesForPattern = new ArrayList<>(3000);
 
+
+            String emoticonData = readTextFile(R.raw.emoticons_list);
             if (emoticonData != null) {
                 //Open the database connection
                 EmoticonDbHelper helper = new EmoticonDbHelper(mContext);
@@ -59,20 +63,20 @@ class EmoticonLoader extends AsyncTask<Void, Void, Void> {
                             EmoticonsCategories.getCategoryFromCategoryName(object.getString("category")),
                             object.getString("description"),
                             tags);
+
+                    unicodesForPattern.add(object.getString("emoji"));
                 }
 
                 //Close the database connection
                 sqLiteDatabase.close();
+
+                //Create and save emoticons
+                EmoticonUtils.createAndSaveEmoticonRegex(mContext, unicodesForPattern);
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
         return null;
-    }
-
-    @Override
-    protected void onPostExecute(Void aVoid) {
-        super.onPostExecute(aVoid);
     }
 
     @Nullable
@@ -97,5 +101,4 @@ class EmoticonLoader extends AsyncTask<Void, Void, Void> {
         }
         return builder.toString();
     }
-
 }

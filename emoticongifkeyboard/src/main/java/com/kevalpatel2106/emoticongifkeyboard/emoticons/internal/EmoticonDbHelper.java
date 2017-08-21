@@ -1,4 +1,4 @@
-package com.kevalpatel2106.emoticongifkeyboard.internal.emoticons;
+package com.kevalpatel2106.emoticongifkeyboard.emoticons.internal;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -8,6 +8,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.util.Log;
+
+import com.kevalpatel2106.emoticongifkeyboard.emoticons.Emoticon;
 
 import java.util.ArrayList;
 
@@ -53,6 +56,7 @@ class EmoticonDbHelper extends SQLiteOpenHelper {
         values.put(EmoticonDbColumns.CATEGORY, category);
         values.put(EmoticonDbColumns.DESCRIPTION, description);
         if (tags != null) values.put(EmoticonDbColumns.TAGS, TextUtils.join(",", tags));
+        Log.d(TAG, "insertInDb: " + description);
         sqLiteDatabase.insert(EmoticonDbColumns.TABLE, null, values);
     }
 
@@ -67,7 +71,6 @@ class EmoticonDbHelper extends SQLiteOpenHelper {
             }
             cursor.close();
         }
-
         sqLiteDatabase.close();
         return count;
     }

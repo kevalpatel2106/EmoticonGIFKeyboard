@@ -1,15 +1,17 @@
-package com.kevalpatel2106.emoticongifkeyboard.widget;
+package com.kevalpatel2106.emoticongifkeyboard.emoticons.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.AppCompatTextView;
 import android.text.SpannableString;
 import android.text.TextUtils;
-import android.text.style.DynamicDrawableSpan;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
 import com.kevalpatel2106.emoticongifkeyboard.R;
+import com.kevalpatel2106.emoticongifkeyboard.emoticons.EmoticonProvider;
+import com.kevalpatel2106.emoticongifkeyboard.emoticons.internal.EmoticonUtils;
 
 /**
  * Created by Keval Patel on 20/08/17.
@@ -19,38 +21,34 @@ import com.kevalpatel2106.emoticongifkeyboard.R;
 
 public class EmojiconTextView extends AppCompatTextView {
     private int mEmojiconSize;
-    private int mEmojiconAlignment;
-    private int mEmojiconTextSize;
-    private int mTextStart = 0;
-    private int mTextLength = -1;
-    private boolean mUseSystemDefault = false;
+    private EmoticonProvider mEmoticonProvider;
+    private Context mContext;
 
     public EmojiconTextView(Context context) {
         super(context);
+        mContext = context;
+        mEmojiconSize = (int) getTextSize();
         init(null);
     }
 
     public EmojiconTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        mContext = context;
         init(attrs);
     }
 
     public EmojiconTextView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+        mContext = context;
         init(attrs);
     }
 
     private void init(AttributeSet attrs) {
-        mEmojiconTextSize = (int) getTextSize();
         if (attrs == null) {
             mEmojiconSize = (int) getTextSize();
         } else {
             TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.Emojicon);
             mEmojiconSize = (int) a.getDimension(R.styleable.Emojicon_emojiconSize, getTextSize());
-            mEmojiconAlignment = a.getInt(R.styleable.Emojicon_emojiconAlignment, DynamicDrawableSpan.ALIGN_BASELINE);
-            mTextStart = a.getInteger(R.styleable.Emojicon_emojiconTextStart, 0);
-            mTextLength = a.getInteger(R.styleable.Emojicon_emojiconTextLength, -1);
-            mUseSystemDefault = a.getBoolean(R.styleable.Emojicon_emojiconUseSystemDefault, false);
             a.recycle();
         }
         setText(getText());
@@ -58,16 +56,11 @@ public class EmojiconTextView extends AppCompatTextView {
 
     @Override
     public void setText(CharSequence text, TextView.BufferType type) {
-        if (!TextUtils.isEmpty(text)) {
-            SpannableString ss = new SpannableString("abc");
-
-//            Drawable d = getResources().getDrawable(R.drawable.icon32);
-//            d.setBounds(0, 0, d.getIntrinsicWidth(), d.getIntrinsicHeight());
-//            ImageSpan span = new ImageSpan(d, ImageSpan.ALIGN_BASELINE);
-//            ss.setSpan(span, 0, 3, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
-//            textView.setText(ss);
-//            text = builder;
-        }
+        if (mEmoticonProvider != null && !TextUtils.isEmpty(text))
+            text = EmoticonUtils.replaceWithImages(mContext,
+                    new SpannableString(text),
+                    mEmoticonProvider,
+                    mEmojiconSize);
         super.setText(text, type);
     }
 
@@ -79,10 +72,7 @@ public class EmojiconTextView extends AppCompatTextView {
         super.setText(getText());
     }
 
-    /**
-     * Set whether to use system default emojicon
-     */
-    public void setUseSystemDefault(boolean useSystemDefault) {
-        mUseSystemDefault = useSystemDefault;
+    public void setEmoticonProvider(@NonNull EmoticonProvider emoticonProvider) {
+        mEmoticonProvider = emoticonProvider;
     }
 }

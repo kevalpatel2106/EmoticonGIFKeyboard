@@ -1,4 +1,4 @@
-package com.kevalpatel2106.emoticongifkeyboard.internal.emoticons;
+package com.kevalpatel2106.emoticongifkeyboard.emoticons.internal;
 
 import android.support.annotation.IntDef;
 

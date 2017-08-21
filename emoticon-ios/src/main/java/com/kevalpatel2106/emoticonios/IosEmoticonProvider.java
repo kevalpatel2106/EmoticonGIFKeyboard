@@ -1,7 +1,7 @@
 package com.kevalpatel2106.emoticonios;
 
-import com.kevalpatel2106.emoticongifkeyboard.internal.emoticons.Emoticon;
-import com.kevalpatel2106.emoticongifkeyboard.internal.emoticons.EmoticonProvider;
+import com.kevalpatel2106.emoticongifkeyboard.emoticons.Emoticon;
+import com.kevalpatel2106.emoticongifkeyboard.emoticons.EmoticonProvider;
 
 /**
  * Created by Keval Patel on 21/08/17.
@@ -11,22 +11,24 @@ import com.kevalpatel2106.emoticongifkeyboard.internal.emoticons.EmoticonProvide
 
 public class IosEmoticonProvider implements EmoticonProvider {
 
+    private IosEmoticonProvider() {
+    }
 
     public static IosEmoticonProvider create() {
         return new IosEmoticonProvider();
     }
 
     @Override
-    public Emoticon getEmoticon(int codePointHex) {
-        if (hasEmoticon(codePointHex)) {
-            return new Emoticon(codePointHex, EmoticonList.sEmoticons.get(codePointHex));
-        } else {
-            return Emoticon.fromCodePoint(codePointHex);
+    public Emoticon getEmoticon(String unicode) {
+        if (hasEmoticon(unicode)) {
+            int index = EmoticonList.EMOTICONS.lastIndexOf(new Emoticon(unicode));
+            if (index > 0) return EmoticonList.EMOTICONS.get(index);
         }
+        return new Emoticon(unicode);
     }
 
     @Override
-    public boolean hasEmoticon(int codePointHex) {
-        return EmoticonList.sEmoticons.indexOfKey(codePointHex) > 0;
+    public boolean hasEmoticon(String unicode) {
+        return EmoticonList.EMOTICONS.contains(new Emoticon(unicode));
     }
 }

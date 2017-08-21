@@ -1,4 +1,4 @@
-package com.kevalpatel2106.emoticongifkeyboard.internal.gifs;
+package com.kevalpatel2106.emoticongifkeyboard.gifs.internal;
 
 
 import android.content.Context;
@@ -19,6 +19,8 @@ import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 import com.kevalpatel2106.emoticongifkeyboard.R;
+import com.kevalpatel2106.emoticongifkeyboard.gifs.Gif;
+import com.kevalpatel2106.emoticongifkeyboard.gifs.GifLoaderProtocol;
 
 import java.util.ArrayList;
 import java.util.List;

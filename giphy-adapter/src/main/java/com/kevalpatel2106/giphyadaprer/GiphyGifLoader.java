@@ -4,8 +4,8 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import com.kevalpatel2106.emoticongifkeyboard.internal.gifs.Gif;
-import com.kevalpatel2106.emoticongifkeyboard.internal.gifs.GifLoaderProtocol;
+import com.kevalpatel2106.emoticongifkeyboard.gifs.Gif;
+import com.kevalpatel2106.emoticongifkeyboard.gifs.GifLoaderProtocol;
 
 import org.json.JSONArray;
 import org.json.JSONException;

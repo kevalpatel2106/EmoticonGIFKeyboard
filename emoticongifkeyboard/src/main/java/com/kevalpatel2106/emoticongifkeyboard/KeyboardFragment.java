@@ -15,10 +15,11 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ViewFlipper;
 
-import com.kevalpatel2106.emoticongifkeyboard.internal.EmoticonGifImageView;
-import com.kevalpatel2106.emoticongifkeyboard.internal.emoticons.EmoticonFragment;
-import com.kevalpatel2106.emoticongifkeyboard.internal.gifs.GifFragment;
-import com.kevalpatel2106.emoticongifkeyboard.internal.gifs.GifLoaderProtocol;
+import com.kevalpatel2106.emoticongifkeyboard.emoticons.EmoticonProvider;
+import com.kevalpatel2106.emoticongifkeyboard.emoticons.internal.EmoticonFragment;
+import com.kevalpatel2106.emoticongifkeyboard.gifs.GifLoaderProtocol;
+import com.kevalpatel2106.emoticongifkeyboard.gifs.internal.EmoticonGifImageView;
+import com.kevalpatel2106.emoticongifkeyboard.gifs.internal.GifFragment;
 
 
 /**
@@ -200,6 +201,16 @@ public final class KeyboardFragment extends Fragment {
      */
     public void setGifLoader(@NonNull GifLoaderProtocol gifLoader) {
         mGifFragment.setGifLoader(gifLoader);
+    }
+
+    /**
+     * Set the {@link EmoticonProvider} to render different images for unicode. If the value is null,
+     * system emoticon images will render.
+     *
+     * @param emoticonProvider {@link EmoticonProvider}
+     */
+    public void setEmoticonProvider(@Nullable EmoticonProvider emoticonProvider) {
+        mEmoticonFragment.setEmoticonProvider(emoticonProvider);
     }
 
     /**

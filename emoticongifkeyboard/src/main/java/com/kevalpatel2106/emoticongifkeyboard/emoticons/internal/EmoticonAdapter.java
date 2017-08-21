@@ -1,14 +1,17 @@
-package com.kevalpatel2106.emoticongifkeyboard.internal.emoticons;
+package com.kevalpatel2106.emoticongifkeyboard.emoticons.internal;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.kevalpatel2106.emoticongifkeyboard.R;
+import com.kevalpatel2106.emoticongifkeyboard.emoticons.Emoticon;
+import com.kevalpatel2106.emoticongifkeyboard.emoticons.EmoticonProvider;
+import com.kevalpatel2106.emoticongifkeyboard.emoticons.widget.EmojiconTextView;
 
 import java.util.List;
 
@@ -20,14 +23,18 @@ final class EmoticonAdapter extends RecyclerView.Adapter<EmoticonAdapter.ViewHol
     private final Context mContext;
     private final List<Emoticon> mData;
 
+    @Nullable
+    private final EmoticonProvider mEmoticonProvider;
     @NonNull
     private final ItemSelectListener mListener;
 
     EmoticonAdapter(@NonNull Context context,
                     @NonNull List<Emoticon> data,
+                    @Nullable EmoticonProvider emoticonProvider,
                     @NonNull ItemSelectListener listener) {
         mContext = context;
         mData = data;
+        mEmoticonProvider = emoticonProvider;
         mListener = listener;
     }
 
@@ -61,11 +68,12 @@ final class EmoticonAdapter extends RecyclerView.Adapter<EmoticonAdapter.ViewHol
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        TextView icon;
+        EmojiconTextView icon;
 
         ViewHolder(View itemView) {
             super(itemView);
             icon = itemView.findViewById(R.id.emojicon_icon);
+            icon.setEmoticonProvider(mEmoticonProvider);
         }
     }
 }
