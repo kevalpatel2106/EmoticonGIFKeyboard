@@ -1,0 +1,29 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_light"
+    android:orientation="vertical"
+    tools:context="com.kevalpatel2106.emoticongifkeyboard.internal.emoticons.EmoticonFragment">
+
+    <!--Tab titles of emoticons category-->
+    <include
+        layout="@layout/tab_emoticons"
+        android:background="@color/background_dark"/>
+
+    <include layout="@layout/layout_divider"/>
+
+    <!--Emoticons grid-->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/emoji_gridView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        android:cacheColorHint="@android:color/transparent"
+        android:columnWidth="40dip"
+        android:horizontalSpacing="@dimen/emoticon_grid_view_item_spacing"
+        android:numColumns="auto_fit"
+        android:scrollbars="none"
+        android:verticalSpacing="@dimen/emoticon_grid_view_item_spacing"/>
+</LinearLayout>

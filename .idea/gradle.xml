@@ -9,7 +9,9 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/emoji-keyboard" />
+            <option value="$PROJECT_DIR$/emoticon-ios" />
+            <option value="$PROJECT_DIR$/emoticongifkeyboard" />
+            <option value="$PROJECT_DIR$/giphy-adapter" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

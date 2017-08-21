@@ -1,1 +1,1 @@
-include ':app', ':emoji-keyboard'
+include ':app', ':emoticongifkeyboard', ':giphy-adapter', ':emoticon-ios'
