@@ -241,7 +241,7 @@ public final class KeyboardFragment extends Fragment {
 
         @Override
         public int getCount() {
-            return 2;
+            return 1;
         }
     }
 }

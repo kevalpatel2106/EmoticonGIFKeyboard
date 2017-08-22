@@ -14,7 +14,7 @@
   ~ limitations under the License.
   -->
 
-<com.kevalpatel2106.emoticongifkeyboard.emoticons.widget.EmoticonTextView
+<com.kevalpatel2106.emoticongifkeyboard.emoticons.internal.EmoticonTextViewInternal
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:emoticon="http://schemas.android.com/apk/res-auto"
     android:id="@+id/emojicon_icon"

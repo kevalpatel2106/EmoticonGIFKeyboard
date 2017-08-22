@@ -138,7 +138,7 @@ public final class Emoticon implements Parcelable {
 
     @Override
     public boolean equals(Object o) {
-        return o instanceof Emoticon && unicode.equals(((Emoticon) o).unicode);
+        return o == this || (o instanceof Emoticon && unicode.equals(((Emoticon) o).unicode));
     }
 
     @Override
