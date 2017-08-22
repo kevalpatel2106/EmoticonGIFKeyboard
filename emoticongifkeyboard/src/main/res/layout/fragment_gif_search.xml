@@ -1,0 +1,90 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <!--1. Search box container-->
+    <RelativeLayout
+        android:id="@+id/bottom_container"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/keyboard_tabs_container_height"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center_vertical"
+        android:background="@color/background_dark"
+        android:elevation="2dp"
+        android:orientation="horizontal"
+        tools:ignore="UnusedAttribute">
+
+        <!--Back button-->
+        <com.kevalpatel2106.emoticongifkeyboard.gifs.internal.EmoticonGifImageView
+            android:id="@+id/up_arrow"
+            android:layout_width="@dimen/keyboard_tabs_container_height"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:padding="@dimen/image_btn_padding"
+            android:src="@drawable/ic_up_arrow"/>
+
+        <!--Back button-->
+        <com.kevalpatel2106.emoticongifkeyboard.gifs.internal.EmoticonGifImageView
+            android:id="@+id/search_btn"
+            android:layout_width="@dimen/keyboard_tabs_container_height"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:padding="@dimen/image_btn_padding"
+            android:src="@drawable/ic_search"/>
+
+        <!--Search box-->
+        <EditText
+            android:id="@+id/search_box_et"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toEndOf="@id/up_arrow"
+            android:layout_toLeftOf="@id/search_btn"
+            android:layout_toRightOf="@id/up_arrow"
+            android:layout_toStartOf="@id/search_btn"
+            android:background="@android:color/transparent"
+            android:hint="@string/hint_search"
+            android:imeOptions="actionSearch"
+            android:maxLength="1"
+            android:padding="@dimen/image_btn_padding"/>
+
+    </RelativeLayout>
+
+    <ViewFlipper
+        android:id="@+id/gif_search_vieW_pager"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/gif_image_view_height"
+        android:layout_above="@id/bottom_container">
+
+        <!--0. Loader-->
+        <ProgressBar
+            android:id="@+id/loading_progressbar"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"/>
+
+        <!--1. Gif search-->
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/gif_search_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"/>
+
+        <!--2. Gif not found-->
+        <TextView
+            android:id="@+id/error_tv"
+            style="@style/Base.TextAppearance.AppCompat.Small"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:padding="10dp"/>
+    </ViewFlipper>
+</RelativeLayout>
+
+

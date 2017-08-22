@@ -905,6 +905,7 @@ class EmoticonList {
         EMOTICONS.put(newString(0x1f513), R.drawable.emoji_ios_1f513);
 
             //People
+        EMOTICONS.put(newString(0x263a), R.drawable.emoji_ios_263a);
         EMOTICONS.put(newString(0x1f600), R.drawable.emoji_ios_1f600);
         EMOTICONS.put(newString(0x1f603), R.drawable.emoji_ios_1f603);
         EMOTICONS.put(newString(0x1f604), R.drawable.emoji_ios_1f604);

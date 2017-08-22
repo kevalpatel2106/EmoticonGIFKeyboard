@@ -18,4 +18,10 @@ interface GiphyApiService {
     Call<ResponseBody> getTrending(@Query("api_key") String apiKey,
                                    @Query("limit") int limit,
                                    @Query("fmt") String format);
+
+    @GET("/v1/gifs/search")
+    Call<ResponseBody> searchGif(@Query("api_key") String apiKey,
+                                 @Query("q") String query,
+                                 @Query("limit") int limit,
+                                 @Query("fmt") String format);
 }

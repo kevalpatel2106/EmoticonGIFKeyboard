@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/gif_view_flipper"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="250dp"
     android:background="@color/background_light"
     tools:context=".gifs.internal.GifFragment">
 
@@ -14,22 +14,17 @@
         android:layout_height="40dp"
         android:layout_gravity="center"/>
 
-
     <!--1. GIF grid-->
-    <GridView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/gif_gridView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/transparent"
-        android:cacheColorHint="@android:color/transparent"
-        android:numColumns="2"
-        android:scrollbars="none"/>
+        android:layout_height="match_parent"/>
 
     <TextView
         android:id="@+id/error_textview"
         style="@style/Base.TextAppearance.AppCompat.Small"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
         android:padding="10dp"/>
 </ViewFlipper>

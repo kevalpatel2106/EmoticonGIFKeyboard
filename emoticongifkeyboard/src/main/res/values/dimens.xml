@@ -5,4 +5,5 @@
     <dimen name="gif_grid_view_item_spacing">6dp</dimen>
     <dimen name="emoticon_grid_view_item_spacing">2dp</dimen>
     <dimen name="image_btn_padding">6dp</dimen>
+    <dimen name="emoticon_grid_item_size">50dp</dimen>
 </resources>

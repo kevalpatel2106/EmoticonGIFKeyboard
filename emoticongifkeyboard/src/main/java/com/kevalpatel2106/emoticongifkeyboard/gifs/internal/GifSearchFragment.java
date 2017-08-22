@@ -2,19 +2,18 @@ package com.kevalpatel2106.emoticongifkeyboard.gifs.internal;
 
 
 import android.content.Context;
-import android.graphics.PorterDuff;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
@@ -30,51 +29,40 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public final class GifFragment extends Fragment implements GifGridAdapter.ItemSelectListener {
-    private Context mContext;
+public class GifSearchFragment extends Fragment implements GifGridAdapter.ItemSelectListener {
 
-    //Array list to hold currently displaying emoticons list
-    private List<Gif> mGifs;
+    //List of GIFs to display
+    private ArrayList<Gif> mGifs;
 
-    //Adapter to display emoticon grids.
+    //GIF adapter
     private GifGridAdapter mGifGridAdapter;
 
-    //View flipper for show different states.
-    private ViewFlipper mViewFlipper;
-
-    //Gif loader protocol
-    private GifProviderProtocol mGifProvider;
-
-    //Error text view.
-    private TextView mErrorTv;
-
-    /**
-     * Async task to load the trending GIFs.
-     */
-    private AsyncTask<Void, Void, List<Gif>> mTrendingGifTask;
-
-    //Listener to notify when any gif select
+    //Listener to notify when gif selected.
     private GifSelectListener mGifSelectListener;
 
-    public GifFragment() {
+    private GifProviderProtocol mGifProvider;
+
+    private ViewFlipper mViewFlipper;
+
+    private SearchGifTask mSearchTask;
+
+    private TextView mErrorTv;
+
+    public GifSearchFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Get new instance of {@link GifFragment}. This function is for internal use only.
-     *
-     * @return {@link GifFragment}
-     */
-    public static GifFragment getNewInstance() {
-        return new GifFragment();
+    public static GifSearchFragment getNewInstance() {
+        return new GifSearchFragment();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_gif, container, false);
+        return inflater.inflate(R.layout.fragment_gif_search, container, false);
     }
+
 
     /**
      * Set the GIF loader. This function is for internal use only.
@@ -97,43 +85,51 @@ public final class GifFragment extends Fragment implements GifGridAdapter.ItemSe
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        mContext = context;
-    }
-
-    @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        //Set the progressbar
-        ProgressBar progressBar = view.findViewById(R.id.loading_progressbar);
-        progressBar.getIndeterminateDrawable()
-                .setColorFilter(ContextCompat.getColor(mContext, R.color.icon_selected),
-                        PorterDuff.Mode.SRC_ATOP);
-
-        mViewFlipper = view.findViewById(R.id.gif_view_flipper);
-        mErrorTv = view.findViewById(R.id.error_textview);
-
-        //Set the grid view
         mGifs = new ArrayList<>();
-        mGifGridAdapter = new GifGridAdapter(mContext, mGifs, this);
-        RecyclerView recyclerView = view.findViewById(R.id.gif_gridView);
-        recyclerView.setLayoutManager(new GridLayoutManager(mContext, 2));
+        mViewFlipper = view.findViewById(R.id.gif_search_vieW_pager);
+        mErrorTv = view.findViewById(R.id.error_tv);
+
+        //Set the list
+        mGifGridAdapter = new GifGridAdapter(getActivity(), mGifs, this);
+        RecyclerView recyclerView = view.findViewById(R.id.gif_search_list);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),
+                LinearLayoutManager.HORIZONTAL, false));
         recyclerView.setAdapter(mGifGridAdapter);
 
-        //Load the list of trending GIFs.
-        if (mTrendingGifTask != null) mTrendingGifTask.cancel(true);
-        mTrendingGifTask = new TrendingGifTask();
-        mTrendingGifTask.execute();
+        //Set the search interface
+        final EditText searchEt = view.findViewById(R.id.search_box_et);
+        view.findViewById(R.id.search_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (searchEt.getText().length() > 0) {
+                    if (mSearchTask != null) mSearchTask.cancel(true);
+
+                    mSearchTask = new SearchGifTask();
+                    mSearchTask.execute(searchEt.getText().toString());
+                }
+            }
+        });
+
+        //Set up button
+        EmoticonGifImageView backBtn = view.findViewById(R.id.up_arrow);
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Hide the keyboard
+                InputMethodManager imm = (InputMethodManager) getActivity()
+                        .getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            }
+        });
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-
-        //Cancel trending GIF.
-        if (mTrendingGifTask != null) mTrendingGifTask.cancel(true);
+        if (mSearchTask != null) mSearchTask.cancel(true);
     }
 
     @Override
@@ -141,7 +137,7 @@ public final class GifFragment extends Fragment implements GifGridAdapter.ItemSe
         if (mGifSelectListener != null) mGifSelectListener.onGifSelected(gif);
     }
 
-    private class TrendingGifTask extends AsyncTask<Void, Void, List<Gif>> {
+    private class SearchGifTask extends AsyncTask<String, Void, List<Gif>> {
 
         @Override
         protected void onPreExecute() {
@@ -152,8 +148,8 @@ public final class GifFragment extends Fragment implements GifGridAdapter.ItemSe
         }
 
         @Override
-        protected List<Gif> doInBackground(Void... voids) {
-            return mGifProvider.getTrendingGifs(20);
+        protected List<Gif> doInBackground(String... strings) {
+            return mGifProvider.searchGifs(20, strings[0]);
         }
 
         @Override
@@ -174,6 +170,14 @@ public final class GifFragment extends Fragment implements GifGridAdapter.ItemSe
 
                 mViewFlipper.setDisplayedChild(1);
             }
+
+            mSearchTask = null;
+        }
+
+        @Override
+        protected void onCancelled() {
+            super.onCancelled();
+            mSearchTask = null;
         }
     }
 }

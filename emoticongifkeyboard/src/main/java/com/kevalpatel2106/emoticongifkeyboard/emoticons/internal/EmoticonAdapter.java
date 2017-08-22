@@ -19,9 +19,11 @@ import java.util.List;
  */
 
 final class EmoticonAdapter extends RecyclerView.Adapter<EmoticonAdapter.ViewHolder> {
-    private final Context mContext;
-    private final List<Emoticon> mData;
 
+    @NonNull
+    private final Context mContext;
+    @NonNull
+    private final List<Emoticon> mData;
     @Nullable
     private final EmoticonProvider mEmoticonProvider;
     @NonNull
@@ -31,6 +33,10 @@ final class EmoticonAdapter extends RecyclerView.Adapter<EmoticonAdapter.ViewHol
                     @NonNull List<Emoticon> data,
                     @Nullable EmoticonProvider emoticonProvider,
                     @NonNull ItemSelectListener listener) {
+        //noinspection ConstantConditions
+        if (context == null || data == null || listener == null)
+            throw new IllegalArgumentException("Null parameters not allowed.");
+
         mContext = context;
         mData = data;
         mEmoticonProvider = emoticonProvider;
@@ -51,7 +57,7 @@ final class EmoticonAdapter extends RecyclerView.Adapter<EmoticonAdapter.ViewHol
             holder.icon.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    mListener.OnEmoticonSelected(emoji);
+                    mListener.OnListItemSelected(emoji);
                 }
             });
         }
@@ -63,7 +69,7 @@ final class EmoticonAdapter extends RecyclerView.Adapter<EmoticonAdapter.ViewHol
     }
 
     interface ItemSelectListener {
-        void OnEmoticonSelected(@NonNull Emoticon emoticon);
+        void OnListItemSelected(@NonNull Emoticon emoticon);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

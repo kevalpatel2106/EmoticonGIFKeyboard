@@ -25,4 +25,4 @@
     android:padding="@dimen/emoticon_grid_view_item_spacing"
     android:textColor="#000000"
     android:textSize="20sp"
-    emoticon:emojiconSize="30dip"/>
+    emoticon:emojiconSize="30dp"/>

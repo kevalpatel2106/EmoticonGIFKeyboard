@@ -112,4 +112,43 @@ public class GiphyGifProvider implements GifProviderProtocol {
         return null;
     }
 
+    @Nullable
+    @Override
+    public List<Gif> searchGifs(int limit, @NonNull String query) {
+        try {
+            Response<ResponseBody> responseBody = new Retrofit.Builder()
+                    .baseUrl(GiphyApiService.GIPHY_BASE_URL)
+                    .client(new OkHttpClient.Builder()
+                            .addNetworkInterceptor(new CacheInterceptor(5))
+                            .cache(mCache)
+                            .build())
+                    .build()
+                    .create(GiphyApiService.class)
+                    .searchGif(mApiKey, query, limit, "json")
+                    .execute();
+
+
+            //Check if the response okay?
+            if (responseBody.code() == 200 && responseBody.body() != null) {
+                //noinspection ConstantConditions
+                String response = getStringFromStream(responseBody.body().byteStream());
+                if (response == null) return null;
+
+                JSONArray data = new JSONObject(response).getJSONArray("data");
+                ArrayList<Gif> gifs = new ArrayList<>();
+                for (int i = 0; i < data.length(); i++) {
+                    JSONObject images = data.getJSONObject(i).getJSONObject("images");
+                    Gif gif = new Gif(images.getJSONObject("original").getString("url"),
+                            images.has("preview_gif") ? images.getJSONObject("preview_gif").getString("url") : null,
+                            images.has("original_mp4") ? images.getJSONObject("original_mp4").getString("mp4") : null);
+                    gifs.add(gif);
+                }
+                return gifs;
+            }
+        } catch (IOException | JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }

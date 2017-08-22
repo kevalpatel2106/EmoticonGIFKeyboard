@@ -178,7 +178,7 @@ public final class EmoticonFragment extends Fragment implements EmoticonAdapter.
 
 
     @Override
-    public void OnEmoticonSelected(@NonNull Emoticon emoticon) {
+    public void OnListItemSelected(@NonNull Emoticon emoticon) {
         //Notify the emoticon
         if (mEmoticonSelectListener != null)
             mEmoticonSelectListener.emoticonSelected(emoticon);

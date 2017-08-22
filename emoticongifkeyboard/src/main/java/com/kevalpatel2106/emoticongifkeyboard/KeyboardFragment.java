@@ -1,7 +1,6 @@
 package com.kevalpatel2106.emoticongifkeyboard;
 
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,8 +11,6 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.ViewFlipper;
 
 import com.kevalpatel2106.emoticongifkeyboard.emoticons.EmoticonProvider;
 import com.kevalpatel2106.emoticongifkeyboard.emoticons.EmoticonSelectListener;
@@ -44,9 +41,6 @@ public final class KeyboardFragment extends Fragment {
     //Listener to notify when emoticons selected.
     private EmoticonSelectListener mEmoticonSelectListener;
 
-    //Bottom view flipper
-    private ViewFlipper mBottomFlipper;
-
     public KeyboardFragment() {
         //Initiate emoticon fragment.
         mEmoticonFragment = EmoticonFragment.getNewInstance();
@@ -64,29 +58,11 @@ public final class KeyboardFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mBottomFlipper = view.findViewById(R.id.bottom_view_flipper);
         mEmoticonTab = view.findViewById(R.id.btn_emoji_tab);
         mGifTab = view.findViewById(R.id.btn_gif_tab);
 
-        //Set search close button
-        EmoticonGifImageView backBtn = view.findViewById(R.id.up_arrow);
-        backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mBottomFlipper.setDisplayedChild(0);
-
-                //Hide the keyboard
-                InputMethodManager imm = (InputMethodManager) getActivity()
-                        .getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-            }
-        });
-
         //Set backspace button
         setBackSpace(view);
-
-        //Set the search button
-        setSearchBtn(view);
 
         setViewPager(view);
 
@@ -166,22 +142,6 @@ public final class KeyboardFragment extends Fragment {
     }
 
     /**
-     * Set the click lister for the backspace.
-     *
-     * @param rootView Root view.
-     */
-    private void setSearchBtn(@NonNull View rootView) {
-        rootView.findViewById(R.id.search_btn)
-                .setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        //Search view.
-                        mBottomFlipper.setDisplayedChild(1);
-                    }
-                });
-    }
-
-    /**
      * Set the {@link EmoticonSelectListener} to get notify whenever the emoticon is selected or deleted.
      *
      * @param emoticonSelectListener {@link EmoticonSelectListener}
@@ -201,7 +161,7 @@ public final class KeyboardFragment extends Fragment {
      * @param gifLoader Loader class that extends {@link GifProviderProtocol}.
      */
     public void setGifProvider(@NonNull GifProviderProtocol gifLoader) {
-        mGifFragment.setGifLoader(gifLoader);
+        mGifFragment.setGifProvider(gifLoader);
     }
 
     /**

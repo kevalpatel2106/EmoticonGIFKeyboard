@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -55,12 +54,11 @@ public class EmoticonSearchFragment extends Fragment implements EmoticonAdapter.
         RecyclerView recyclerView = view.findViewById(R.id.emoticon_search_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),
                 LinearLayoutManager.HORIZONTAL, false));
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
     }
 
     @Override
-    public void OnEmoticonSelected(@NonNull Emoticon emoticon) {
+    public void OnListItemSelected(@NonNull Emoticon emoticon) {
 
     }
 

@@ -7,4 +7,6 @@ package com.kevalpatel2106.emoticongifkeyboard.gifs;
  */
 
 public interface GifSelectListener {
+
+    void onGifSelected(Gif gif);
 }
