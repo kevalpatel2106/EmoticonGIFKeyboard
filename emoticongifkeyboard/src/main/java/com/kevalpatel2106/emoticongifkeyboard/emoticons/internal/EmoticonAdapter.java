@@ -72,7 +72,7 @@ final class EmoticonAdapter extends RecyclerView.Adapter<EmoticonAdapter.ViewHol
         ViewHolder(View itemView) {
             super(itemView);
             icon = itemView.findViewById(R.id.emojicon_icon);
-//            icon.setEmoticonProvider(mEmoticonProvider);
+            icon.setEmoticonProvider(mEmoticonProvider);
         }
     }
 }

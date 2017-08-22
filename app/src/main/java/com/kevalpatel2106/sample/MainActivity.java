@@ -4,10 +4,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
-import com.kevalpatel2106.emoticongifkeyboard.EmoticonSelectListener;
 import com.kevalpatel2106.emoticongifkeyboard.KeyboardFragment;
 import com.kevalpatel2106.emoticongifkeyboard.emoticons.Emoticon;
-import com.kevalpatel2106.emoticonpack.ios.IosEmoticonProvider;
+import com.kevalpatel2106.emoticongifkeyboard.emoticons.EmoticonSelectListener;
+import com.kevalpatel2106.emoticonpack.emojione.EmojiOneEmoticonProvider;
 import com.kevalpatel2106.gifpack.giphy.GiphyGifProvider;
 
 public class MainActivity extends AppCompatActivity {
@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         final TextView textView = (TextView) findViewById(R.id.selected_emoticons_tv);
 
         KeyboardFragment keyboardFragment = new KeyboardFragment();
-        keyboardFragment.setEmoticonProvider(IosEmoticonProvider.create());
+        keyboardFragment.setEmoticonProvider(EmojiOneEmoticonProvider.create());
         keyboardFragment.setEmoticonSelectListener(new EmoticonSelectListener() {
             @Override
             public void emoticonSelected(Emoticon emoticon) {

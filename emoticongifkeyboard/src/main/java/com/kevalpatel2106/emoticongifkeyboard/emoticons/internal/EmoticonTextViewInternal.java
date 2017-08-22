@@ -49,13 +49,13 @@ public class EmoticonTextViewInternal extends AppCompatTextView {
         if (mEmoticonProvider != null && !TextUtils.isEmpty(text)) {
 
             //Check if the icon for this emoticon is available?
-            int icon = mEmoticonProvider.getEmoticon(text.toString()).getIcon();
+            int icon = mEmoticonProvider.getIcon(text.toString());
             if (icon > 0) {
 
                 //Convert to spannable.
                 Spannable spannable = new SpannableString(text);
                 spannable.setSpan(new EmoticonSpan(mContext,
-                                mEmoticonProvider.getEmoticon(text.toString()).getIcon(),
+                                mEmoticonProvider.getIcon(text.toString()),
                                 mEmoticonSize),
                         0,
                         spannable.length() - 1,

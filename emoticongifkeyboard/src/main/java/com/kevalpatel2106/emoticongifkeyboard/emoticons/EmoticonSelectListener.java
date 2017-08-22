@@ -1,6 +1,4 @@
-package com.kevalpatel2106.emoticongifkeyboard;
-
-import com.kevalpatel2106.emoticongifkeyboard.emoticons.Emoticon;
+package com.kevalpatel2106.emoticongifkeyboard.emoticons;
 
 /**
  * Created by Keval on 18-Aug-17.

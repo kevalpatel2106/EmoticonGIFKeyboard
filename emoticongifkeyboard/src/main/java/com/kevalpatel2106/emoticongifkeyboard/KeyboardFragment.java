@@ -16,6 +16,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ViewFlipper;
 
 import com.kevalpatel2106.emoticongifkeyboard.emoticons.EmoticonProvider;
+import com.kevalpatel2106.emoticongifkeyboard.emoticons.EmoticonSelectListener;
 import com.kevalpatel2106.emoticongifkeyboard.emoticons.internal.EmoticonFragment;
 import com.kevalpatel2106.emoticongifkeyboard.gifs.GifProviderProtocol;
 import com.kevalpatel2106.emoticongifkeyboard.gifs.internal.EmoticonGifImageView;
@@ -241,7 +242,7 @@ public final class KeyboardFragment extends Fragment {
 
         @Override
         public int getCount() {
-            return 1;
+            return 2;
         }
     }
 }

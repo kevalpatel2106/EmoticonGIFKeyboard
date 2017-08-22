@@ -1,5 +1,7 @@
 package com.kevalpatel2106.emoticongifkeyboard.emoticons;
 
+import android.support.annotation.DrawableRes;
+
 /**
  * Created by Keval Patel on 20/08/17.
  *
@@ -8,8 +10,8 @@ package com.kevalpatel2106.emoticongifkeyboard.emoticons;
 
 public interface EmoticonProvider {
 
-    Emoticon getEmoticon(String unicode);
-
+    @DrawableRes
+    int getIcon(String unicode);
 
     boolean hasEmoticon(String unicode);
 }

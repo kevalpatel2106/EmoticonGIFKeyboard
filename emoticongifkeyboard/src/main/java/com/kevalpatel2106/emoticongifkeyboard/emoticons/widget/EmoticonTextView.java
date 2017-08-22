@@ -66,10 +66,10 @@ public class EmoticonTextView extends AppCompatTextView {
                     mEmoticonSize);
 
 
-//            int icon = mEmoticonProvider.getEmoticon(text.toString()).getIcon();
+//            int icon = mEmoticonProvider.getIcon(text.toString()).getIcon();
 //            if (icon > 0) {
 //                Spannable spanable = new SpannableString(text);
-//                spanable.setSpan(new EmoticonSpan(mContext, mEmoticonProvider.getEmoticon(text.toString()).getIcon(), mEmoticonSize),
+//                spanable.setSpan(new EmoticonSpan(mContext, mEmoticonProvider.getIcon(text.toString()).getIcon(), mEmoticonSize),
 //                        0,
 //                        text.length() - 1,
 //                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);

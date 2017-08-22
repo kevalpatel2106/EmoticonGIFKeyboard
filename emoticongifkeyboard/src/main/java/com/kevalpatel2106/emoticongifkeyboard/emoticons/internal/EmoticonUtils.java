@@ -117,9 +117,9 @@ public final class EmoticonUtils {
         if (!TextUtils.isEmpty(text)) {
             final Matcher matcher = getRegex(context).matcher(text);
             while (matcher.find()) {
-                final Emoticon found = emoticonProvider.getEmoticon(text.subSequence(matcher.start(),
-                        matcher.end()).toString());
-                if (found != null && found.getIcon() > 0) { //Check if the the emoticon has icon?
+                String unicode = text.subSequence(matcher.start(), matcher.end()).toString();
+                final Emoticon found = new Emoticon(unicode, emoticonProvider.getIcon(unicode));
+                if (found.getIcon() > 0) { //Check if the the emoticon has icon?
 
                     //Add this emoticon to change list.
                     result.add(new EmoticonRange(matcher.start(), matcher.end(), found));

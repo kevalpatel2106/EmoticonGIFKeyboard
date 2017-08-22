@@ -12,9 +12,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.kevalpatel2106.emoticongifkeyboard.EmoticonSelectListener;
 import com.kevalpatel2106.emoticongifkeyboard.R;
 import com.kevalpatel2106.emoticongifkeyboard.emoticons.Emoticon;
+import com.kevalpatel2106.emoticongifkeyboard.emoticons.EmoticonSelectListener;
 
 import java.util.ArrayList;
 
