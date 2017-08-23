@@ -19,6 +19,7 @@ import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
+ * @author 'https://github.com/kevalpatel2106'
  */
 public class EmoticonSearchFragment extends Fragment implements EmoticonAdapter.ItemSelectListener {
 
@@ -36,6 +37,9 @@ public class EmoticonSearchFragment extends Fragment implements EmoticonAdapter.
         // Required empty public constructor
     }
 
+    public static EmoticonSearchFragment getNewInstance() {
+        return new EmoticonSearchFragment();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

@@ -31,11 +31,6 @@ dependencies {
         exclude group: 'com.android.support', module: 'appcompat-v7'
     })
 
-    compile('com.android.support:recyclerview-v7:26.0.0-alpha1', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-        exclude group: 'com.android.support', module: 'support-v4'
-        exclude group: 'com.android.support', module: 'appcompat-v7'
-    })
+    compile 'com.android.support:recyclerview-v7:26.0.0-alpha1'
     compile 'com.android.support:appcompat-v7:26.0.0-alpha1'
-    compile 'com.android.support:support-v4:26.+'
 }

@@ -1,128 +1,89 @@
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/root_view"
     android:layout_width="match_parent"
-    android:layout_height="250dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
     tools:context="com.kevalpatel2106.emoticongifkeyboard.KeyboardFragment">
 
-    <!--Bottom container-->
-    <ViewFlipper
-        android:id="@+id/bottom_view_flipper"
+    <!--Top divider-->
+    <include layout="@layout/layout_divider"/>
+
+    <!--View pager to display GIF/Emoticon-->
+    <FrameLayout
+        android:id="@+id/keyboard_fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/keyboard_tabs_container_height"
-        android:layout_alignParentBottom="true"
-        android:background="@color/background_dark"
-        android:elevation="2dp">
-
-        <!--0. Bottom tabs container-->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            tools:ignore="UnusedAttribute">
-
-            <!--Search button-->
-            <com.kevalpatel2106.emoticongifkeyboard.gifs.internal.EmoticonGifImageView
-                android:id="@+id/search_btn"
-                android:layout_width="@dimen/keyboard_tabs_container_height"
-                android:layout_height="@dimen/keyboard_tabs_container_height"
-                android:layout_alignParentBottom="true"
-                android:background="?selectableItemBackground"
-                android:padding="@dimen/image_btn_padding"
-                android:src="@drawable/ic_search"
-                tools:ignore="ContentDescription,RtlHardcoded"/>
-
-            <!--Backspace button-->
-            <com.kevalpatel2106.emoticongifkeyboard.gifs.internal.EmoticonGifImageView
-                android:id="@+id/emojis_backspace"
-                android:layout_width="@dimen/keyboard_tabs_container_height"
-                android:layout_height="@dimen/keyboard_tabs_container_height"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:background="?selectableItemBackground"
-                android:padding="@dimen/image_btn_padding"
-                android:src="@drawable/emoji_x"
-                tools:ignore="ContentDescription,RtlHardcoded"/>
-
-            <!--Emoticon/GIF button container-->
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_centerInParent="true"
-                android:orientation="horizontal">
-
-                <!--Emoticon button-->
-                <com.kevalpatel2106.emoticongifkeyboard.gifs.internal.EmoticonGifImageView
-                    android:id="@+id/btn_emoji_tab"
-                    style="@style/Base.Widget.AppCompat.Button.Borderless"
-                    android:layout_width="@dimen/keyboard_tabs_container_height"
-                    android:layout_height="@dimen/keyboard_tabs_container_height"
-                    android:background="?selectableItemBackground"
-                    android:padding="@dimen/image_btn_padding"
-                    android:src="@drawable/ic_smiley"
-                    tools:ignore="ContentDescription"/>
-
-
-                <!--GIF button-->
-                <com.kevalpatel2106.emoticongifkeyboard.gifs.internal.EmoticonGifImageView
-                    android:id="@+id/btn_gif_tab"
-                    style="@style/Base.Widget.AppCompat.Button.Borderless"
-                    android:layout_width="@dimen/keyboard_tabs_container_height"
-                    android:layout_height="@dimen/keyboard_tabs_container_height"
-                    android:background="?selectableItemBackground"
-                    android:src="@drawable/ic_gif"
-                    tools:ignore="ContentDescription,RtlHardcoded"/>
-            </LinearLayout>
-        </RelativeLayout>
-
-        <!--1. Search box container-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <!--Back button-->
-            <com.kevalpatel2106.emoticongifkeyboard.gifs.internal.EmoticonGifImageView
-                android:id="@+id/up_arrow"
-                android:layout_width="@dimen/keyboard_tabs_container_height"
-                android:layout_height="match_parent"
-                android:padding="@dimen/image_btn_padding"
-                android:src="@drawable/ic_up_arrow"/>
-
-            <!--Search box-->
-            <EditText
-                android:id="@+id/search_box_et"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@android:color/transparent"
-                android:hint="@string/hint_search"
-                android:imeOptions="actionSearch"
-                android:maxLength="1"
-                android:padding="@dimen/image_btn_padding"/>
-
-        </LinearLayout>
-    </ViewFlipper>
+        android:layout_height="wrap_content"
+        android:background="@color/background_light"/>
 
     <include
         layout="@layout/layout_divider"
         android:layout_width="match_parent"
-        android:layout_height="1.5px"
-        android:layout_above="@id/bottom_view_flipper"/>
+        android:layout_height="1.5px"/>
 
-    <!--View pager to display GIF/Emoticon-->
-    <android.support.v4.view.ViewPager
-        android:id="@+id/main_view_pager"
+    <!--Bottom container-->
+    <RelativeLayout
+        android:id="@+id/bottom_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/bottom_view_flipper"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:background="@color/background_light"/>
+        android:layout_height="@dimen/keyboard_tabs_container_height"
+        android:background="@color/background_dark"
+        android:elevation="2dp"
+        android:orientation="horizontal"
+        tools:ignore="UnusedAttribute">
 
-    <!--Top divider-->
-    <include layout="@layout/layout_divider"/>
-</RelativeLayout>
+        <!--Search button-->
+        <com.kevalpatel2106.emoticongifkeyboard.gifs.internal.EmoticonGifImageView
+            android:id="@+id/search_btn"
+            android:layout_width="@dimen/keyboard_tabs_container_height"
+            android:layout_height="@dimen/keyboard_tabs_container_height"
+            android:layout_alignParentBottom="true"
+            android:background="?selectableItemBackground"
+            android:padding="@dimen/image_btn_padding"
+            android:src="@drawable/ic_search"
+            tools:ignore="ContentDescription,RtlHardcoded"/>
+
+        <!--Backspace button-->
+        <com.kevalpatel2106.emoticongifkeyboard.gifs.internal.EmoticonGifImageView
+            android:id="@+id/emojis_backspace"
+            android:layout_width="@dimen/keyboard_tabs_container_height"
+            android:layout_height="@dimen/keyboard_tabs_container_height"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:background="?selectableItemBackground"
+            android:padding="@dimen/image_btn_padding"
+            android:src="@drawable/emoji_x"
+            tools:ignore="ContentDescription,RtlHardcoded"/>
+
+        <!--Emoticon/GIF button container-->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal">
+
+            <!--Emoticon button-->
+            <com.kevalpatel2106.emoticongifkeyboard.gifs.internal.EmoticonGifImageView
+                android:id="@+id/btn_emoji_tab"
+                style="@style/Base.Widget.AppCompat.Button.Borderless"
+                android:layout_width="@dimen/keyboard_tabs_container_height"
+                android:layout_height="@dimen/keyboard_tabs_container_height"
+                android:background="?selectableItemBackground"
+                android:padding="@dimen/image_btn_padding"
+                android:src="@drawable/ic_smiley"
+                tools:ignore="ContentDescription"/>
+
+
+            <!--GIF button-->
+            <com.kevalpatel2106.emoticongifkeyboard.gifs.internal.EmoticonGifImageView
+                android:id="@+id/btn_gif_tab"
+                style="@style/Base.Widget.AppCompat.Button.Borderless"
+                android:layout_width="@dimen/keyboard_tabs_container_height"
+                android:layout_height="@dimen/keyboard_tabs_container_height"
+                android:background="?selectableItemBackground"
+                android:src="@drawable/ic_gif"
+                tools:ignore="ContentDescription,RtlHardcoded"/>
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

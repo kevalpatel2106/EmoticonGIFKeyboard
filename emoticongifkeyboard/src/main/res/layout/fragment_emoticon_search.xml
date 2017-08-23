@@ -35,7 +35,10 @@
             android:hint="@string/hint_search"
             android:imeOptions="actionSearch"
             android:maxLength="1"
-            android:padding="@dimen/image_btn_padding"/>
+            android:padding="@dimen/image_btn_padding">
+
+            <requestFocus/>
+        </EditText>
 
     </LinearLayout>
 
@@ -43,8 +46,7 @@
         android:id="@+id/emoticon_search_list"
         android:layout_width="match_parent"
         android:layout_height="@dimen/emoticon_grid_item_size"
-        android:layout_above="@id/bottom_container"
-        tools:context=".emoticons.internal.EmoticonSearchFragment"/>
+        android:layout_above="@id/bottom_container"/>
 </RelativeLayout>
 
 

@@ -24,7 +24,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  *
- * @author <a href='https://github.com/kevalpatel2106'>Kevalpatel2106</a>
+ * @author 'https://github.com/kevalpatel2106'
  */
 public final class EmoticonFragment extends Fragment implements EmoticonAdapter.ItemSelectListener {
     private Context mContext;

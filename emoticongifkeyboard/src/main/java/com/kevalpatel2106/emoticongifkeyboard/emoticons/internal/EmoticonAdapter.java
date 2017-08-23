@@ -16,6 +16,8 @@ import java.util.List;
 
 /**
  * Created by Keval on 18-Aug-17.
+ *
+ * @author 'https://github.com/kevalpatel2106'
  */
 
 final class EmoticonAdapter extends RecyclerView.Adapter<EmoticonAdapter.ViewHolder> {

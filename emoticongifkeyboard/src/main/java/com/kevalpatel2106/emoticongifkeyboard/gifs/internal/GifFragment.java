@@ -9,11 +9,10 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
@@ -28,32 +27,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A simple {@link Fragment} subclass.
+ * This {@link Fragment} will display the list of trending GIFs in a grid.
  */
 public final class GifFragment extends Fragment implements GifGridAdapter.ItemSelectListener {
+    private static final String OUT_STATE_GIFS = "out_state_gifs";
+
     private Context mContext;
 
-    //Array list to hold currently displaying emoticons list
-    private List<Gif> mGifs;
+    /* Array list to hold currently displaying emoticons list */
+    private ArrayList<Gif> mGifs;
 
-    //Adapter to display emoticon grids.
+    /* Adapter to display emoticon grids. */
     private GifGridAdapter mGifGridAdapter;
 
-    //View flipper for show different states.
+    /* View flipper for show different states. */
     private ViewFlipper mViewFlipper;
 
-    //Gif loader protocol
+    /* Gif loader protocol */
     private GifProviderProtocol mGifProvider;
 
-    //Error text view.
+    /* Error text view. */
     private TextView mErrorTv;
 
-    /**
-     * Async task to load the trending GIFs.
-     */
+    /* Async task to load the trending GIFs. */
     private AsyncTask<Void, Void, List<Gif>> mTrendingGifTask;
 
-    //Listener to notify when any gif select
+    /* Listener to notify when any gif select */
     private GifSelectListener mGifSelectListener;
 
     public GifFragment() {
@@ -70,30 +69,17 @@ public final class GifFragment extends Fragment implements GifGridAdapter.ItemSe
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater,
+                             ViewGroup container,
                              Bundle savedInstanceState) {
+        if (savedInstanceState == null) {
+            mGifs = new ArrayList<>();
+        } else {
+            mGifs = savedInstanceState.getParcelableArrayList(OUT_STATE_GIFS);
+        }
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_gif, container, false);
-    }
-
-    /**
-     * Set the GIF loader. This function is for internal use only.
-     *
-     * @param gifProvider {@link GifProviderProtocol}
-     */
-    @SuppressWarnings("ConstantConditions")
-    public void setGifProvider(@NonNull GifProviderProtocol gifProvider) {
-        if (gifProvider == null) throw new RuntimeException("Set GIF loader.");
-        mGifProvider = gifProvider;
-    }
-
-    /**
-     * Set the {@link EmoticonSelectListener} to get notify whenever the emoticon is selected or deleted.
-     *
-     * @param gifSelectListener {@link EmoticonSelectListener}
-     */
-    public void setGifSelectListener(@NonNull GifSelectListener gifSelectListener) {
-        mGifSelectListener = gifSelectListener;
     }
 
     @Override
@@ -102,6 +88,7 @@ public final class GifFragment extends Fragment implements GifGridAdapter.ItemSe
         mContext = context;
     }
 
+    @SuppressWarnings("DanglingJavadoc")
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -116,16 +103,32 @@ public final class GifFragment extends Fragment implements GifGridAdapter.ItemSe
         mErrorTv = view.findViewById(R.id.error_textview);
 
         //Set the grid view
-        mGifs = new ArrayList<>();
         mGifGridAdapter = new GifGridAdapter(mContext, mGifs, this);
-        RecyclerView recyclerView = view.findViewById(R.id.gif_gridView);
-        recyclerView.setLayoutManager(new GridLayoutManager(mContext, 2));
-        recyclerView.setAdapter(mGifGridAdapter);
+
+        /**
+         * Instead of using recycler view,we are stick to the GRidView here because in recycler view
+         * items from the grid column are not getting displayed until user scrolls up-down. There is
+         * no solution found for this problem,
+         * @see https://stackoverflow.com/questions/29460164/recyclerview-refreshes-items-only-when-scrolling-down-and-up
+         */
+        GridView gridView = view.findViewById(R.id.gif_gridView);
+        gridView.setAdapter(mGifGridAdapter);
 
         //Load the list of trending GIFs.
-        if (mTrendingGifTask != null) mTrendingGifTask.cancel(true);
-        mTrendingGifTask = new TrendingGifTask();
-        mTrendingGifTask.execute();
+        if (mGifs.isEmpty()) {
+            if (mTrendingGifTask != null) mTrendingGifTask.cancel(true);
+            mTrendingGifTask = new TrendingGifTask();
+            mTrendingGifTask.execute();
+            mViewFlipper.setDisplayedChild(0);
+        } else {
+            mViewFlipper.setDisplayedChild(1);
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putParcelableArrayList(OUT_STATE_GIFS, mGifs);
+        super.onSaveInstanceState(outState);
     }
 
     @Override
@@ -141,6 +144,29 @@ public final class GifFragment extends Fragment implements GifGridAdapter.ItemSe
         if (mGifSelectListener != null) mGifSelectListener.onGifSelected(gif);
     }
 
+    /**
+     * Set the GIF loader. This function is for internal use only.
+     *
+     * @param gifProvider {@link GifProviderProtocol}
+     */
+    @SuppressWarnings("ConstantConditions")
+    public void setGifProvider(@NonNull GifProviderProtocol gifProvider) {
+        mGifProvider = gifProvider;
+    }
+
+    /**
+     * Set the {@link EmoticonSelectListener} to get notify whenever the emoticon is selected or deleted.
+     *
+     * @param gifSelectListener {@link EmoticonSelectListener}
+     */
+    public void setGifSelectListener(@NonNull GifSelectListener gifSelectListener) {
+        mGifSelectListener = gifSelectListener;
+    }
+
+
+    /**
+     * Async task to load the list of trending GIFs.
+     */
     private class TrendingGifTask extends AsyncTask<Void, Void, List<Gif>> {
 
         @Override
@@ -153,6 +179,7 @@ public final class GifFragment extends Fragment implements GifGridAdapter.ItemSe
 
         @Override
         protected List<Gif> doInBackground(Void... voids) {
+            if (mGifProvider == null) throw new RuntimeException("Set GIF provider.");
             return mGifProvider.getTrendingGifs(20);
         }
 
@@ -161,18 +188,18 @@ public final class GifFragment extends Fragment implements GifGridAdapter.ItemSe
             super.onPostExecute(gifs);
 
             if (gifs == null) { //Error occurred.
-                mErrorTv.setText("Something went wrong.");
+                mErrorTv.setText(R.string.network_error);
                 mViewFlipper.setDisplayedChild(2);
             } else if (gifs.isEmpty()) { //No result found.
-                mErrorTv.setText("No GIF found.");
+                mErrorTv.setText(R.string.no_gif_found);
                 mViewFlipper.setDisplayedChild(2);
             } else {
+                mViewFlipper.setDisplayedChild(1);
+
                 //Load the tending gifs
                 mGifs.clear();
                 mGifs.addAll(gifs);
                 mGifGridAdapter.notifyDataSetChanged();
-
-                mViewFlipper.setDisplayedChild(1);
             }
         }
     }

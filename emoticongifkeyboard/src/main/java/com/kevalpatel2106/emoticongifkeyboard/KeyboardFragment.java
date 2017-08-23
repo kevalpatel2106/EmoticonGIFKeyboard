@@ -6,8 +6,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,42 +13,52 @@ import android.view.ViewGroup;
 import com.kevalpatel2106.emoticongifkeyboard.emoticons.EmoticonProvider;
 import com.kevalpatel2106.emoticongifkeyboard.emoticons.EmoticonSelectListener;
 import com.kevalpatel2106.emoticongifkeyboard.emoticons.internal.EmoticonFragment;
+import com.kevalpatel2106.emoticongifkeyboard.emoticons.internal.EmoticonSearchFragment;
 import com.kevalpatel2106.emoticongifkeyboard.gifs.GifProviderProtocol;
-import com.kevalpatel2106.emoticongifkeyboard.gifs.internal.EmoticonGifImageView;
+import com.kevalpatel2106.emoticongifkeyboard.gifs.GifSelectListener;
 import com.kevalpatel2106.emoticongifkeyboard.gifs.internal.GifFragment;
+import com.kevalpatel2106.emoticongifkeyboard.gifs.internal.GifSearchFragment;
 
 
 /**
- * A simple {@link Fragment} subclass. This fragment will host the smiles and gifs.
+ * This {@link Fragment} will host the smiles and gifs.
+ *
+ * @author 'https://github.com/kevalpatel2106'
  */
-public final class KeyboardFragment extends Fragment {
-    //Fragments to load.
+public final class KeyboardFragment extends Fragment implements FragmentManager.OnBackStackChangedListener {
+    /* Tags for the fragment back stack */
+    public static final String TAG_EMOTICON_FRAGMENT = "tag_emoticon_fragment";
+    public static final String TAG_GIF_FRAGMENT = "tag_gif_fragment";
+    private static final String TAG_EMOTICON_SEARCH_FRAGMENT = "tag_emoticon_search_fragment";
+    private static final String TAG_GIF_SEARCH_FRAGMENT = "tag_gif_search_fragment";
+
+    /* Fragments to load. */
     private final EmoticonFragment mEmoticonFragment;
     private final GifFragment mGifFragment;
+    private final GifSearchFragment mGifSearchFragment;
+    private final EmoticonSearchFragment mEmoticonSearchFragment;
 
-    //View pager to load Emoticons and GIFs
-    private ViewPager mMainViewPager;
-
-    //Tabs
-    private View mEmoticonTab;
-    private View mGifTab;
-
-    //Backspace button
-    private EmoticonGifImageView mBackSpaceBtn;
-
-    //Listener to notify when emoticons selected.
+    /* Listener to notify when emoticons selected. */
     private EmoticonSelectListener mEmoticonSelectListener;
 
+    /* View container that hosts search, backspace and tabs buttons. */
+    private View mBottomViewContainer;
+
     public KeyboardFragment() {
-        //Initiate emoticon fragment.
         mEmoticonFragment = EmoticonFragment.getNewInstance();
+        mEmoticonSearchFragment = EmoticonSearchFragment.getNewInstance();
+
         mGifFragment = GifFragment.getNewInstance();
+        mGifSearchFragment = GifSearchFragment.getNewInstance();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
+        //Add back stack change listener to maintain views state according to fragment
+        getChildFragmentManager().addOnBackStackChangedListener(this);
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_keyboard, container, false);
     }
@@ -58,85 +66,65 @@ public final class KeyboardFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mEmoticonTab = view.findViewById(R.id.btn_emoji_tab);
-        mGifTab = view.findViewById(R.id.btn_gif_tab);
+        mBottomViewContainer = view.findViewById(R.id.bottom_container);
 
         //Set backspace button
-        setBackSpace(view);
-
-        setViewPager(view);
-
-        //Set the click listener for Emoticons
-        mEmoticonTab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mMainViewPager.setCurrentItem(ViewPagerAdapter.POS_EMOTICON);
-                setTabIcons();
-            }
-        });
-
-        //Set the click listener for GIF
-        mGifTab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mMainViewPager.setCurrentItem(ViewPagerAdapter.POS_GIF);
-                setTabIcons();
-            }
-        });
-    }
-
-    /**
-     * Set the viewpager. There will be two pages in view pager.
-     *
-     * @param rootView Root view.
-     */
-    private void setViewPager(@NonNull View rootView) {
-        mMainViewPager = rootView.findViewById(R.id.main_view_pager);
-        mMainViewPager.setAdapter(new ViewPagerAdapter(getChildFragmentManager()));
-        mMainViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                //Do nothing
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                setTabIcons();
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-                //Do nothing
-            }
-        });
-
-        //Select Emoticon fragment by default
-        mMainViewPager.setCurrentItem(ViewPagerAdapter.POS_EMOTICON);
-        setTabIcons();
-    }
-
-    /**
-     * Set the tab icons tint and backspace button visibility based on the currently selected page in
-     * {@link #mMainViewPager}.
-     */
-    private void setTabIcons() {
-        mGifTab.setSelected(mMainViewPager.getCurrentItem() == ViewPagerAdapter.POS_GIF);
-        mBackSpaceBtn.setVisibility(mMainViewPager.getCurrentItem() == ViewPagerAdapter.POS_EMOTICON ?
-                View.VISIBLE : View.GONE);
-        mEmoticonTab.setSelected(mMainViewPager.getCurrentItem() == ViewPagerAdapter.POS_EMOTICON);
-    }
-
-    /**
-     * Set the click lister for the backspace.
-     *
-     * @param rootView Root view.
-     */
-    private void setBackSpace(@NonNull View rootView) {
-        mBackSpaceBtn = rootView.findViewById(R.id.emojis_backspace);
-        mBackSpaceBtn.setOnClickListener(new View.OnClickListener() {
+        final View backSpaceBtn = view.findViewById(R.id.emojis_backspace);
+        backSpaceBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (mEmoticonSelectListener != null) mEmoticonSelectListener.onBackSpace();
+            }
+        });
+
+        //Set the tabs
+        final View emoticonTab = view.findViewById(R.id.btn_emoji_tab);
+        final View gifTab = view.findViewById(R.id.btn_gif_tab);
+        emoticonTab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getChildFragmentManager().beginTransaction()
+                        .replace(R.id.keyboard_fragment_container, mEmoticonFragment)
+                        .addToBackStack(TAG_EMOTICON_FRAGMENT)
+                        .commit();
+
+                //Set the tab
+                emoticonTab.setSelected(true);
+                gifTab.setSelected(!emoticonTab.isSelected());
+                backSpaceBtn.setVisibility(View.VISIBLE);
+            }
+        });
+        emoticonTab.callOnClick();
+        gifTab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getChildFragmentManager().beginTransaction()
+                        .replace(R.id.keyboard_fragment_container, mGifFragment)
+                        .addToBackStack(TAG_GIF_FRAGMENT)
+                        .commit();
+
+                //Set the tab
+                emoticonTab.setSelected(false);
+                gifTab.setSelected(!emoticonTab.isSelected());
+                backSpaceBtn.setVisibility(View.GONE);
+            }
+        });
+
+        //Setup the search button.
+        view.findViewById(R.id.search_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (emoticonTab.isSelected()) {
+                    getChildFragmentManager().beginTransaction()
+                            .replace(R.id.keyboard_fragment_container, mEmoticonSearchFragment)
+                            .addToBackStack(TAG_EMOTICON_SEARCH_FRAGMENT)
+                            .commit();
+                } else {
+                    getChildFragmentManager().beginTransaction()
+                            .replace(R.id.keyboard_fragment_container, mGifSearchFragment)
+                            .addToBackStack(TAG_GIF_SEARCH_FRAGMENT)
+                            .commit();
+                }
             }
         });
     }
@@ -158,10 +146,11 @@ public final class KeyboardFragment extends Fragment {
     /**
      * Set the GIF loader adapter.
      *
-     * @param gifLoader Loader class that extends {@link GifProviderProtocol}.
+     * @param gifProvider Loader class that extends {@link GifProviderProtocol}.
      */
-    public void setGifProvider(@NonNull GifProviderProtocol gifLoader) {
-        mGifFragment.setGifProvider(gifLoader);
+    public void setGifProvider(@NonNull GifProviderProtocol gifProvider) {
+        mGifFragment.setGifProvider(gifProvider);
+        mGifSearchFragment.setGifProvider(gifProvider);
     }
 
     /**
@@ -175,34 +164,37 @@ public final class KeyboardFragment extends Fragment {
     }
 
     /**
-     * {@link FragmentStatePagerAdapter} for view pager. There are two tabs:
-     * <li>Emoticon</li>
-     * <li>GIFs</li>
+     * Set the {@link EmoticonSelectListener} to get notify whenever the emoticon is selected or deleted.
+     *
+     * @param gifSelectListener {@link EmoticonSelectListener}
      */
-    private class ViewPagerAdapter extends FragmentStatePagerAdapter {
+    public void setGifSelectListener(@NonNull GifSelectListener gifSelectListener) {
+        mGifFragment.setGifSelectListener(gifSelectListener);
+        mGifSearchFragment.setGifSelectListener(gifSelectListener);
+    }
 
-        private static final int POS_EMOTICON = 0;
-        private static final int POS_GIF = 1;
+    @Override
+    public void onBackStackChanged() {
+        int index = getChildFragmentManager().getBackStackEntryCount() - 1;
+        if (index < 0) return;
 
-        ViewPagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            switch (position) {
-                case POS_EMOTICON:  //Emoticons
-                    return mEmoticonFragment;
-                case POS_GIF:       //GIFs
-                    return mGifFragment;
-                default:
-                    throw new IllegalStateException("Invalid position.");
-            }
-        }
-
-        @Override
-        public int getCount() {
-            return 2;
+        switch (getChildFragmentManager().getBackStackEntryAt(index).getName()) {
+            case TAG_EMOTICON_FRAGMENT:
+                //Display bottom bar of not displayed.
+                if (mBottomViewContainer != null) mBottomViewContainer.setVisibility(View.VISIBLE);
+                break;
+            case TAG_GIF_FRAGMENT:
+                //Display bottom bar of not displayed.
+                if (mBottomViewContainer != null) mBottomViewContainer.setVisibility(View.VISIBLE);
+                break;
+            case TAG_EMOTICON_SEARCH_FRAGMENT:
+                //Display bottom bar of not displayed.
+                if (mBottomViewContainer != null) mBottomViewContainer.setVisibility(View.GONE);
+                break;
+            case TAG_GIF_SEARCH_FRAGMENT:
+                //Display bottom bar of not displayed.
+                if (mBottomViewContainer != null) mBottomViewContainer.setVisibility(View.GONE);
+                break;
         }
     }
 }

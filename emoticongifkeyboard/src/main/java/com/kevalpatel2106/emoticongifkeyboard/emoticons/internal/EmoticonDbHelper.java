@@ -17,7 +17,7 @@ import java.util.ArrayList;
 /**
  * Created by Keval on 21-Aug-17.
  *
- * @author <a href='https://github.com/kevalpatel2106'>Kevalpatel2106</a>
+ * @author 'https://github.com/kevalpatel2106'
  */
 
 class EmoticonDbHelper extends SQLiteOpenHelper {

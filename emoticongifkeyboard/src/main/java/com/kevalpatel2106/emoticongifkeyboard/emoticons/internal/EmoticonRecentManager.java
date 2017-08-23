@@ -29,7 +29,7 @@ import java.util.StringTokenizer;
 /**
  * This is singleton class to handle the recent emoticons and recently selected categories.
  *
- * @author <a href='https://github.com/kevalpatel2106'>Kevalpatel2106</a>
+ * @author 'https://github.com/kevalpatel2106'
  */
 
 final class EmoticonRecentManager {

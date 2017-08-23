@@ -2,10 +2,10 @@ package com.kevalpatel2106.emoticongifkeyboard.gifs.internal;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -15,18 +15,22 @@ import com.kevalpatel2106.emoticongifkeyboard.gifs.Gif;
 import java.util.List;
 
 /**
- * Created by Keval on 18-Aug-17.
+ * Created by Keval Patel on 22/08/17.
+ *
+ * @author 'https://github.com/kevalpatel2106'
  */
 
-final class GifGridAdapter extends ArrayAdapter<Gif> {
+final class GifSearchAdapter extends RecyclerView.Adapter<GifSearchAdapter.GifViewHolder> {
+    @NonNull
     private final Context mContext;
-    private final ItemSelectListener mListener;
+    @NonNull
     private final List<Gif> mData;
+    @NonNull
+    private final ItemSelectListener mListener;
 
-    GifGridAdapter(@NonNull final Context context,
-                   @NonNull final List<Gif> data,
-                   @NonNull final ItemSelectListener listener) {
-        super(context, R.layout.item_emojicon, data);
+    GifSearchAdapter(@NonNull final Context context,
+                     @NonNull final List<Gif> data,
+                     @NonNull final ItemSelectListener listener) {
         //noinspection ConstantConditions
         if (context == null || data == null || listener == null)
             throw new IllegalArgumentException("Null parameters not allowed.");
@@ -37,25 +41,13 @@ final class GifGridAdapter extends ArrayAdapter<Gif> {
     }
 
     @Override
-    public Gif getItem(int position) {
-        return mData.get(position);
+    public GifViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return new GifViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_gif, parent, false));
     }
 
     @Override
-    public View getView(final int position, View convertView, @NonNull ViewGroup parent) {
-        View v = convertView;
-        ViewHolder holder;
-        if (v == null) {
-            v = LayoutInflater.from(mContext).inflate(R.layout.item_gif, parent, false);
-
-            holder = new ViewHolder();
-            holder.gifIv = v.findViewById(R.id.gif_iv);
-            v.setTag(holder);
-        } else {
-            holder = (ViewHolder) v.getTag();
-        }
-
-        final Gif gif = getItem(position);
+    public void onBindViewHolder(GifViewHolder holder, int position) {
+        final Gif gif = mData.get(position);
         if (gif != null) {
             Glide.with(mContext)
                     .load(gif.getPreviewGifUrl())
@@ -71,14 +63,23 @@ final class GifGridAdapter extends ArrayAdapter<Gif> {
                 }
             });
         }
-        return v;
+    }
+
+    @Override
+    public int getItemCount() {
+        return mData.size();
     }
 
     interface ItemSelectListener {
         void OnListItemSelected(@NonNull Gif gif);
     }
 
-    private class ViewHolder {
-        private ImageView gifIv;
+    class GifViewHolder extends RecyclerView.ViewHolder {
+        ImageView gifIv;
+
+        GifViewHolder(View itemView) {
+            super(itemView);
+            gifIv = itemView.findViewById(R.id.gif_iv);
+        }
     }
 }
