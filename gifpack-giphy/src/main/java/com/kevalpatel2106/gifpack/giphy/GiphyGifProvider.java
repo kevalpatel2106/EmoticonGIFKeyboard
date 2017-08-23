@@ -12,14 +12,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
 import retrofit2.Response;
@@ -33,17 +31,13 @@ import retrofit2.Retrofit;
 
 public class GiphyGifProvider implements GifProviderProtocol {
     private final String mApiKey;
-    private final Cache mCache;
+    private final Context mContext;
 
     @SuppressWarnings("ConstantConditions")
     private GiphyGifProvider(@NonNull Context context, @NonNull String apiKey) {
         if (apiKey == null || apiKey.isEmpty()) throw new RuntimeException("Invalid GIPHY key.");
-
+        mContext = context;
         mApiKey = apiKey;
-
-        //Define mCache
-        File httpCacheDirectory = new File(context.getCacheDir(), "responses");
-        mCache = new Cache(httpCacheDirectory, CacheInterceptor.CACHE_SIZE);
     }
 
     public static GiphyGifProvider create(@NonNull Context context, @NonNull String apiKey) {
@@ -80,8 +74,8 @@ public class GiphyGifProvider implements GifProviderProtocol {
             Response<ResponseBody> responseBody = new Retrofit.Builder()
                     .baseUrl(GiphyApiService.GIPHY_BASE_URL)
                     .client(new OkHttpClient.Builder()
-                            .addNetworkInterceptor(new CacheInterceptor(5))
-                            .cache(mCache)
+                            .addNetworkInterceptor(new CacheInterceptor(mContext, 15))
+                            .cache(CacheInterceptor.getCache(mContext))
                             .build())
                     .build()
                     .create(GiphyApiService.class)
@@ -119,8 +113,8 @@ public class GiphyGifProvider implements GifProviderProtocol {
             Response<ResponseBody> responseBody = new Retrofit.Builder()
                     .baseUrl(GiphyApiService.GIPHY_BASE_URL)
                     .client(new OkHttpClient.Builder()
-                            .addNetworkInterceptor(new CacheInterceptor(5))
-                            .cache(mCache)
+                            .addNetworkInterceptor(new CacheInterceptor(mContext, 4))
+                            .cache(CacheInterceptor.getCache(mContext))
                             .build())
                     .build()
                     .create(GiphyApiService.class)
@@ -150,5 +144,4 @@ public class GiphyGifProvider implements GifProviderProtocol {
         }
         return null;
     }
-
 }

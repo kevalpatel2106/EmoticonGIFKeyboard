@@ -1,1 +1,5 @@
-<manifest package="com.kevalpatel2106.gifpack.giphy"/>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.kevalpatel2106.gifpack.giphy">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+</manifest>

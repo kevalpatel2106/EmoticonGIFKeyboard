@@ -6,14 +6,15 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
+    <!--Search GIF view flipper height-->
     <ViewFlipper
-        android:id="@+id/gif_search_vieW_pager"
+        android:id="@+id/gif_search_view_pager"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/gif_image_view_height">
+        android:layout_height="@dimen/search_gif_view_flipper_height"
+        android:background="@color/background_light">
 
         <!--0. Loader-->
         <ProgressBar
-            android:id="@+id/loading_progressbar"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="center"/>
@@ -22,16 +23,16 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/gif_search_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp"/>
+            android:layout_height="@dimen/search_gif_view_flipper_height"
+            android:paddingBottom="@dimen/search_gif_recycler_view_padding"
+            android:paddingTop="@dimen/search_gif_recycler_view_padding"/>
 
         <!--2. Gif not found-->
         <TextView
             android:id="@+id/error_tv"
             style="@style/Base.TextAppearance.AppCompat.Small"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
             android:padding="10dp"/>
@@ -80,12 +81,10 @@
             android:background="@android:color/transparent"
             android:hint="@string/hint_search"
             android:imeOptions="actionSearch"
-            android:maxLength="1"
-            android:padding="@dimen/image_btn_padding">
-
-            <requestFocus/>
-
-        </EditText>
+            android:maxLines="1"
+            android:padding="@dimen/image_btn_padding"
+            android:singleLine="true"
+            tools:ignore="Deprecated"/>
     </RelativeLayout>
 </LinearLayout>
 

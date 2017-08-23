@@ -20,7 +20,7 @@ import java.util.ArrayList;
  * @author 'https://github.com/kevalpatel2106'
  */
 
-class EmoticonDbHelper extends SQLiteOpenHelper {
+final class EmoticonDbHelper extends SQLiteOpenHelper {
     @SuppressWarnings("unused")
     private static final String TAG = "EmoticonDbHelper";
     private static final String DB_NAME = "emoticon.db";

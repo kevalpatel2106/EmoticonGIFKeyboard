@@ -17,10 +17,7 @@
         android:layout_height="wrap_content"
         android:background="@color/background_light"/>
 
-    <include
-        layout="@layout/layout_divider"
-        android:layout_width="match_parent"
-        android:layout_height="1.5px"/>
+    <include layout="@layout/layout_divider"/>
 
     <!--Bottom container-->
     <RelativeLayout

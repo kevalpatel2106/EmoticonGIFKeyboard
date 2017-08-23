@@ -2,18 +2,15 @@ package com.kevalpatel2106.emoticongifkeyboard.gifs.internal;
 
 
 import android.content.Context;
-import android.graphics.PorterDuff;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
@@ -92,12 +89,6 @@ public final class GifFragment extends Fragment implements GifGridAdapter.ItemSe
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        //Set the progressbar
-        ProgressBar progressBar = view.findViewById(R.id.loading_progressbar);
-        progressBar.getIndeterminateDrawable()
-                .setColorFilter(ContextCompat.getColor(mContext, R.color.icon_selected),
-                        PorterDuff.Mode.SRC_ATOP);
 
         mViewFlipper = view.findViewById(R.id.gif_view_flipper);
         mErrorTv = view.findViewById(R.id.error_textview);

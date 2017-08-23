@@ -21,7 +21,7 @@ import java.util.ArrayList;
  * A simple {@link Fragment} subclass.
  * @author 'https://github.com/kevalpatel2106'
  */
-public class EmoticonSearchFragment extends Fragment implements EmoticonAdapter.ItemSelectListener {
+public final class EmoticonSearchFragment extends Fragment implements EmoticonAdapter.ItemSelectListener {
 
     //List of emoticons to display
     private ArrayList<Emoticon> mEmoticons;

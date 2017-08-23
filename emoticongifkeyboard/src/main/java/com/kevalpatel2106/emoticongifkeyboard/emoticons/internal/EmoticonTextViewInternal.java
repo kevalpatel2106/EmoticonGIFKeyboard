@@ -20,7 +20,7 @@ import com.kevalpatel2106.emoticongifkeyboard.emoticons.EmoticonProvider;
  * @author 'https://github.com/kevalpatel2106'
  */
 
-public class EmoticonTextViewInternal extends AppCompatTextView {
+public final class EmoticonTextViewInternal extends AppCompatTextView {
     @NonNull
     private final Context mContext;
     private int mEmoticonSize;

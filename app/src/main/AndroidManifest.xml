@@ -12,7 +12,9 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
 
-        <activity android:name="com.kevalpatel2106.sample.MainActivity">
+        <activity
+            android:name="com.kevalpatel2106.sample.MainActivity"
+            android:configChanges="keyboard|keyboardHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

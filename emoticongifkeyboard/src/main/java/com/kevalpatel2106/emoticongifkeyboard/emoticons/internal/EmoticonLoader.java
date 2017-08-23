@@ -25,7 +25,7 @@ import java.util.regex.Pattern;
  * @author 'https://github.com/kevalpatel2106'
  */
 
-class EmoticonLoader extends AsyncTask<Void, Void, Void> {
+final class EmoticonLoader extends AsyncTask<Void, Void, Void> {
     @SuppressWarnings("unused")
     private static final String TAG = "EmoticonLoader";
     private final Context mContext;

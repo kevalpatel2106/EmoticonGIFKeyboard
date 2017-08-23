@@ -42,7 +42,7 @@ final class GifSearchAdapter extends RecyclerView.Adapter<GifSearchAdapter.GifVi
 
     @Override
     public GifViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new GifViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_gif, parent, false));
+        return new GifViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_gif_search, parent, false));
     }
 
     @Override
