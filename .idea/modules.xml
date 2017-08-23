@@ -16,6 +16,7 @@
       <module fileurl="file://$PROJECT_DIR$/emoticonpack-ios/emoticonpack-ios.iml" filepath="$PROJECT_DIR$/emoticonpack-ios/emoticonpack-ios.iml" />
       <module fileurl="file://$PROJECT_DIR$/emoticonpack-twitter/emoticonpack-twitter.iml" filepath="$PROJECT_DIR$/emoticonpack-twitter/emoticonpack-twitter.iml" />
       <module fileurl="file://$PROJECT_DIR$/gifpack-giphy/gifpack-giphy.iml" filepath="$PROJECT_DIR$/gifpack-giphy/gifpack-giphy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gifpack-tenor/gifpack-tenor.iml" filepath="$PROJECT_DIR$/gifpack-tenor/gifpack-tenor.iml" />
     </modules>
   </component>
 </project>

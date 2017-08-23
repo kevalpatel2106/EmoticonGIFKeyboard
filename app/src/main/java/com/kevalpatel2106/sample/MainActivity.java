@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         keyboardFragment.setGifProvider(GiphyGifProvider.create(this, "564ce7370bf347f2b7c0e4746593c179"));
+//        keyboardFragment.setGifProvider(TenorGifProvider.create(this, "LIVDSRZULELA"));
 
         getSupportFragmentManager()
                 .beginTransaction()

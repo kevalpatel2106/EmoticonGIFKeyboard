@@ -33,11 +33,14 @@ android {
 
 dependencies {
     compile project(':emoticongifkeyboard')
-    compile project(':gifpack-giphy')
+
     compile project(':emoticonpack-ios')
     compile project(':emoticonpack-google')
     compile project(':emoticonpack-twitter')
     compile project(':emoticonpack-emojione')
+
+    compile project(':gifpack-giphy')
+    compile project(':gifpack-tenor')
 
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'

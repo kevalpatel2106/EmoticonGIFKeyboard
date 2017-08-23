@@ -15,6 +15,7 @@
             <option value="$PROJECT_DIR$/emoticonpack-ios" />
             <option value="$PROJECT_DIR$/emoticonpack-twitter" />
             <option value="$PROJECT_DIR$/gifpack-giphy" />
+            <option value="$PROJECT_DIR$/gifpack-tenor" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

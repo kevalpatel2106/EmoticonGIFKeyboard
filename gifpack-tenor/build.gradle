@@ -1,0 +1,46 @@
+apply plugin: 'com.android.library'
+apply plugin: 'bintray-release'
+apply from: '../gradle/config.gradle'
+
+android {
+    compileSdkVersion buidlConfig.compile
+    buildToolsVersion buidlConfig.buildToolVersion
+
+    compileOptions {
+        sourceCompatibility javaCompatibility.sourceCompatibility
+        targetCompatibility javaCompatibility.targetCompatibility
+    }
+
+    defaultConfig {
+        //sdks
+        minSdkVersion buidlConfig.min
+        targetSdkVersion buidlConfig.target
+
+        consumerProguardFiles 'proguard-rules.pro'
+    }
+
+    packagingOptions packageExcludes
+
+    // This is important, it will run lint checks but won't abort build
+    lintOptions {
+        abortOnError false
+    }
+}
+
+publish {
+    artifactId = "gifpack-tenor"
+    userOrg = bintrayConfig.userOrg
+    groupId = bintrayConfig.groupId
+    publishVersion = bintrayConfig.publishVersion
+    description = bintrayConfig.description
+    website = bintrayConfig.website
+    licences = bintrayConfig.licences
+}
+
+dependencies {
+    compile project(':emoticongifkeyboard')
+    compile('com.squareup.retrofit2:retrofit:2.3.0', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+        exclude group: 'com.android.support', module: 'support-v4'
+    })
+}
