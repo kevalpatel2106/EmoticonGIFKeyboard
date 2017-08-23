@@ -1,27 +1,40 @@
 apply plugin: 'com.android.library'
+apply plugin: 'bintray-release'
+apply from: '../gradle/config.gradle'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.1"
+    compileSdkVersion buidlConfig.compile
+    buildToolsVersion buidlConfig.buildToolVersion
+
+    compileOptions {
+        sourceCompatibility javaCompatibility.sourceCompatibility
+        targetCompatibility javaCompatibility.targetCompatibility
+    }
 
     defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 26
+        //sdks
+        minSdkVersion buidlConfig.min
+        targetSdkVersion buidlConfig.target
 
         consumerProguardFiles 'proguard-rules.pro'
     }
 
+    packagingOptions packageExcludes
+
+    // This is important, it will run lint checks but won't abort build
     lintOptions {
         abortOnError false
     }
+}
 
-    dexOptions {
-        preDexLibraries true
-    }
-
-    aaptOptions {
-        cruncherEnabled false
-    }
+publish {
+    artifactId = "emoticon-gif-keyboard"
+    userOrg = bintrayConfig.userOrg
+    groupId = bintrayConfig.groupId
+    publishVersion = bintrayConfig.publishVersion
+    description = bintrayConfig.description
+    website = bintrayConfig.website
+    licences = bintrayConfig.licences
 }
 
 dependencies {
@@ -30,7 +43,10 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-v4'
         exclude group: 'com.android.support', module: 'appcompat-v7'
     })
-
-    compile 'com.android.support:recyclerview-v7:26.0.0-alpha1'
+    compile ('com.android.support:recyclerview-v7:26.0.0-alpha1', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude group: 'com.android.support', module: 'appcompat-v7'
+    })
     compile 'com.android.support:appcompat-v7:26.0.0-alpha1'
 }

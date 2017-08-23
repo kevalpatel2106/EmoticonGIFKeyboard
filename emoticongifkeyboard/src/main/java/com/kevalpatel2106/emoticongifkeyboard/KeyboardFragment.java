@@ -44,6 +44,9 @@ public final class KeyboardFragment extends Fragment implements FragmentManager.
     /* View container that hosts search, backspace and tabs buttons. */
     private View mBottomViewContainer;
 
+    /**
+     * Public constructor.
+     */
     public KeyboardFragment() {
         mEmoticonFragment = EmoticonFragment.getNewInstance();
         mEmoticonSearchFragment = EmoticonSearchFragment.getNewInstance();
@@ -173,6 +176,9 @@ public final class KeyboardFragment extends Fragment implements FragmentManager.
         mGifSearchFragment.setGifSelectListener(gifSelectListener);
     }
 
+    /**
+     * Handle the backstack changes in the fragment container.
+     */
     @Override
     public void onBackStackChanged() {
         int index = getChildFragmentManager().getBackStackEntryCount() - 1;

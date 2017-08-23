@@ -13,11 +13,12 @@ import okhttp3.Interceptor;
 
 /**
  * Created by Keval on 16-Jun-17.
+ * {@link Interceptor} to handle caching of the retrofit request.
  *
  * @author {@link 'https://github.com/kevalpatel2106'}
  */
 
-class CacheInterceptor implements Interceptor {
+final class CacheInterceptor implements Interceptor {
     private static final int CACHE_SIZE = 5242880;          //5 MB //Cache size.
 
     @NonNull

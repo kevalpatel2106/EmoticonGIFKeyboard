@@ -18,6 +18,7 @@ import java.util.regex.Pattern;
 
 /**
  * Created by Keval Patel on 20/08/17.
+ * Utils to find emoticons from the string.
  *
  * @author 'https://github.com/kevalpatel2106'
  */
@@ -130,6 +131,14 @@ public final class EmoticonUtils {
         return result;
     }
 
+    /**
+     * Load the regex to parse unicode from the shared preference if {@link #sRegexPattern} is not
+     * loaded.
+     *
+     * @param context Instance.
+     * @return Regex to find emoticon unicode from string.
+     */
+    @NonNull
     private static Pattern getRegex(@NonNull final Context context) {
         if (sRegexPattern == null) {
             String regex = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE)

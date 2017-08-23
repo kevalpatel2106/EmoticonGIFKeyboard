@@ -20,11 +20,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-
-import java.util.List;
-
-import static java.util.Arrays.asList;
 
 /**
  * Emoticon POJO.
@@ -56,12 +51,6 @@ public final class Emoticon implements Parcelable {
     @DrawableRes
     private int icon;
 
-    /**
-     * Different variants of the emoticons. This value will be null if there is no emoticons.
-     */
-    @Nullable
-    private List<Emoticon> mVariants;
-
     public Emoticon(@NonNull String unicode) {
         //noinspection ConstantConditions
         if (unicode == null) throw new RuntimeException("Unicode cannot be null.");
@@ -73,29 +62,6 @@ public final class Emoticon implements Parcelable {
         this.icon = icon;
     }
 
-    public Emoticon(int codePoint) {
-        this(newString(codePoint));
-    }
-
-    public Emoticon(int codePoint, @DrawableRes int icon) {
-        this(newString(codePoint), icon);
-    }
-
-    public Emoticon(int codePoint, @DrawableRes int icon, final Emoticon... variants) {
-        this(codePoint, icon);
-        this.mVariants = asList(variants);
-    }
-
-    public Emoticon(@NonNull final int[] codePoints, @DrawableRes int icon) {
-        this.unicode = new String(codePoints, 0, codePoints.length);
-        this.icon = icon;
-    }
-
-    public Emoticon(@NonNull final int[] codePoints, @DrawableRes int icon, final Emoticon... variants) {
-        this(codePoints, icon);
-        this.mVariants = asList(variants);
-    }
-
     /**
      * Constructor for parcelable object.
      */
@@ -105,14 +71,6 @@ public final class Emoticon implements Parcelable {
 
         //noinspection ConstantConditions
         if (unicode == null) throw new RuntimeException("Unicode cannot be null.");
-    }
-
-    private static String newString(int codePoint) {
-        if (Character.charCount(codePoint) == 1) {
-            return String.valueOf(codePoint);
-        } else {
-            return new String(Character.toChars(codePoint));
-        }
     }
 
     @Override
@@ -144,10 +102,5 @@ public final class Emoticon implements Parcelable {
     @Override
     public int hashCode() {
         return unicode.hashCode();
-    }
-
-    @Nullable
-    public List<Emoticon> getVariants() {
-        return mVariants;
     }
 }

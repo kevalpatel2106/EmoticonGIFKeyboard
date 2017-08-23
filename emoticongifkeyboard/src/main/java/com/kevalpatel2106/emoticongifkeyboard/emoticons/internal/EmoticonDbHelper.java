@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
 import android.util.Log;
 
 import com.kevalpatel2106.emoticongifkeyboard.emoticons.Emoticon;
@@ -40,6 +39,10 @@ final class EmoticonDbHelper extends SQLiteOpenHelper {
                 + EmoticonDbColumns.CATEGORY + " INTEGER,"
                 + EmoticonDbColumns.TAGS + " VARCHAR);");
 
+        sqLiteDatabase.execSQL("CREATE TABLE " + EmoticonTagsColumns.TABLE + " ("
+                + EmoticonTagsColumns.ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + EmoticonTagsColumns.UNICODE + " VARCHAR,"
+                + EmoticonTagsColumns.TAG + " VARCHAR);");
 
         sqLiteDatabase.execSQL("CREATE INDEX unicode_category ON " + EmoticonDbColumns.TABLE + "("
                 + EmoticonDbColumns.CATEGORY + ", "
@@ -56,14 +59,27 @@ final class EmoticonDbHelper extends SQLiteOpenHelper {
                                  @EmoticonsCategories.EmoticonsCategory final int category,
                                  @NonNull final String description,
                                  @Nullable final String[] tags) {
+
+        //Insert emoticon
         ContentValues values = new ContentValues();
         values.put(EmoticonDbColumns.UNICODE, unicode);
         values.put(EmoticonDbColumns.CATEGORY, category);
         values.put(EmoticonDbColumns.DESCRIPTION, description);
-        if (tags != null) values.put(EmoticonDbColumns.TAGS, TextUtils.join(",", tags));
-        Log.d(TAG, "insertInDb: " + description);
         sqLiteDatabase.insert(EmoticonDbColumns.TABLE, null, values);
         values.clear();
+
+        //Insert tags to tags table
+        if (tags == null)return;
+        for (String tag: tags) {
+            if (tag ==null)continue;
+            values = new ContentValues();
+            values.put(EmoticonTagsColumns.UNICODE, unicode);
+            values.put(EmoticonTagsColumns.TAG, tag.trim());
+            sqLiteDatabase.insert(EmoticonTagsColumns.TABLE, null, values);
+            values.clear();
+        }
+
+        Log.d(TAG, "insertInDb: " + description);
     }
 
     int getCount() {
@@ -81,11 +97,28 @@ final class EmoticonDbHelper extends SQLiteOpenHelper {
         return count;
     }
 
+    @NonNull
     ArrayList<Emoticon> getEmoticons(@EmoticonsCategories.EmoticonsCategory final int category) {
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
         Cursor cursor = sqLiteDatabase.query(EmoticonDbColumns.TABLE,
                 new String[]{EmoticonDbColumns.UNICODE, EmoticonDbColumns.CATEGORY},
                 EmoticonDbColumns.CATEGORY + "=?", new String[]{category + ""}, null, null, null);
+
+        ArrayList<Emoticon> emoticons = new ArrayList<>();
+        while (cursor.moveToNext()) {
+            emoticons.add(new Emoticon(cursor.getString(cursor.getColumnIndex(EmoticonDbColumns.UNICODE))));
+        }
+        cursor.close();
+        sqLiteDatabase.close();
+        return emoticons;
+    }
+
+    @NonNull
+    ArrayList<Emoticon> searchEmoticons(@NonNull final String searchQuery) {
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.query(EmoticonTagsColumns.TABLE,
+                new String[]{EmoticonTagsColumns.UNICODE},
+                EmoticonTagsColumns.TAG + " LIKE ?", new String[]{searchQuery.trim() + "%"}, null, null, null);
 
         ArrayList<Emoticon> emoticons = new ArrayList<>();
         while (cursor.moveToNext()) {
@@ -103,5 +136,12 @@ final class EmoticonDbHelper extends SQLiteOpenHelper {
         private static final String TAGS = "tags";
         private static final String CATEGORY = "category";
         private static final String DESCRIPTION = "description";
+    }
+
+    private static class EmoticonTagsColumns {
+        private static final String TABLE = "emoticontags";
+        private static final String ID = "_id";
+        private static final String UNICODE = "unicode";
+        private static final String TAG = "tags";
     }
 }

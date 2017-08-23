@@ -16,6 +16,7 @@ import java.util.List;
 
 /**
  * Created by Keval Patel on 22/08/17.
+ * Adapter to display GIFs in the Recycler view.
  *
  * @author 'https://github.com/kevalpatel2106'
  */
@@ -28,6 +29,11 @@ final class GifSearchAdapter extends RecyclerView.Adapter<GifSearchAdapter.GifVi
     @NonNull
     private final ItemSelectListener mListener;
 
+    /**
+     * @param context  Instance
+     * @param data     List of {@link Gif}
+     * @param listener {@link GifGridAdapter.ItemSelectListener} to get callback.
+     */
     GifSearchAdapter(@NonNull final Context context,
                      @NonNull final List<Gif> data,
                      @NonNull final ItemSelectListener listener) {
@@ -70,11 +76,20 @@ final class GifSearchAdapter extends RecyclerView.Adapter<GifSearchAdapter.GifVi
         return mData.size();
     }
 
+    /**
+     * Callback listener to get notify when item is clicked.
+     */
     interface ItemSelectListener {
         void OnListItemSelected(@NonNull Gif gif);
     }
 
+    /**
+     * Recycler view holder.
+     */
     class GifViewHolder extends RecyclerView.ViewHolder {
+        /**
+         * Image view to display GIFs.
+         */
         ImageView gifIv;
 
         GifViewHolder(View itemView) {

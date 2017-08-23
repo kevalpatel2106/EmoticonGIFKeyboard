@@ -16,6 +16,7 @@ import com.kevalpatel2106.emoticongifkeyboard.emoticons.EmoticonProvider;
 
 /**
  * Created by Keval Patel on 22/08/17.
+ * This class is for internal use only.
  *
  * @author 'https://github.com/kevalpatel2106'
  */

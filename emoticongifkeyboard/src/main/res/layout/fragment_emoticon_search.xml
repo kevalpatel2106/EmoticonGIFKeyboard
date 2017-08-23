@@ -1,17 +1,43 @@
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/root_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context="com.kevalpatel2106.emoticongifkeyboard.KeyboardFragment">
+    android:orientation="vertical">
 
-    <!--1. Search box container-->
-    <LinearLayout
+    <!--Search GIF view flipper height-->
+    <ViewFlipper
+        android:id="@+id/emoticon_search_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/search_emoticon_view_flipper_height"
+        android:background="@color/background_light">
+
+        <!--1. Gif search-->
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/emoticon_search_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="@dimen/search_emoticon_recycler_view_padding"
+            android:paddingTop="@dimen/search_emoticon_recycler_view_padding"/>
+
+        <!--2. Gif not found-->
+        <TextView
+            android:id="@+id/error_tv"
+            style="@style/Base.TextAppearance.AppCompat.Small"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@string/no_result_found"/>
+    </ViewFlipper>
+
+    <!--Search box container-->
+    <RelativeLayout
         android:id="@+id/bottom_container"
         android:layout_width="match_parent"
         android:layout_height="@dimen/keyboard_tabs_container_height"
-        android:layout_alignParentBottom="true"
         android:layout_gravity="center_vertical"
         android:background="@color/background_dark"
         android:elevation="2dp"
@@ -23,6 +49,8 @@
             android:id="@+id/up_arrow"
             android:layout_width="@dimen/keyboard_tabs_container_height"
             android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
             android:padding="@dimen/image_btn_padding"
             android:src="@drawable/ic_up_arrow"/>
 
@@ -31,22 +59,14 @@
             android:id="@+id/search_box_et"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_toEndOf="@id/up_arrow"
+            android:layout_toRightOf="@id/up_arrow"
             android:background="@android:color/transparent"
             android:hint="@string/hint_search"
             android:imeOptions="actionSearch"
-            android:maxLength="1"
-            android:padding="@dimen/image_btn_padding">
-
-            <requestFocus/>
-        </EditText>
-
-    </LinearLayout>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/emoticon_search_list"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/emoticon_grid_item_size"
-        android:layout_above="@id/bottom_container"/>
-</RelativeLayout>
-
-
+            android:maxLines="1"
+            android:padding="@dimen/image_btn_padding"
+            android:singleLine="true"
+            tools:ignore="Deprecated"/>
+    </RelativeLayout>
+</LinearLayout>

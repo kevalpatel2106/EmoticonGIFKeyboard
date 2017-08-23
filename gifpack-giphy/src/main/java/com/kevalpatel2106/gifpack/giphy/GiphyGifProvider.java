@@ -25,22 +25,44 @@ import retrofit2.Retrofit;
 
 /**
  * Created by Keval on 19-Aug-17.
+ * GIF providor to load GIFs using GIPHY apis.
  *
  * @author <a href='https://github.com/kevalpatel2106'>Kevalpatel2106</a>
+ * @see GifProviderProtocol
  */
 
-public class GiphyGifProvider implements GifProviderProtocol {
+public final class GiphyGifProvider implements GifProviderProtocol {
+
+    /* Giphy api key */
     private final String mApiKey;
+
+    /* Instance */
     private final Context mContext;
 
+    /**
+     * Private constructor.
+     *
+     * @param context Instance.
+     * @param apiKey  Giphy api key.
+     */
     @SuppressWarnings("ConstantConditions")
-    private GiphyGifProvider(@NonNull Context context, @NonNull String apiKey) {
+    private GiphyGifProvider(@NonNull final Context context,
+                             @NonNull final String apiKey) {
         if (apiKey == null || apiKey.isEmpty()) throw new RuntimeException("Invalid GIPHY key.");
         mContext = context;
         mApiKey = apiKey;
     }
 
-    public static GiphyGifProvider create(@NonNull Context context, @NonNull String apiKey) {
+    /**
+     * Create {@link GiphyGifProvider}.
+     *
+     * @param context Instance.
+     * @param apiKey  Giphy api key.
+     * @return {@link GiphyGifProvider}
+     * @see <a href='https://developers.giphy.com/dashboard/'>Create Giphy Account</a>
+     */
+    public static GiphyGifProvider create(@NonNull final Context context,
+                                          @NonNull final String apiKey) {
         return new GiphyGifProvider(context, apiKey);
     }
 
@@ -52,7 +74,7 @@ public class GiphyGifProvider implements GifProviderProtocol {
      * @throws IOException - If unable to read
      */
     @Nullable
-    private static String getStringFromStream(@NonNull InputStream inputStream) throws IOException {
+    private static String getStringFromStream(@NonNull final InputStream inputStream) throws IOException {
         //noinspection ConstantConditions
         BufferedReader r = new BufferedReader(new InputStreamReader(inputStream));
         StringBuilder total = new StringBuilder();
@@ -69,7 +91,7 @@ public class GiphyGifProvider implements GifProviderProtocol {
      */
     @Nullable
     @Override
-    public List<Gif> getTrendingGifs(int limit) {
+    public List<Gif> getTrendingGifs(final int limit) {
         try {
             Response<ResponseBody> responseBody = new Retrofit.Builder()
                     .baseUrl(GiphyApiService.GIPHY_BASE_URL)
@@ -106,9 +128,16 @@ public class GiphyGifProvider implements GifProviderProtocol {
         return null;
     }
 
+    /**
+     * Search GIFs.
+     *
+     * @param limit Number of GIFs.
+     * @param query Search query string.
+     * @return List of all the {@link Gif} or null of the error occurs.
+     */
     @Nullable
     @Override
-    public List<Gif> searchGifs(int limit, @NonNull String query) {
+    public List<Gif> searchGifs(final int limit, @NonNull final String query) {
         try {
             Response<ResponseBody> responseBody = new Retrofit.Builder()
                     .baseUrl(GiphyApiService.GIPHY_BASE_URL)

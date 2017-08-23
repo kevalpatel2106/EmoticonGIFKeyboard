@@ -16,13 +16,24 @@ import java.util.List;
 
 /**
  * Created by Keval on 18-Aug-17.
+ * Adapter to display Trending GIFs in the GridView.
+ *
+ * @author 'https://github.com/kevalpatel2106'
  */
 
 final class GifGridAdapter extends ArrayAdapter<Gif> {
+    @NonNull
     private final Context mContext;
+    @NonNull
     private final ItemSelectListener mListener;
+    @NonNull
     private final List<Gif> mData;
 
+    /**
+     * @param context  Instance
+     * @param data     List of {@link Gif}
+     * @param listener {@link ItemSelectListener} to get callback.
+     */
     GifGridAdapter(@NonNull final Context context,
                    @NonNull final List<Gif> data,
                    @NonNull final ItemSelectListener listener) {
@@ -41,6 +52,7 @@ final class GifGridAdapter extends ArrayAdapter<Gif> {
         return mData.get(position);
     }
 
+    @NonNull
     @Override
     public View getView(final int position, View convertView, @NonNull ViewGroup parent) {
         View v = convertView;
@@ -74,11 +86,21 @@ final class GifGridAdapter extends ArrayAdapter<Gif> {
         return v;
     }
 
+    /**
+     * Callback listener to get notify when item is clicked.
+     */
     interface ItemSelectListener {
         void OnListItemSelected(@NonNull Gif gif);
     }
 
+    /**
+     * View holder class to cache views.
+     */
     private class ViewHolder {
+
+        /**
+         * Image view to display GIFs.
+         */
         private ImageView gifIv;
     }
 }

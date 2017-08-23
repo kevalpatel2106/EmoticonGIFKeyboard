@@ -1,25 +1,40 @@
 apply plugin: 'com.android.library'
+apply plugin: 'bintray-release'
+apply from: '../gradle/config.gradle'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.1"
+    compileSdkVersion buidlConfig.compile
+    buildToolsVersion buidlConfig.buildToolVersion
 
-    defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 26
+    compileOptions {
+        sourceCompatibility javaCompatibility.sourceCompatibility
+        targetCompatibility javaCompatibility.targetCompatibility
     }
 
+    defaultConfig {
+        //sdks
+        minSdkVersion buidlConfig.min
+        targetSdkVersion buidlConfig.target
+
+        consumerProguardFiles 'proguard-rules.pro'
+    }
+
+    packagingOptions packageExcludes
+
+    // This is important, it will run lint checks but won't abort build
     lintOptions {
         abortOnError false
     }
+}
 
-    dexOptions {
-        preDexLibraries true
-    }
-
-    aaptOptions {
-        cruncherEnabled false
-    }
+publish {
+    artifactId = "emoticonpack-twitter"
+    userOrg = bintrayConfig.userOrg
+    groupId = bintrayConfig.groupId
+    publishVersion = bintrayConfig.publishVersion
+    description = bintrayConfig.description
+    website = bintrayConfig.website
+    licences = bintrayConfig.licences
 }
 
 dependencies {

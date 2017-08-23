@@ -25,6 +25,7 @@ import java.util.List;
 
 /**
  * This {@link Fragment} will display the list of trending GIFs in a grid.
+ * This fragment is for internal use only.
  */
 public final class GifFragment extends Fragment implements GifGridAdapter.ItemSelectListener {
     private static final String OUT_STATE_GIFS = "out_state_gifs";
@@ -182,7 +183,7 @@ public final class GifFragment extends Fragment implements GifGridAdapter.ItemSe
                 mErrorTv.setText(R.string.network_error);
                 mViewFlipper.setDisplayedChild(2);
             } else if (gifs.isEmpty()) { //No result found.
-                mErrorTv.setText(R.string.no_gif_found);
+                mErrorTv.setText(R.string.no_result_found);
                 mViewFlipper.setDisplayedChild(2);
             } else {
                 mViewFlipper.setDisplayedChild(1);

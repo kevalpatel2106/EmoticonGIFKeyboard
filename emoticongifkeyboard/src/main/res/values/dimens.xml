@@ -7,5 +7,7 @@
     <dimen name="image_btn_padding">6dp</dimen>
     <dimen name="emoticon_grid_item_size">50dp</dimen>
     <dimen name="search_gif_view_flipper_height">120dp</dimen>
+    <dimen name="search_emoticon_view_flipper_height">70dp</dimen>
     <dimen name="search_gif_recycler_view_padding">10dp</dimen>
+    <dimen name="search_emoticon_recycler_view_padding">10dp</dimen>
 </resources>

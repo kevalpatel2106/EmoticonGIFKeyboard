@@ -27,12 +27,21 @@ public final class Gif implements Parcelable {
         }
     };
 
+    /**
+     * Original GIF image url.
+     */
     @NonNull
     private final String gifUrl;
 
+    /**
+     * Preview GIF url to use as thumbnail.
+     */
     @Nullable
     private final String previewGifUrl;
 
+    /**
+     * MP4 video url for the image.
+     */
     @Nullable
     private final String mp4Url;
 
@@ -41,7 +50,7 @@ public final class Gif implements Parcelable {
      *
      * @param gifUrl        Full scale GIF URL.
      * @param previewGifUrl Preview scale GIF URL.
-     * @param mp4Url
+     * @param mp4Url MP4 video url for the image.
      */
     @SuppressWarnings("ConstantConditions")
     public Gif(@NonNull String gifUrl, @Nullable String previewGifUrl, @Nullable String mp4Url) {

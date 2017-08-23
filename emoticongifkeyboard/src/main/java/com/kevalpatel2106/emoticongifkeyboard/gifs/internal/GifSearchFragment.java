@@ -29,7 +29,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A simple {@link Fragment} subclass.
+ * A simple {@link Fragment} subclass to provide search interface for GIF image using the {@link GifProviderProtocol}.
+ * After initialization, this will display the list of trending GIFs. Once user enter the search
+ * query, this will search for the GIFs from {@link GifProviderProtocol}.
+ * This fragment is for internal use only.
+ *
+ * @author 'https://github.com/kevalpatel2106'
  */
 public final class GifSearchFragment extends Fragment implements GifSearchAdapter.ItemSelectListener {
 
@@ -42,24 +47,37 @@ public final class GifSearchFragment extends Fragment implements GifSearchAdapte
     /* Listener to notify when gif selected. */
     private GifSelectListener mGifSelectListener;
 
+    /* GifProviderProtocol to load the GIF from provider */
     private GifProviderProtocol mGifProvider;
 
+    /* View flipper to flip between GIFs list and no result found view. */
     private ViewFlipper mViewFlipper;
 
+    /* Async Task to search GIFs */
     private SearchGifTask mSearchTask;
 
+    /* Async Task to load trending GIFs*/
     private TrendingGifTask mTrendingGifTask;
 
+    /* Error text view */
     private TextView mErrorTv;
 
-    /* Search list */
+    /* GIF recycler view. */
     private RecyclerView mRecyclerView;
+
+    /* Search text input */
     private EditText mSearchEt;
 
     public GifSearchFragment() {
         // Required empty public constructor
     }
 
+    /**
+     * Get the new instance of {@link GifSearchFragment}. Use this method over calling constructor.
+     * This function is for internal use only.
+     *
+     * @return {@link GifSearchFragment}
+     */
     public static GifSearchFragment getNewInstance() {
         return new GifSearchFragment();
     }
@@ -140,7 +158,8 @@ public final class GifSearchFragment extends Fragment implements GifSearchAdapte
     }
 
     /**
-     * Start searching the GIFs for given search query.
+     * Start searching the GIFs for given search query. This field should set before displaying the
+     * fragment. This function is for internal use only.
      *
      * @param searchQuery Search query.
      */
@@ -214,7 +233,7 @@ public final class GifSearchFragment extends Fragment implements GifSearchAdapte
                 mErrorTv.setText(R.string.network_error);
                 mViewFlipper.setDisplayedChild(2);
             } else if (gifs.isEmpty()) { //No result found.
-                mErrorTv.setText(R.string.no_gif_found);
+                mErrorTv.setText(R.string.no_result_found);
                 mViewFlipper.setDisplayedChild(2);
             } else {
                 mViewFlipper.setDisplayedChild(1);
@@ -265,7 +284,7 @@ public final class GifSearchFragment extends Fragment implements GifSearchAdapte
                 mErrorTv.setText(R.string.network_error);
                 mViewFlipper.setDisplayedChild(2);
             } else if (gifs.isEmpty()) { //No result found.
-                mErrorTv.setText(R.string.no_gif_found);
+                mErrorTv.setText(R.string.no_result_found);
                 mViewFlipper.setDisplayedChild(2);
             } else {
                 mViewFlipper.setDisplayedChild(1);

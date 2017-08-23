@@ -1,9 +1,5 @@
 <resources>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="hint_search">Search</string>
-    <string name="no_gif_found">No GIF found.</string>
+    <string name="no_result_found">No result found.</string>
     <string name="network_error">Something went wrong.</string>
-
 </resources>

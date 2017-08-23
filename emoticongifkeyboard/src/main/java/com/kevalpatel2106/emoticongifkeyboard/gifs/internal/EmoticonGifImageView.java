@@ -15,6 +15,8 @@ import com.kevalpatel2106.emoticongifkeyboard.R;
 
 /**
  * Created by Keval on 19-Aug-17.
+ * Custom {@link AppCompatImageView} to change the tint for the buttons when selected or click.
+ * This class is for internal use only.
  *
  * @author <a href='https://github.com/kevalpatel2106'>Kevalpatel2106</a>
  */

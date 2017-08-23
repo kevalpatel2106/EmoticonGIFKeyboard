@@ -8,6 +8,7 @@ import java.util.List;
 
 /**
  * Created by Keval on 19-Aug-17.
+ * Protocol to implement GIFs provider. Create an adapter for GIF service to integrate.
  *
  * @author <a href='https://github.com/kevalpatel2106'>Kevalpatel2106</a>
  */
