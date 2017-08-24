@@ -12,7 +12,4 @@
 /.idea/markdown-navigator.xml
 /.idea/misc.xml
 /.idea/dictionaries/
-emoji-parser/.idea/workspace.xml
-emoji-parser/.idea/misc.xml
-emoji-parser/.idea/libraries/jsoup_1_10_3__2_.xml
-emoji-parser/out/production/emoji-parser/com/kevalpatel2106/emojiparser/Emoji.class
+/emoji-parser/out/

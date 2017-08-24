@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/EmoticonGIFKeyboard.iml" filepath="$PROJECT_DIR$/EmoticonGIFKeyboard.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/emoticongifkeyboard/emoji-keyboard.iml" filepath="$PROJECT_DIR$/emoticongifkeyboard/emoji-keyboard.iml" />
+      <module fileurl="file://$PROJECT_DIR$/emoji-parser/emoji-parser.iml" filepath="$PROJECT_DIR$/emoji-parser/emoji-parser.iml" />
       <module fileurl="file://$PROJECT_DIR$/emoticonpack-google/emoticon-google.iml" filepath="$PROJECT_DIR$/emoticonpack-google/emoticon-google.iml" />
       <module fileurl="file://$PROJECT_DIR$/emoticonpack-ios/emoticon-ios.iml" filepath="$PROJECT_DIR$/emoticonpack-ios/emoticon-ios.iml" />
       <module fileurl="file://$PROJECT_DIR$/emoticon-one/emoticon-one.iml" filepath="$PROJECT_DIR$/emoticon-one/emoticon-one.iml" />

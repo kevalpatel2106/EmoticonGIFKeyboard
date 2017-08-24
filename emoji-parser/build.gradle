@@ -14,4 +14,13 @@
  *  limitations under the License.
  */
 
-include ':app', ':emoticongifkeyboard', ':gifpack-giphy', ':emoticonpack-ios', ':emoticonpack-google', ':emoticonpack-twitter', ':emoticonpack-emojione', ':gifpack-tenor', ':emoji-parser'
+apply plugin: 'java'
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile files('libs/gson-2.8.1.jar')
+    compile files('libs/jsoup-1.10.3.jar')
+}
+
+sourceCompatibility = "1.7"
+targetCompatibility = "1.7"
