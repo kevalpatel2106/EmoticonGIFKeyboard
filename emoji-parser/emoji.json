@@ -1,0 +1,25 @@
+[
+  {
+    "name": "Grinning Face",
+    "codepoint": [
+      "1F600"
+    ],
+    "tag": [
+      "Grinning Face",
+      "Happy Face",
+      "Smiley Face"
+    ],
+    "variants": [],
+    "imageUrls": {
+      "Google": "https://emojipedia-us.s3.amazonaws.com/thumbs/120/google/110/grinning-face_1f600.png",
+      "Apple": "https://emojipedia-us.s3.amazonaws.com/thumbs/120/apple/96/grinning-face_1f600.png",
+      "EmojiOne": "https://emojipedia-us.s3.amazonaws.com/thumbs/120/emoji-one/104/grinning-face_1f600.png",
+      "Twitter": "https://emojipedia-us.s3.amazonaws.com/thumbs/120/twitter/103/grinning-face_1f600.png",
+      "Microsoft": "https://emojipedia-us.s3.amazonaws.com/thumbs/120/microsoft/94/grinning-face_1f600.png",
+      "Samsung": "https://emojipedia-us.s3.amazonaws.com/thumbs/120/samsung/100/grinning-face_1f600.png",
+      "Messenger": "https://emojipedia-us.s3.amazonaws.com/thumbs/120/facebook/65/grinning-face_1f600.png",
+      "Facebook": "https://emojipedia-us.s3.amazonaws.com/thumbs/120/facebook/111/grinning-face_1f600.png",
+      "emojidex": "https://emojipedia-us.s3.amazonaws.com/thumbs/120/emojidex/112/grinning-face_1f600.png"
+    }
+  }
+]
