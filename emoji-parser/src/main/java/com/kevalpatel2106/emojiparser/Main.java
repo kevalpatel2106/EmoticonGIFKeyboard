@@ -17,19 +17,22 @@
 package com.kevalpatel2106.emojiparser;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import javax.imageio.ImageIO;
 
 public class Main {
     private static final List<String> SUPPORTED_VENDOR = Arrays.asList(
@@ -55,13 +58,19 @@ public class Main {
             BASE_URL + "/symbols/",
             BASE_URL + "/flags/"
     };
+    private Connection mConnection;
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
     public static void main(String[] args) {
         System.out.println("Initializing...");
 
-        //Delete image dir
-        for (String vendor : SUPPORTED_VENDOR) Utils.getImageDir(vendor).delete();
+
+        System.out.println("Deleting previous data...");
+        String[] entries = new File(Utils.CURRENT_DIR_PATH).list();
+        if (entries != null) for (String s : entries) {
+            File currentFile = new File(Utils.CURRENT_DIR_PATH, s);
+            currentFile.delete();
+        }
 
         //Start loading categories.
         for (String categoryUrl : EMOJI_CATEGORIES_URL) {
@@ -73,10 +82,21 @@ public class Main {
             }
         }
 
+        System.out.println("\n\n*******************************************");
         System.out.println("Saving json file...");
         String json = new Gson().toJson(mEmojis);
-        Utils.saveJson(json);
-        System.out.println("Success!!!");
+        Utils.saveFile(new File(Utils.CURRENT_DIR_PATH + "/emoji.json"), json);
+
+        createEmoticonList(mEmojis);
+
+        System.out.println("\n\n*******************************************");
+        System.out.println("Creating database...");
+        Connection connection = SQLiteJDBC.connect();
+        SQLiteJDBC.createTable(connection);
+        for (Emoji emoji : mEmojis) SQLiteJDBC.insertEmoji(connection, emoji);
+
+        System.out.println("\n\nSuccess!!!");
+        System.out.println("*******************************************");
     }
 
     private static void parseCategoryEmoji(final String categoryUrl) throws IOException {
@@ -99,7 +119,9 @@ public class Main {
 
             mEmojis.add(parseEmojiDetailPage(emojiPageUrl,
                     true,
-                    categoryUrl.replace(BASE_URL,"").replace("/","")));
+                    categoryUrl.replace(BASE_URL, "").replace("/", "")));
+
+            break;
         }
     }
 
@@ -114,6 +136,43 @@ public class Main {
 
         //Parse the name from H1 tag
         emoji.name = Utils.removeFirstEmojiFromText(doc.getElementsByTag("h1").text());
+        emoji.unicode = Utils.getFirstEmojiFromText(doc.getElementsByTag("h1").text());
+        System.out.println(doc.getElementsByTag("h1").text());
+        emoji.category = category;
+
+        //Get the tags
+        emoji.tags.add(emoji.name);
+        if (emoji.name.toLowerCase().contains("face")) emoji.tags.add("Face");
+        if (emoji.name.toLowerCase().contains("flag")) emoji.tags.add("flag");
+        if (emoji.name.toLowerCase().contains("flags")) emoji.tags.add("flag");
+        if (emoji.name.toLowerCase().contains("hand")) emoji.tags.add("hand");
+        if (emoji.name.toLowerCase().contains("hands")) emoji.tags.add("hand");
+
+        if (!doc.getElementsByClass("aliases").isEmpty()) {
+            final Elements aliases = doc.getElementsByClass("aliases")
+                    .tagName("ul").get(0)
+                    .getElementsByTag("ul").get(0)
+                    .getElementsByTag("li");
+            for (Element element : aliases) {
+                String tagToAdd = Utils.removeFirstEmojiFromText(element.text());
+                emoji.tags.add(tagToAdd);
+                if (tagToAdd.contains(" and ")) {
+                    emoji.tags.add(tagToAdd.split(" and ")[0]);
+                    emoji.tags.add(tagToAdd.split(" and ")[1]);
+                }
+                if (tagToAdd.contains(":")) emoji.tags.add(tagToAdd.split(":")[0]);
+            }
+        }
+        System.out.println("\t\tTags: " + emoji.tags.toString());
+
+        //Add code points
+        Elements codePoints = doc.getElementsMatchingOwnText("Codepoints") //Find <h2>Codepoint</h2>
+                .next().get(0) //Get the element next to it (<ul>)
+                .getElementsByTag("li");     //Get all <li> elements from it.
+        for (Element codePointElement : codePoints) {
+            emoji.codePoints.add(Utils.getStringCodePointFromElement(codePointElement
+                    .getElementsByTag("a").text()));
+        }
 
         //Parse the images
         final Elements vendorNames = doc.getElementsByClass("vendor-info");
@@ -125,20 +184,9 @@ public class Main {
 
             //Check if the vendor is among supported vendors
             if (SUPPORTED_VENDOR.contains(vendorName)) {
-                emoji.imageUrls.put(vendorName, vendorImage);
                 System.out.println("\t" + vendorName + " : " + vendorImage);
+                emoji.imageUrls.put(vendorName, downloadImages(vendorImage, vendorName, emoji.codePoints));
             }
-        }
-
-        //Get the tags
-        emoji.tags.add(emoji.name);
-        if (!doc.getElementsByClass("aliases").isEmpty()) {
-            final Elements aliases = doc.getElementsByClass("aliases")
-                    .tagName("ul").get(0)
-                    .getElementsByTag("ul").get(0)
-                    .getElementsByTag("li");
-            for (Element element : aliases) emoji.tags.add(Utils.removeFirstEmojiFromText(element.text()));
-            //TODO What about faces, flags and hand tags?
         }
 
         //Get modifiers
@@ -152,25 +200,55 @@ public class Main {
                         false, category));    //False to prevent infinite recursion
             }
         }
-
-        //Add code points
-        Elements codePoints = doc.getElementsMatchingOwnText("Codepoints") //Find <h2>Codepoint</h2>
-                .next().get(0) //Get the element next to it (<ul>)
-                .getElementsByTag("li");     //Get all <li> elements from it.
-        for (Element codePointElement : codePoints) {
-            emoji.codePoints.add(Utils.getStringCodePointFromElement(codePointElement
-                    .getElementsByTag("a").text()));
-        }
-
-        //Download images
-        downloadImages(emoji);
         return emoji;
     }
 
-    private static void downloadImages(Emoji emoji) throws IOException {
-        for (String vendorKey : emoji.imageUrls.keySet()) {
-            BufferedImage img = ImageIO.read(new URL(emoji.imageUrls.get(vendorKey)));
-            ImageIO.write(img, "png", Utils.getImageFile(vendorKey, emoji.codePoints));
+    private static File downloadImages(String url,
+                                       String vendor,
+                                       ArrayList<String> codePoints) throws IOException {
+        File originalImageFile = Utils.getImageFile(vendor, codePoints);
+        File resizedImageFile = Utils.getResizedImageFile(vendor, codePoints);
+
+        //Prepare full scale image
+        BufferedImage originalImg = ImageIO.read(new URL(url));
+        ImageIO.write(originalImg, "png", originalImageFile);
+
+        //Prepare resized image also
+        BufferedImage resizedImg = Utils.resizeImage(originalImg);
+        ImageIO.write(resizedImg, "png", resizedImageFile);
+
+        return originalImageFile;
+    }
+
+    private static void createEmoticonList(ArrayList<Emoji> emojis) {
+        System.out.println("\n\n*******************************************");
+        System.out.println("Creating emoticon lists file...");
+
+        String start = "\n" +
+                "import java.util.HashMap;\n" +
+                "\n" +
+                "class EmoticonList {\n" +
+                "    static final HashMap<String, Integer> EMOTICONS = new HashMap<>();\n" +
+                "\n" +
+                "    static {\n";
+
+        for (String vendor : SUPPORTED_VENDOR) {
+
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append(start);
+            for (Emoji emoji : emojis) {
+                if (!emoji.imageUrls.containsKey(vendor)) continue;
+
+                stringBuilder.append("        EMOTICONS.put(")
+                        .append("\"").append(emoji.unicode).append("\"")
+                        .append(", R.drawable.")
+                        .append(emoji.imageUrls.get(vendor).getName().replace(".png", ""))
+                        .append(";\n");
+            }
+
+            stringBuilder.append("\t}\n}");
+            Utils.saveFile(new File(Utils.CURRENT_DIR_PATH + "/" + vendor + "/EmoticonList.java"),
+                    stringBuilder.toString());
         }
     }
 }

@@ -19,6 +19,7 @@ package com.kevalpatel2106.emojiparser;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -35,6 +36,8 @@ public class Emoji {
     @Expose
     String category;
 
+    @SerializedName("unicode")
+    @Expose
     String unicode;
 
     @SerializedName("codepoint")
@@ -49,5 +52,5 @@ public class Emoji {
     @Expose
     ArrayList<Emoji> variants = new ArrayList<>();
 
-    HashMap<String, String> imageUrls = new HashMap<>();
+    transient HashMap<String, File> imageUrls = new HashMap<>();
 }

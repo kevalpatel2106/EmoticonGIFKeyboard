@@ -120,9 +120,9 @@ public final class EmoticonFragment extends Fragment implements EmoticonAdapter.
         emojiTabs[EmoticonsCategories.PEOPLE] = rootView.findViewById(R.id.emojis_tab_1_people);
         emojiTabs[EmoticonsCategories.NATURE] = rootView.findViewById(R.id.emojis_tab_2_nature);
         emojiTabs[EmoticonsCategories.FOOD] = rootView.findViewById(R.id.emojis_tab_3_food);
-        emojiTabs[EmoticonsCategories.SPORT] = rootView.findViewById(R.id.emojis_tab_4_sport);
-        emojiTabs[EmoticonsCategories.CARS] = rootView.findViewById(R.id.emojis_tab_5_cars);
-        emojiTabs[EmoticonsCategories.ELECTRIC] = rootView.findViewById(R.id.emojis_tab_6_elec);
+        emojiTabs[EmoticonsCategories.ACTIVITY] = rootView.findViewById(R.id.emojis_tab_4_sport);
+        emojiTabs[EmoticonsCategories.TRAVEL] = rootView.findViewById(R.id.emojis_tab_5_cars);
+        emojiTabs[EmoticonsCategories.OBJECTS] = rootView.findViewById(R.id.emojis_tab_6_elec);
         emojiTabs[EmoticonsCategories.SYMBOLS] = rootView.findViewById(R.id.emojis_tab_7_sym);
         emojiTabs[EmoticonsCategories.FLAGS] = rootView.findViewById(R.id.emojis_tab_8_flag);
 
@@ -181,9 +181,9 @@ public final class EmoticonFragment extends Fragment implements EmoticonAdapter.
             case EmoticonsCategories.PEOPLE:
             case EmoticonsCategories.NATURE:
             case EmoticonsCategories.FOOD:
-            case EmoticonsCategories.SPORT:
-            case EmoticonsCategories.CARS:
-            case EmoticonsCategories.ELECTRIC:
+            case EmoticonsCategories.ACTIVITY:
+            case EmoticonsCategories.TRAVEL:
+            case EmoticonsCategories.OBJECTS:
             case EmoticonsCategories.SYMBOLS:
             case EmoticonsCategories.FLAGS:
                 return new EmoticonDbHelper(mContext).getEmoticons(category);

@@ -51,9 +51,8 @@ final class EmoticonDbHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("CREATE TABLE " + EmoticonDbColumns.TABLE + " ("
                 + EmoticonDbColumns.ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + EmoticonDbColumns.UNICODE + " VARCHAR,"
-                + EmoticonDbColumns.DESCRIPTION + " VARCHAR,"
-                + EmoticonDbColumns.CATEGORY + " INTEGER,"
-                + EmoticonDbColumns.TAGS + " VARCHAR);");
+                + EmoticonDbColumns.NAME + " VARCHAR,"
+                + EmoticonDbColumns.CATEGORY + " INTEGER);");
 
         sqLiteDatabase.execSQL("CREATE TABLE " + EmoticonTagsColumns.TABLE + " ("
                 + EmoticonTagsColumns.ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -80,7 +79,7 @@ final class EmoticonDbHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(EmoticonDbColumns.UNICODE, unicode);
         values.put(EmoticonDbColumns.CATEGORY, category);
-        values.put(EmoticonDbColumns.DESCRIPTION, description);
+        values.put(EmoticonDbColumns.NAME, description);
         sqLiteDatabase.insert(EmoticonDbColumns.TABLE, null, values);
         values.clear();
 
@@ -149,9 +148,8 @@ final class EmoticonDbHelper extends SQLiteOpenHelper {
         private static final String TABLE = "emoticon";
         private static final String ID = "_id";
         private static final String UNICODE = "unicode";
-        private static final String TAGS = "tags";
         private static final String CATEGORY = "category";
-        private static final String DESCRIPTION = "description";
+        private static final String NAME = "name";
     }
 
     private static class EmoticonTagsColumns {

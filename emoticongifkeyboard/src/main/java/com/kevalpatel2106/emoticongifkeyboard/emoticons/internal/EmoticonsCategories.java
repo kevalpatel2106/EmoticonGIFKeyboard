@@ -33,9 +33,9 @@ final class EmoticonsCategories {
     static final int PEOPLE = 1;
     static final int NATURE = 2;
     static final int FOOD = 3;
-    static final int SPORT = 4;
-    static final int CARS = 5;
-    static final int ELECTRIC = 6;
+    static final int ACTIVITY = 4;
+    static final int TRAVEL = 5;
+    static final int OBJECTS = 6;
     static final int SYMBOLS = 7;
     static final int FLAGS = 8;
 
@@ -56,19 +56,19 @@ final class EmoticonsCategories {
             case "Symbols":
                 return SYMBOLS;
             case "Objects":
-                return ELECTRIC;
+                return OBJECTS;
             case "Activity":
-                return SPORT;
+                return ACTIVITY;
             case "Places":
             case "Transportation":
-                return CARS;
+                return TRAVEL;
             default:
                 return SYMBOLS;
         }
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    @IntDef({RECENT, PEOPLE, NATURE, FOOD, SPORT, CARS, ELECTRIC, SYMBOLS, FLAGS})
+    @IntDef({RECENT, PEOPLE, NATURE, FOOD, ACTIVITY, TRAVEL, OBJECTS, SYMBOLS, FLAGS})
     @interface EmoticonsCategory {
     }
 }
