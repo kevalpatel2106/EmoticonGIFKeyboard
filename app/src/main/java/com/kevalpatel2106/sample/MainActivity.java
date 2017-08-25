@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
         final TextView textView = (TextView) findViewById(R.id.selected_emoticons_tv);
 
-        KeyboardFragment keyboardFragment = new KeyboardFragment();
+        KeyboardFragment keyboardFragment = KeyboardFragment.getNewInstance();
         keyboardFragment.setEmoticonProvider(IosEmoticonProvider.create());
         keyboardFragment.setEmoticonSelectListener(new EmoticonSelectListener() {
             @Override
