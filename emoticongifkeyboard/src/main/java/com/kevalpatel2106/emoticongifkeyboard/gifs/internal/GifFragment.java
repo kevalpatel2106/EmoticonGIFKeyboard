@@ -120,6 +120,7 @@ public final class GifFragment extends Fragment implements GifGridAdapter.ItemSe
          * @see https://stackoverflow.com/questions/29460164/recyclerview-refreshes-items-only-when-scrolling-down-and-up
          */
         GridView gridView = view.findViewById(R.id.gif_gridView);
+        gridView.setNumColumns(getResources().getInteger(R.integer.gif_recycler_view_span_size));
         gridView.setAdapter(mGifGridAdapter);
 
         //Load the list of trending GIFs.

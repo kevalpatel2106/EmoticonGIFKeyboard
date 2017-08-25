@@ -16,15 +16,6 @@
   -->
 
 <resources>
-    <dimen name="emoticon_gif_fragments_height">250dp</dimen>
-    <dimen name="keyboard_tabs_container_height">40dp</dimen>
-    <dimen name="gif_image_view_height">100dp</dimen>
-    <dimen name="gif_grid_view_item_spacing">6dp</dimen>
-    <dimen name="emoticon_grid_view_item_spacing">2dp</dimen>
-    <dimen name="image_btn_padding">6dp</dimen>
-    <dimen name="emoticon_grid_item_size">50dp</dimen>
-    <dimen name="search_gif_view_flipper_height">120dp</dimen>
-    <dimen name="search_emoticon_view_flipper_height">70dp</dimen>
-    <dimen name="search_gif_recycler_view_padding">10dp</dimen>
-    <dimen name="search_emoticon_recycler_view_padding">10dp</dimen>
+    <integer name="emoticon_recycler_view_span_size">8</integer>
+    <integer name="gif_recycler_view_span_size">2</integer>
 </resources>

@@ -83,45 +83,41 @@ public class Main {
         System.out.println("Creating database...");
         Connection connection = SQLiteJDBC.connect();
         SQLiteJDBC.createTable(connection);
-//
-//        System.out.println("Deleting previous data...");
-//        String[] entries = new File(Utils.CURRENT_DIR_PATH).list();
-//        if (entries != null) for (String s : entries) {
-//            File currentFile = new File(Utils.CURRENT_DIR_PATH, s);
-//            currentFile.delete();
-//        }
-//
-//        //Start loading categories.
-//        for (String categoryUrl : EMOJI_CATEGORIES_URL) {
-//            try {
-//                parseCategoryEmoji(categoryUrl);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//                System.out.println("Try again...");
-//            }
-//        }
-//
-//        System.out.println("\n\n*******************************************");
-//        System.out.println("Saving json file...");
-//        String json = new Gson().toJson(mEmojis);
-//        Utils.saveFile(new File(Utils.CURRENT_DIR_PATH + "/emoji.json"), json);
-//
-//        createEmoticonList(mEmojis);
-//
-//        System.out.println("\n\n*******************************************");
-//        System.out.println("Saving to database...");
-//        for (Emoji emoji : mEmojis) SQLiteJDBC.insertEmoji(connection, emoji);
-//
-//        System.out.println("\n\n*******************************************");
-//        System.out.println("Creating regex...");
-//        createAndSaveEmoticonRegex(sUnicodesForPattern);
-//
-//        System.out.println("\n\nSuccess!!!");
-//        System.out.println("*******************************************");
 
-        File file = new File(Utils.CURRENT_DIR_PATH + "/emoji.json");
-        String json = readTextFile(file);
-        List<Emoji> emojis = (List<Emoji>) new Gson().fromJson(json, Emoji.class);
+        System.out.println("Deleting previous data...");
+        String[] entries = new File(Utils.CURRENT_DIR_PATH).list();
+        if (entries != null) for (String s : entries) {
+            File currentFile = new File(Utils.CURRENT_DIR_PATH, s);
+            currentFile.delete();
+        }
+
+        //Start loading categories.
+        for (String categoryUrl : EMOJI_CATEGORIES_URL) {
+            try {
+                parseCategoryEmoji(categoryUrl);
+            } catch (IOException e) {
+                e.printStackTrace();
+                System.out.println("Try again...");
+            }
+        }
+
+        System.out.println("\n\n*******************************************");
+        System.out.println("Saving json file...");
+        String json = new Gson().toJson(mEmojis);
+        Utils.saveFile(new File(Utils.CURRENT_DIR_PATH + "/emoji.json"), json);
+
+        createEmoticonList(mEmojis);
+
+        System.out.println("\n\n*******************************************");
+        System.out.println("Saving to database...");
+        for (Emoji emoji : mEmojis) SQLiteJDBC.insertEmoji(connection, emoji);
+
+        System.out.println("\n\n*******************************************");
+        System.out.println("Creating regex...");
+        createAndSaveEmoticonRegex(sUnicodesForPattern);
+
+        System.out.println("\n\nSuccess!!!");
+        System.out.println("*******************************************");
     }
 
     private static void parseCategoryEmoji(final String categoryUrl) throws IOException {
