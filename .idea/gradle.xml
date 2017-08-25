@@ -9,7 +9,6 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/emoji-parser" />
             <option value="$PROJECT_DIR$/emoticongifkeyboard" />
             <option value="$PROJECT_DIR$/emoticonpack-emojidex" />
             <option value="$PROJECT_DIR$/emoticonpack-emojione" />
