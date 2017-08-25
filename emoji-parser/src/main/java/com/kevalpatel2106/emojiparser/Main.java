@@ -24,7 +24,10 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -72,46 +75,53 @@ public class Main {
     private static ArrayList<String> sUnicodesForPattern;
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         System.out.println("Initializing...");
         sUnicodesForPattern = new ArrayList<>();
-
-        System.out.println("Deleting previous data...");
-        String[] entries = new File(Utils.CURRENT_DIR_PATH).list();
-        if (entries != null) for (String s : entries) {
-            File currentFile = new File(Utils.CURRENT_DIR_PATH, s);
-            currentFile.delete();
-        }
-
-        //Start loading categories.
-        for (String categoryUrl : EMOJI_CATEGORIES_URL) {
-            try {
-                parseCategoryEmoji(categoryUrl);
-            } catch (IOException e) {
-                e.printStackTrace();
-                System.out.println("Try again...");
-            }
-        }
-
-        System.out.println("\n\n*******************************************");
-        System.out.println("Saving json file...");
-        String json = new Gson().toJson(mEmojis);
-        Utils.saveFile(new File(Utils.CURRENT_DIR_PATH + "/emoji.json"), json);
-
-        createEmoticonList(mEmojis);
 
         System.out.println("\n\n*******************************************");
         System.out.println("Creating database...");
         Connection connection = SQLiteJDBC.connect();
         SQLiteJDBC.createTable(connection);
-        for (Emoji emoji : mEmojis) SQLiteJDBC.insertEmoji(connection, emoji);
+//
+//        System.out.println("Deleting previous data...");
+//        String[] entries = new File(Utils.CURRENT_DIR_PATH).list();
+//        if (entries != null) for (String s : entries) {
+//            File currentFile = new File(Utils.CURRENT_DIR_PATH, s);
+//            currentFile.delete();
+//        }
+//
+//        //Start loading categories.
+//        for (String categoryUrl : EMOJI_CATEGORIES_URL) {
+//            try {
+//                parseCategoryEmoji(categoryUrl);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//                System.out.println("Try again...");
+//            }
+//        }
+//
+//        System.out.println("\n\n*******************************************");
+//        System.out.println("Saving json file...");
+//        String json = new Gson().toJson(mEmojis);
+//        Utils.saveFile(new File(Utils.CURRENT_DIR_PATH + "/emoji.json"), json);
+//
+//        createEmoticonList(mEmojis);
+//
+//        System.out.println("\n\n*******************************************");
+//        System.out.println("Saving to database...");
+//        for (Emoji emoji : mEmojis) SQLiteJDBC.insertEmoji(connection, emoji);
+//
+//        System.out.println("\n\n*******************************************");
+//        System.out.println("Creating regex...");
+//        createAndSaveEmoticonRegex(sUnicodesForPattern);
+//
+//        System.out.println("\n\nSuccess!!!");
+//        System.out.println("*******************************************");
 
-        System.out.println("\n\n*******************************************");
-        System.out.println("Creating regex...");
-        createAndSaveEmoticonRegex(sUnicodesForPattern);
-
-        System.out.println("\n\nSuccess!!!");
-        System.out.println("*******************************************");
+        File file = new File(Utils.CURRENT_DIR_PATH + "/emoji.json");
+        String json = readTextFile(file);
+        List<Emoji> emojis = (List<Emoji>) new Gson().fromJson(json, Emoji.class);
     }
 
     private static void parseCategoryEmoji(final String categoryUrl) throws IOException {
@@ -257,7 +267,7 @@ public class Main {
                         .append("\"").append(emoji.unicode).append("\"")
                         .append(", R.drawable.")
                         .append(emoji.imageUrls.get(vendor).getName().replace(".png", ""))
-                        .append(";\n");
+                        .append(");\n");
             }
 
             stringBuilder.append("\t}\n}");
@@ -286,4 +296,24 @@ public class Main {
         Utils.saveFile(new File(Utils.CURRENT_DIR_PATH + "/regex"), unicodeRegex);
     }
 
+    private static String readTextFile(File file) throws FileNotFoundException {
+        BufferedReader br = new BufferedReader(new FileReader(file));
+
+        StringBuilder builder = new StringBuilder();
+        try {
+            String sCurrentLine;
+            while ((sCurrentLine = br.readLine()) != null) {
+                builder.append(sCurrentLine);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                br.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return builder.toString();
+    }
 }

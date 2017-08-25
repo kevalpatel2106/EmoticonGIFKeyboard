@@ -14,4 +14,17 @@
  *  limitations under the License.
  */
 
-include ':app', ':emoticongifkeyboard', ':gifpack-giphy', ':emoticonpack-ios', ':emoticonpack-google', ':emoticonpack-twitter', ':emoticonpack-emojione', ':gifpack-tenor', ':emoji-parser'
+include ':app',
+        ':emoticongifkeyboard',
+        ':gifpack-giphy',
+        ':emoticonpack-ios',
+        ':emoticonpack-google',
+        ':emoticonpack-twitter',
+        ':emoticonpack-emojione',
+        ':gifpack-tenor',
+        ':emoji-parser',
+        ':emoticonpack-emojidex',
+        ':emoticonpack-facebook',
+        ':emoticonpack-messanger',
+        ':emoticonpack-windows',
+        ':emoticonpack-samsung'

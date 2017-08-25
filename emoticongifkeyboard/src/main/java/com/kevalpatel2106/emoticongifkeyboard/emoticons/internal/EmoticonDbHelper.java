@@ -20,8 +20,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import com.kevalpatel2106.emoticongifkeyboard.emoticons.Emoticon;
+import com.kevalpatel2106.emoticongifkeyboard.emoticons.EmoticonProvider;
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
 import java.util.ArrayList;
@@ -45,23 +47,9 @@ final class EmoticonDbHelper extends SQLiteAssetHelper {
         setForcedUpgrade();
     }
 
-    int getCount() {
-        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
-        Cursor cursor = sqLiteDatabase.rawQuery("SELECT COUNT (*) FROM " + EmoticonColumns.TABLE, null);
-        int count = 0;
-        if (cursor != null) {
-            if (cursor.getCount() > 0) {
-                cursor.moveToFirst();
-                count = cursor.getInt(0);
-            }
-            cursor.close();
-        }
-        sqLiteDatabase.close();
-        return count;
-    }
-
     @NonNull
-    ArrayList<Emoticon> getEmoticons(@EmoticonsCategories.EmoticonsCategory final int category) {
+    ArrayList<Emoticon> getEmoticons(@EmoticonsCategories.EmoticonsCategory final int category,
+                                     @Nullable EmoticonProvider emoticonProvider) {
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
         Cursor cursor = sqLiteDatabase.query(EmoticonColumns.TABLE,
                 new String[]{EmoticonColumns.UNICODE, EmoticonColumns.CATEGORY},
@@ -69,7 +57,9 @@ final class EmoticonDbHelper extends SQLiteAssetHelper {
 
         ArrayList<Emoticon> emoticons = new ArrayList<>();
         while (cursor.moveToNext()) {
-            emoticons.add(new Emoticon(cursor.getString(cursor.getColumnIndex(EmoticonColumns.UNICODE))));
+            String unicode = cursor.getString(cursor.getColumnIndex(EmoticonColumns.UNICODE));
+            if (emoticonProvider == null || emoticonProvider.hasEmoticon(unicode))
+                emoticons.add(new Emoticon(unicode));
         }
         cursor.close();
         sqLiteDatabase.close();
@@ -77,7 +67,8 @@ final class EmoticonDbHelper extends SQLiteAssetHelper {
     }
 
     @NonNull
-    ArrayList<Emoticon> searchEmoticons(@NonNull final String searchQuery) {
+    ArrayList<Emoticon> searchEmoticons(@NonNull final String searchQuery,
+                                        @Nullable EmoticonProvider emoticonProvider) {
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
         Cursor cursor = sqLiteDatabase.query(EmoticonTagsColumns.TABLE,
                 new String[]{EmoticonTagsColumns.UNICODE},
@@ -86,13 +77,16 @@ final class EmoticonDbHelper extends SQLiteAssetHelper {
 
         ArrayList<Emoticon> emoticons = new ArrayList<>();
         while (cursor.moveToNext()) {
-            emoticons.add(new Emoticon(cursor.getString(cursor.getColumnIndex(EmoticonTagsColumns.UNICODE))));
+            String unicode = cursor.getString(cursor.getColumnIndex(EmoticonTagsColumns.UNICODE));
+            if (emoticonProvider == null || emoticonProvider.hasEmoticon(unicode))
+                emoticons.add(new Emoticon(unicode));
         }
         cursor.close();
         sqLiteDatabase.close();
         return emoticons;
     }
 
+    @SuppressWarnings("unused")
     private static class EmoticonColumns {
         private static final String TABLE = "emoticon";
         private static final String ID = "_id";
@@ -111,6 +105,7 @@ final class EmoticonDbHelper extends SQLiteAssetHelper {
         private static final String NAME = "variant_name";
     }
 
+    @SuppressWarnings("unused")
     private static class EmoticonTagsColumns {
         private static final String TABLE = "emoticon_tags";
         private static final String ID = "tags_id";

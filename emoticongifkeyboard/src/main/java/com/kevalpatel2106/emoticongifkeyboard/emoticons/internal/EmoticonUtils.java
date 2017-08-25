@@ -133,7 +133,6 @@ public final class EmoticonUtils {
         }
         return sRegexPattern;
     }
-
     @Nullable
     private static String readTextFile(@NonNull Context context, int rowResource) {
         InputStream inputStream = context.getResources().openRawResource(rowResource); // getting json
@@ -157,6 +156,7 @@ public final class EmoticonUtils {
         }
         return builder.toString();
     }
+
 
     /**
      * Range of the emoticons unicode.

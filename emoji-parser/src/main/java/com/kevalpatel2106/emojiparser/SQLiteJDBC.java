@@ -16,6 +16,7 @@
 
 package com.kevalpatel2106.emojiparser;
 
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
