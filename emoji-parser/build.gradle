@@ -17,10 +17,9 @@
 apply plugin: 'java'
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile files('libs/gson-2.8.1.jar')
-    compile files('libs/jsoup-1.10.3.jar')
-    compile files('libs/sqlite-jdbc-3.20.0.jar')
+    compile 'com.google.code.gson:gson:2.8.1'
+    compile 'org.jsoup:jsoup:1.10.3'
+    compile 'org.xerial:sqlite-jdbc:3.20.0'
 }
 
 sourceCompatibility = "1.7"

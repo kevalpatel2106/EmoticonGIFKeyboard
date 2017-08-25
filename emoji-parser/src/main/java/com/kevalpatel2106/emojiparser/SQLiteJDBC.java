@@ -26,7 +26,7 @@ import java.sql.Statement;
  * @author 'https://github.com/kevalpatel2106'
  */
 
-public class SQLiteJDBC {
+class SQLiteJDBC {
     static Connection connect() {
         Connection c = null;
 
@@ -47,11 +47,21 @@ public class SQLiteJDBC {
             stmt = c.createStatement();
 
             //Create emoticon table
-            String sql = "CREATE TABLE " + EmoticonDbColumns.TABLE + " ("
-                    + EmoticonDbColumns.ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                    + EmoticonDbColumns.UNICODE + " VARCHAR,"
-                    + EmoticonDbColumns.NAME + " VARCHAR,"
-                    + EmoticonDbColumns.CATEGORY + " INTEGER);";
+            String sql = "CREATE TABLE " + EmoticonColumns.TABLE + " ("
+                    + EmoticonColumns.ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                    + EmoticonColumns.UNICODE + " VARCHAR,"
+                    + EmoticonColumns.NAME + " VARCHAR,"
+                    + EmoticonColumns.CATEGORY + " INTEGER);";
+            stmt.executeUpdate(sql);
+
+
+            //Create variant emoticon table
+            sql = "CREATE TABLE " + EmoticonVariantColumns.TABLE + " ("
+                    + EmoticonVariantColumns.ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                    + EmoticonVariantColumns.UNICODE + " VARCHAR,"
+                    + EmoticonVariantColumns.NAME + " VARCHAR,"
+                    + EmoticonVariantColumns.ROOT_UNICODE + " VARCHAR,"
+                    + EmoticonVariantColumns.CATEGORY + " INTEGER);";
             stmt.executeUpdate(sql);
 
 
@@ -63,11 +73,16 @@ public class SQLiteJDBC {
             stmt.executeUpdate(sql);
 
             //Create index on category and unicode
-            sql = "CREATE INDEX unicode_category ON " + EmoticonDbColumns.TABLE + "("
-                    + EmoticonDbColumns.CATEGORY + ", "
-                    + EmoticonDbColumns.UNICODE + ");";
+            sql = "CREATE INDEX unicode_category ON " + EmoticonColumns.TABLE + "("
+                    + EmoticonColumns.CATEGORY + ", "
+                    + EmoticonColumns.UNICODE + ");";
             stmt.executeUpdate(sql);
 
+            //Create index on category and unicode
+            sql = "CREATE INDEX unicode_variant ON " + EmoticonVariantColumns.TABLE + "("
+                    + EmoticonVariantColumns.ROOT_UNICODE + ", "
+                    + EmoticonVariantColumns.UNICODE + ");";
+            stmt.executeUpdate(sql);
 
             stmt.close();
             System.out.println("Table created successfully");
@@ -80,10 +95,10 @@ public class SQLiteJDBC {
     static void insertEmoji(Connection c, Emoji emoji) {
         try {
             Statement stmt = c.createStatement();
-            String sql = "INSERT INTO " + EmoticonDbColumns.TABLE + " ("
-                    + EmoticonDbColumns.UNICODE + ","
-                    + EmoticonDbColumns.CATEGORY + ","
-                    + EmoticonDbColumns.NAME + ") " +
+            String sql = "INSERT INTO " + EmoticonColumns.TABLE + " ("
+                    + EmoticonColumns.UNICODE + ","
+                    + EmoticonColumns.CATEGORY + ","
+                    + EmoticonColumns.NAME + ") " +
                     "VALUES ('" + emoji.unicode + "', "
                     + Utils.getCategoryFromCategoryName(emoji.category) + ", '"
                     + emoji.name + "');";
@@ -98,13 +113,40 @@ public class SQLiteJDBC {
                 stmt.executeUpdate(sql);
             }
             stmt.close();
+
+            //Add variant
+            if (!emoji.variants.isEmpty()) {
+                for (Emoji variant : emoji.variants) {
+                    insertVariantEmoji(c, variant, emoji.unicode);
+                }
+            }
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
     }
 
-    private static class EmoticonDbColumns {
+    private static void insertVariantEmoji(Connection c, Emoji emoji, String rootUnicode) {
+        try {
+            Statement stmt = c.createStatement();
+            String sql = "INSERT INTO " + EmoticonVariantColumns.TABLE + " ("
+                    + EmoticonVariantColumns.UNICODE + ","
+                    + EmoticonVariantColumns.CATEGORY + ","
+                    + EmoticonVariantColumns.ROOT_UNICODE + ","
+                    + EmoticonVariantColumns.NAME + ") " +
+                    "VALUES ('" + emoji.unicode + "', "
+                    + Utils.getCategoryFromCategoryName(emoji.category) + ", "
+                    + "'" + rootUnicode + "', "
+                    + "'" + emoji.name + "');";
+            stmt.executeUpdate(sql);
+            stmt.close();
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+    }
+
+    private static class EmoticonColumns {
         private static final String TABLE = "emoticon";
         private static final String ID = "_id";
         private static final String UNICODE = "unicode";
@@ -112,10 +154,19 @@ public class SQLiteJDBC {
         private static final String NAME = "name";
     }
 
+    private static class EmoticonVariantColumns {
+        private static final String TABLE = "emoticon_variant";
+        private static final String ID = "variant_id";
+        private static final String UNICODE = "variant_unicode";
+        private static final String CATEGORY = "variant_category";
+        private static final String ROOT_UNICODE = "variant_root_unicode";
+        private static final String NAME = "variant_name";
+    }
+
     private static class EmoticonTagsColumns {
-        private static final String TABLE = "emoticontags";
-        private static final String ID = "_id";
-        private static final String UNICODE = "unicode";
-        private static final String TAG = "tags";
+        private static final String TABLE = "emoticon_tags";
+        private static final String ID = "tags_id";
+        private static final String UNICODE = "tags_unicode";
+        private static final String TAG = "tags_tags";
     }
 }

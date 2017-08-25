@@ -82,21 +82,25 @@ class Utils {
     static File getImageFile(String vendor, ArrayList<String> codePoints) {
         String codePointStr = "";
         for (String codePoint : codePoints) codePointStr = codePointStr + codePoint + "_";
+        if (codePointStr.endsWith("_"))
+            codePointStr = codePointStr.substring(0, codePointStr.length() - 1);
 
         return new File(getImageDir(vendor).getAbsolutePath()
                 + "/emoji_"
                 + vendor.toLowerCase() + "_"
-                + codePointStr + ".png");
+                + codePointStr.toLowerCase() + ".png");
     }
 
     static File getResizedImageFile(String vendor, ArrayList<String> codePoints) {
         String codePointStr = "";
         for (String codePoint : codePoints) codePointStr = codePointStr + codePoint + "_";
+        if (codePointStr.endsWith("_"))
+            codePointStr = codePointStr.substring(0, codePointStr.length() - 1);
 
         return new File(getResizedImageDir(vendor).getAbsolutePath()
                 + "/emoji_"
                 + vendor.toLowerCase() + "_"
-                + codePointStr + ".png");
+                + codePointStr.toLowerCase() + ".png");
     }
 
     static void saveFile(File file, String text) {

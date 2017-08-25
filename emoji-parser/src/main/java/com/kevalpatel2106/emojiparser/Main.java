@@ -30,11 +30,22 @@ import java.net.URL;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import javax.imageio.ImageIO;
 
 public class Main {
+    private static final Comparator<String> STRING_LENGTH_COMPARATOR = new Comparator<String>() {
+        @Override
+        public int compare(final String first, final String second) {
+            final int firstLength = first.length();
+            final int secondLength = second.length();
+            return firstLength < secondLength ? 1 : firstLength == secondLength ? 0 : -1;
+        }
+    };
     private static final List<String> SUPPORTED_VENDOR = Arrays.asList(
             "Apple",
             "Google",
@@ -58,12 +69,12 @@ public class Main {
             BASE_URL + "/symbols/",
             BASE_URL + "/flags/"
     };
-    private Connection mConnection;
+    private static ArrayList<String> sUnicodesForPattern;
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
     public static void main(String[] args) {
         System.out.println("Initializing...");
-
+        sUnicodesForPattern = new ArrayList<>();
 
         System.out.println("Deleting previous data...");
         String[] entries = new File(Utils.CURRENT_DIR_PATH).list();
@@ -95,6 +106,10 @@ public class Main {
         SQLiteJDBC.createTable(connection);
         for (Emoji emoji : mEmojis) SQLiteJDBC.insertEmoji(connection, emoji);
 
+        System.out.println("\n\n*******************************************");
+        System.out.println("Creating regex...");
+        createAndSaveEmoticonRegex(sUnicodesForPattern);
+
         System.out.println("\n\nSuccess!!!");
         System.out.println("*******************************************");
     }
@@ -120,8 +135,6 @@ public class Main {
             mEmojis.add(parseEmojiDetailPage(emojiPageUrl,
                     true,
                     categoryUrl.replace(BASE_URL, "").replace("/", "")));
-
-            break;
         }
     }
 
@@ -131,22 +144,23 @@ public class Main {
 
         System.out.println("\nParsing the emoji: " + emojiPageUrl);
         Emoji emoji = new Emoji();
+        emoji.category = category;
 
         final Document doc = Jsoup.connect(emojiPageUrl).get();
 
         //Parse the name from H1 tag
         emoji.name = Utils.removeFirstEmojiFromText(doc.getElementsByTag("h1").text());
         emoji.unicode = Utils.getFirstEmojiFromText(doc.getElementsByTag("h1").text());
+        sUnicodesForPattern.add(emoji.unicode);
         System.out.println(doc.getElementsByTag("h1").text());
-        emoji.category = category;
 
         //Get the tags
         emoji.tags.add(emoji.name);
         if (emoji.name.toLowerCase().contains("face")) emoji.tags.add("Face");
         if (emoji.name.toLowerCase().contains("flag")) emoji.tags.add("flag");
-        if (emoji.name.toLowerCase().contains("flags")) emoji.tags.add("flag");
         if (emoji.name.toLowerCase().contains("hand")) emoji.tags.add("hand");
         if (emoji.name.toLowerCase().contains("hands")) emoji.tags.add("hand");
+        if (emoji.name.toLowerCase().contains("Person")) emoji.tags.add("Person");
 
         if (!doc.getElementsByClass("aliases").isEmpty()) {
             final Elements aliases = doc.getElementsByClass("aliases")
@@ -191,12 +205,12 @@ public class Main {
 
         //Get modifiers
         if (allowParseModifire && !doc.getElementsByClass("modifiers").isEmpty()) {
-            final Elements modifires = doc.getElementsByClass("modifiers").get(0)
+            final Elements modifiers = doc.getElementsByClass("modifiers").get(0)
                     .getElementsByTag("ul").get(0)
                     .getElementsByTag("li");
-            for (Element modifire : modifires) {
+            for (Element modifier : modifiers) {
                 emoji.variants.add(parseEmojiDetailPage(BASE_URL
-                                + modifire.getElementsByTag("a").attr("href"),
+                                + modifier.getElementsByTag("a").attr("href"),
                         false, category));    //False to prevent infinite recursion
             }
         }
@@ -251,4 +265,25 @@ public class Main {
                     stringBuilder.toString());
         }
     }
+
+    /**
+     * Create the regex to find emoticons and save it to the shared preference. This will generate
+     * regex by adding unicode of all emoticons separated by '|'.
+     *
+     * @param unicodesForPattern List of all the supported unicodes from the database.
+     */
+    private static void createAndSaveEmoticonRegex(final ArrayList<String> unicodesForPattern) {
+        // We need to sort the unicodes by length so the longest one gets matched first.
+        Collections.sort(unicodesForPattern, STRING_LENGTH_COMPARATOR);
+
+        String unicodeRegex = "";
+        for (String unicode : unicodesForPattern)
+            unicodeRegex = unicodeRegex + Pattern.quote(unicode) + "|";
+        if (unicodeRegex.endsWith("|"))
+            unicodeRegex = unicodeRegex.substring(0, unicodeRegex.length() - 1);
+
+        //Save the regex
+        Utils.saveFile(new File(Utils.CURRENT_DIR_PATH + "/regex"), unicodeRegex);
+    }
+
 }

@@ -22,12 +22,15 @@ import android.support.annotation.Nullable;
 import android.text.Spannable;
 import android.text.TextUtils;
 
+import com.kevalpatel2106.emoticongifkeyboard.R;
 import com.kevalpatel2106.emoticongifkeyboard.emoticons.Emoticon;
 import com.kevalpatel2106.emoticongifkeyboard.emoticons.EmoticonProvider;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -40,43 +43,10 @@ import java.util.regex.Pattern;
  */
 
 public final class EmoticonUtils {
-    private static final String EMOTICON_REGEX_KEY = "emoticon_regex_key";
-    /**
-     * Name of the preference file to store all the emoticons data.
-     */
-    private static final String PREFERENCE_NAME = "emojicon";
-    private static final Comparator<String> STRING_LENGTH_COMPARATOR = new Comparator<String>() {
-        @Override
-        public int compare(final String first, final String second) {
-            final int firstLength = first.length();
-            final int secondLength = second.length();
-            return firstLength < secondLength ? 1 : firstLength == secondLength ? 0 : -1;
-        }
-    };
     private static Pattern sRegexPattern;
 
     private EmoticonUtils() {
         //Do nothing
-    }
-
-    /**
-     * Create the regex to find emoticons and save it to the shared preference. This will generate
-     * regex by adding unicode of all emoticons separated by '|'.
-     *
-     * @param context            Instance
-     * @param unicodesForPattern List of all the supported unicodes from the database.
-     * @see EmoticonLoader#doInBackground(Void...)
-     */
-    static void createAndSaveEmoticonRegex(@NonNull final Context context,
-                                           @NonNull final ArrayList<String> unicodesForPattern) {
-        // We need to sort the unicodes by length so the longest one gets matched first.
-        Collections.sort(unicodesForPattern, STRING_LENGTH_COMPARATOR);
-
-        //Save the regex
-        context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE)
-                .edit()
-                .putString(EMOTICON_REGEX_KEY, TextUtils.join("|", unicodesForPattern))
-                .apply();
     }
 
     /**
@@ -157,12 +127,35 @@ public final class EmoticonUtils {
     @NonNull
     private static Pattern getRegex(@NonNull final Context context) {
         if (sRegexPattern == null) {
-            String regex = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE)
-                    .getString(EMOTICON_REGEX_KEY, null);
-            if (regex == null) throw new RuntimeException("Database is not loaded yet.");
+            String regex = readTextFile(context, R.raw.regex);
+            if (regex == null) throw new RuntimeException("Regex not found.");
             sRegexPattern = Pattern.compile(regex);
         }
         return sRegexPattern;
+    }
+
+    @Nullable
+    private static String readTextFile(@NonNull Context context, int rowResource) {
+        InputStream inputStream = context.getResources().openRawResource(rowResource); // getting json
+        BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
+
+        StringBuilder builder = new StringBuilder();
+        try {
+            String sCurrentLine;
+            while ((sCurrentLine = br.readLine()) != null) {
+                builder.append(sCurrentLine);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                inputStream.close();
+                br.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return builder.toString();
     }
 
     /**

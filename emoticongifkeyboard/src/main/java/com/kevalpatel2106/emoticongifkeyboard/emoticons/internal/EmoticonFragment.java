@@ -80,9 +80,6 @@ public final class EmoticonFragment extends Fragment implements EmoticonAdapter.
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mEmoticonRecentManager = EmoticonRecentManager.getInstance(mContext);
-
-        //Check if we need to load emoticons to the database.
-        if (new EmoticonDbHelper(mContext).getCount() <= 0) new EmoticonLoader(mContext).execute();
     }
 
     @Override
