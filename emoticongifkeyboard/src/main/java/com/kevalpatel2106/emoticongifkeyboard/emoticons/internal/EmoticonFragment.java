@@ -103,7 +103,8 @@ public final class EmoticonFragment extends Fragment implements EmoticonAdapter.
 
         mRecyclerView = view.findViewById(R.id.emoji_gridView);
         mRecyclerView.setAdapter(mEmoticonAdapter);
-        mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 8));
+        mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(),
+                getResources().getInteger(R.integer.emoticon_recycler_view_span_size)));
 
         //Set headers
         setTabHeaders(view);

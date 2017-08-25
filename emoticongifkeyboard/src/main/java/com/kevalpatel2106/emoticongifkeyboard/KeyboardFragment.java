@@ -45,6 +45,10 @@ public final class KeyboardFragment extends Fragment implements FragmentManager.
     /* Tags for the fragment back stack */
     public static final String TAG_EMOTICON_FRAGMENT = "tag_emoticon_fragment";
     public static final String TAG_GIF_FRAGMENT = "tag_gif_fragment";
+    @SuppressWarnings("unused")
+    private static final String TAG = "KeyboardFragment";
+    //Keys for saved instance
+    private static final String KEY_CURRENT_FRAGMENT = "current_fragment";
     private static final String TAG_EMOTICON_SEARCH_FRAGMENT = "tag_emoticon_search_fragment";
     private static final String TAG_GIF_SEARCH_FRAGMENT = "tag_gif_search_fragment";
 
@@ -59,6 +63,9 @@ public final class KeyboardFragment extends Fragment implements FragmentManager.
 
     /* View container that hosts search, backspace and tabs buttons. */
     private View mBottomViewContainer;
+    private View mGifTabBtn;
+    private View mEmoticonTabBtn;
+    private View mBackSpaceBtn;
 
     /**
      * Public constructor.
@@ -69,6 +76,12 @@ public final class KeyboardFragment extends Fragment implements FragmentManager.
 
         mGifFragment = GifFragment.getNewInstance();
         mGifSearchFragment = GifSearchFragment.getNewInstance();
+    }
+
+    public static KeyboardFragment getNewInstance() {
+        KeyboardFragment keyboardFragment = new KeyboardFragment();
+        keyboardFragment.setRetainInstance(true);
+        return keyboardFragment;
     }
 
     @Override
@@ -88,8 +101,8 @@ public final class KeyboardFragment extends Fragment implements FragmentManager.
         mBottomViewContainer = view.findViewById(R.id.bottom_container);
 
         //Set backspace button
-        final View backSpaceBtn = view.findViewById(R.id.emojis_backspace);
-        backSpaceBtn.setOnClickListener(new View.OnClickListener() {
+        mBackSpaceBtn = view.findViewById(R.id.emojis_backspace);
+        mBackSpaceBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (mEmoticonSelectListener != null) mEmoticonSelectListener.onBackSpace();
@@ -97,55 +110,68 @@ public final class KeyboardFragment extends Fragment implements FragmentManager.
         });
 
         //Set the tabs
-        final View emoticonTab = view.findViewById(R.id.btn_emoji_tab);
-        final View gifTab = view.findViewById(R.id.btn_gif_tab);
-        emoticonTab.setOnClickListener(new View.OnClickListener() {
+        mEmoticonTabBtn = view.findViewById(R.id.btn_emoji_tab);
+        mGifTabBtn = view.findViewById(R.id.btn_gif_tab);
+        mEmoticonTabBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getChildFragmentManager().beginTransaction()
-                        .replace(R.id.keyboard_fragment_container, mEmoticonFragment)
-                        .addToBackStack(TAG_EMOTICON_FRAGMENT)
-                        .commit();
-
-                //Set the tab
-                emoticonTab.setSelected(true);
-                gifTab.setSelected(!emoticonTab.isSelected());
-                backSpaceBtn.setVisibility(View.VISIBLE);
+                replaceFragment(mEmoticonFragment, TAG_EMOTICON_FRAGMENT);
             }
         });
-        emoticonTab.callOnClick();
-        gifTab.setOnClickListener(new View.OnClickListener() {
+        mGifTabBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getChildFragmentManager().beginTransaction()
-                        .replace(R.id.keyboard_fragment_container, mGifFragment)
-                        .addToBackStack(TAG_GIF_FRAGMENT)
-                        .commit();
-
-                //Set the tab
-                emoticonTab.setSelected(false);
-                gifTab.setSelected(!emoticonTab.isSelected());
-                backSpaceBtn.setVisibility(View.GONE);
+                replaceFragment(mGifFragment, TAG_GIF_FRAGMENT);
             }
         });
 
         //Setup the search button.
-        view.findViewById(R.id.search_btn).setOnClickListener(new View.OnClickListener() {
+        View searchBtn = view.findViewById(R.id.search_btn);
+        searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (emoticonTab.isSelected()) {
-                    getChildFragmentManager().beginTransaction()
-                            .replace(R.id.keyboard_fragment_container, mEmoticonSearchFragment)
-                            .addToBackStack(TAG_EMOTICON_SEARCH_FRAGMENT)
-                            .commit();
+                if (mEmoticonTabBtn.isSelected()) {
+                    replaceFragment(mEmoticonSearchFragment, TAG_EMOTICON_SEARCH_FRAGMENT);
                 } else {
-                    getChildFragmentManager().beginTransaction()
-                            .replace(R.id.keyboard_fragment_container, mGifSearchFragment)
-                            .addToBackStack(TAG_GIF_SEARCH_FRAGMENT)
-                            .commit();
+                    replaceFragment(mGifSearchFragment, TAG_GIF_SEARCH_FRAGMENT);
                 }
             }
         });
+
+        if (savedInstanceState != null) {
+            //noinspection ConstantConditions
+            switch (savedInstanceState.getString(KEY_CURRENT_FRAGMENT)) {
+                case TAG_EMOTICON_FRAGMENT:
+                    replaceFragment(mGifFragment, TAG_GIF_FRAGMENT);
+                    break;
+                case TAG_GIF_FRAGMENT:
+                    replaceFragment(mEmoticonFragment, TAG_EMOTICON_FRAGMENT);
+                    break;
+                case TAG_EMOTICON_SEARCH_FRAGMENT:
+                    replaceFragment(mEmoticonSearchFragment, TAG_EMOTICON_SEARCH_FRAGMENT);
+                    break;
+                case TAG_GIF_SEARCH_FRAGMENT:
+                    replaceFragment(mGifSearchFragment, TAG_GIF_SEARCH_FRAGMENT);
+                    break;
+            }
+        } else {
+            mEmoticonTabBtn.callOnClick();
+        }
+    }
+
+    private void replaceFragment(Fragment fragment, String tag) {
+        getChildFragmentManager().beginTransaction()
+                .replace(R.id.keyboard_fragment_container, fragment)
+                .addToBackStack(tag)
+                .commit();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putString(KEY_CURRENT_FRAGMENT, getChildFragmentManager()
+                .getBackStackEntryAt(getChildFragmentManager().getBackStackEntryCount() - 1)
+                .getName());
+        super.onSaveInstanceState(outState);
     }
 
     /**
@@ -193,21 +219,33 @@ public final class KeyboardFragment extends Fragment implements FragmentManager.
     }
 
     /**
-     * Handle the backstack changes in the fragment container.
+     * Handle the back stack changes in the fragment container.
      */
     @Override
     public void onBackStackChanged() {
         int index = getChildFragmentManager().getBackStackEntryCount() - 1;
         if (index < 0) return;
 
-        switch (getChildFragmentManager().getBackStackEntryAt(index).getName()) {
+        changeLayoutFromTag(getChildFragmentManager().getBackStackEntryAt(index).getName());
+    }
+
+    private void changeLayoutFromTag(String tag) {
+        switch (tag) {
             case TAG_EMOTICON_FRAGMENT:
                 //Display bottom bar of not displayed.
                 if (mBottomViewContainer != null) mBottomViewContainer.setVisibility(View.VISIBLE);
+
+                mEmoticonTabBtn.setSelected(true);
+                mGifTabBtn.setSelected(!mEmoticonTabBtn.isSelected());
+                mBackSpaceBtn.setVisibility(View.VISIBLE);
                 break;
             case TAG_GIF_FRAGMENT:
                 //Display bottom bar of not displayed.
                 if (mBottomViewContainer != null) mBottomViewContainer.setVisibility(View.VISIBLE);
+
+                mEmoticonTabBtn.setSelected(false);
+                mGifTabBtn.setSelected(!mEmoticonTabBtn.isSelected());
+                mBackSpaceBtn.setVisibility(View.GONE);
                 break;
             case TAG_EMOTICON_SEARCH_FRAGMENT:
                 //Display bottom bar of not displayed.

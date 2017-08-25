@@ -138,7 +138,7 @@ final class EmoticonDbHelper extends SQLiteOpenHelper {
 
         ArrayList<Emoticon> emoticons = new ArrayList<>();
         while (cursor.moveToNext()) {
-            emoticons.add(new Emoticon(cursor.getString(cursor.getColumnIndex(EmoticonDbColumns.UNICODE))));
+            emoticons.add(new Emoticon(cursor.getString(cursor.getColumnIndex(EmoticonTagsColumns.UNICODE))));
         }
         cursor.close();
         sqLiteDatabase.close();
