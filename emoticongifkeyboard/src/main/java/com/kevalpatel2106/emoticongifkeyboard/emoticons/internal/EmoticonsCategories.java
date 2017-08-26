@@ -39,34 +39,6 @@ final class EmoticonsCategories {
     static final int SYMBOLS = 7;
     static final int FLAGS = 8;
 
-    @EmoticonsCategory
-    static int getCategoryFromCategoryName(String name) {
-        switch (name) {
-            case "People":
-            case "Faces":
-            case "Gestures":
-                return PEOPLE;
-            case "Nature":
-            case "Cosmos":
-                return NATURE;
-            case "Foods":
-                return FOOD;
-            case "Flags":
-                return FLAGS;
-            case "Symbols":
-                return SYMBOLS;
-            case "Objects":
-                return OBJECTS;
-            case "Activity":
-                return ACTIVITY;
-            case "Places":
-            case "Transportation":
-                return TRAVEL;
-            default:
-                return SYMBOLS;
-        }
-    }
-
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({RECENT, PEOPLE, NATURE, FOOD, ACTIVITY, TRAVEL, OBJECTS, SYMBOLS, FLAGS})
     @interface EmoticonsCategory {

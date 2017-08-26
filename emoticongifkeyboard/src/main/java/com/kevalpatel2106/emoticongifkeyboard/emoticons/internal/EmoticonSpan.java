@@ -33,7 +33,9 @@ import android.text.style.ImageSpan;
 final class EmoticonSpan extends ImageSpan {
     private final float size;
 
-    EmoticonSpan(final Context context, @DrawableRes final int drawableRes, final float size) {
+    EmoticonSpan(final Context context,
+                 @DrawableRes final int drawableRes,
+                 final float size) {
         super(context, drawableRes);
 
         this.size = size;

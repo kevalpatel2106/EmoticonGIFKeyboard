@@ -20,6 +20,7 @@ package com.kevalpatel2106.emoticongifkeyboard;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringDef;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
@@ -35,9 +36,13 @@ import com.kevalpatel2106.emoticongifkeyboard.gifs.GifSelectListener;
 import com.kevalpatel2106.emoticongifkeyboard.gifs.internal.GifFragment;
 import com.kevalpatel2106.emoticongifkeyboard.gifs.internal.GifSearchFragment;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
 
 /**
  * This {@link Fragment} will host the smiles and gifs.
+ * Add this fragment into your view of activity or fragment.
  *
  * @author 'https://github.com/kevalpatel2106'
  */
@@ -45,20 +50,24 @@ public final class KeyboardFragment extends Fragment implements FragmentManager.
     /* Tags for the fragment back stack */
     public static final String TAG_EMOTICON_FRAGMENT = "tag_emoticon_fragment";
     public static final String TAG_GIF_FRAGMENT = "tag_gif_fragment";
-    @SuppressWarnings("unused")
-    private static final String TAG = "KeyboardFragment";
-    //Keys for saved instance
-    private static final String KEY_CURRENT_FRAGMENT = "current_fragment";
     private static final String TAG_EMOTICON_SEARCH_FRAGMENT = "tag_emoticon_search_fragment";
     private static final String TAG_GIF_SEARCH_FRAGMENT = "tag_gif_search_fragment";
 
+    //Keys for saved instance bundle
+    private static final String KEY_CURRENT_FRAGMENT = "current_fragment";
+
     /* Fragments to load. */
+    @NonNull
     private final EmoticonFragment mEmoticonFragment;
+    @NonNull
     private final GifFragment mGifFragment;
+    @NonNull
     private final GifSearchFragment mGifSearchFragment;
+    @NonNull
     private final EmoticonSearchFragment mEmoticonSearchFragment;
 
     /* Listener to notify when emoticons selected. */
+    @Nullable
     private EmoticonSelectListener mEmoticonSelectListener;
 
     /* View container that hosts search, backspace and tabs buttons. */
@@ -68,8 +77,12 @@ public final class KeyboardFragment extends Fragment implements FragmentManager.
     private View mBackSpaceBtn;
 
     /**
-     * Public constructor.
+     * Public constructor. Don't call constructor to create new instance. Use {@link #getNewInstance()}
+     * instead.
+     *
+     * @see #getNewInstance()
      */
+    @Deprecated
     public KeyboardFragment() {
         mEmoticonFragment = EmoticonFragment.getNewInstance();
         mEmoticonSearchFragment = EmoticonSearchFragment.getNewInstance();
@@ -78,6 +91,13 @@ public final class KeyboardFragment extends Fragment implements FragmentManager.
         mGifSearchFragment = GifSearchFragment.getNewInstance();
     }
 
+    /**
+     * Get the new instance of {@link KeyboardFragment}. Call this method to get repairable instance
+     * of fragment instead of directly calling constructor.
+     *
+     * @return {@link KeyboardFragment}
+     */
+    @SuppressWarnings("deprecation")
     public static KeyboardFragment getNewInstance() {
         KeyboardFragment keyboardFragment = new KeyboardFragment();
         keyboardFragment.setRetainInstance(true);
@@ -138,7 +158,7 @@ public final class KeyboardFragment extends Fragment implements FragmentManager.
             }
         });
 
-        if (savedInstanceState != null) {
+        if (savedInstanceState != null) {   //Fragment reloaded from config changes,
             //noinspection ConstantConditions
             switch (savedInstanceState.getString(KEY_CURRENT_FRAGMENT)) {
                 case TAG_EMOTICON_FRAGMENT:
@@ -155,11 +175,19 @@ public final class KeyboardFragment extends Fragment implements FragmentManager.
                     break;
             }
         } else {
-            mEmoticonTabBtn.callOnClick();
+            //Display emoticon fragment by default.
+            replaceFragment(mEmoticonFragment, TAG_EMOTICON_FRAGMENT);
         }
     }
 
-    private void replaceFragment(Fragment fragment, String tag) {
+    /**
+     * Replace the fragment in the fragment container.
+     *
+     * @param fragment New {@link Fragment} to replace
+     * @param tag      Tag for the back stack entry
+     */
+    private void replaceFragment(@NonNull Fragment fragment,
+                                 @FragmentBackStackTags String tag) {
         getChildFragmentManager().beginTransaction()
                 .replace(R.id.keyboard_fragment_container, fragment)
                 .addToBackStack(tag)
@@ -168,6 +196,7 @@ public final class KeyboardFragment extends Fragment implements FragmentManager.
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
+        //Save current fragment
         outState.putString(KEY_CURRENT_FRAGMENT, getChildFragmentManager()
                 .getBackStackEntryAt(getChildFragmentManager().getBackStackEntryCount() - 1)
                 .getName());
@@ -178,6 +207,7 @@ public final class KeyboardFragment extends Fragment implements FragmentManager.
      * Set the {@link EmoticonSelectListener} to get notify whenever the emoticon is selected or deleted.
      *
      * @param emoticonSelectListener {@link EmoticonSelectListener}
+     * @see EmoticonSelectListener
      */
     @SuppressWarnings("ConstantConditions")
     public void setEmoticonSelectListener(@NonNull EmoticonSelectListener emoticonSelectListener) {
@@ -189,9 +219,10 @@ public final class KeyboardFragment extends Fragment implements FragmentManager.
     }
 
     /**
-     * Set the GIF loader adapter.
+     * Set the GIF provider for for fetching the GIFs.
      *
      * @param gifProvider Loader class that extends {@link GifProviderProtocol}.
+     * @see GifProviderProtocol
      */
     public void setGifProvider(@NonNull GifProviderProtocol gifProvider) {
         mGifFragment.setGifProvider(gifProvider);
@@ -202,7 +233,9 @@ public final class KeyboardFragment extends Fragment implements FragmentManager.
      * Set the {@link EmoticonProvider} to render different images for unicode. If the value is null,
      * system emoticon images will render.
      *
-     * @param emoticonProvider {@link EmoticonProvider}
+     * @param emoticonProvider {@link EmoticonProvider} for custom emoticon packs or null to use system
+     *                         emoticons.
+     * @see EmoticonProvider
      */
     public void setEmoticonProvider(@Nullable EmoticonProvider emoticonProvider) {
         mEmoticonFragment.setEmoticonProvider(emoticonProvider);
@@ -212,6 +245,7 @@ public final class KeyboardFragment extends Fragment implements FragmentManager.
      * Set the {@link EmoticonSelectListener} to get notify whenever the emoticon is selected or deleted.
      *
      * @param gifSelectListener {@link EmoticonSelectListener}
+     * @see GifSelectListener
      */
     public void setGifSelectListener(@NonNull GifSelectListener gifSelectListener) {
         mGifFragment.setGifSelectListener(gifSelectListener);
@@ -226,10 +260,12 @@ public final class KeyboardFragment extends Fragment implements FragmentManager.
         int index = getChildFragmentManager().getBackStackEntryCount() - 1;
         if (index < 0) return;
 
+        //noinspection WrongConstant
         changeLayoutFromTag(getChildFragmentManager().getBackStackEntryAt(index).getName());
     }
 
-    private void changeLayoutFromTag(String tag) {
+
+    private void changeLayoutFromTag(@FragmentBackStackTags String tag) {
         switch (tag) {
             case TAG_EMOTICON_FRAGMENT:
                 //Display bottom bar of not displayed.
@@ -255,6 +291,13 @@ public final class KeyboardFragment extends Fragment implements FragmentManager.
                 //Display bottom bar of not displayed.
                 if (mBottomViewContainer != null) mBottomViewContainer.setVisibility(View.GONE);
                 break;
+            default:
+                //Do nothing
         }
+    }
+
+    @Retention(RetentionPolicy.SOURCE)
+    @StringDef({TAG_EMOTICON_FRAGMENT, TAG_EMOTICON_SEARCH_FRAGMENT, TAG_GIF_FRAGMENT, TAG_GIF_SEARCH_FRAGMENT})
+    @interface FragmentBackStackTags {
     }
 }

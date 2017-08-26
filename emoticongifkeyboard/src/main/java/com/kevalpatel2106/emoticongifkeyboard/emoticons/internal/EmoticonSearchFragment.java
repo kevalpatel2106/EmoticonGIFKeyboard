@@ -56,25 +56,25 @@ import java.util.List;
 public final class EmoticonSearchFragment extends Fragment implements EmoticonAdapter.ItemSelectListener {
     private Context mContext;
 
-    /* List of emoticons to display */
+    /** List of emoticons to display */
     private ArrayList<Emoticon> mEmoticons;
 
-    /* Emoticon adapter */
+    /** Emoticon adapter */
     private EmoticonAdapter mAdapter;
 
-    /* Listener to notify when emoticons selected. */
+    /** Listener to notify when emoticons selected. */
     private EmoticonSelectListener mEmoticonSelectListener;
 
-    /* View flipper to flip between emoticon list and no result found view. */
+    /** View flipper to flip between emoticon list and no result found view. */
     private ViewFlipper mViewFlipper;
 
-    /* Async Task to search emoticons */
+    /** Async Task to search emoticons */
     private SearchEmoticonTask mSearchTask;
 
-    /* Recycler view to display search result.*/
+    /** Recycler view to display search result.*/
     private RecyclerView mRecyclerView;
 
-    /* Search text input */
+    /** Search text input */
     private EditText mSearchEt;
 
     public EmoticonSearchFragment() {

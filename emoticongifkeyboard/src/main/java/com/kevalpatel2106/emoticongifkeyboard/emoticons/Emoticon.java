@@ -24,7 +24,6 @@ import android.support.annotation.NonNull;
 /**
  * Emoticon POJO.
  *
- * @author Hieu Rocker (rockerhieu@gmail.com)
  * @author <a href='https://github.com/kevalpatel2106'>Kevalpatel2106</a>
  */
 public final class Emoticon implements Parcelable {
@@ -49,13 +48,25 @@ public final class Emoticon implements Parcelable {
      * Custom icon for the emoticon. (If you don't want to use system default ones.)
      */
     @DrawableRes
-    private int icon;
+    private int icon = -1;
 
+    /**
+     * Public constructor.
+     *
+     * @param unicode Unicode of the emoticon. This cannot be null.
+     */
     public Emoticon(@NonNull String unicode) {
         //noinspection ConstantConditions
         if (unicode == null) throw new RuntimeException("Unicode cannot be null.");
         this.unicode = unicode;
     }
+
+    /**
+     * Public constructor.
+     *
+     * @param unicode Unicode of the emoticon. This cannot be null.
+     * @param icon    Drawable resource id for the emoticon.
+     */
 
     public Emoticon(@NonNull String unicode, @DrawableRes int icon) {
         this(unicode);
@@ -84,11 +95,17 @@ public final class Emoticon implements Parcelable {
         dest.writeString(unicode);
     }
 
+    /**
+     * @return Drawable resource for the image of emoticon. If there is no icon, it will return -1.
+     */
     @DrawableRes
     public int getIcon() {
         return icon;
     }
 
+    /**
+     * @return Unicode for the emoticon.
+     */
     @NonNull
     public String getUnicode() {
         return unicode;

@@ -45,21 +45,35 @@ import java.util.List;
 public final class EmoticonFragment extends Fragment implements EmoticonAdapter.ItemSelectListener {
     private Context mContext;
 
-    //Array list to hold currently displaying emoticons list
+    /**
+     * Array list to hold currently displaying emoticons list
+     */
     private ArrayList<Emoticon> mEmoticons;
 
-    //Adapter to display emoticon grids.
+    /**
+     * Adapter to display emoticon grids.
+     */
     private EmoticonAdapter mEmoticonAdapter;
 
-    //Listener to notify when emoticons selected.
+    /**
+     * Listener to notify when emoticons selected.
+     */
     private EmoticonSelectListener mEmoticonSelectListener;
 
-    //Recently used emoticons.
+    /**
+     * Recently used emoticons.
+     */
     private EmoticonRecentManager mEmoticonRecentManager;
 
-    //Emoticon provider
+    /**
+     * Emoticon provider
+     */
     @Nullable
     private EmoticonProvider mEmoticonProvider;
+
+    /**
+     * Recycler view to display the grid of emoticons.
+     */
     private RecyclerView mRecyclerView;
 
     public EmoticonFragment() {
@@ -98,6 +112,7 @@ public final class EmoticonFragment extends Fragment implements EmoticonAdapter.
         mEmoticons.addAll(getEmoticonsList(mEmoticonRecentManager.getLastCategory()));
         mEmoticonAdapter = new EmoticonAdapter(mContext, mEmoticons, mEmoticonProvider, this);
 
+        //Emoticon grid.
         mRecyclerView = view.findViewById(R.id.emoji_gridView);
         mRecyclerView.setAdapter(mEmoticonAdapter);
         mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(),

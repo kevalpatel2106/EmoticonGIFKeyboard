@@ -54,34 +54,54 @@ import java.util.List;
  */
 public final class GifSearchFragment extends Fragment implements GifSearchAdapter.ItemSelectListener {
 
-    /* List of GIFs to display */
+    /**
+     * List of GIFs to display
+     */
     private ArrayList<Gif> mGifs;
 
-    /* GIF adapter */
+    /**
+     * GIF adapter
+     */
     private GifSearchAdapter mGifGridAdapter;
 
-    /* Listener to notify when gif selected. */
+    /**
+     * Listener to notify when gif selected.
+     */
     private GifSelectListener mGifSelectListener;
 
-    /* GifProviderProtocol to load the GIF from provider */
+    /**
+     * GifProviderProtocol to load the GIF from provider
+     */
     private GifProviderProtocol mGifProvider;
 
-    /* View flipper to flip between GIFs list and no result found view. */
+    /**
+     * View flipper to flip between GIFs list and no result found view.
+     */
     private ViewFlipper mViewFlipper;
 
-    /* Async Task to search GIFs */
+    /**
+     * Async Task to search GIFs
+     */
     private SearchGifTask mSearchTask;
 
-    /* Async Task to load trending GIFs*/
+    /**
+     * Async Task to load trending GIFs
+     */
     private TrendingGifTask mTrendingGifTask;
 
-    /* Error text view */
+    /**
+     * Error text view
+     */
     private TextView mErrorTv;
 
-    /* GIF recycler view. */
+    /**
+     * GIF recycler view.
+     */
     private RecyclerView mRecyclerView;
 
-    /* Search text input */
+    /**
+     * Search text input
+     */
     private EditText mSearchEt;
 
     public GifSearchFragment() {

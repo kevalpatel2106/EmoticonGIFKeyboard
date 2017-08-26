@@ -48,25 +48,25 @@ public final class GifFragment extends Fragment implements GifGridAdapter.ItemSe
 
     private Context mContext;
 
-    /* Array list to hold currently displaying emoticons list */
+    /** Array list to hold currently displaying emoticons list */
     private ArrayList<Gif> mGifs;
 
-    /* Adapter to display emoticon grids. */
+    /** Adapter to display emoticon grids. */
     private GifGridAdapter mGifGridAdapter;
 
-    /* View flipper for show different states. */
+    /** View flipper for show different states. */
     private ViewFlipper mViewFlipper;
 
-    /* Gif loader protocol */
+    /** Gif loader protocol */
     private GifProviderProtocol mGifProvider;
 
-    /* Error text view. */
+    /** Error text view. */
     private TextView mErrorTv;
 
-    /* Async task to load the trending GIFs. */
+    /** Async task to load the trending GIFs. */
     private AsyncTask<Void, Void, List<Gif>> mTrendingGifTask;
 
-    /* Listener to notify when any gif select */
+    /** Listener to notify when any gif select */
     private GifSelectListener mGifSelectListener;
 
     public GifFragment() {

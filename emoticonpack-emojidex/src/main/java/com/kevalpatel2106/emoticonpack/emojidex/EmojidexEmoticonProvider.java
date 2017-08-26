@@ -20,26 +20,45 @@ import com.kevalpatel2106.emoticongifkeyboard.emoticons.EmoticonProvider;
 
 /**
  * Created by Keval Patel on 21/08/17.
+ * Emojidex emoticon icon pack.
  *
  * @author 'https://github.com/kevalpatel2106'
+ * @see <a href='https://www.emojidex.com/'>Emojidex</a>
  */
 
+@SuppressWarnings("WeakerAccess")
 public class EmojidexEmoticonProvider implements EmoticonProvider {
 
     private EmojidexEmoticonProvider() {
+        //Do nothing
     }
 
+    /**
+     * return {@link EmojidexEmoticonProvider}
+     */
     public static EmojidexEmoticonProvider create() {
         return new EmojidexEmoticonProvider();
     }
 
+    /**
+     * Get the drawable resource for the given unicode.
+     *
+     * @param unicode Unicode for which icon is required.
+     * @return Icon drawable resource id or -1 if there is no drawable for given unicode.
+     */
     @Override
     public int getIcon(String unicode) {
-        return hasEmoticon(unicode) ? EmoticonList.EMOTICONS.get(unicode) : -1;
+        return hasEmoticonIcon(unicode) ? EmoticonList.EMOTICONS.get(unicode) : -1;
     }
 
+    /**
+     * Check if the icon pack contains the icon image for given unicode/emoticon?
+     *
+     * @param unicode Unicode to check.
+     * @return True if the icon found else false.
+     */
     @Override
-    public boolean hasEmoticon(String unicode) {
+    public boolean hasEmoticonIcon(String unicode) {
         return EmoticonList.EMOTICONS.containsKey(unicode);
     }
 }

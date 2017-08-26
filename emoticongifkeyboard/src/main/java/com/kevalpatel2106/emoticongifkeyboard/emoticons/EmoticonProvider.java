@@ -20,14 +20,27 @@ import android.support.annotation.DrawableRes;
 
 /**
  * Created by Keval Patel on 20/08/17.
+ * Custom emoticon icon provider to display custom emoticon images instead of system emoticons.
  *
  * @author 'https://github.com/kevalpatel2106'
  */
 
 public interface EmoticonProvider {
 
+    /**
+     * Get the drawable resource for the given unicode.
+     *
+     * @param unicode Unicode for which icon is required.
+     * @return Icon drawable resource id or -1 if there is no drawable for given unicode.
+     */
     @DrawableRes
     int getIcon(String unicode);
 
-    boolean hasEmoticon(String unicode);
+    /**
+     * Check if the icon pack contains the icon image for given unicode/emoticon?
+     *
+     * @param unicode Unicode to check.
+     * @return True if the icon found else false.
+     */
+    boolean hasEmoticonIcon(String unicode);
 }

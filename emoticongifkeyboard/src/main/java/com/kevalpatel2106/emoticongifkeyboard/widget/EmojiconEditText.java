@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package com.kevalpatel2106.emoticongifkeyboard.emoticons.widget;
+package com.kevalpatel2106.emoticongifkeyboard.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;

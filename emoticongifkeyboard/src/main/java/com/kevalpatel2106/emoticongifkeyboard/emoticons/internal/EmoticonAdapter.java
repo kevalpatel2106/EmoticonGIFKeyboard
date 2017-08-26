@@ -90,6 +90,9 @@ final class EmoticonAdapter extends RecyclerView.Adapter<EmoticonAdapter.ViewHol
         void OnListItemSelected(@NonNull Emoticon emoticon);
     }
 
+    /**
+     * View holder class.
+     */
     class ViewHolder extends RecyclerView.ViewHolder {
         EmoticonTextViewInternal icon;
 
