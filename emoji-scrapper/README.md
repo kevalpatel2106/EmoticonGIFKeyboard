@@ -1,8 +1,10 @@
 # Emoji scrapper
+<a href="https://www.paypal.me/kevalpatel2106"> <img src="https://img.shields.io/badge/paypal-donate-yellow.svg" /></a>
+ 
+This is an open sourced java project to scrap the [Emojipedia](http://emojipedia.org) website and find out latest emojis and their icons for different vendors. 
 
-This is an java project to scrap the emojipedia website and findout latest emojis and their icons for different vendors. Downloaded files will be stored in /out folder.
 
-### What will be in output?
+## What will be in the output?
 
 1. Icons of all emoticons.
 
@@ -49,8 +51,8 @@ This is an java project to scrap the emojipedia website and findout latest emoji
 
 4. Java rejex string to find  out supported emojis from the string. Regex string is stored in `/out/regex`.
 
-### What data it scraps from emojipedia?
 
+## What data it scraps from emojipedia?
 - Emoticon name.
 - Emoticon unicode.
 - Emoticon codepoints.
@@ -59,6 +61,27 @@ This is an java project to scrap the emojipedia website and findout latest emoji
 - Category.
 
 
-###### This is an Intellij IDEA project.
+## How to run this code?
+- Open directory in Intelij IDEA and run (▷) the `Main.java`. That's it.
 
 
+## What if I don't want to spend time to scrap the website?
+- Scrapping Emojopedia and get all the emojis from the website will take almost 2 -3 hours 🕑 (depends on your internet connectivity).😟😟 
+- We know that you don't have time for that. Don't worry!!! You can download the scrapped data from the website from [here](https://mega.nz/#F!7IgGmaoY!nQIX7zW1iBaSSS8W-HY4Bg).
+
+## Legal:
+This code is open source and freely available for use. However the data scrapped from the [Emojipedia](http://emojipedia.org) website are subjected to [Emojipedia](http://emojipedia.org) terms and conditions. Visit [Emojipedia](http://emojipedia.org) to know more.
+
+
+## Questions?🤔
+Hit me on twitter [![Twitter](https://img.shields.io/badge/Twitter-@kevalpatel2106-blue.svg?style=flat)](https://twitter.com/kevalpatel2106)
+
+
+## License
+Copyright 2017 Keval Patel
+
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.

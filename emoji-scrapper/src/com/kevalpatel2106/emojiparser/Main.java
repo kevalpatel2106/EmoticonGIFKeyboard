@@ -141,8 +141,6 @@ public class Main {
             mEmojis.add(parseEmojiDetailPage(emojiPageUrl,
                     true,
                     categoryUrl.replace(BASE_URL, "").replace("/", "")));
-
-            break;
         }
     }
 
