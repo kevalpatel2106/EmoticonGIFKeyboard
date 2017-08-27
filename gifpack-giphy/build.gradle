@@ -54,8 +54,8 @@ publish {
 }
 
 dependencies {
-    compile project(':emoticongifkeyboard')
-    compile('com.squareup.retrofit2:retrofit:2.3.0', {
+    implementation project(':emoticongifkeyboard')
+    implementation('com.squareup.retrofit2:retrofit:2.3.0', {
         exclude group: 'com.android.support', module: 'support-annotations'
         exclude group: 'com.android.support', module: 'support-v4'
     })

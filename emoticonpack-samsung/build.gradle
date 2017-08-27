@@ -54,5 +54,5 @@ publish {
 }
 
 dependencies {
-    compile project(':emoticongifkeyboard')
+    implementation project(':emoticongifkeyboard')
 }

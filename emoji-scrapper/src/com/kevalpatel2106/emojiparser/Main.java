@@ -17,37 +17,29 @@
 package com.kevalpatel2106.emojiparser;
 
 import com.google.gson.Gson;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import javax.imageio.ImageIO;
-
 public class Main {
-    private static final Comparator<String> STRING_LENGTH_COMPARATOR = new Comparator<String>() {
-        @Override
-        public int compare(final String first, final String second) {
-            final int firstLength = first.length();
-            final int secondLength = second.length();
-            return firstLength < secondLength ? 1 : firstLength == secondLength ? 0 : -1;
-        }
+    private static final Comparator<String> STRING_LENGTH_COMPARATOR = (first, second) -> {
+        final int firstLength = first.length();
+        final int secondLength = second.length();
+        return firstLength < secondLength ? 1 : firstLength == secondLength ? 0 : -1;
     };
     private static final List<String> SUPPORTED_VENDOR = Arrays.asList(
             "Apple",
@@ -88,12 +80,7 @@ public class Main {
 
         //Start loading categories.
         for (String categoryUrl : EMOJI_CATEGORIES_URL) {
-            try {
-                parseCategoryEmoji(categoryUrl);
-            } catch (IOException e) {
-                e.printStackTrace();
-                System.out.println("Try again...");
-            }
+            parseCategoryEmoji(categoryUrl);
         }
 
         System.out.println("\n\n*******************************************");
@@ -120,107 +107,124 @@ public class Main {
         System.out.println("*******************************************");
     }
 
-    private static void parseCategoryEmoji(final String categoryUrl) throws IOException {
+    private static void parseCategoryEmoji(final String categoryUrl) {
         System.out.println("\n\n*******************************************");
         System.out.println("Loading category : " + categoryUrl);
         System.out.println("*******************************************");
 
-        Document doc = Jsoup.connect(categoryUrl).get();
+        try {
+            Document doc = Jsoup.connect(categoryUrl).get();
 
-        //Find out the emoji list <ul>
-        Elements emojiLists = doc.getElementsByClass("emoji-list").get(0).getElementsByTag("li");
-        System.out.println("Total " + emojiLists.size() + " emojis found.");
+            //Find out the emoji list <ul>
+            Elements emojiLists = doc.getElementsByClass("emoji-list").get(0).getElementsByTag("li");
+            System.out.println("Total " + emojiLists.size() + " emojis found.");
 
-        //Iterate through all  the <li> elements.
-        for (Element emojiListItem : emojiLists) {
-            //Get the page url for each emoji
-            String emojiPageUrl = BASE_URL + emojiListItem
-                    .getElementsByTag("a")
-                    .attr("href");
+            //Iterate through all  the <li> elements.
+            for (Element emojiListItem : emojiLists) {
+                //Get the page url for each emoji
+                String emojiPageUrl = BASE_URL + emojiListItem
+                        .getElementsByTag("a")
+                        .attr("href");
 
-            mEmojis.add(parseEmojiDetailPage(emojiPageUrl,
-                    true,
-                    categoryUrl.replace(BASE_URL, "").replace("/", "")));
+                Emoji emoji = parseEmojiDetailPage(emojiPageUrl,
+                        true,
+                        categoryUrl.replace(BASE_URL, "").replace("/", ""));
+
+                if (emoji != null) mEmojis.add(emoji);
+            }
+        } catch (IOException e) {
+            System.out.println("Category page loading failed...Trying again...");
+            parseCategoryEmoji(categoryUrl);
         }
     }
 
     private static Emoji parseEmojiDetailPage(final String emojiPageUrl,
                                               boolean allowParseModifire,
-                                              String category) throws IOException {
+                                              String category) {
 
-        System.out.println("\nParsing the emoji: " + emojiPageUrl);
-        Emoji emoji = new Emoji();
-        emoji.category = category;
+        try {
 
-        final Document doc = Jsoup.connect(emojiPageUrl).get();
+            System.out.println("\nParsing the emoji: " + emojiPageUrl);
+            Emoji emoji = new Emoji();
+            emoji.category = category;
 
-        //Parse the name from H1 tag
-        emoji.name = Utils.removeFirstEmojiFromText(doc.getElementsByTag("h1").text());
-        emoji.unicode = Utils.getFirstEmojiFromText(doc.getElementsByTag("h1").text());
-        sUnicodesForPattern.add(emoji.unicode);
-        System.out.println(doc.getElementsByTag("h1").text());
+            final Document doc = Jsoup.connect(emojiPageUrl).get();
 
-        //Get the tags
-        emoji.tags.add(emoji.name);
-        if (emoji.name.toLowerCase().contains("face")) emoji.tags.add("Face");
-        if (emoji.name.toLowerCase().contains("flag")) emoji.tags.add("flag");
-        if (emoji.name.toLowerCase().contains("hand")) emoji.tags.add("hand");
-        if (emoji.name.toLowerCase().contains("hands")) emoji.tags.add("hand");
-        if (emoji.name.toLowerCase().contains("Person")) emoji.tags.add("Person");
+            //Parse the name from H1 tag
+            emoji.name = Utils.removeFirstEmojiFromText(doc.getElementsByTag("h1").text());
+            emoji.unicode = Utils.getFirstEmojiFromText(doc.getElementsByTag("h1").text());
+            sUnicodesForPattern.add(emoji.unicode);
+            System.out.println(doc.getElementsByTag("h1").text());
 
-        if (!doc.getElementsByClass("aliases").isEmpty()) {
-            final Elements aliases = doc.getElementsByClass("aliases")
-                    .tagName("ul").get(0)
-                    .getElementsByTag("ul").get(0)
-                    .getElementsByTag("li");
-            for (Element element : aliases) {
-                String tagToAdd = Utils.removeFirstEmojiFromText(element.text());
-                emoji.tags.add(tagToAdd);
-                if (tagToAdd.contains(" and ")) {
-                    emoji.tags.add(tagToAdd.split(" and ")[0]);
-                    emoji.tags.add(tagToAdd.split(" and ")[1]);
+            //Get the tags
+            emoji.tags.add(emoji.name);
+            if (emoji.name.toLowerCase().contains("face")) emoji.tags.add("Face");
+            if (emoji.name.toLowerCase().contains("flag")) emoji.tags.add("flag");
+            if (emoji.name.toLowerCase().contains("hand")) emoji.tags.add("hand");
+            if (emoji.name.toLowerCase().contains("hands")) emoji.tags.add("hand");
+            if (emoji.name.toLowerCase().contains("Person")) emoji.tags.add("Person");
+
+            if (!doc.getElementsByClass("aliases").isEmpty()) {
+                final Elements aliases = doc.getElementsByClass("aliases")
+                        .tagName("ul").get(0)
+                        .getElementsByTag("ul").get(0)
+                        .getElementsByTag("li");
+                for (Element element : aliases) {
+                    String tagToAdd = Utils.removeFirstEmojiFromText(element.text());
+                    emoji.tags.add(tagToAdd);
+                    if (tagToAdd.contains(" and ")) {
+                        emoji.tags.add(tagToAdd.split(" and ")[0]);
+                        emoji.tags.add(tagToAdd.split(" and ")[1]);
+                    }
+                    if (tagToAdd.contains(":")) emoji.tags.add(tagToAdd.split(":")[0]);
                 }
-                if (tagToAdd.contains(":")) emoji.tags.add(tagToAdd.split(":")[0]);
             }
-        }
-        System.out.println("\t\tTags: " + emoji.tags.toString());
+            System.out.println("\t\tTags: " + emoji.tags.toString());
 
-        //Add code points
-        Elements codePoints = doc.getElementsMatchingOwnText("Codepoints") //Find <h2>Codepoint</h2>
-                .next().get(0) //Get the element next to it (<ul>)
-                .getElementsByTag("li");     //Get all <li> elements from it.
-        for (Element codePointElement : codePoints) {
-            emoji.codePoints.add(Utils.getStringCodePointFromElement(codePointElement
-                    .getElementsByTag("a").text()));
-        }
-
-        //Parse the images
-        final Elements vendorNames = doc.getElementsByClass("vendor-info");
-        final Elements vendorImageUrls = doc.getElementsByClass("vendor-image");
-        for (int i = 0; i < vendorNames.size(); i++) {
-            //Vendor name
-            String vendorName = vendorNames.get(i).getElementsByTag("a").text();
-            String vendorImage = vendorImageUrls.get(i).getElementsByTag("img").attr("src");
-
-            //Check if the vendor is among supported vendors
-            if (SUPPORTED_VENDOR.contains(vendorName)) {
-                System.out.println("\t" + vendorName + " : " + vendorImage);
-                emoji.imageUrls.put(vendorName, downloadImages(vendorImage, vendorName, emoji.codePoints));
+            //Add code points
+            Elements codePoints = doc.getElementsMatchingOwnText("Codepoints") //Find <h2>Codepoint</h2>
+                    .next().get(0) //Get the element next to it (<ul>)
+                    .getElementsByTag("li");     //Get all <li> elements from it.
+            for (Element codePointElement : codePoints) {
+                emoji.codePoints.add(Utils.getStringCodePointFromElement(codePointElement
+                        .getElementsByTag("a").text()));
             }
-        }
 
-        //Get modifiers
-        if (allowParseModifire && !doc.getElementsByClass("modifiers").isEmpty()) {
-            final Elements modifiers = doc.getElementsByClass("modifiers").get(0)
-                    .getElementsByTag("ul").get(0)
-                    .getElementsByTag("li");
-            for (Element modifier : modifiers) {
-                emoji.variants.add(parseEmojiDetailPage(BASE_URL
-                                + modifier.getElementsByTag("a").attr("href"),
-                        false, category));    //False to prevent infinite recursion
+            //Parse the images
+            final Elements vendorNames = doc.getElementsByClass("vendor-info");
+            final Elements vendorImageUrls = doc.getElementsByClass("vendor-image");
+            for (int i = 0; i < vendorNames.size(); i++) {
+                //Vendor name
+                String vendorName = vendorNames.get(i).getElementsByTag("a").text();
+                String vendorImage = vendorImageUrls.get(i).getElementsByTag("img").attr("src");
+
+                //Check if the vendor is among supported vendors
+                if (SUPPORTED_VENDOR.contains(vendorName)) {
+                    System.out.println("\t" + vendorName + " : " + vendorImage);
+                    emoji.imageUrls.put(vendorName, downloadImages(vendorImage, vendorName, emoji.codePoints));
+                }
             }
+
+            //Get modifiers
+            if (allowParseModifire && !doc.getElementsByClass("modifiers").isEmpty()) {
+                final Elements modifiers = doc.getElementsByClass("modifiers").get(0)
+                        .getElementsByTag("ul").get(0)
+                        .getElementsByTag("li");
+                for (Element modifier : modifiers) {
+                    Emoji emojiVariantParsed = parseEmojiDetailPage(BASE_URL
+                                    + modifier.getElementsByTag("a").attr("href"),
+                            false, category);    //False to prevent infinite recursion
+
+                    emoji.variants.add(emojiVariantParsed);
+                }
+            }
+            return emoji;
+
+        } catch (IOException e) {
+            System.out.println("Emoji detail page loading failed...Trying again...");
+            parseEmojiDetailPage(emojiPageUrl, allowParseModifire, category);
+            return null;
         }
-        return emoji;
     }
 
     private static File downloadImages(String url,
@@ -280,36 +284,15 @@ public class Main {
      */
     private static void createAndSaveEmoticonRegex(final ArrayList<String> unicodesForPattern) {
         // We need to sort the unicodes by length so the longest one gets matched first.
-        Collections.sort(unicodesForPattern, STRING_LENGTH_COMPARATOR);
+        unicodesForPattern.sort(STRING_LENGTH_COMPARATOR);
 
-        String unicodeRegex = "";
+        StringBuilder unicodeRegex = new StringBuilder();
         for (String unicode : unicodesForPattern)
-            unicodeRegex = unicodeRegex + Pattern.quote(unicode) + "|";
-        if (unicodeRegex.endsWith("|"))
-            unicodeRegex = unicodeRegex.substring(0, unicodeRegex.length() - 1);
+            unicodeRegex.append(Pattern.quote(unicode)).append("|");
+        if (unicodeRegex.toString().endsWith("|"))
+            unicodeRegex = new StringBuilder(unicodeRegex.substring(0, unicodeRegex.length() - 1));
 
         //Save the regex
-        Utils.saveFile(new File(Utils.CURRENT_DIR_PATH + "/regex"), unicodeRegex);
-    }
-
-    private static String readTextFile(File file) throws FileNotFoundException {
-        BufferedReader br = new BufferedReader(new FileReader(file));
-
-        StringBuilder builder = new StringBuilder();
-        try {
-            String sCurrentLine;
-            while ((sCurrentLine = br.readLine()) != null) {
-                builder.append(sCurrentLine);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                br.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return builder.toString();
+        Utils.saveFile(new File(Utils.CURRENT_DIR_PATH + "/regex"), unicodeRegex.toString());
     }
 }
