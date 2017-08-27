@@ -17,6 +17,7 @@
 package com.kevalpatel2106.emoticongifkeyboard.emoticons.internal;
 
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -127,6 +128,7 @@ public final class EmoticonFragment extends Fragment implements EmoticonAdapter.
      *
      * @param rootView Root view.
      */
+    @SuppressLint("WrongConstant")
     private void setTabHeaders(@NonNull View rootView) {
         final View[] emojiTabs = new View[9];
         emojiTabs[EmoticonsCategories.RECENT] = rootView.findViewById(R.id.emojis_tab_0_recents);
@@ -142,26 +144,23 @@ public final class EmoticonFragment extends Fragment implements EmoticonAdapter.
         //Set the click listener in each tab
         for (int i = 0; i < emojiTabs.length; i++) {
             final int position = i;
-            emojiTabs[i].setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //Mark current tab as selected.
-                    for (View emojiTab : emojiTabs) emojiTab.setSelected(false);
-                    v.setSelected(true);
+            emojiTabs[i].setOnClickListener(v -> {
+                //Mark current tab as selected.
+                for (View emojiTab : emojiTabs) emojiTab.setSelected(false);
+                v.setSelected(true);
 
-                    //Update the grid with emoticons for that category
-                    mEmoticons.clear();
-                    //noinspection WrongConstant
-                    mEmoticons.addAll(getEmoticonsList(position));
-                    mEmoticonAdapter.notifyDataSetChanged();
+                //Update the grid with emoticons for that category
+                mEmoticons.clear();
+                //noinspection WrongConstant
+                mEmoticons.addAll(getEmoticonsList(position));
+                mEmoticonAdapter.notifyDataSetChanged();
 
-                    //Scroll the list to top.
-                    mRecyclerView.scrollToPosition(0);
+                //Scroll the list to top.
+                mRecyclerView.scrollToPosition(0);
 
-                    //Save the selected category
-                    //noinspection WrongConstant
-                    mEmoticonRecentManager.setLastCategory(position);
-                }
+                //Save the selected category
+                //noinspection WrongConstant
+                mEmoticonRecentManager.setLastCategory(position);
             });
         }
 
@@ -199,7 +198,7 @@ public final class EmoticonFragment extends Fragment implements EmoticonAdapter.
             case EmoticonsCategories.OBJECTS:
             case EmoticonsCategories.SYMBOLS:
             case EmoticonsCategories.FLAGS:
-                return new EmoticonDbHelper(mContext).getEmoticons(category);
+                return new EmoticonDbHelper(mContext).getEmoticons(category, mEmoticonProvider);
             default:
                 throw new IllegalStateException("Invalid position.");
         }

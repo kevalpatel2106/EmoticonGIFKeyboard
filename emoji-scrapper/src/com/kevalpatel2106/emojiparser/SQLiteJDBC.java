@@ -100,17 +100,17 @@ class SQLiteJDBC {
                     + EmoticonColumns.UNICODE + ","
                     + EmoticonColumns.CATEGORY + ","
                     + EmoticonColumns.NAME + ") " +
-                    "VALUES ('" + emoji.unicode + "', "
-                    + Utils.getCategoryFromCategoryName(emoji.category) + ", '"
-                    + emoji.name + "');";
+                    "VALUES (\"" + emoji.unicode + "\", "
+                    + Utils.getCategoryFromCategoryName(emoji.category) + ", \""
+                    + emoji.name + "\");";
             stmt.executeUpdate(sql);
 
             for (String tag : emoji.tags) {
                 sql = "INSERT INTO " + EmoticonTagsColumns.TABLE + " ("
                         + EmoticonTagsColumns.UNICODE + ","
                         + EmoticonTagsColumns.TAG + ") " +
-                        "VALUES ('" + emoji.unicode + "', '"
-                        + tag + "');";
+                        "VALUES (\"" + emoji.unicode + "\", \""
+                        + tag + "\");";
                 stmt.executeUpdate(sql);
             }
             stmt.close();
@@ -135,10 +135,10 @@ class SQLiteJDBC {
                     + EmoticonVariantColumns.CATEGORY + ","
                     + EmoticonVariantColumns.ROOT_UNICODE + ","
                     + EmoticonVariantColumns.NAME + ") " +
-                    "VALUES ('" + emoji.unicode + "', "
+                    "VALUES (\"" + emoji.unicode + "\", "
                     + Utils.getCategoryFromCategoryName(emoji.category) + ", "
-                    + "'" + rootUnicode + "', "
-                    + "'" + emoji.name + "');";
+                    + "\"" + rootUnicode + "\", "
+                    + "\"" + emoji.name + "\");";
             stmt.executeUpdate(sql);
             stmt.close();
         } catch (Exception e) {

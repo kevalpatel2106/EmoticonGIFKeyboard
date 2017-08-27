@@ -39,6 +39,7 @@ import android.widget.ViewFlipper;
 import com.kevalpatel2106.emoticongifkeyboard.KeyboardFragment;
 import com.kevalpatel2106.emoticongifkeyboard.R;
 import com.kevalpatel2106.emoticongifkeyboard.emoticons.Emoticon;
+import com.kevalpatel2106.emoticongifkeyboard.emoticons.EmoticonProvider;
 import com.kevalpatel2106.emoticongifkeyboard.emoticons.EmoticonSelectListener;
 import com.kevalpatel2106.emoticongifkeyboard.gifs.internal.EmoticonGifImageView;
 
@@ -56,26 +57,46 @@ import java.util.List;
 public final class EmoticonSearchFragment extends Fragment implements EmoticonAdapter.ItemSelectListener {
     private Context mContext;
 
-    /** List of emoticons to display */
+    /**
+     * List of emoticons to display
+     */
     private ArrayList<Emoticon> mEmoticons;
 
-    /** Emoticon adapter */
+    /**
+     * Emoticon adapter
+     */
     private EmoticonAdapter mAdapter;
 
-    /** Listener to notify when emoticons selected. */
+    /**
+     * Listener to notify when emoticons selected.
+     */
     private EmoticonSelectListener mEmoticonSelectListener;
 
-    /** View flipper to flip between emoticon list and no result found view. */
+    /**
+     * View flipper to flip between emoticon list and no result found view.
+     */
     private ViewFlipper mViewFlipper;
 
-    /** Async Task to search emoticons */
+    /**
+     * Async Task to search emoticons
+     */
     private SearchEmoticonTask mSearchTask;
 
-    /** Recycler view to display search result.*/
+    /**
+     * Recycler view to display search result.
+     */
     private RecyclerView mRecyclerView;
 
-    /** Search text input */
+    /**
+     * Search text input
+     */
     private EditText mSearchEt;
+
+    /**
+     * Emoticon provider
+     */
+    @Nullable
+    private EmoticonProvider mEmoticonProvider;
 
     public EmoticonSearchFragment() {
         // Required empty public constructor
@@ -229,6 +250,16 @@ public final class EmoticonSearchFragment extends Fragment implements EmoticonAd
     }
 
     /**
+     * Set the {@link EmoticonProvider} to render different images for unicode. If the value is null,
+     * system emoticon images will render.
+     *
+     * @param emoticonProvider {@link EmoticonProvider}
+     */
+    public void setEmoticonProvider(@Nullable EmoticonProvider emoticonProvider) {
+        mEmoticonProvider = emoticonProvider;
+    }
+
+    /**
      * Async task to load search emoticons into database in background and refresh the list in main
      * thread.
      */
@@ -237,7 +268,7 @@ public final class EmoticonSearchFragment extends Fragment implements EmoticonAd
         @Override
         protected List<Emoticon> doInBackground(final String... strings) {
             //Search for the tag in database.
-            return new EmoticonDbHelper(mContext).searchEmoticons(strings[0]);
+            return new EmoticonDbHelper(mContext).searchEmoticons(strings[0], mEmoticonProvider);
         }
 
         @Override

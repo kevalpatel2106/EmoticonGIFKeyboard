@@ -111,7 +111,7 @@ final class EmoticonDbHelper extends SQLiteAssetHelper {
 
         ArrayList<Emoticon> emoticons = new ArrayList<>();
         while (cursor.moveToNext()) {
-            String unicode = cursor.getString(cursor.getColumnIndex(EmoticonColumns.UNICODE));
+            String unicode = cursor.getString(cursor.getColumnIndex(EmoticonTagsColumns.UNICODE));
             if (emoticonProvider == null || emoticonProvider.hasEmoticonIcon(unicode))
                 emoticons.add(new Emoticon(unicode));
         }

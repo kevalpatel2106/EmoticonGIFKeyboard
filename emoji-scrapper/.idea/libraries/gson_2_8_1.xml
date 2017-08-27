@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="gson-2.8.1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/src/lib/gson-2.8.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/lib/jsoup-1.10.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/lib/sqlite-jdbc-3.20.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

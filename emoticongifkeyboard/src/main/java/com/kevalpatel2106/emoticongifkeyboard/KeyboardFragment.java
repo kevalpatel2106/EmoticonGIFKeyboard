@@ -239,6 +239,7 @@ public final class KeyboardFragment extends Fragment implements FragmentManager.
      */
     public void setEmoticonProvider(@Nullable EmoticonProvider emoticonProvider) {
         mEmoticonFragment.setEmoticonProvider(emoticonProvider);
+        mEmoticonSearchFragment.setEmoticonProvider(emoticonProvider);
     }
 
     /**

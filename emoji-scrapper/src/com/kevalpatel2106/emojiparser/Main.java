@@ -17,6 +17,7 @@
 package com.kevalpatel2106.emojiparser;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -24,9 +25,7 @@ import org.jsoup.select.Elements;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -52,7 +51,7 @@ public class Main {
             "EmojiOne",
             "emojidex");
 
-    private static final ArrayList<Emoji> mEmojis = new ArrayList<>();
+    private static  ArrayList<Emoji> mEmojis = new ArrayList<>();
     private static final String BASE_URL = "http://emojipedia.org";
     private static final String[] EMOJI_CATEGORIES_URL = new String[]{
             BASE_URL + "/people/",
@@ -96,8 +95,15 @@ public class Main {
         SQLiteJDBC.createTable(connection);
 
         System.out.println("\n\n*******************************************");
-        System.out.println("Saving to database...");
-        for (Emoji emoji : mEmojis) SQLiteJDBC.insertEmoji(connection, emoji);
+        System.out.println("Saving to database..." + mEmojis.size());
+        for (int i = 0, mEmojisSize = mEmojis.size(); i < mEmojisSize; i++) {
+            System.out.println(i+"");
+            Emoji emoji = mEmojis.get(i);
+            if (emoji != null) {
+                System.out.println(emoji.unicode + " " + emoji.category + " " + emoji.codePoints + " " + emoji.tags);
+                SQLiteJDBC.insertEmoji(connection, emoji);
+            }
+        }
 
         System.out.println("\n\n*******************************************");
         System.out.println("Creating regex...");
@@ -294,5 +300,26 @@ public class Main {
 
         //Save the regex
         Utils.saveFile(new File(Utils.CURRENT_DIR_PATH + "/regex"), unicodeRegex.toString());
+    }
+
+    private static String readTextFile(File file) throws FileNotFoundException {
+        BufferedReader br = new BufferedReader(new FileReader(file));
+
+        StringBuilder builder = new StringBuilder();
+        try {
+            String sCurrentLine;
+            while ((sCurrentLine = br.readLine()) != null) {
+                builder.append(sCurrentLine);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                br.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return builder.toString();
     }
 }
