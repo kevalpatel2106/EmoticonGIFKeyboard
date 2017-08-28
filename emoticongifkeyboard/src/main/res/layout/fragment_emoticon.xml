@@ -21,7 +21,7 @@
     android:layout_height="@dimen/emoticon_gif_fragments_height"
     android:background="@color/background_light"
     android:orientation="vertical"
-    tools:context=".emoticons.internal.EmoticonFragment">
+    tools:context=".internal.emoticon.EmoticonFragment">
 
     <!--Tab titles of emoticons category-->
     <include

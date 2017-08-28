@@ -9,12 +9,16 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/emoji-parser" />
             <option value="$PROJECT_DIR$/emoticongifkeyboard" />
+            <option value="$PROJECT_DIR$/emoticonpack-emojidex" />
             <option value="$PROJECT_DIR$/emoticonpack-emojione" />
+            <option value="$PROJECT_DIR$/emoticonpack-facebook" />
             <option value="$PROJECT_DIR$/emoticonpack-google" />
             <option value="$PROJECT_DIR$/emoticonpack-ios" />
+            <option value="$PROJECT_DIR$/emoticonpack-messanger" />
+            <option value="$PROJECT_DIR$/emoticonpack-samsung" />
             <option value="$PROJECT_DIR$/emoticonpack-twitter" />
+            <option value="$PROJECT_DIR$/emoticonpack-windows" />
             <option value="$PROJECT_DIR$/gifpack-giphy" />
             <option value="$PROJECT_DIR$/gifpack-tenor" />
           </set>

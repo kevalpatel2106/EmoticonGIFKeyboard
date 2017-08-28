@@ -14,9 +14,8 @@
   ~  limitations under the License.
   -->
 
-<com.kevalpatel2106.emoticongifkeyboard.emoticons.internal.EmoticonTextViewInternal
+<android.support.v7.widget.AppCompatTextView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:emoticon="http://schemas.android.com/apk/res-auto"
     android:id="@+id/emojicon_icon"
     android:layout_width="36dp"
     android:layout_height="36dp"
@@ -24,5 +23,4 @@
     android:gravity="center"
     android:padding="@dimen/emoticon_grid_view_item_spacing"
     android:textColor="#000000"
-    android:textSize="20sp"
-    emoticon:emojiconSize="30dp"/>
+    android:textSize="20sp"/>

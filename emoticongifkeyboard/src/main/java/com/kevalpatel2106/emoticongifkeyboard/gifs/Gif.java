@@ -124,7 +124,7 @@ public final class Gif implements Parcelable {
 
     @Override
     public boolean equals(Object obj) {
-        return obj instanceof Gif && ((Gif) obj).gifUrl.equals(gifUrl);
+        return obj == this || (obj instanceof Gif && ((Gif) obj).gifUrl.equals(gifUrl));
     }
 
     @Override

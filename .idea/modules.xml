@@ -4,18 +4,16 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/EmoticonGIFKeyboard.iml" filepath="$PROJECT_DIR$/EmoticonGIFKeyboard.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/emoticongifkeyboard/emoji-keyboard.iml" filepath="$PROJECT_DIR$/emoticongifkeyboard/emoji-keyboard.iml" />
-      <module fileurl="file://$PROJECT_DIR$/emoji-parser/emoji-parser.iml" filepath="$PROJECT_DIR$/emoji-parser/emoji-parser.iml" />
-      <module fileurl="file://$PROJECT_DIR$/emoticonpack-google/emoticon-google.iml" filepath="$PROJECT_DIR$/emoticonpack-google/emoticon-google.iml" />
-      <module fileurl="file://$PROJECT_DIR$/emoticonpack-ios/emoticon-ios.iml" filepath="$PROJECT_DIR$/emoticonpack-ios/emoticon-ios.iml" />
-      <module fileurl="file://$PROJECT_DIR$/emoticon-one/emoticon-one.iml" filepath="$PROJECT_DIR$/emoticon-one/emoticon-one.iml" />
-      <module fileurl="file://$PROJECT_DIR$/emoticon-twitter/emoticon-twitter.iml" filepath="$PROJECT_DIR$/emoticon-twitter/emoticon-twitter.iml" />
-      <module fileurl="file://$PROJECT_DIR$/emoticonpack-twitter/emoticon-twitter.iml" filepath="$PROJECT_DIR$/emoticonpack-twitter/emoticon-twitter.iml" />
       <module fileurl="file://$PROJECT_DIR$/emoticongifkeyboard/emoticongifkeyboard.iml" filepath="$PROJECT_DIR$/emoticongifkeyboard/emoticongifkeyboard.iml" />
+      <module fileurl="file://$PROJECT_DIR$/emoticonpack-emojidex/emoticonpack-emojidex.iml" filepath="$PROJECT_DIR$/emoticonpack-emojidex/emoticonpack-emojidex.iml" />
       <module fileurl="file://$PROJECT_DIR$/emoticonpack-emojione/emoticonpack-emojione.iml" filepath="$PROJECT_DIR$/emoticonpack-emojione/emoticonpack-emojione.iml" />
+      <module fileurl="file://$PROJECT_DIR$/emoticonpack-facebook/emoticonpack-facebook.iml" filepath="$PROJECT_DIR$/emoticonpack-facebook/emoticonpack-facebook.iml" />
       <module fileurl="file://$PROJECT_DIR$/emoticonpack-google/emoticonpack-google.iml" filepath="$PROJECT_DIR$/emoticonpack-google/emoticonpack-google.iml" />
       <module fileurl="file://$PROJECT_DIR$/emoticonpack-ios/emoticonpack-ios.iml" filepath="$PROJECT_DIR$/emoticonpack-ios/emoticonpack-ios.iml" />
+      <module fileurl="file://$PROJECT_DIR$/emoticonpack-messanger/emoticonpack-messanger.iml" filepath="$PROJECT_DIR$/emoticonpack-messanger/emoticonpack-messanger.iml" />
+      <module fileurl="file://$PROJECT_DIR$/emoticonpack-samsung/emoticonpack-samsung.iml" filepath="$PROJECT_DIR$/emoticonpack-samsung/emoticonpack-samsung.iml" />
       <module fileurl="file://$PROJECT_DIR$/emoticonpack-twitter/emoticonpack-twitter.iml" filepath="$PROJECT_DIR$/emoticonpack-twitter/emoticonpack-twitter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/emoticonpack-windows/emoticonpack-windows.iml" filepath="$PROJECT_DIR$/emoticonpack-windows/emoticonpack-windows.iml" />
       <module fileurl="file://$PROJECT_DIR$/gifpack-giphy/gifpack-giphy.iml" filepath="$PROJECT_DIR$/gifpack-giphy/gifpack-giphy.iml" />
       <module fileurl="file://$PROJECT_DIR$/gifpack-tenor/gifpack-tenor.iml" filepath="$PROJECT_DIR$/gifpack-tenor/gifpack-tenor.iml" />
     </modules>

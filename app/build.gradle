@@ -48,19 +48,22 @@ android {
 }
 
 dependencies {
-    compile project(':emoticongifkeyboard')
-
-    compile project(':emoticonpack-ios')
-    compile project(':emoticonpack-google')
-    compile project(':emoticonpack-twitter')
-    compile project(':emoticonpack-emojione')
-
-    compile project(':gifpack-giphy')
-    compile project(':gifpack-tenor')
+    implementation project(':emoticongifkeyboard')
+    implementation project(':gifpack-giphy')
+    implementation project(':emoticonpack-ios')
+    implementation project(':emoticonpack-google')
+    implementation project(':emoticonpack-twitter')
+    implementation project(':emoticonpack-emojione')
+    implementation project(':gifpack-tenor')
+    implementation project(':emoticonpack-emojidex')
+    implementation project(':emoticonpack-facebook')
+    implementation project(':emoticonpack-messanger')
+    implementation project(':emoticonpack-windows')
+    implementation project(':emoticonpack-samsung')
 
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:26.0.0-alpha1'
+    compile 'com.android.support:appcompat-v7:26.0.1'
     testCompile 'junit:junit:4.12'
 }
