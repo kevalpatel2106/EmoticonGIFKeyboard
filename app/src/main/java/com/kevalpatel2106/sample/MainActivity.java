@@ -22,11 +22,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.TextView;
 
+import com.kevalpatel2106.emoticongifkeyboard.EmoticonGIFKeyboardFragment;
 import com.kevalpatel2106.emoticongifkeyboard.emoticons.Emoticon;
 import com.kevalpatel2106.emoticongifkeyboard.emoticons.EmoticonSelectListener;
 import com.kevalpatel2106.emoticongifkeyboard.gifs.Gif;
 import com.kevalpatel2106.emoticongifkeyboard.gifs.GifSelectListener;
-import com.kevalpatel2106.emoticongifkeyboard.internal.KeyboardFragment;
 import com.kevalpatel2106.emoticonpack.ios.IosEmoticonProvider;
 import com.kevalpatel2106.gifpack.giphy.GiphyGifProvider;
 
@@ -41,39 +41,36 @@ public class MainActivity extends AppCompatActivity {
 
         final TextView textView = findViewById(R.id.selected_emoticons_tv);
 
-        KeyboardFragment keyboardFragment = KeyboardFragment.getNewInstance();
-        keyboardFragment.enableEmoticons(true);
-        keyboardFragment.setEmoticonProvider(IosEmoticonProvider.create());
-        keyboardFragment.setEmoticonSelectListener(new EmoticonSelectListener() {
-            @Override
-            public void emoticonSelected(Emoticon emoticon) {
-                Log.d(TAG, "emoticonSelected: " + emoticon.getUnicode());
-                textView.append(emoticon.getUnicode());
-            }
+        EmoticonGIFKeyboardFragment.EmoticonConfig emoticonConfig = new EmoticonGIFKeyboardFragment.EmoticonConfig()
+                .setEmoticonProvider(IosEmoticonProvider.create())
+                .setEmoticonSelectListener(new EmoticonSelectListener() {
+                    @Override
+                    public void emoticonSelected(Emoticon emoticon) {
+                        Log.d(TAG, "emoticonSelected: " + emoticon.getUnicode());
+                        textView.append(emoticon.getUnicode());
+                    }
 
-            @Override
-            public void onBackSpace() {
-                if (textView.length() > 0) {
-                    textView.setText(textView.getText()
-                            .toString()
-                            .substring(0, textView.length() - 1));
-                }
-            }
-        });
+                    @Override
+                    public void onBackSpace() {
+                        if (textView.length() > 0) {
+                            textView.setText(textView.getText()
+                                    .toString()
+                                    .substring(0, textView.length() - 1));
+                        }
+                    }
+                });
+        EmoticonGIFKeyboardFragment.GIFConfig gifConfig = new EmoticonGIFKeyboardFragment
+                .GIFConfig(GiphyGifProvider.create(this, "564ce7370bf347f2b7c0e4746593c179"))
+                .setGifSelectListener(new GifSelectListener() {
+                    @Override
+                    public void onGifSelected(@NonNull Gif gif) {
 
-        keyboardFragment.enableGIFs(true);
-        keyboardFragment.setGifProvider(GiphyGifProvider.create(this, "564ce7370bf347f2b7c0e4746593c179"));
-//        keyboardFragment.setGifProvider(TenorGifProvider.create(this, "LIVDSRZULELA"));
-        keyboardFragment.setGifSelectListener(new GifSelectListener() {
-            @Override
-            public void onGifSelected(@NonNull Gif gif) {
-                Log.d("GIF selected : ", gif.getGifUrl());
-            }
-        });
-
+                    }
+                });
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.keyboard_container, keyboardFragment)
+                .replace(R.id.keyboard_container, EmoticonGIFKeyboardFragment
+                        .getNewInstance(findViewById(R.id.keyboard_container), emoticonConfig, gifConfig))
                 .commit();
     }
 }

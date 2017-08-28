@@ -1,9 +1,10 @@
 com.kevalpatel2106.emoticompack.samsung
 com.kevalpatel2106.emoticongifkeyboard
 com.kevalpatel2106.emoticongifkeyboard.emoticons
-com.kevalpatel2106.emoticongifkeyboard.internal
 com.kevalpatel2106.emoticongifkeyboard.gifs
-com.kevalpatel2106.emoticongifkeyboard.gifs.internal
+com.kevalpatel2106.emoticongifkeyboard.internal
+com.kevalpatel2106.emoticongifkeyboard.internal.emoticon
+com.kevalpatel2106.emoticongifkeyboard.internal.gif
 com.kevalpatel2106.emoticongifkeyboard.widget
 com.kevalpatel2106.emoticonpack.emojidex
 com.kevalpatel2106.emoticonpack.emojione
@@ -13,6 +14,7 @@ com.kevalpatel2106.emoticonpack.messanger
 com.kevalpatel2106.emoticonpack.twitter
 com.kevalpatel2106.emoticonpack.windows
 com.kevalpatel2106.emoticonspack.google
+com.kevalpatel2106.gifpack
 com.kevalpatel2106.gifpack.giphy
 com.kevalpatel2106.gifpack.tenor
 com.kevalpatel2106.sample

@@ -59,6 +59,7 @@ public final class EmoticonFragment extends Fragment implements EmoticonAdapter.
     /**
      * Listener to notify when emoticons selected.
      */
+    @Nullable
     private EmoticonSelectListener mEmoticonSelectListener;
 
     /**
@@ -186,9 +187,7 @@ public final class EmoticonFragment extends Fragment implements EmoticonAdapter.
      * @param emoticonSelectListener {@link EmoticonSelectListener}
      */
     @SuppressWarnings("ConstantConditions")
-    public void setEmoticonSelectListener(@NonNull EmoticonSelectListener emoticonSelectListener) {
-        if (emoticonSelectListener == null)
-            throw new IllegalArgumentException("EmoticonSelectListener cannot be null.");
+    public void setEmoticonSelectListener(@Nullable EmoticonSelectListener emoticonSelectListener) {
         mEmoticonSelectListener = emoticonSelectListener;
     }
 

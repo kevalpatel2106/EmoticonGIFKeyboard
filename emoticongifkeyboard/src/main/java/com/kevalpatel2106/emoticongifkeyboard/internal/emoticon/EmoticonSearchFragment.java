@@ -36,12 +36,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
+import com.kevalpatel2106.emoticongifkeyboard.EmoticonGIFKeyboardFragment;
 import com.kevalpatel2106.emoticongifkeyboard.R;
 import com.kevalpatel2106.emoticongifkeyboard.emoticons.Emoticon;
 import com.kevalpatel2106.emoticongifkeyboard.emoticons.EmoticonProvider;
 import com.kevalpatel2106.emoticongifkeyboard.emoticons.EmoticonSelectListener;
 import com.kevalpatel2106.emoticongifkeyboard.internal.EmoticonGifImageView;
-import com.kevalpatel2106.emoticongifkeyboard.internal.KeyboardFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -180,7 +180,7 @@ public final class EmoticonSearchFragment extends Fragment implements EmoticonAd
                 hideKeyboard();
 
                 //Pop fragment from the back stack
-                getFragmentManager().popBackStackImmediate(KeyboardFragment.TAG_EMOTICON_FRAGMENT, 0);
+                getFragmentManager().popBackStackImmediate(EmoticonGIFKeyboardFragment.TAG_EMOTICON_FRAGMENT, 0);
             }
         });
 

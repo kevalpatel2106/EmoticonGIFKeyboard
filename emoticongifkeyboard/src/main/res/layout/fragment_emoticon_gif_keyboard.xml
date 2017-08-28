@@ -1,0 +1,102 @@
+<!--
+  ~ Copyright 2017 Keval Patel.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~  Unless required by applicable law or agreed to in writing, software
+  ~  distributed under the License is distributed on an "AS IS" BASIS,
+  ~  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~  See the License for the specific language governing permissions and
+  ~  limitations under the License.
+  -->
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context="com.kevalpatel2106.emoticongifkeyboard.EmoticonGIFKeyboardFragment">
+
+    <!--Top divider-->
+    <include layout="@layout/layout_divider"/>
+
+    <!--View pager to display GIF/Emoticon-->
+    <FrameLayout
+        android:id="@+id/keyboard_fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background_light"/>
+
+    <include layout="@layout/layout_divider"/>
+
+    <!--Bottom container-->
+    <RelativeLayout
+        android:id="@+id/bottom_container"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/keyboard_tabs_container_height"
+        android:background="@color/background_dark"
+        android:elevation="2dp"
+        android:orientation="horizontal"
+        tools:ignore="UnusedAttribute">
+
+        <!--Search button-->
+        <com.kevalpatel2106.emoticongifkeyboard.internal.EmoticonGifImageView
+            android:id="@+id/search_btn"
+            android:layout_width="@dimen/keyboard_tabs_container_height"
+            android:layout_height="@dimen/keyboard_tabs_container_height"
+            android:layout_alignParentBottom="true"
+            android:background="?selectableItemBackground"
+            android:padding="@dimen/image_btn_padding"
+            android:src="@drawable/ic_search"
+            tools:ignore="ContentDescription,RtlHardcoded"/>
+
+        <!--Backspace button-->
+        <com.kevalpatel2106.emoticongifkeyboard.internal.EmoticonGifImageView
+            android:id="@+id/emojis_backspace"
+            android:layout_width="@dimen/keyboard_tabs_container_height"
+            android:layout_height="@dimen/keyboard_tabs_container_height"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:background="?selectableItemBackground"
+            android:padding="@dimen/image_btn_padding"
+            android:src="@drawable/emoji_x"
+            tools:ignore="ContentDescription,RtlHardcoded"/>
+
+        <!--Emoticon/GIF button container-->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal">
+
+            <!--Emoticon button-->
+            <com.kevalpatel2106.emoticongifkeyboard.internal.EmoticonGifImageView
+                android:id="@+id/btn_emoji_tab"
+                style="@style/Base.Widget.AppCompat.Button.Borderless"
+                android:layout_width="@dimen/keyboard_tabs_container_height"
+                android:layout_height="@dimen/keyboard_tabs_container_height"
+                android:background="?selectableItemBackground"
+                android:padding="@dimen/image_btn_padding"
+                android:src="@drawable/ic_smiley"
+                tools:ignore="ContentDescription"/>
+
+
+            <!--GIF button-->
+            <com.kevalpatel2106.emoticongifkeyboard.internal.EmoticonGifImageView
+                android:id="@+id/btn_gif_tab"
+                style="@style/Base.Widget.AppCompat.Button.Borderless"
+                android:layout_width="@dimen/keyboard_tabs_container_height"
+                android:layout_height="@dimen/keyboard_tabs_container_height"
+                android:background="?selectableItemBackground"
+                android:src="@drawable/ic_gif"
+                tools:ignore="ContentDescription,RtlHardcoded"/>
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

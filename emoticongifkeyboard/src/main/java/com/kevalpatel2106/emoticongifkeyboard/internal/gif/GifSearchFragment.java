@@ -34,13 +34,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
+import com.kevalpatel2106.emoticongifkeyboard.EmoticonGIFKeyboardFragment;
 import com.kevalpatel2106.emoticongifkeyboard.R;
 import com.kevalpatel2106.emoticongifkeyboard.emoticons.EmoticonSelectListener;
 import com.kevalpatel2106.emoticongifkeyboard.gifs.Gif;
 import com.kevalpatel2106.emoticongifkeyboard.gifs.GifProviderProtocol;
 import com.kevalpatel2106.emoticongifkeyboard.gifs.GifSelectListener;
 import com.kevalpatel2106.emoticongifkeyboard.internal.EmoticonGifImageView;
-import com.kevalpatel2106.emoticongifkeyboard.internal.KeyboardFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,6 +68,7 @@ public final class GifSearchFragment extends Fragment implements GifSearchAdapte
     /**
      * Listener to notify when gif selected.
      */
+    @Nullable
     private GifSelectListener mGifSelectListener;
 
     /**
@@ -165,7 +166,7 @@ public final class GifSearchFragment extends Fragment implements GifSearchAdapte
             hideKeyboard();
 
             //Pop fragment from the back stack
-            getFragmentManager().popBackStackImmediate(KeyboardFragment.TAG_GIF_FRAGMENT, 0);
+            getFragmentManager().popBackStackImmediate(EmoticonGIFKeyboardFragment.TAG_GIF_FRAGMENT, 0);
         });
 
         showKeyboard();
@@ -237,7 +238,7 @@ public final class GifSearchFragment extends Fragment implements GifSearchAdapte
      *
      * @param gifSelectListener {@link EmoticonSelectListener}
      */
-    public void setGifSelectListener(@NonNull final GifSelectListener gifSelectListener) {
+    public void setGifSelectListener(@Nullable final GifSelectListener gifSelectListener) {
         mGifSelectListener = gifSelectListener;
     }
 

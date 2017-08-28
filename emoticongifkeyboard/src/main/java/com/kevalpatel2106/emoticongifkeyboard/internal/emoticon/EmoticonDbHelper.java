@@ -119,8 +119,11 @@ final class EmoticonDbHelper extends SQLiteAssetHelper {
             String unicode = cursor.getString(cursor.getColumnIndex(EmoticonTagsColumns.UNICODE));
 
             //Check if there is icon available to display for custom emoticon page.
-            if (emoticonProvider == null || emoticonProvider.hasEmoticonIcon(unicode))
-                emoticons.add(new Emoticon(unicode));
+            if (emoticonProvider == null || emoticonProvider.hasEmoticonIcon(unicode)) {
+                Emoticon emoticon = new Emoticon(unicode);
+                if (!emoticons.contains(emoticon))  //Prevent duplicates.
+                    emoticons.add(new Emoticon(unicode));
+            }
         }
         cursor.close();
         sqLiteDatabase.close();
