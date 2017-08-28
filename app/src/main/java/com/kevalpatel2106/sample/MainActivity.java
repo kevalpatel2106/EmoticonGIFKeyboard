@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                 .setGifSelectListener(new GifSelectListener() {
                     @Override
                     public void onGifSelected(@NonNull Gif gif) {
-
+                        Log.d(TAG, "onGifSelected: " + gif.getGifUrl());
                     }
                 });
         getSupportFragmentManager()
