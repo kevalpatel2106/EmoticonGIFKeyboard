@@ -14,9 +14,10 @@
  *  limitations under the License.
  */
 
-package com.kevalpatel2106.emoticongifkeyboard.gifs.internal;
+package com.kevalpatel2106.emoticongifkeyboard.internal.gif;
 
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -25,7 +26,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,12 +34,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
-import com.kevalpatel2106.emoticongifkeyboard.KeyboardFragment;
 import com.kevalpatel2106.emoticongifkeyboard.R;
 import com.kevalpatel2106.emoticongifkeyboard.emoticons.EmoticonSelectListener;
 import com.kevalpatel2106.emoticongifkeyboard.gifs.Gif;
 import com.kevalpatel2106.emoticongifkeyboard.gifs.GifProviderProtocol;
 import com.kevalpatel2106.emoticongifkeyboard.gifs.GifSelectListener;
+import com.kevalpatel2106.emoticongifkeyboard.internal.EmoticonGifImageView;
+import com.kevalpatel2106.emoticongifkeyboard.internal.KeyboardFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -104,6 +105,12 @@ public final class GifSearchFragment extends Fragment implements GifSearchAdapte
      */
     private EditText mSearchEt;
 
+    /**
+     * Public constructor. Don't call constructor to create new instance. Use {@link #getNewInstance()}
+     * instead.
+     *
+     * @see #getNewInstance()
+     */
     public GifSearchFragment() {
         // Required empty public constructor
     }
@@ -145,31 +152,20 @@ public final class GifSearchFragment extends Fragment implements GifSearchAdapte
 
         //Set the search interface
         mSearchEt = view.findViewById(R.id.search_box_et);
-        view.findViewById(R.id.search_btn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                searchGif(mSearchEt.getText().toString());
-            }
-        });
+        view.findViewById(R.id.search_btn).setOnClickListener(view1 -> searchGif(mSearchEt.getText().toString()));
         mSearchEt.requestFocus();
-        mSearchEt.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                searchGif(mSearchEt.getText().toString());
-                return true;
-            }
+        mSearchEt.setOnEditorActionListener((textView, i, keyEvent) -> {
+            searchGif(mSearchEt.getText().toString());
+            return true;
         });
 
         //Set up button
         EmoticonGifImageView backBtn = view.findViewById(R.id.up_arrow);
-        backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                hideKeyboard();
+        backBtn.setOnClickListener(view12 -> {
+            hideKeyboard();
 
-                //Pop fragment from the back stack
-                getFragmentManager().popBackStackImmediate(KeyboardFragment.TAG_GIF_FRAGMENT, 0);
-            }
+            //Pop fragment from the back stack
+            getFragmentManager().popBackStackImmediate(KeyboardFragment.TAG_GIF_FRAGMENT, 0);
         });
 
         showKeyboard();
@@ -181,7 +177,7 @@ public final class GifSearchFragment extends Fragment implements GifSearchAdapte
     private void showKeyboard() {
         //Show the keyboard
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.showSoftInput(mSearchEt, 0);
+        if (imm != null) imm.showSoftInput(mSearchEt, 0);
     }
 
     /**
@@ -190,7 +186,7 @@ public final class GifSearchFragment extends Fragment implements GifSearchAdapte
     private void hideKeyboard() {
         //Hide the keyboard
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(mSearchEt.getWindowToken(), 0);
+        if (imm != null) imm.hideSoftInputFromWindow(mSearchEt.getWindowToken(), 0);
     }
 
     /**
@@ -245,6 +241,7 @@ public final class GifSearchFragment extends Fragment implements GifSearchAdapte
         mGifSelectListener = gifSelectListener;
     }
 
+    @SuppressLint("StaticFieldLeak")
     private class SearchGifTask extends AsyncTask<String, Void, List<Gif>> {
 
         @Override
@@ -296,6 +293,7 @@ public final class GifSearchFragment extends Fragment implements GifSearchAdapte
     /**
      * Async task to load the list of trending GIFs.
      */
+    @SuppressLint("StaticFieldLeak")
     private class TrendingGifTask extends AsyncTask<Void, Void, List<Gif>> {
 
         @Override

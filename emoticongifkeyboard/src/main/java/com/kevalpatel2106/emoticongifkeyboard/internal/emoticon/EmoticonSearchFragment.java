@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package com.kevalpatel2106.emoticongifkeyboard.emoticons.internal;
+package com.kevalpatel2106.emoticongifkeyboard.internal.emoticon;
 
 
 import android.content.Context;
@@ -36,12 +36,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
-import com.kevalpatel2106.emoticongifkeyboard.KeyboardFragment;
 import com.kevalpatel2106.emoticongifkeyboard.R;
 import com.kevalpatel2106.emoticongifkeyboard.emoticons.Emoticon;
 import com.kevalpatel2106.emoticongifkeyboard.emoticons.EmoticonProvider;
 import com.kevalpatel2106.emoticongifkeyboard.emoticons.EmoticonSelectListener;
-import com.kevalpatel2106.emoticongifkeyboard.gifs.internal.EmoticonGifImageView;
+import com.kevalpatel2106.emoticongifkeyboard.internal.EmoticonGifImageView;
+import com.kevalpatel2106.emoticongifkeyboard.internal.KeyboardFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -98,6 +98,12 @@ public final class EmoticonSearchFragment extends Fragment implements EmoticonAd
     @Nullable
     private EmoticonProvider mEmoticonProvider;
 
+    /**
+     * Public constructor. Don't call constructor to create new instance. Use {@link #getNewInstance()}
+     * instead.
+     *
+     * @see #getNewInstance()
+     */
     public EmoticonSearchFragment() {
         // Required empty public constructor
     }
@@ -235,7 +241,7 @@ public final class EmoticonSearchFragment extends Fragment implements EmoticonAd
     }
 
     @Override
-    public void OnListItemSelected(@NonNull Emoticon emoticon) {
+    public void OnEmoticonSelected(@NonNull Emoticon emoticon) {
         if (mEmoticonSelectListener != null) mEmoticonSelectListener.emoticonSelected(emoticon);
     }
 

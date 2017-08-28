@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package com.kevalpatel2106.emoticongifkeyboard.emoticons.internal;
+package com.kevalpatel2106.emoticongifkeyboard.internal.emoticon;
 
 
 import android.annotation.SuppressLint;
@@ -39,7 +39,7 @@ import java.util.List;
 
 
 /**
- * A simple {@link Fragment} subclass.
+ * A {@link Fragment} subclass to load the list of emoticons and display them based on the categories.
  *
  * @author 'https://github.com/kevalpatel2106'
  */
@@ -77,10 +77,22 @@ public final class EmoticonFragment extends Fragment implements EmoticonAdapter.
      */
     private RecyclerView mRecyclerView;
 
+    /**
+     * Public constructor. Don't call constructor to create new instance. Use {@link #getNewInstance()}
+     * instead.
+     *
+     * @see #getNewInstance()
+     */
     public EmoticonFragment() {
         // Required empty public constructor
     }
 
+    /**
+     * Get the new instance of {@link EmoticonFragment}. Use this method over calling constructor.
+     * This function is for internal use only.
+     *
+     * @return {@link EmoticonFragment}
+     */
     public static EmoticonFragment getNewInstance() {
         return new EmoticonFragment();
     }
@@ -120,16 +132,16 @@ public final class EmoticonFragment extends Fragment implements EmoticonAdapter.
                 getResources().getInteger(R.integer.emoticon_recycler_view_span_size)));
 
         //Set headers
-        setTabHeaders(view);
+        setTabs(view);
     }
 
     /**
-     * Set the tab headers with categories of emoticons and back space button.
+     * Set the tabs with categories of emoticons and back space button.
      *
      * @param rootView Root view.
      */
     @SuppressLint("WrongConstant")
-    private void setTabHeaders(@NonNull View rootView) {
+    private void setTabs(@NonNull View rootView) {
         final View[] emojiTabs = new View[9];
         emojiTabs[EmoticonsCategories.RECENT] = rootView.findViewById(R.id.emojis_tab_0_recents);
         emojiTabs[EmoticonsCategories.PEOPLE] = rootView.findViewById(R.id.emojis_tab_1_people);
@@ -181,7 +193,7 @@ public final class EmoticonFragment extends Fragment implements EmoticonAdapter.
     }
 
     /**
-     * Get the emoticons list for the selected category.
+     * Get the list  of {@link Emoticon} for the selected category.
      *
      * @param category category id.
      * @return List of {@link Emoticon}
@@ -200,13 +212,14 @@ public final class EmoticonFragment extends Fragment implements EmoticonAdapter.
             case EmoticonsCategories.FLAGS:
                 return new EmoticonDbHelper(mContext).getEmoticons(category, mEmoticonProvider);
             default:
+                //This should
                 throw new IllegalStateException("Invalid position.");
         }
     }
 
 
     @Override
-    public void OnListItemSelected(@NonNull Emoticon emoticon) {
+    public void OnEmoticonSelected(@NonNull Emoticon emoticon) {
         //Notify the emoticon
         if (mEmoticonSelectListener != null)
             mEmoticonSelectListener.emoticonSelected(emoticon);

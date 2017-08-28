@@ -21,7 +21,7 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/emoticon_gif_fragments_height"
     android:background="@color/background_light"
-    tools:context=".gifs.internal.GifFragment">
+    tools:context=".internal.gif.GifFragment">
 
     <!--0. Loader-->
     <ProgressBar

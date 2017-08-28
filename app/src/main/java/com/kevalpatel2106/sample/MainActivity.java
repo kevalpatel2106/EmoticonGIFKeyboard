@@ -22,11 +22,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.TextView;
 
-import com.kevalpatel2106.emoticongifkeyboard.KeyboardFragment;
 import com.kevalpatel2106.emoticongifkeyboard.emoticons.Emoticon;
 import com.kevalpatel2106.emoticongifkeyboard.emoticons.EmoticonSelectListener;
 import com.kevalpatel2106.emoticongifkeyboard.gifs.Gif;
 import com.kevalpatel2106.emoticongifkeyboard.gifs.GifSelectListener;
+import com.kevalpatel2106.emoticongifkeyboard.internal.KeyboardFragment;
 import com.kevalpatel2106.emoticonpack.ios.IosEmoticonProvider;
 import com.kevalpatel2106.gifpack.giphy.GiphyGifProvider;
 

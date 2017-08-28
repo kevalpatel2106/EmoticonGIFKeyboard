@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package com.kevalpatel2106.emoticongifkeyboard;
+package com.kevalpatel2106.emoticongifkeyboard.internal;
 
 
 import android.os.Bundle;
@@ -29,14 +29,15 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
 
+import com.kevalpatel2106.emoticongifkeyboard.R;
 import com.kevalpatel2106.emoticongifkeyboard.emoticons.EmoticonProvider;
 import com.kevalpatel2106.emoticongifkeyboard.emoticons.EmoticonSelectListener;
-import com.kevalpatel2106.emoticongifkeyboard.emoticons.internal.EmoticonFragment;
-import com.kevalpatel2106.emoticongifkeyboard.emoticons.internal.EmoticonSearchFragment;
 import com.kevalpatel2106.emoticongifkeyboard.gifs.GifProviderProtocol;
 import com.kevalpatel2106.emoticongifkeyboard.gifs.GifSelectListener;
-import com.kevalpatel2106.emoticongifkeyboard.gifs.internal.GifFragment;
-import com.kevalpatel2106.emoticongifkeyboard.gifs.internal.GifSearchFragment;
+import com.kevalpatel2106.emoticongifkeyboard.internal.emoticon.EmoticonFragment;
+import com.kevalpatel2106.emoticongifkeyboard.internal.emoticon.EmoticonSearchFragment;
+import com.kevalpatel2106.emoticongifkeyboard.internal.gif.GifFragment;
+import com.kevalpatel2106.emoticongifkeyboard.internal.gif.GifSearchFragment;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -309,8 +310,8 @@ public final class KeyboardFragment extends Fragment implements FragmentManager.
         if (!mIsGIFsEnable && !mIsEmoticonsEnable)
             throw new RuntimeException("At least one of emoticon or GIF should be active.");
 
-        mEmoticonTabBtn.setVisibility(mIsEmoticonsEnable ? View.VISIBLE : View.GONE);
-        mGifTabBtn.setVisibility(mIsGIFsEnable ? View.VISIBLE : View.GONE);
+//        mEmoticonTabBtn.setVisibility(mIsEmoticonsEnable ? View.VISIBLE : View.GONE);
+//        mGifTabBtn.setVisibility(mIsGIFsEnable ? View.VISIBLE : View.GONE);
 
         //Replace the fragment with emoticon fragment
         if (!mIsEmoticonsEnable) replaceFragment(mGifFragment, TAG_GIF_FRAGMENT);
@@ -329,8 +330,8 @@ public final class KeyboardFragment extends Fragment implements FragmentManager.
         if (!mIsGIFsEnable && !mIsEmoticonsEnable)
             throw new RuntimeException("At least one of emoticon or GIF should be active.");
 
-        mEmoticonTabBtn.setVisibility(mIsEmoticonsEnable ? View.VISIBLE : View.GONE);
-        mGifTabBtn.setVisibility(mIsGIFsEnable ? View.VISIBLE : View.GONE);
+//        mEmoticonTabBtn.setVisibility(mIsEmoticonsEnable ? View.VISIBLE : View.GONE);
+//        mGifTabBtn.setVisibility(mIsGIFsEnable ? View.VISIBLE : View.GONE);
 
         //Replace the fragment with emoticon fragment
         if (!mIsGIFsEnable) replaceFragment(mEmoticonFragment, TAG_EMOTICON_FRAGMENT);

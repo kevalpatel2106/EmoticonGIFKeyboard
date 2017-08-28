@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package com.kevalpatel2106.emoticongifkeyboard.emoticons.internal;
+package com.kevalpatel2106.emoticongifkeyboard.internal.emoticon;
 
 import android.support.annotation.IntDef;
 
@@ -29,14 +29,51 @@ import java.lang.annotation.RetentionPolicy;
  */
 
 final class EmoticonsCategories {
+    /**
+     * Category of all the recently used emoticons.
+     *
+     * @see EmoticonRecentManager
+     */
     static final int RECENT = 0;
+
+    /**
+     * Category for all face, hands and pearson emoticons.
+     */
     static final int PEOPLE = 1;
+
+    /**
+     * Category for nature and animal emoticons.
+     */
     static final int NATURE = 2;
+
+    /**
+     * Category for food emoticons.
+     */
     static final int FOOD = 3;
+
+    /**
+     * Category for human activities and sport emoticons.
+     */
     static final int ACTIVITY = 4;
+
+    /**
+     * Category for travel, places and vehicle emoticons.
+     */
     static final int TRAVEL = 5;
+
+    /**
+     * Category for different object emoticons.
+     */
     static final int OBJECTS = 6;
+
+    /**
+     * Category for symbols, arrow and other symbol.
+     */
     static final int SYMBOLS = 7;
+
+    /**
+     * Category for flags.
+     */
     static final int FLAGS = 8;
 
     @Retention(RetentionPolicy.SOURCE)

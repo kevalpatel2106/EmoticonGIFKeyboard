@@ -14,18 +14,19 @@
  *  limitations under the License.
  */
 
-package com.kevalpatel2106.emoticongifkeyboard.gifs.internal;
+package com.kevalpatel2106.emoticongifkeyboard.internal;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.MotionEvent;
-import android.view.View;
 
 import com.kevalpatel2106.emoticongifkeyboard.R;
 
@@ -45,13 +46,20 @@ public final class EmoticonGifImageView extends AppCompatImageView {
     @ColorInt
     private int mAccentDarkColor;
 
-    public EmoticonGifImageView(Context context, AttributeSet attrs) {
+    public EmoticonGifImageView(@NonNull Context context,
+                                @Nullable AttributeSet attrs) {
         super(context, attrs);
         init(context);
     }
 
+    /**
+     * Get the dark color.
+     *
+     * @param color Original color.
+     * @return Dark color.
+     */
     @ColorInt
-    public static int getDarkAccentColor(final int color) {
+    private static int getDarkColor(final int color) {
         final float factor = 0.6f;
 
         final int a = Color.alpha(color);
@@ -64,18 +72,16 @@ public final class EmoticonGifImageView extends AppCompatImageView {
                 Math.min(b, 255));
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private void init(@NonNull Context context) {
         mAccentColor = getAccentColor(context);
-        mAccentDarkColor = getDarkAccentColor(mAccentColor);
+        mAccentDarkColor = getDarkColor(mAccentColor);
 
         //Set on touch listener to change the tint color when image is pressed.
-        setOnTouchListener(new OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                setColorFilter(motionEvent.getAction() == MotionEvent.ACTION_DOWN ?
-                        mAccentDarkColor : mAccentColor, PorterDuff.Mode.SRC_ATOP);
-                return false;
-            }
+        setOnTouchListener((view, motionEvent) -> {
+            setColorFilter(motionEvent.getAction() == MotionEvent.ACTION_DOWN ?
+                    mAccentDarkColor : mAccentColor, PorterDuff.Mode.SRC_ATOP);
+            return false;
         });
 
         //Set the icon color to accent color
@@ -85,14 +91,21 @@ public final class EmoticonGifImageView extends AppCompatImageView {
     @Override
     public void setSelected(boolean selected) {
         super.setSelected(selected);
+
+        //If the image is selected, display dark tint.
         setColorFilter(selected ? mAccentDarkColor : mAccentColor, PorterDuff.Mode.SRC_ATOP);
     }
 
+    /**
+     * Extract the accent color from the application theme.
+     *
+     * @param context {@link Context}
+     * @return Accent color.
+     */
     @ColorInt
-    public int getAccentColor(final Context context) {
+    public int getAccentColor(@NonNull final Context context) {
         final TypedValue value = new TypedValue();
         context.getTheme().resolveAttribute(R.attr.colorAccent, value, true);
         return value.data;
     }
-
 }

@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package com.kevalpatel2106.emoticongifkeyboard.emoticons.internal;
+package com.kevalpatel2106.emoticongifkeyboard.internal.emoticon;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -37,6 +37,7 @@ import java.util.ArrayList;
  * <li>List of all search tags with the respective unicode.</li>
  *
  * @author 'https://github.com/kevalpatel2106'
+ * @see SQLiteAssetHelper
  */
 
 final class EmoticonDbHelper extends SQLiteAssetHelper {
@@ -78,11 +79,14 @@ final class EmoticonDbHelper extends SQLiteAssetHelper {
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
         Cursor cursor = sqLiteDatabase.query(EmoticonColumns.TABLE,
                 new String[]{EmoticonColumns.UNICODE, EmoticonColumns.CATEGORY},
-                EmoticonColumns.CATEGORY + "=?", new String[]{category + ""}, null, null, null);
+                EmoticonColumns.CATEGORY + "=?", new String[]{category + ""},
+                null, null, null);
 
         ArrayList<Emoticon> emoticons = new ArrayList<>();
         while (cursor.moveToNext()) {
             String unicode = cursor.getString(cursor.getColumnIndex(EmoticonColumns.UNICODE));
+
+            //Check if there is icon available to display for custom emoticon page.
             if (emoticonProvider == null || emoticonProvider.hasEmoticonIcon(unicode))
                 emoticons.add(new Emoticon(unicode));
         }
@@ -106,12 +110,15 @@ final class EmoticonDbHelper extends SQLiteAssetHelper {
                                         @Nullable EmoticonProvider emoticonProvider) {
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
         Cursor cursor = sqLiteDatabase.query(EmoticonTagsColumns.TABLE,
-                new String[]{EmoticonTagsColumns.UNICODE},
-                EmoticonTagsColumns.TAG + " LIKE ?", new String[]{searchQuery.trim() + "%"}, null, null, null);
+                new String[]{EmoticonTagsColumns.UNICODE},      //Unicode.
+                EmoticonTagsColumns.TAG + " LIKE ?", new String[]{searchQuery.trim() + "%"}, //Search for the tag
+                null, null, null);
 
         ArrayList<Emoticon> emoticons = new ArrayList<>();
         while (cursor.moveToNext()) {
             String unicode = cursor.getString(cursor.getColumnIndex(EmoticonTagsColumns.UNICODE));
+
+            //Check if there is icon available to display for custom emoticon page.
             if (emoticonProvider == null || emoticonProvider.hasEmoticonIcon(unicode))
                 emoticons.add(new Emoticon(unicode));
         }
@@ -125,10 +132,35 @@ final class EmoticonDbHelper extends SQLiteAssetHelper {
      */
     @SuppressWarnings("unused")
     private static class EmoticonColumns {
+        /**
+         * Table name
+         */
         private static final String TABLE = "emoticon";
+
+        /**
+         * Primary integer key.
+         */
         private static final String ID = "_id";
+
+        /**
+         * Unicode value of {@link Emoticon}.
+         *
+         * @see Emoticon#unicode
+         */
         private static final String UNICODE = "unicode";
+
+        /**
+         * Category of the {@link Emoticon}. The field will have integer from supported categories.
+         * List of supported categories: {@link EmoticonsCategories}.
+         *
+         * @see EmoticonsCategories
+         */
         private static final String CATEGORY = "category";
+
+        /**
+         * Name of the {@link Emoticon}. This field will be removed in future releases.
+         */
+        @Deprecated
         private static final String NAME = "name";
     }
 
@@ -137,11 +169,39 @@ final class EmoticonDbHelper extends SQLiteAssetHelper {
      */
     @SuppressWarnings("unused")
     private static class EmoticonVariantColumns {
+        /**
+         * Table name
+         */
         private static final String TABLE = "emoticon_variant";
+
+        /**
+         * Primary integer key.
+         */
         private static final String ID = "variant_id";
+
+        /**
+         * Unicode value of {@link Emoticon}.
+         *
+         * @see Emoticon#unicode
+         */
         private static final String UNICODE = "variant_unicode";
+        /**
+         * Category of the {@link Emoticon}. The field will have integer from supported categories.
+         * List of supported categories: {@link EmoticonsCategories}.
+         *
+         * @see EmoticonsCategories
+         */
         private static final String CATEGORY = "variant_category";
+
+        /**
+         * Unicode of the root/main emoticon.
+         */
         private static final String ROOT_UNICODE = "variant_root_unicode";
+
+        /**
+         * Name of the {@link Emoticon}. This field will be removed in future releases.
+         */
+        @Deprecated
         private static final String NAME = "variant_name";
     }
 
@@ -150,9 +210,26 @@ final class EmoticonDbHelper extends SQLiteAssetHelper {
      */
     @SuppressWarnings("unused")
     private static class EmoticonTagsColumns {
+        /**
+         * Table name
+         */
         private static final String TABLE = "emoticon_tags";
+
+        /**
+         * Primary integer key.
+         */
         private static final String ID = "tags_id";
+
+        /**
+         * Unicode value of {@link Emoticon}.
+         *
+         * @see Emoticon#unicode
+         */
         private static final String UNICODE = "tags_unicode";
+
+        /**
+         * Search tag to search the emoticon based on search query.
+         */
         private static final String TAG = "tags_tags";
     }
 }

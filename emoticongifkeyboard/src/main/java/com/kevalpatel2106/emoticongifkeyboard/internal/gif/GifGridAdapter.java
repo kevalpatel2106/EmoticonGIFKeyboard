@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package com.kevalpatel2106.emoticongifkeyboard.gifs.internal;
+package com.kevalpatel2106.emoticongifkeyboard.internal.gif;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -46,6 +46,8 @@ final class GifGridAdapter extends ArrayAdapter<Gif> {
     private final List<Gif> mData;
 
     /**
+     * Public constructor.
+     *
      * @param context  Instance
      * @param data     List of {@link Gif}
      * @param listener {@link ItemSelectListener} to get callback.
@@ -92,12 +94,7 @@ final class GifGridAdapter extends ArrayAdapter<Gif> {
                     .centerCrop()
                     .into(holder.gifIv);
 
-            holder.gifIv.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    mListener.OnListItemSelected(gif);
-                }
-            });
+            holder.gifIv.setOnClickListener(view -> mListener.OnListItemSelected(gif));
         }
         return v;
     }
@@ -106,6 +103,10 @@ final class GifGridAdapter extends ArrayAdapter<Gif> {
      * Callback listener to get notify when item is clicked.
      */
     interface ItemSelectListener {
+
+        /**
+         * @param gif {@link Gif} selected.
+         */
         void OnListItemSelected(@NonNull Gif gif);
     }
 

@@ -14,9 +14,10 @@
  *  limitations under the License.
  */
 
-package com.kevalpatel2106.emoticongifkeyboard.gifs.internal;
+package com.kevalpatel2106.emoticongifkeyboard.internal.gif;
 
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -69,6 +70,12 @@ public final class GifFragment extends Fragment implements GifGridAdapter.ItemSe
     /** Listener to notify when any gif select */
     private GifSelectListener mGifSelectListener;
 
+    /**
+     * Public constructor. Don't call constructor to create new instance. Use {@link #getNewInstance()}
+     * instead.
+     *
+     * @see #getNewInstance()
+     */
     public GifFragment() {
         // Required empty public constructor
     }
@@ -176,6 +183,7 @@ public final class GifFragment extends Fragment implements GifGridAdapter.ItemSe
     /**
      * Async task to load the list of trending GIFs.
      */
+    @SuppressLint("StaticFieldLeak")
     private class TrendingGifTask extends AsyncTask<Void, Void, List<Gif>> {
 
         @Override

@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package com.kevalpatel2106.emoticongifkeyboard.emoticons.internal;
+package com.kevalpatel2106.emoticongifkeyboard.internal.emoticon;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -43,8 +43,14 @@ import java.util.regex.Pattern;
  */
 
 public final class EmoticonUtils {
+    /**
+     * {@link Pattern} to find the supported emoticons unicodes.
+     */
     private static Pattern sRegexPattern;
 
+    /**
+     * Private constructor.
+     */
     private EmoticonUtils() {
         //Do nothing
     }
@@ -76,10 +82,10 @@ public final class EmoticonUtils {
         //Replace all the emoticons with their relatives.
         for (int i = 0; i < findAllEmojis.size(); i++) {
             final EmoticonRange location = findAllEmojis.get(i);
-            if (!existingSpanPositions.contains(location.start)) {
+            if (!existingSpanPositions.contains(location.mStartPos)) {
                 text.setSpan(new EmoticonSpan(context, location.mEmoticon.getIcon(), emoticonSize),
-                        location.start,
-                        location.end,
+                        location.mStartPos,
+                        location.mEndPos,
                         Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
         }
@@ -128,12 +134,12 @@ public final class EmoticonUtils {
     private static Pattern getRegex(@NonNull final Context context) {
         if (sRegexPattern == null) {
             String regex = readTextFile(context, R.raw.regex);
-            if (regex == null) throw new RuntimeException("Regex not found.");
             sRegexPattern = Pattern.compile(regex);
         }
         return sRegexPattern;
     }
-    @Nullable
+
+    @NonNull
     private static String readTextFile(@NonNull Context context, int rowResource) {
         InputStream inputStream = context.getResources().openRawResource(rowResource); // getting json
         BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
@@ -141,9 +147,7 @@ public final class EmoticonUtils {
         StringBuilder builder = new StringBuilder();
         try {
             String sCurrentLine;
-            while ((sCurrentLine = br.readLine()) != null) {
-                builder.append(sCurrentLine);
-            }
+            while ((sCurrentLine = br.readLine()) != null) builder.append(sCurrentLine);
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -162,13 +166,34 @@ public final class EmoticonUtils {
      * Range of the emoticons unicode.
      */
     private static final class EmoticonRange {
-        final int start;
-        final int end;
+
+        /**
+         * Start portion of the emoticon in string.
+         */
+        final int mStartPos;
+
+        /**
+         * End portion of the emoticon in string.
+         */
+        final int mEndPos;
+
+        /**
+         * {@link Emoticon}.
+         */
         final Emoticon mEmoticon;
 
-        private EmoticonRange(final int start, final int end, @NonNull final Emoticon emoticon) {
-            this.start = start;
-            this.end = end;
+        /**
+         * Private constructor.
+         *
+         * @param start    Start portion of the emoticon in string.
+         * @param end      End portion of the emoticon in string.
+         * @param emoticon {@link Emoticon}
+         */
+        private EmoticonRange(final int start,
+                              final int end,
+                              @NonNull final Emoticon emoticon) {
+            this.mStartPos = start;
+            this.mEndPos = end;
             this.mEmoticon = emoticon;
         }
 
@@ -178,13 +203,15 @@ public final class EmoticonUtils {
             if (o == null || getClass() != o.getClass()) return false;
 
             final EmoticonRange that = (EmoticonRange) o;
-            return start == that.start && end == that.end && mEmoticon.equals(that.mEmoticon);
+            return mStartPos == that.mStartPos
+                    && mEndPos == that.mEndPos
+                    && mEmoticon.equals(that.mEmoticon);
         }
 
         @Override
         public int hashCode() {
-            int result = start;
-            result = 31 * result + end;
+            int result = mStartPos;
+            result = 31 * result + mEndPos;
             result = 31 * result + mEmoticon.hashCode();
             return result;
         }

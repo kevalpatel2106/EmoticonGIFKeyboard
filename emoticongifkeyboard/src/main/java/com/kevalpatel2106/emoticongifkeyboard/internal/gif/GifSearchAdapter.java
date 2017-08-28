@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package com.kevalpatel2106.emoticongifkeyboard.gifs.internal;
+package com.kevalpatel2106.emoticongifkeyboard.internal.gif;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

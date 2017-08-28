@@ -16,6 +16,7 @@
 
 package com.kevalpatel2106.emoticongifkeyboard.widget;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.annotation.NonNull;
@@ -28,7 +29,7 @@ import android.widget.TextView;
 
 import com.kevalpatel2106.emoticongifkeyboard.R;
 import com.kevalpatel2106.emoticongifkeyboard.emoticons.EmoticonProvider;
-import com.kevalpatel2106.emoticongifkeyboard.emoticons.internal.EmoticonUtils;
+import com.kevalpatel2106.emoticongifkeyboard.internal.emoticon.EmoticonUtils;
 
 /**
  * Created by Keval Patel on 20/08/17.
@@ -66,6 +67,7 @@ public class EmoticonTextView extends AppCompatTextView {
         if (attrs == null) {
             mEmoticonSize = (int) getTextSize();
         } else {
+            @SuppressLint("CustomViewStyleable")
             TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.Emoticon);
             mEmoticonSize = (int) a.getDimension(R.styleable.Emoticon_emojiconSize, getTextSize());
             a.recycle();
@@ -80,18 +82,6 @@ public class EmoticonTextView extends AppCompatTextView {
                     new SpannableString(text),
                     mEmoticonProvider,
                     mEmoticonSize);
-
-
-//            int icon = mEmoticonProvider.getIcon(text.toString()).getIcon();
-//            if (icon > 0) {
-//                Spannable spanable = new SpannableString(text);
-//                spanable.setSpan(new EmoticonSpan(mContext, mEmoticonProvider.getIcon(text.toString()).getIcon(), mEmoticonSize),
-//                        0,
-//                        text.length() - 1,
-//                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-//
-//                text = spanable;
-//            }
         }
         super.setText(text, type);
     }
@@ -104,6 +94,12 @@ public class EmoticonTextView extends AppCompatTextView {
         super.setText(getText());
     }
 
+    /**
+     * Set {@link EmoticonProvider} to display custom emoticon icons.
+     *
+     * @param emoticonProvider {@link EmoticonProvider} of custom icon packs or null to display
+     *                         system icons.
+     */
     public void setEmoticonProvider(@Nullable final EmoticonProvider emoticonProvider) {
         mEmoticonProvider = emoticonProvider;
     }

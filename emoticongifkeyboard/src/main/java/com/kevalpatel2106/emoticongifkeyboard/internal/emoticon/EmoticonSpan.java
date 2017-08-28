@@ -14,39 +14,48 @@
  *  limitations under the License.
  */
 
-package com.kevalpatel2106.emoticongifkeyboard.emoticons.internal;
+package com.kevalpatel2106.emoticongifkeyboard.internal.emoticon;
 
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.NonNull;
 import android.text.style.ImageSpan;
 
 /**
  * Created by Keval Patel on 20/08/17.
+ * The {@link ImageSpan} to display custom emoticon icon based on the unicode.
  *
  * @author 'https://github.com/kevalpatel2106'
  * @see <a href='https://github.com/rockerhieu/emojicon/blob/master/library/src/main/java/io/github/rockerhieu/emojicon/EmojiconSpan.java>EmojiconSpan.java</a>
  */
 
 final class EmoticonSpan extends ImageSpan {
-    private final float size;
+    /**
+     * Size of the emoticon span.
+     */
+    private final float mSize;
 
-    EmoticonSpan(final Context context,
+    /**
+     * Public constructor.
+     *
+     * @param context     Instance of caller.
+     * @param drawableRes Drawable icon to display.
+     * @param size        Size of the emoticon text.
+     */
+    EmoticonSpan(@NonNull final Context context,
                  @DrawableRes final int drawableRes,
                  final float size) {
         super(context, drawableRes);
-
-        this.size = size;
+        this.mSize = size;
     }
 
     @Override
     public Drawable getDrawable() {
         final Drawable result = super.getDrawable();
-
-        result.setBounds(0, 0, (int) size, (int) size);
-
+        result.setBounds(0, 0, (int) mSize, (int) mSize);
         return result;
     }
 
@@ -58,13 +67,13 @@ final class EmoticonSpan extends ImageSpan {
             final float fontHeight = paintFontMetrics.descent - paintFontMetrics.ascent;
             final float centerY = paintFontMetrics.ascent + fontHeight / 2;
 
-            fontMetrics.ascent = (int) (centerY - size / 2);
+            fontMetrics.ascent = (int) (centerY - mSize / 2);
             fontMetrics.top = fontMetrics.ascent;
-            fontMetrics.bottom = (int) (centerY + size / 2);
+            fontMetrics.bottom = (int) (centerY + mSize / 2);
             fontMetrics.descent = fontMetrics.bottom;
         }
 
-        return (int) size;
+        return (int) mSize;
     }
 
     @Override
@@ -75,7 +84,7 @@ final class EmoticonSpan extends ImageSpan {
         final Paint.FontMetrics paintFontMetrics = paint.getFontMetrics();
         final float fontHeight = paintFontMetrics.descent - paintFontMetrics.ascent;
         final float centerY = y + paintFontMetrics.descent - fontHeight / 2;
-        final float transitionY = centerY - size / 2;
+        final float transitionY = centerY - mSize / 2;
 
         canvas.save();
         canvas.translate(x, transitionY);
