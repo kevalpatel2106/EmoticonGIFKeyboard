@@ -17,6 +17,7 @@
 package com.kevalpatel2106.sample;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.TextView;
@@ -24,6 +25,8 @@ import android.widget.TextView;
 import com.kevalpatel2106.emoticongifkeyboard.KeyboardFragment;
 import com.kevalpatel2106.emoticongifkeyboard.emoticons.Emoticon;
 import com.kevalpatel2106.emoticongifkeyboard.emoticons.EmoticonSelectListener;
+import com.kevalpatel2106.emoticongifkeyboard.gifs.Gif;
+import com.kevalpatel2106.emoticongifkeyboard.gifs.GifSelectListener;
 import com.kevalpatel2106.emoticonpack.ios.IosEmoticonProvider;
 import com.kevalpatel2106.gifpack.giphy.GiphyGifProvider;
 
@@ -36,9 +39,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final TextView textView = (TextView) findViewById(R.id.selected_emoticons_tv);
+        final TextView textView = findViewById(R.id.selected_emoticons_tv);
 
         KeyboardFragment keyboardFragment = KeyboardFragment.getNewInstance();
+        keyboardFragment.enableEmoticons(true);
         keyboardFragment.setEmoticonProvider(IosEmoticonProvider.create());
         keyboardFragment.setEmoticonSelectListener(new EmoticonSelectListener() {
             @Override
@@ -56,8 +60,16 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        keyboardFragment.enableGIFs(true);
         keyboardFragment.setGifProvider(GiphyGifProvider.create(this, "564ce7370bf347f2b7c0e4746593c179"));
 //        keyboardFragment.setGifProvider(TenorGifProvider.create(this, "LIVDSRZULELA"));
+        keyboardFragment.setGifSelectListener(new GifSelectListener() {
+            @Override
+            public void onGifSelected(@NonNull Gif gif) {
+                Log.d("GIF selected : ", gif.getGifUrl());
+            }
+        });
 
         getSupportFragmentManager()
                 .beginTransaction()

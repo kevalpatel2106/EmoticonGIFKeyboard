@@ -26,6 +26,8 @@ import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.Transformation;
 
 import com.kevalpatel2106.emoticongifkeyboard.emoticons.EmoticonProvider;
 import com.kevalpatel2106.emoticongifkeyboard.emoticons.EmoticonSelectListener;
@@ -47,16 +49,22 @@ import java.lang.annotation.RetentionPolicy;
  * @author 'https://github.com/kevalpatel2106'
  */
 public final class KeyboardFragment extends Fragment implements FragmentManager.OnBackStackChangedListener {
-    /* Tags for the fragment back stack */
+    /**
+     * Tags for the fragment back stack
+     */
     public static final String TAG_EMOTICON_FRAGMENT = "tag_emoticon_fragment";
     public static final String TAG_GIF_FRAGMENT = "tag_gif_fragment";
     private static final String TAG_EMOTICON_SEARCH_FRAGMENT = "tag_emoticon_search_fragment";
     private static final String TAG_GIF_SEARCH_FRAGMENT = "tag_gif_search_fragment";
 
-    //Keys for saved instance bundle
+    /**
+     * Key for saved instance bundle.
+     */
     private static final String KEY_CURRENT_FRAGMENT = "current_fragment";
 
-    /* Fragments to load. */
+    /**
+     * Fragments to load.
+     */
     @NonNull
     private final EmoticonFragment mEmoticonFragment;
     @NonNull
@@ -66,15 +74,23 @@ public final class KeyboardFragment extends Fragment implements FragmentManager.
     @NonNull
     private final EmoticonSearchFragment mEmoticonSearchFragment;
 
-    /* Listener to notify when emoticons selected. */
+    /**
+     * Listener to notify when emoticons selected.
+     */
     @Nullable
     private EmoticonSelectListener mEmoticonSelectListener;
 
-    /* View container that hosts search, backspace and tabs buttons. */
+    /**
+     * View container that hosts search, backspace and tabs buttons.
+     */
     private View mBottomViewContainer;
     private View mGifTabBtn;
     private View mEmoticonTabBtn;
     private View mBackSpaceBtn;
+    private View mRootView;
+
+    private boolean mIsEmoticonsEnable = true;
+    private boolean mIsGIFsEnable = true;
 
     /**
      * Public constructor. Don't call constructor to create new instance. Use {@link #getNewInstance()}
@@ -82,6 +98,7 @@ public final class KeyboardFragment extends Fragment implements FragmentManager.
      *
      * @see #getNewInstance()
      */
+    @SuppressWarnings("DeprecatedIsStillUsed")
     @Deprecated
     public KeyboardFragment() {
         mEmoticonFragment = EmoticonFragment.getNewInstance();
@@ -118,43 +135,28 @@ public final class KeyboardFragment extends Fragment implements FragmentManager.
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mRootView = view.findViewById(R.id.root_view);
         mBottomViewContainer = view.findViewById(R.id.bottom_container);
 
         //Set backspace button
         mBackSpaceBtn = view.findViewById(R.id.emojis_backspace);
-        mBackSpaceBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (mEmoticonSelectListener != null) mEmoticonSelectListener.onBackSpace();
-            }
+        mBackSpaceBtn.setOnClickListener(view1 -> {
+            if (mEmoticonSelectListener != null) mEmoticonSelectListener.onBackSpace();
         });
 
         //Set the tabs
         mEmoticonTabBtn = view.findViewById(R.id.btn_emoji_tab);
         mGifTabBtn = view.findViewById(R.id.btn_gif_tab);
-        mEmoticonTabBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                replaceFragment(mEmoticonFragment, TAG_EMOTICON_FRAGMENT);
-            }
-        });
-        mGifTabBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                replaceFragment(mGifFragment, TAG_GIF_FRAGMENT);
-            }
-        });
+        mEmoticonTabBtn.setOnClickListener(view12 -> replaceFragment(mEmoticonFragment, TAG_EMOTICON_FRAGMENT));
+        mGifTabBtn.setOnClickListener(view13 -> replaceFragment(mGifFragment, TAG_GIF_FRAGMENT));
 
         //Setup the search button.
         View searchBtn = view.findViewById(R.id.search_btn);
-        searchBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (mEmoticonTabBtn.isSelected()) {
-                    replaceFragment(mEmoticonSearchFragment, TAG_EMOTICON_SEARCH_FRAGMENT);
-                } else {
-                    replaceFragment(mGifSearchFragment, TAG_GIF_SEARCH_FRAGMENT);
-                }
+        searchBtn.setOnClickListener(view14 -> {
+            if (mEmoticonTabBtn.isSelected()) {
+                replaceFragment(mEmoticonSearchFragment, TAG_EMOTICON_SEARCH_FRAGMENT);
+            } else {
+                replaceFragment(mGifSearchFragment, TAG_GIF_SEARCH_FRAGMENT);
             }
         });
 
@@ -265,7 +267,12 @@ public final class KeyboardFragment extends Fragment implements FragmentManager.
         changeLayoutFromTag(getChildFragmentManager().getBackStackEntryAt(index).getName());
     }
 
-
+    /**
+     * Make layout changes based on the fragment tag.
+     *
+     * @param tag Fragment tags.
+     * @see FragmentBackStackTags
+     */
     private void changeLayoutFromTag(@FragmentBackStackTags String tag) {
         switch (tag) {
             case TAG_EMOTICON_FRAGMENT:
@@ -297,8 +304,115 @@ public final class KeyboardFragment extends Fragment implements FragmentManager.
         }
     }
 
+    public void enableEmoticons(@SuppressWarnings("SameParameterValue") boolean show) {
+        mIsEmoticonsEnable = show;
+        if (!mIsGIFsEnable && !mIsEmoticonsEnable)
+            throw new RuntimeException("At least one of emoticon or GIF should be active.");
+
+        mEmoticonTabBtn.setVisibility(mIsEmoticonsEnable ? View.VISIBLE : View.GONE);
+        mGifTabBtn.setVisibility(mIsGIFsEnable ? View.VISIBLE : View.GONE);
+
+        //Replace the fragment with emoticon fragment
+        if (!mIsEmoticonsEnable) replaceFragment(mGifFragment, TAG_GIF_FRAGMENT);
+    }
+
+    /**
+     * @return True if emoticons are enable for the keyboard.
+     * @see #enableEmoticons(boolean)
+     */
+    public boolean isEmoticonsEnable() {
+        return mIsEmoticonsEnable;
+    }
+
+    public void enableGIFs(@SuppressWarnings("SameParameterValue") boolean show) {
+        mIsGIFsEnable = show;
+        if (!mIsGIFsEnable && !mIsEmoticonsEnable)
+            throw new RuntimeException("At least one of emoticon or GIF should be active.");
+
+        mEmoticonTabBtn.setVisibility(mIsEmoticonsEnable ? View.VISIBLE : View.GONE);
+        mGifTabBtn.setVisibility(mIsGIFsEnable ? View.VISIBLE : View.GONE);
+
+        //Replace the fragment with emoticon fragment
+        if (!mIsGIFsEnable) replaceFragment(mEmoticonFragment, TAG_EMOTICON_FRAGMENT);
+    }
+
+    /**
+     * @return True if GIFs are enable for the keyboard.
+     * @see #enableGIFs(boolean)
+     */
+    public boolean isGIFsEnable() {
+        return mIsGIFsEnable;
+    }
+
+    /**
+     * Show thw keyboard with resize animation.
+     */
+    public void open() {
+        ResizeAnimation resizeAnimation = new ResizeAnimation(mRootView,
+                (int) getResources().getDimension(R.dimen.emoticon_gif_fragments_height),
+                0);
+        resizeAnimation.setDuration(300);
+        mRootView.startAnimation(resizeAnimation);
+    }
+
+    /**
+     * Hide the keyboard with resize animation.
+     */
+    public void close() {
+        ResizeAnimation resizeAnimation = new ResizeAnimation(mRootView,
+                0,
+                mRootView.getWidth());
+        resizeAnimation.setDuration(300);
+        mRootView.startAnimation(resizeAnimation);
+    }
+
     @Retention(RetentionPolicy.SOURCE)
     @StringDef({TAG_EMOTICON_FRAGMENT, TAG_EMOTICON_SEARCH_FRAGMENT, TAG_GIF_FRAGMENT, TAG_GIF_SEARCH_FRAGMENT})
     @interface FragmentBackStackTags {
+    }
+
+    /**
+     * Custom {@link Animation} class to resize the height of the view in given duration.
+     *
+     * @see <a href='https://gist.github.com/rafali/5146957'>ResizeAnimation.java</a>
+     */
+    private class ResizeAnimation extends Animation {
+        private final int mStartHeight;     //Start height
+        private final int mTargetHeight;
+        private final View view;
+
+        /**
+         * Public constructor.
+         *
+         * @param view         View to resize.
+         * @param targetHeight Desired height of the view at the end of the animation. The number
+         *                     must be 0 or positive.
+         * @param startHeight  Current height of view.  The number must be 0 or positive.
+         */
+        @SuppressWarnings("WeakerAccess")
+        public ResizeAnimation(@NonNull View view, int targetHeight, int startHeight) {
+            if (targetHeight < 0 || startHeight < 0) {
+                throw new IllegalArgumentException("Height cannot be negative.");
+            }
+            this.view = view;
+            this.mTargetHeight = targetHeight;
+            mStartHeight = startHeight;
+        }
+
+        @Override
+        protected void applyTransformation(float interpolatedTime, Transformation t) {
+            view.getLayoutParams().height = (int) (mStartHeight + (mTargetHeight - mStartHeight) * interpolatedTime);
+            view.requestLayout();
+        }
+
+        @Override
+        public void initialize(int width, int height, int parentWidth, int parentHeight) {
+            super.initialize(width, height, parentWidth, parentHeight);
+        }
+
+        @Override
+        public boolean willChangeBounds() {
+            return true;
+        }
     }
 }
