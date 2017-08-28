@@ -1,5 +1,5 @@
 # Emoticon Pack - Emojidex
-[![API](https://img.shields.io/badge/API-16%2B-orange.svg?style=flat)](https://android-arsenal.com/api?level=16) [![Javadoc](https://img.shields.io/badge/Javadoc-EmoticonGIFKeyboard-blue.svg)](http://kevalpatel2106.github.io/EmoticonGIFKeyboard) <a href="https://www.paypal.me/kevalpatel2106"> <img src="https://img.shields.io/badge/paypal-donate-yellow.svg" /></a> [![Emojidex](https://img.shields.io/badge/Emojidex-1615%20Icons-red.svg)]
+[![API](https://img.shields.io/badge/API-16%2B-orange.svg?style=flat)](https://android-arsenal.com/api?level=16) [![Javadoc](https://img.shields.io/badge/Javadoc-EmoticonGIFKeyboard-blue.svg)](http://kevalpatel2106.github.io/EmoticonGIFKeyboard) <a href="https://www.paypal.me/kevalpatel2106"> <img src="https://img.shields.io/badge/paypal-donate-yellow.svg" /></a> ![Emojidex](https://img.shields.io/badge/Emojidex-1615%20Icons-red.svg)
 
 This emoticon icon pack contains emoticons graphics from [Emojidex](http://emojidex.com/). You can find complete list of emoticons icons from [here](https://emojipedia.org/emojidex/).
 

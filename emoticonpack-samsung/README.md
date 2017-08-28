@@ -1,5 +1,5 @@
 # Emoticon Pack - Samsung
-[![API](https://img.shields.io/badge/API-16%2B-orange.svg?style=flat)](https://android-arsenal.com/api?level=16) [![Javadoc](https://img.shields.io/badge/Javadoc-EmoticonGIFKeyboard-blue.svg)](http://kevalpatel2106.github.io/EmoticonGIFKeyboard) <a href="https://www.paypal.me/kevalpatel2106"> <img src="https://img.shields.io/badge/paypal-donate-yellow.svg" /></a> [![Samsung](https://img.shields.io/badge/Samsung-1895%20Icons-yellowgreen.svg)]
+[![API](https://img.shields.io/badge/API-16%2B-orange.svg?style=flat)](https://android-arsenal.com/api?level=16) [![Javadoc](https://img.shields.io/badge/Javadoc-EmoticonGIFKeyboard-blue.svg)](http://kevalpatel2106.github.io/EmoticonGIFKeyboard) <a href="https://www.paypal.me/kevalpatel2106"> <img src="https://img.shields.io/badge/paypal-donate-yellow.svg" /></a> ![Samsung](https://img.shields.io/badge/Samsung-1895%20Icons-yellowgreen.svg)
 
 This emoticon icon pack contains emoticons graphics from **Samsung Galaxy S8**. You can find complete list of emoticons icons from [here](https://emojipedia.org/samsung/).
 
