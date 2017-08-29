@@ -1,13 +1,13 @@
 # EmoticonGIFKeyboard
 [![API](https://img.shields.io/badge/API-16%2B-orange.svg?style=flat)](https://android-arsenal.com/api?level=16) [![Javadoc](https://img.shields.io/badge/Javadoc-EmoticonGIFKeyboard-blue.svg)](http://kevalpatel2106.github.io/EmoticonGIFKeyboard) <a href="https://www.paypal.me/kevalpatel2106"> <img src="https://img.shields.io/badge/paypal-donate-yellow.svg" /></a>
 
-###### 🙌An advance Emoticons & GIF keyboard.🙌
+###### 🙌 An advance Emoticons & GIF keyboard. 🙌
 **EmoticonGIFKeyboard** is an easy to integrate, customizable and lightweight library to add support for emojis and GIFs.
 
 
 ## Features:
 - Highly customizable.
-- Extremely lightweight 🏋. 
+- Extremely lightweight 🏋.
 - ❤ for Emoticons
     - More than 1400 emoticons. This library includes all the emoticons listed under [Emoticons 6.0](https://emojipedia.org/unicode-6.0/) standards.
     - 6 emoticons categories.
@@ -19,8 +19,19 @@
     - Select your favourite GIF provider (e.g. Giphy, Tenor) by adding available [GIF packs](https://github.com/kevalpatel2106/EmoticonGIFKeyboard#gif-packs).
 
 
-# Emoticon icon packs
-|Icon Pack Name|Icon|Module|Dependency|
+## How to import this library?
+- ### Gradle Dependency:
+  * Add below lines to `app/build.gradle` file of your project.
+  ```
+  dependencies {
+      compile 'com.kevalpatel2106:moticon-gif-keyboard:1.0'
+  }
+  ```
+- To integrate using maven visit this [page](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/blob/master/IMPORT.md).
+
+
+## Emoticon icon packs
+|Icon Pack Name|Icon|Module|Gradle Dependency|
 |:---:|:---:|:---:|:---:|
 |Apple|![Grinning Emoji](/emoticonpack-ios/art/grinning-face_1f600.png)|[Apple](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/tree/master/emoticonpack-ios)|`compile 'com.kevalpatel2106:emoticonpack-ios:<latest>`|
 |Google|![Grinning Emoji](/emoticonpack-google/art/grinning-face_1f600.png)|[Google](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/tree/master/emoticonpack-google)|`compile 'com.kevalpatel2106:emoticonpack-google:<latest>`|
@@ -33,7 +44,7 @@
 |EmojiOne|![Grinning Emoji](/emoticonpack-emojione/art/grinning-face_1f600.png)|[EmojiOne](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/tree/master/emoticonpack-emojione)|`compile 'com.kevalpatel2106:emoticonpack-emojione:<latest>`|
 
 
-# GIF Packs
+## GIF Packs
 |GIF Provider|Module|Dependency|
 |:---:|:---:|:---:|
 |[giphy.com](https://giphy.com)|[Giphy](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/tree/master/gifpack-giphy)|`compile 'com.kevalpatel2106:gifpack-gif:<latest>`|
