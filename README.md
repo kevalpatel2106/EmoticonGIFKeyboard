@@ -16,7 +16,7 @@
 - ❤ for **GIFs**
     - Displays trending GIFs for batter suggestion.
     - 🔍 Search GIFs based on the content and meaning.
-    - Select your favourite GIF provider (e.g. Giphy, Tenor) by adding available GIF packs.
+    - Select your favourite GIF provider (e.g. Giphy, Tenor) by adding available [GIF packs](https://github.com/kevalpatel2106/EmoticonGIFKeyboard#gif-packs).
 
 
 # Emoticon icon packs
