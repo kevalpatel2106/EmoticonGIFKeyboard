@@ -1,5 +1,5 @@
 # GIF Pack - GIPHY
-[![API](https://img.shields.io/badge/API-16%2B-orange.svg?style=flat)](https://android-arsenal.com/api?level=16) [![Javadoc](https://img.shields.io/badge/Javadoc-EmoticonGIFKeyboard-blue.svg)](http://kevalpatel2106.github.io/EmoticonGIFKeyboard) <a href="https://www.paypal.me/kevalpatel2106"> <img src="https://img.shields.io/badge/paypal-donate-yellow.svg" /></a>
+[![API](https://img.shields.io/badge/API-16%2B-orange.svg?style=flat)](https://android-arsenal.com/api?level=16) [![Javadoc](https://img.shields.io/badge/Javadoc-EmoticonGIFKeyboard-blue.svg)](http://kevalpatel2106.github.io/EmoticonGIFKeyboard) <a href="https://www.paypal.me/kevalpatel2106"> <img src="https://img.shields.io/badge/paypal-donate-yellow.svg" /></a> ![Giphy](https://img.shields.io/badge/GIF%20Service-Giphy-orange.svg)
 
 This GIF pack provides GIF images from [Giphy](https://giphy.com/). Internally it uses Giphy APIs to get trending gifs and search the gifs.
 
@@ -10,10 +10,6 @@ This GIF pack provides GIF images from [Giphy](https://giphy.com/). Internally i
 
 ## Third party libraries used:
 - [Retrofit](http://square.github.io/retrofit/)
-
-
-## Acknowledgements
-- Emoticon graphics and emoticon details are from [Emojipedia](https://emojipedia.org/). (See [emoji-scrapper](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/tree/master/emoji-scrapper) module.)
 
 
 ## Questions?🤔
