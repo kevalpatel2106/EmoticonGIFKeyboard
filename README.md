@@ -19,6 +19,20 @@
     - Select your favourite GIF provider (e.g. Giphy, Tenor) by adding available GIF packs.
 
 
+# Emoticon icon packs
+|Icon Pack Name|Icon|Square|
+|:---:|:---:|:---:|
+|Emojidex|![Grinning Emoji](/emoticonpack-emojidex/art/grinning-face_1f600.png)|[Emojidex](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/tree/master/emoticonpack-emojidex)|
+|EmojiOne|![Grinning Emoji](/emoticonpack-emojione/art/grinning-face_1f600.png)|[EmojiOne](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/tree/master/emoticonpack-emojione)|
+|Facebook|![Grinning Emoji](/emoticonpack-facebook/art/grinning-face_1f600.png)|[Facebook](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/tree/master/emoticonpack-facebook)|
+|Google|![Grinning Emoji](/emoticonpack-google/art/grinning-face_1f600.png)|[Google](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/tree/master/emoticonpack-google)|
+|Apple|![Grinning Emoji](/emoticonpack-ios/art/grinning-face_1f600.png)|[Apple](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/tree/master/emoticonpack-ios)|
+|Messenger|![Grinning Emoji](/emoticonpack-messenger/art/grinning-face_1f600.png)|[Messenger](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/tree/master/emoticonpack-messenger)|
+|Samsung|![Grinning Emoji](/emoticonpack-samsung/art/grinning-face_1f600.png)|[Samsung](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/tree/master/emoticonpack-samsung)|
+|Twitter|![Grinning Emoji](/emoticonpack-twitter/art/grinning-face_1f600.png)|[Twitter](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/tree/master/emoticonpack-twitter)|
+|Windows|![Grinning Emoji](/emoticonpack-windows/art/grinning-face_1f600.png)|[Windows](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/tree/master/emoticonpack-windows)|
+
+
 ## Acknowledgements
 - Based on Hieu Rocker's library [Emojicon](https://github.com/rockerhieu/emojicon).
 - Emoticon graphics and emoticon details are from [Emojipedia](https://emojipedia.org/). (See [emoji-scrapper](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/tree/master/emoji-scrapper) module.)
