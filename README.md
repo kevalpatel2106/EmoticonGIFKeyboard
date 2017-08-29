@@ -7,7 +7,7 @@
 
 ## Features:
 - Highly customizable.
-- Extremely lightweight 🏋.
+- Extremely lightweight 🏋. You only have to add the icon packs you want to use by adding extra dependency, so you don't have to add emoticon icons you don't want to use.
 - ❤ for **Emoticons**
     - More than 1400 emoticons. This library includes all the emoticons listed under [Emoticons 6.0](https://emojipedia.org/unicode-6.0/) standards.
     - 6 emoticons categories.
@@ -17,6 +17,8 @@
     - Displays trending GIFs for batter suggestion.
     - 🔍 Search GIFs based on the content and meaning.
     - Select your favourite GIF provider (e.g. Giphy, Tenor) by adding available [GIF packs](https://github.com/kevalpatel2106/EmoticonGIFKeyboard#gif-packs).
+- Custom widgets (e.g. `EmoticonTextView`, `EmoticonEditText` and `EmoticonButton`) to render custom emoticon icons throughout application.
+- Easily disable emoticons or GIF functionality if you don't want.
 
 
 ## How to import this library?
@@ -28,6 +30,86 @@
   }
   ```
 - To integrate using maven visit this [page](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/blob/master/IMPORT.md).
+
+
+## How to use this EmoticonGIFKeyboard?
+- ### Prepare emoticons configuration.
+  * Create `EmoticonConfig` to configure emoticons.
+  * Set the custom emoticon icon provider using `EmoticonConfig#setEmoticonProvider()`. If you don't set any icon provider here, library will render system emoticons. You can pic custom emoticon icons from [here](https://github.com/kevalpatel2106/EmoticonGIFKeyboard#emoticon-icon-packs).
+  * Set the `EmoticonSelectListener` using `EmoticonConfig#setEmoticonSelectListener()`. This will notify you when user selects any emoticon from list or user preses back button.
+
+  ```
+  EmoticonGIFKeyboardFragment.EmoticonConfig emoticonConfig = new EmoticonGIFKeyboardFragment.EmoticonConfig()
+          .setEmoticonProvider(IosEmoticonProvider.create())
+          /*
+            NOTE: The process of removing last character when user preses back space will handle
+            by library if your edit text is in focus.
+           */
+          .setEmoticonSelectListener(new EmoticonSelectListener() {
+
+              @Override
+              public void emoticonSelected(Emoticon emoticon) {
+                  //Do something with new emoticon.
+              }
+
+              @Override
+              public void onBackSpace() {
+                  //Do something here to handle backspace event.
+                  //The process of removing last character when user preses back space will handle
+                  //by library if your edit text is in focus.
+              }
+          });
+  ```
+
+- ### Prepare GIF configuration.
+  * Set the desired GIF provider by passing desired `GIFProvider` in constructor `GIFConfig()`. [Here](https://github.com/kevalpatel2106/EmoticonGIFKeyboard#gif-packs) is  the list of supported GIF providers.
+    It is required to set GIF provider before adding fragment into container.
+  * Implement GIF select listener using `GIFConfig#setGifSelectListener()`. This will notify you when user selects new GIF.
+
+  ```
+  //Create GIF config
+  EmoticonGIFKeyboardFragment.GIFConfig gifConfig = new EmoticonGIFKeyboardFragment
+
+          /*
+            Here we are using GIPHY to provide GIFs. Create Giphy GIF provider by passing your key.
+            It is required to set GIF provider before adding fragment into container.
+           */
+          .GIFConfig(GiphyGifProvider.create(this, "564ce7370bf347f2b7c0e4746593c179"))
+          .setGifSelectListener(new GifSelectListener() {
+              @Override
+              public void onGifSelected(@NonNull Gif gif) {
+                  //Do something with the selected GIF.
+                  Log.d(TAG, "onGifSelected: " + gif.getGifUrl());
+              }
+          });
+  ```
+
+- ### Add `EmoticonGIFKeyboardFragment`.
+  * Create new `EmoticonGIFKeyboardFragment` by passing `EmoticonConfig` and `GIFConfig`. If you pass null to `EmoticonConfig`, emoticon functionality will be disabled. Also, if you pass `GIFConfig` as null, GIF functionality will be disabled.
+  * Add the generated fragment to the container.
+
+  ```
+  EmoticonGIFKeyboardFragment emoticonGIFKeyboardFragment = EmoticonGIFKeyboardFragment
+          .getNewInstance(findViewById(R.id.keyboard_container), emoticonConfig, gifConfig);
+
+  //Adding the keyboard fragment to keyboard_container.
+  getSupportFragmentManager()
+          .beginTransaction()
+          .replace(R.id.keyboard_container, EmoticonGIFKeyboardFragment)
+          .commit();
+  ```
+
+- ### Open/Close the keyboard and handle back button press.
+  * Open keyboard view by calling `EmoticonGIFKeyboardFragment#open()` and close it by calling `EmoticonGIFKeyboardFragment#close()`.
+  * Handle back button press events by using `EmoticonGIFKeyboardFragment#handleBackPressed()` in your activity.
+
+  ```
+    @Override
+    public void onBackPressed() {
+      if (!mEmoticonGIFKeyboardFragment.handleBackPressed())
+          super.onBackPressed();
+    }
+  ```
 
 
 ## Emoticon icon packs

@@ -124,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
                 .setGifSelectListener(new GifSelectListener() {
                     @Override
                     public void onGifSelected(@NonNull Gif gif) {
+                        //Do something with the selected GIF.
                         Log.d(TAG, "onGifSelected: " + gif.getGifUrl());
                     }
                 });
