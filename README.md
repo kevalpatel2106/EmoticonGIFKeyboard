@@ -8,7 +8,7 @@
 ## Features:
 - Highly customizable.
 - Extremely lightweight 🏋.
-- ❤ for Emoticons
+- ❤ for **Emoticons**
     - More than 1400 emoticons. This library includes all the emoticons listed under [Emoticons 6.0](https://emojipedia.org/unicode-6.0/) standards.
     - 6 emoticons categories.
     - 🔍 Search emoticons by their name or meaning.
@@ -24,7 +24,7 @@
   * Add below lines to `app/build.gradle` file of your project.
   ```
   dependencies {
-      compile 'com.kevalpatel2106:moticon-gif-keyboard:1.0'
+      compile 'com.kevalpatel2106:emoticon-gif-keyboard:1.0'
   }
   ```
 - To integrate using maven visit this [page](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/blob/master/IMPORT.md).
@@ -47,7 +47,7 @@
 ## GIF Packs
 |GIF Provider|Module|Dependency|
 |:---:|:---:|:---:|
-|[giphy.com](https://giphy.com)|[Giphy](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/tree/master/gifpack-giphy)|`compile 'com.kevalpatel2106:gifpack-gif:<latest>`|
+|[giphy.com](https://giphy.com)|[Giphy](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/tree/master/gifpack-giphy)|`compile 'com.kevalpatel2106:gifpack-giphy:<latest>`|
 |[tenor.com](https://tenor.com)|[Tenor](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/tree/master/gifpack-tenor)|`compile 'com.kevalpatel2106:gifpack-tenor:<latest>`|
 
 

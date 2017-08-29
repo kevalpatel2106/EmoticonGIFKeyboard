@@ -1,11 +1,24 @@
 # GIF Pack - TENOR
-[![API](https://img.shields.io/badge/API-16%2B-orange.svg?style=flat)](https://android-arsenal.com/api?level=16) [![Javadoc](https://img.shields.io/badge/Javadoc-EmoticonGIFKeyboard-blue.svg)](http://kevalpatel2106.github.io/EmoticonGIFKeyboard) <a href="https://www.paypal.me/kevalpatel2106"> <img src="https://img.shields.io/badge/paypal-donate-yellow.svg" /></a> ![Tenor](https://img.shields.io/badge/GIF%20Service-Tenor-orange.svg)
+[ ![Download](https://api.bintray.com/packages/kevalpatel2106/maven/gifpack-tenor/images/download.svg) ](https://bintray.com/kevalpatel2106/maven/gifpack-tenor/_latestVersion) [![API](https://img.shields.io/badge/API-16%2B-orange.svg?style=flat)](https://android-arsenal.com/api?level=16) [![Javadoc](https://img.shields.io/badge/Javadoc-EmoticonGIFKeyboard-blue.svg)](http://kevalpatel2106.github.io/EmoticonGIFKeyboard) <a href="https://www.paypal.me/kevalpatel2106"> <img src="https://img.shields.io/badge/paypal-donate-yellow.svg" /></a> ![Tenor](https://img.shields.io/badge/GIF%20Service-Tenor-orange.svg)
+
+![Tenor Banner](/gifpack-tenor/art/headerbannergif.gif)
 
 This GIF pack provides GIF images from [Tenor](https://tenor.com/). Internally it uses Tenor APIs to get trending gifs and search the gifs.
 
 
 ## How to use?
+- Add below lines to `app/build.gradle` file of your project.
+    ```
+    dependencies {
+       compile 'com.kevalpatel2106:gifpack-tenor:<latest>
+    }
+    ```
 - This gif pack is plugin for [EmoticonGIFKeyboard](https://github.com/kevalpatel2106/EmoticonGIFKeyboard).
+- Obtain the api key from the [here](https://tenor.com/gifapi#apikey).
+- Add the GIF provider in GifConfig constructor.
+  ```
+      EmoticonGIFKeyboardFragment.GIFConfig giphyGifConfig = new EmoticonGIFKeyboardFragment.GIFConfig(TenorGifProvider.create(context, "<YOUR API KEY>"))
+  ```
 
 
 ## Third party libraries used:

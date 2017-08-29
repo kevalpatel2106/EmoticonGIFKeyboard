@@ -1,10 +1,21 @@
 # Emoticon Pack - Google Android 8.0
-[![API](https://img.shields.io/badge/API-16%2B-orange.svg?style=flat)](https://android-arsenal.com/api?level=16) ![Javadoc](https://img.shields.io/badge/Javadoc-EmoticonGIFKeyboard-blue.svg)](http://kevalpatel2106.github.io/EmoticonGIFKeyboard) <a href="https://www.paypal.me/kevalpatel2106"> <img src="https://img.shields.io/badge/paypal-donate-yellow.svg" /></a> [![Google Android 8.0](https://img.shields.io/badge/Google-1869%20Icons-brightgreen.svg)
+[ ![Download](https://api.bintray.com/packages/kevalpatel2106/maven/emoticonpack-google/images/download.svg) ](https://bintray.com/kevalpatel2106/maven/emoticonpack-google/_latestVersion) [![API](https://img.shields.io/badge/API-16%2B-orange.svg?style=flat)](https://android-arsenal.com/api?level=16) ![Javadoc](https://img.shields.io/badge/Javadoc-EmoticonGIFKeyboard-blue.svg)](http://kevalpatel2106.github.io/EmoticonGIFKeyboard) <a href="https://www.paypal.me/kevalpatel2106"> <img src="https://img.shields.io/badge/paypal-donate-yellow.svg" /></a> [![Google Android 8.0](https://img.shields.io/badge/Google-1869%20Icons-brightgreen.svg)
 
 This emoticon icon pack contains emoticons graphics from **Google Android 8.0**. You can find complete list of emoticons icons from [here](https://emojipedia.org/google/).
 
 ## How to use?
-- This icon pack is plugin for [EmoticonGIFKeyboard](https://github.com/kevalpatel2106/EmoticonGIFKeyboard).
+- Add below lines to `app/build.gradle` file of your project.
+    ```
+    dependencies {
+       compile 'com.kevalpatel2106:emoticonpack-google:<latest>
+    }
+    ```
+- This gif pack is plugin for [EmoticonGIFKeyboard](https://github.com/kevalpatel2106/EmoticonGIFKeyboard).
+- Set `GoogleEmoticonProvider` as emoticon provider in `EmoticonConfig`.
+  ```
+    EmoticonGIFKeyboardFragment.EmoticonConfig emoticonConfig = new EmoticonGIFKeyboardFragment.EmoticonConfig()
+                .setEmoticonProvider(GoogleEmoticonProvider.create())
+  ```
 
 
 ## Acknowledgements

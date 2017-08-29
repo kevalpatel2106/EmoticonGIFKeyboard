@@ -1,10 +1,21 @@
 # Emoticon Pack - Microsoft Windows
-[![API](https://img.shields.io/badge/API-16%2B-orange.svg?style=flat)](https://android-arsenal.com/api?level=16) [![Javadoc](https://img.shields.io/badge/Javadoc-EmoticonGIFKeyboard-blue.svg)](http://kevalpatel2106.github.io/EmoticonGIFKeyboard) <a href="https://www.paypal.me/kevalpatel2106"> <img src="https://img.shields.io/badge/paypal-donate-yellow.svg" /></a> ![Windows](https://img.shields.io/badge/Windows-1653%20Icons-orange.svg)
+[ ![Download](https://api.bintray.com/packages/kevalpatel2106/maven/emoticonpack-windows/images/download.svg) ](https://bintray.com/kevalpatel2106/maven/emoticonpack-windows/_latestVersion) [![API](https://img.shields.io/badge/API-16%2B-orange.svg?style=flat)](https://android-arsenal.com/api?level=16) [![Javadoc](https://img.shields.io/badge/Javadoc-EmoticonGIFKeyboard-blue.svg)](http://kevalpatel2106.github.io/EmoticonGIFKeyboard) <a href="https://www.paypal.me/kevalpatel2106"> <img src="https://img.shields.io/badge/paypal-donate-yellow.svg" /></a> ![Windows](https://img.shields.io/badge/Windows-1653%20Icons-orange.svg)
 
 This emoticon icon pack contains emoticons graphics from **Microsoft Windows 10**. You can find complete list of emoticons icons from [here](https://emojipedia.org/microsoft/).
 
 ## How to use?
-- This icon pack is plugin for [EmoticonGIFKeyboard](https://github.com/kevalpatel2106/EmoticonGIFKeyboard).
+- Add below lines to `app/build.gradle` file of your project.
+    ```
+    dependencies {
+       compile 'com.kevalpatel2106:emoticonpack-windows:<latest>
+    }
+    ```
+- This gif pack is plugin for [EmoticonGIFKeyboard](https://github.com/kevalpatel2106/EmoticonGIFKeyboard).
+- Set `WindowsEmoticonProvider` as emoticon provider in `EmoticonConfig`.
+  ```
+    EmoticonGIFKeyboardFragment.EmoticonConfig emoticonConfig = new EmoticonGIFKeyboardFragment.EmoticonConfig()
+                .setEmoticonProvider(WindowsEmoticonProvider.create())
+  ```
 
 
 ## Acknowledgements

@@ -1,10 +1,22 @@
 # Emoticon Pack - Emojidex
-[![API](https://img.shields.io/badge/API-16%2B-orange.svg?style=flat)](https://android-arsenal.com/api?level=16) [![Javadoc](https://img.shields.io/badge/Javadoc-EmoticonGIFKeyboard-blue.svg)](http://kevalpatel2106.github.io/EmoticonGIFKeyboard) <a href="https://www.paypal.me/kevalpatel2106"> <img src="https://img.shields.io/badge/paypal-donate-yellow.svg" /></a> ![Emojidex](https://img.shields.io/badge/Emojidex-1615%20Icons-red.svg)
+[ ![Download](https://api.bintray.com/packages/kevalpatel2106/maven/emoticonpack-emojidex/images/download.svg) ](https://bintray.com/kevalpatel2106/maven/emoticonpack-emojidex/_latestVersion) [![API](https://img.shields.io/badge/API-16%2B-orange.svg?style=flat)](https://android-arsenal.com/api?level=16) [![Javadoc](https://img.shields.io/badge/Javadoc-EmoticonGIFKeyboard-blue.svg)](http://kevalpatel2106.github.io/EmoticonGIFKeyboard) <a href="https://www.paypal.me/kevalpatel2106"> <img src="https://img.shields.io/badge/paypal-donate-yellow.svg" /></a> ![Emojidex](https://img.shields.io/badge/Emojidex-1615%20Icons-red.svg)
 
 This emoticon icon pack contains emoticons graphics from [Emojidex](http://emojidex.com/). You can find complete list of emoticons icons from [here](https://emojipedia.org/emojidex/).
 
+
 ## How to use?
-- This icon pack is plugin for [EmoticonGIFKeyboard](https://github.com/kevalpatel2106/EmoticonGIFKeyboard).
+- Add below lines to `app/build.gradle` file of your project.
+    ```
+    dependencies {
+       compile 'com.kevalpatel2106:emoticonpack-emojidex:<latest>
+    }
+    ```
+- This gif pack is plugin for [EmoticonGIFKeyboard](https://github.com/kevalpatel2106/EmoticonGIFKeyboard).
+- Set `EmojidexEmoticonProvider` as emoticon provider in `EmoticonConfig`.
+  ```
+    EmoticonGIFKeyboardFragment.EmoticonConfig emoticonConfig = new EmoticonGIFKeyboardFragment.EmoticonConfig()
+                .setEmoticonProvider(EmojidexEmoticonProvider.create())
+  ```
 
 
 ## Acknowledgements

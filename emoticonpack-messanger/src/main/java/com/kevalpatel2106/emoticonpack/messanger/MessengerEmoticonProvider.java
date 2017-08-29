@@ -26,16 +26,16 @@ import com.kevalpatel2106.emoticongifkeyboard.emoticons.EmoticonProvider;
  */
 
 @SuppressWarnings("WeakerAccess")
-public class MessangerEmoticonProvider implements EmoticonProvider {
+public class MessengerEmoticonProvider implements EmoticonProvider {
 
-    private MessangerEmoticonProvider() {
+    private MessengerEmoticonProvider() {
     }
 
     /**
-     * return {@link MessangerEmoticonProvider}
+     * return {@link MessengerEmoticonProvider}
      */
-    public static MessangerEmoticonProvider create() {
-        return new MessangerEmoticonProvider();
+    public static MessengerEmoticonProvider create() {
+        return new MessengerEmoticonProvider();
     }
 
     /**

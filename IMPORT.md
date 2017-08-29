@@ -1,4 +1,4 @@
-#Dependencies
+# Dependencies
 
 - You can find the latest version from [here](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/releases).
 
