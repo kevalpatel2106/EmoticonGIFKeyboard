@@ -23,7 +23,7 @@ This is an open sourced java project to scrap the [Emojipedia](http://emojipedia
     - Original Icons folder : `/out/{Vendor name}/original`
     - Small Icons folder : `/out/{Vendor name}/small`
 
-2. JSON file with data of all scrapped emojis. This file is located at `/out/emoji.json`.
+2. JSON file with data of all scrapped emojis. This file is located at `/out/mEmoticon.json`.
 	Sample:
 	```json
 	[
@@ -47,7 +47,7 @@ This is an open sourced java project to scrap the [Emojipedia](http://emojipedia
 	]
  		
 	```
-3. SQLite database that can be directly import in Android Application with emoji information, tags and emoji variants. This database is located under `/out/emoticon.db`.
+3. SQLite database that can be directly import in Android Application with mEmoticon information, tags and mEmoticon variants. This database is located under `/out/emoticon.db`.
 
 4. Java rejex string to find  out supported emojis from the string. Regex string is stored in `/out/regex`.
 

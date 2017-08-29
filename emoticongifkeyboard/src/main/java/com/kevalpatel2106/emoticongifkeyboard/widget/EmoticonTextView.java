@@ -19,11 +19,11 @@ package com.kevalpatel2106.emoticongifkeyboard.widget;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatTextView;
-import android.text.SpannableString;
-import android.text.TextUtils;
+import android.text.SpannableStringBuilder;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
@@ -38,28 +38,23 @@ import com.kevalpatel2106.emoticongifkeyboard.internal.emoticon.EmoticonUtils;
  */
 
 public class EmoticonTextView extends AppCompatTextView {
-    @NonNull
-    private final Context mContext;
     private int mEmoticonSize;
     @Nullable
     private EmoticonProvider mEmoticonProvider;
 
     public EmoticonTextView(@NonNull Context context) {
         super(context);
-        mContext = context;
         mEmoticonSize = (int) getTextSize();
         init(null);
     }
 
     public EmoticonTextView(@NonNull Context context, AttributeSet attrs) {
         super(context, attrs);
-        mContext = context;
         init(attrs);
     }
 
     public EmoticonTextView(@NonNull Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        mContext = context;
         init(attrs);
     }
 
@@ -76,22 +71,33 @@ public class EmoticonTextView extends AppCompatTextView {
     }
 
     @Override
-    public void setText(CharSequence text, TextView.BufferType type) {
-        if (mEmoticonProvider != null && !TextUtils.isEmpty(text)) {
-            text = EmoticonUtils.replaceWithImages(mContext,
-                    new SpannableString(text),
-                    mEmoticonProvider,
-                    mEmoticonSize);
-        }
-        super.setText(text, type);
+    @CallSuper
+    public void setText(CharSequence rawText, TextView.BufferType type) {
+        final CharSequence text = rawText == null ? "" : rawText;
+        final SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(text);
+        if (mEmoticonProvider != null)
+            EmoticonUtils.replaceWithImages(getContext(), spannableStringBuilder, mEmoticonProvider, mEmoticonSize);
+        super.setText(spannableStringBuilder, type);
+    }
+
+    @Override
+    @Deprecated
+    @CallSuper
+    public void append(CharSequence rawText, int start, int end) {
+        final String text = getText() + (rawText == null ? "" : rawText).toString();
+        final SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(text);
+        if (mEmoticonProvider != null)
+            EmoticonUtils.replaceWithImages(getContext(), spannableStringBuilder, mEmoticonProvider, mEmoticonSize);
+        super.setText(spannableStringBuilder);
     }
 
     /**
      * Set the size of emojicon in pixels.
      */
+    @CallSuper
     public void setEmoticonSize(final int pixels) {
         mEmoticonSize = pixels;
-        super.setText(getText());
+        setText(getText());
     }
 
     /**
@@ -100,7 +106,13 @@ public class EmoticonTextView extends AppCompatTextView {
      * @param emoticonProvider {@link EmoticonProvider} of custom icon packs or null to display
      *                         system icons.
      */
+    @CallSuper
     public void setEmoticonProvider(@Nullable final EmoticonProvider emoticonProvider) {
         mEmoticonProvider = emoticonProvider;
+
+        //Refresh the emoticon icons
+        final SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(getText());
+        if (mEmoticonProvider != null)
+            EmoticonUtils.replaceWithImages(getContext(), spannableStringBuilder, mEmoticonProvider, mEmoticonSize);
     }
 }

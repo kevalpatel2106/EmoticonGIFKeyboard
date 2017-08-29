@@ -53,7 +53,7 @@
 
 ## Acknowledgements
 - Based on Hieu Rocker's library [Emojicon](https://github.com/rockerhieu/emojicon).
-- Emoticon graphics and emoticon details are from [Emojipedia](https://emojipedia.org/). (See [emoji-scrapper](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/tree/master/emoji-scrapper) module.)
+- Emoticon graphics and emoticon details are from [Emojipedia](https://emojipedia.org/). (See [mEmoticon-scrapper](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/tree/master/mEmoticon-scrapper) module.)
 
 
 ## How to contribute?

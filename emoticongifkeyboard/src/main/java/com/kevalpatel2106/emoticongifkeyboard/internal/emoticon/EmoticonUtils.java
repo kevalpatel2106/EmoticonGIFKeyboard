@@ -66,10 +66,10 @@ public final class EmoticonUtils {
      * @param emoticonSize     Size of the emoticons in dp
      * @return Modified text.
      */
-    public static Spannable replaceWithImages(@NonNull final Context context,
-                                              @NonNull final Spannable text,
-                                              @NonNull final EmoticonProvider emoticonProvider,
-                                              final int emoticonSize) {
+    public static void replaceWithImages(@NonNull final Context context,
+                                         @NonNull final Spannable text,
+                                         @NonNull final EmoticonProvider emoticonProvider,
+                                         final int emoticonSize) {
 
         final EmoticonSpan[] existingSpans = text.getSpans(0, text.length(), EmoticonSpan.class);
         final ArrayList<Integer> existingSpanPositions = new ArrayList<>(existingSpans.length);
@@ -89,7 +89,6 @@ public final class EmoticonUtils {
                         Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
         }
-        return text;
     }
 
     /**
@@ -111,8 +110,8 @@ public final class EmoticonUtils {
             final Matcher matcher = getRegex(context).matcher(text);
             while (matcher.find()) {
                 String unicode = text.subSequence(matcher.start(), matcher.end()).toString();
-                final Emoticon found = new Emoticon(unicode, emoticonProvider.getIcon(unicode));
-                if (found.getIcon() > 0) { //Check if the the emoticon has icon?
+                if (emoticonProvider.hasEmoticonIcon(unicode)) { //Check if the the emoticon has icon?
+                    final Emoticon found = new Emoticon(unicode, emoticonProvider.getIcon(unicode));
 
                     //Add this emoticon to change list.
                     result.add(new EmoticonRange(matcher.start(), matcher.end(), found));

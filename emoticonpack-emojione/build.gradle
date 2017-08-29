@@ -32,7 +32,7 @@ android {
         minSdkVersion buidlConfig.min
         targetSdkVersion buidlConfig.target
 
-        consumerProguardFiles 'proguard-rules.pro'
+        consumerProguardFiles 'proguard-rules.pro','proguard-rules-remove-logs.pro'
     }
 
     packagingOptions packageExcludes

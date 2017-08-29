@@ -107,9 +107,7 @@ final class EmoticonAdapter extends RecyclerView.Adapter<EmoticonAdapter.ViewHol
                 //Convert to spannable.
                 // Replace the emoticon image with provided by custom icon pack.
                 Spannable spannable = new SpannableString(emoji.getUnicode());
-                spannable.setSpan(new EmoticonSpan(mContext,
-                                mEmoticonProvider.getIcon(emoji.getUnicode()),
-                                mContext.getResources().getDimension(R.dimen.emoticon_grid_text_size)),
+                spannable.setSpan(new EmoticonSpan(mContext, mEmoticonProvider.getIcon(emoji.getUnicode()), mContext.getResources().getDimension(R.dimen.emoticon_grid_text_size)),
                         0,
                         spannable.length() - 1,
                         Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);

@@ -17,17 +17,17 @@
 package com.kevalpatel2106.emoticongifkeyboard;
 
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringDef;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.Transformation;
 
 import com.kevalpatel2106.emoticongifkeyboard.emoticons.EmoticonProvider;
 import com.kevalpatel2106.emoticongifkeyboard.emoticons.EmoticonSelectListener;
@@ -98,6 +98,11 @@ public final class EmoticonGIFKeyboardFragment extends Fragment implements Fragm
      * Bool to indicate weather GIF functionality is enabled or not?
      */
     private boolean mIsGIFsEnable;
+
+    /**
+     * Bool to indicate if the keyboard is currently open/
+     */
+    private boolean mIsOpen = true;
 
     /**
      * Public constructor. Don't call constructor to create new instance. Use
@@ -183,6 +188,12 @@ public final class EmoticonGIFKeyboardFragment extends Fragment implements Fragm
         mBackSpaceBtn = view.findViewById(R.id.emojis_backspace);
         mBackSpaceBtn.setOnClickListener(view1 -> {
             if (mEmoticonSelectListener != null) mEmoticonSelectListener.onBackSpace();
+
+            //dispatch back space event
+            final KeyEvent event = new KeyEvent(0, 0, 0,
+                    KeyEvent.KEYCODE_DEL, 0, 0, 0, 0,
+                    KeyEvent.KEYCODE_ENDCALL);
+            getActivity().dispatchKeyEvent(event);
         });
 
         //Set emoticon button
@@ -268,6 +279,29 @@ public final class EmoticonGIFKeyboardFragment extends Fragment implements Fragm
     }
 
     /**
+     * Handle the back key pressed event. Implement this method to {@link Activity#onBackPressed()}
+     * of your activity.
+     * <p>
+     * Sample:
+     * <code>
+     * public void onBackPressed() {<br/>
+     * if (mEmoticonGIFKeyboardFragment == null || !mEmoticonGIFKeyboardFragment.handleBackPressed())<br/>
+     * super.onBackPressed();<br/>
+     * }<br/>
+     * </code>
+     *
+     * @return True if the back press event is handled by this method. Else it will false.
+     */
+    public boolean handleBackPressed() {
+        //Close the emoticon fragment
+        if (isOpen()) {
+            toggle();
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * Make layout changes based on the fragment tag.
      *
      * @param tag Fragment tags.
@@ -315,6 +349,7 @@ public final class EmoticonGIFKeyboardFragment extends Fragment implements Fragm
     public void setEmoticonSelectListener(@Nullable EmoticonSelectListener emoticonSelectListener) {
         mEmoticonSelectListener = emoticonSelectListener;
         mEmoticonFragment.setEmoticonSelectListener(emoticonSelectListener);
+        mEmoticonSearchFragment.setEmoticonSelectListener(emoticonSelectListener);
     }
 
     /**
@@ -369,23 +404,32 @@ public final class EmoticonGIFKeyboardFragment extends Fragment implements Fragm
     /**
      * Show thw keyboard with resize animation.
      */
-    public void open() {
-        ResizeAnimation resizeAnimation = new ResizeAnimation(mRootView,
-                (int) getResources().getDimension(R.dimen.emoticon_gif_fragments_height),
-                0);
-        resizeAnimation.setDuration(300);
-        mRootView.startAnimation(resizeAnimation);
+    public synchronized void open() {
+        if (mRootView != null) mRootView.setVisibility(View.VISIBLE);
     }
 
     /**
      * Hide the keyboard with resize animation.
      */
-    public void close() {
-        ResizeAnimation resizeAnimation = new ResizeAnimation(mRootView,
-                0,
-                mRootView.getWidth());
-        resizeAnimation.setDuration(300);
-        mRootView.startAnimation(resizeAnimation);
+    public synchronized void close() {
+        if (mRootView != null) mRootView.setVisibility(View.GONE);
+    }
+
+    /**
+     * Toggle the {@link EmoticonGIFKeyboardFragment} visibility.
+     */
+    public void toggle() {
+        if (isOpen()) close();
+        else open();
+    }
+
+    /**
+     * Check if the {@link EmoticonGIFKeyboardFragment} is open/visible?
+     *
+     * @return True if {@link EmoticonGIFKeyboardFragment} is visible.
+     */
+    public boolean isOpen() {
+        return mRootView.getVisibility() == View.VISIBLE;
     }
 
     @Retention(RetentionPolicy.SOURCE)
@@ -438,51 +482,6 @@ public final class EmoticonGIFKeyboardFragment extends Fragment implements Fragm
         public GIFConfig setGifSelectListener(@Nullable GifSelectListener gifSelectListener) {
             mGifSelectListener = gifSelectListener;
             return this;
-        }
-    }
-
-    /**
-     * Custom {@link Animation} class to resize the height of the view in given duration.
-     *
-     * @see <a href='https://gist.github.com/rafali/5146957'>ResizeAnimation.java</a>
-     */
-    private class ResizeAnimation extends Animation {
-        private final int mStartHeight;     //Start height
-        private final int mTargetHeight;
-        private final View view;
-
-        /**
-         * Public constructor.
-         *
-         * @param view         View to resize.
-         * @param targetHeight Desired height of the view at the end of the animation. The number
-         *                     must be 0 or positive.
-         * @param startHeight  Current height of view.  The number must be 0 or positive.
-         */
-        @SuppressWarnings("WeakerAccess")
-        public ResizeAnimation(@NonNull View view, int targetHeight, int startHeight) {
-            if (targetHeight < 0 || startHeight < 0) {
-                throw new IllegalArgumentException("Height cannot be negative.");
-            }
-            this.view = view;
-            this.mTargetHeight = targetHeight;
-            mStartHeight = startHeight;
-        }
-
-        @Override
-        protected void applyTransformation(float interpolatedTime, Transformation t) {
-            view.getLayoutParams().height = (int) (mStartHeight + (mTargetHeight - mStartHeight) * interpolatedTime);
-            view.requestLayout();
-        }
-
-        @Override
-        public void initialize(int width, int height, int parentWidth, int parentHeight) {
-            super.initialize(width, height, parentWidth, parentHeight);
-        }
-
-        @Override
-        public boolean willChangeBounds() {
-            return true;
         }
     }
 }

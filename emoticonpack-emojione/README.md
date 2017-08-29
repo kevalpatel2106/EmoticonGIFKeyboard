@@ -19,7 +19,7 @@ This emoticon icon pack contains emoticons graphics from [EmojiOne](http://emoji
 
 
 ## Acknowledgements
-- Emoticon graphics and emoticon details are from [Emojipedia](https://emojipedia.org/). (See [emoji-scrapper](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/tree/master/emoji-scrapper) module.)
+- Emoticon graphics and emoticon details are from [Emojipedia](https://emojipedia.org/). (See [mEmoticon-scrapper](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/tree/master/mEmoticon-scrapper) module.)
 
 
 ## Questions?🤔
