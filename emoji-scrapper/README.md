@@ -65,7 +65,7 @@ This is an open sourced java project to scrap the [Emojipedia](http://emojipedia
 - Open directory in Intelij IDEA and run (▷) the `Main.java`. That's it.
 
 
-## What if I don't want to spend time to scrap the website?
+## What if I don't want to spend time to scrap the website?🤔
 - Scrapping Emojopedia and get all the emojis from the website will take almost 2 -3 hours 🕑 (depends on your internet connectivity).😟😟 
 - We know that you don't have time for that. Don't worry!!! You can download the scrapped data from the website from [here](https://mega.nz/#F!7IgGmaoY!nQIX7zW1iBaSSS8W-HY4Bg).
 

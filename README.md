@@ -1,7 +1,7 @@
 # EmoticonGIFKeyboard
 [![API](https://img.shields.io/badge/API-16%2B-orange.svg?style=flat)](https://android-arsenal.com/api?level=16) [![Javadoc](https://img.shields.io/badge/Javadoc-EmoticonGIFKeyboard-blue.svg)](http://kevalpatel2106.github.io/EmoticonGIFKeyboard) <a href="https://www.paypal.me/kevalpatel2106"> <img src="https://img.shields.io/badge/paypal-donate-yellow.svg" /></a>
 
-###### An advance Emoticons & GIF keyboard.
+###### 🙌An advance Emoticons & GIF keyboard.🙌
 **EmoticonGIFKeyboard** is an easy to integrate, customizable and lightweight library to add support for emojis and GIFs.
 
 
@@ -22,6 +22,10 @@
 ## Acknowledgements
 - Based on Hieu Rocker's library [Emojicon](https://github.com/rockerhieu/emojicon).
 - Emoticon graphics and emoticon details are from [Emojipedia](https://emojipedia.org/). (See [emoji-scrapper](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/tree/master/emoji-scrapper) module.)
+
+
+## How to contribute?
+* Check out contribution guidelines 👉[CONTRIBUTING.md](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/blob/master/CONTRIBUTING.md)
 
 
 ## Questions?🤔
