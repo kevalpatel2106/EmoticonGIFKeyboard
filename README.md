@@ -20,7 +20,7 @@
 
 
 # Emoticon icon packs
-|Icon Pack Name|Icon|Module|Dependency}
+|Icon Pack Name|Icon|Module|Dependency|
 |:---:|:---:|:---:|:---:|
 |Emojidex|![Grinning Emoji](/emoticonpack-emojidex/art/grinning-face_1f600.png)|[Emojidex](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/tree/master/emoticonpack-emojidex)|`compile 'com.kevalpatel2106:emoticonpack-emojidex:<latest>`|
 |EmojiOne|![Grinning Emoji](/emoticonpack-emojione/art/grinning-face_1f600.png)|[EmojiOne](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/tree/master/emoticonpack-emojione)|`compile 'com.kevalpatel2106:emoticonpack-emojione:<latest>`|
