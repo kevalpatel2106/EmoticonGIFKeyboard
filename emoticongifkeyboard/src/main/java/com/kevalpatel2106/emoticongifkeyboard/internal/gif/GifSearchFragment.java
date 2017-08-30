@@ -165,6 +165,8 @@ public final class GifSearchFragment extends Fragment implements GifSearchAdapte
         backBtn.setOnClickListener(view12 -> {
             hideKeyboard();
 
+            mSearchEt.setText("");
+
             //Pop fragment from the back stack
             getFragmentManager().popBackStackImmediate(EmoticonGIFKeyboardFragment.TAG_GIF_FRAGMENT, 0);
         });

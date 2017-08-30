@@ -98,6 +98,7 @@
           .replace(R.id.keyboard_container, EmoticonGIFKeyboardFragment)
           .commit();
   ```
+  
 
 - ### Open/Close the keyboard and handle back button press.
   * Open keyboard view by calling `EmoticonGIFKeyboardFragment#open()` and close it by calling `EmoticonGIFKeyboardFragment#close()`.
@@ -110,6 +111,17 @@
           super.onBackPressed();
     }
   ```
+  
+
+## Demo
+|Emoticons | GIFs |
+|![Emoticon Demo](/art/emoji_demo.gif)|![GIF Demo](/art/gif_demo.gif)|
+
+|Only Emoticons | Only GIFs |
+|![Only Emoticons](/art/only_emoji.png)|![Only GIFs](/art/only_gif.gif)|
+  
+|Search Emoticons | Search GIFs |
+|![Only Emoticons](/art/search_emoji.png)|![Only GIFs](/art/search_gif.gif)|
 
 
 ## Emoticon icon packs

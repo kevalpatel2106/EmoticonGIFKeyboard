@@ -17,6 +17,7 @@
 package com.kevalpatel2106.emoticongifkeyboard.internal.emoticon;
 
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -27,13 +28,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 import com.kevalpatel2106.emoticongifkeyboard.EmoticonGIFKeyboardFragment;
@@ -139,7 +138,7 @@ public final class EmoticonSearchFragment extends Fragment implements EmoticonAd
         //Set the list.
         //When the fragment initialize display list of recent emoticons.
         mEmoticons = EmoticonRecentManager.getInstance(mContext).getRecentEmoticons();
-        mAdapter = new EmoticonAdapter(getActivity(), mEmoticons, null, this);
+        mAdapter = new EmoticonAdapter(getActivity(), mEmoticons, mEmoticonProvider, this);
         mRecyclerView = view.findViewById(R.id.emoticon_search_list);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),
                 LinearLayoutManager.HORIZONTAL, false));
@@ -148,12 +147,9 @@ public final class EmoticonSearchFragment extends Fragment implements EmoticonAd
         //Set the search interface
         mSearchEt = view.findViewById(R.id.search_box_et);
         mSearchEt.requestFocus();
-        mSearchEt.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                searchEmoticon(mSearchEt.getText().toString());
-                return true;
-            }
+        mSearchEt.setOnEditorActionListener((textView, i, keyEvent) -> {
+            searchEmoticon(mSearchEt.getText().toString());
+            return true;
         });
         mSearchEt.addTextChangedListener(new TextWatcher() {
             @Override
@@ -174,14 +170,13 @@ public final class EmoticonSearchFragment extends Fragment implements EmoticonAd
 
         //Set up button
         EmoticonGifImageView backBtn = view.findViewById(R.id.up_arrow);
-        backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                hideKeyboard();
+        backBtn.setOnClickListener(view1 -> {
+            hideKeyboard();
 
-                //Pop fragment from the back stack
-                getFragmentManager().popBackStackImmediate(EmoticonGIFKeyboardFragment.TAG_EMOTICON_FRAGMENT, 0);
-            }
+            mSearchEt.setText("");
+
+            //Pop fragment from the back stack
+            getFragmentManager().popBackStackImmediate(EmoticonGIFKeyboardFragment.TAG_EMOTICON_FRAGMENT, 0);
         });
 
         //Open the keyboard.
@@ -225,6 +220,7 @@ public final class EmoticonSearchFragment extends Fragment implements EmoticonAd
     /**
      * Show the keyboard.
      */
+    @SuppressWarnings("ConstantConditions")
     private void showKeyboard() {
         //Show the keyboard
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -234,6 +230,7 @@ public final class EmoticonSearchFragment extends Fragment implements EmoticonAd
     /**
      * Hide the keyboard.
      */
+    @SuppressWarnings("ConstantConditions")
     private void hideKeyboard() {
         //Hide the keyboard
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -269,6 +266,7 @@ public final class EmoticonSearchFragment extends Fragment implements EmoticonAd
      * Async task to load search emoticons into database in background and refresh the list in main
      * thread.
      */
+    @SuppressLint("StaticFieldLeak")
     private class SearchEmoticonTask extends AsyncTask<String, Void, List<Emoticon>> {
 
         @Override
