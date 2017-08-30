@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"/>
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/bottom_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -44,9 +44,23 @@
             android:id="@+id/emoji_open_close_btn"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:layout_centerVertical="true"
             android:background="?selectableItemBackground"
             android:padding="6dp"
             android:src="@drawable/ic_emoticon"
+            android:tint="@android:color/white"
+            tools:ignore="ContentDescription"/>
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/emoji_send_btn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="?selectableItemBackground"
+            android:padding="6dp"
+            android:src="@drawable/ic_action_name"
             android:tint="@android:color/white"
             tools:ignore="ContentDescription"/>
 
@@ -59,10 +73,14 @@
             android:layout_marginEnd="6dp"
             android:layout_marginRight="6dp"
             android:layout_marginTop="6dp"
+            android:layout_toEndOf="@id/emoji_open_close_btn"
+            android:layout_toLeftOf="@id/emoji_send_btn"
+            android:layout_toRightOf="@id/emoji_open_close_btn"
+            android:layout_toStartOf="@id/emoji_send_btn"
             android:background="@android:color/white"
             android:padding="10dp"
             app:emojiconSize="30sp"/>
-    </LinearLayout>
+    </RelativeLayout>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -71,13 +89,26 @@
         android:background="@color/colorPrimaryLight"
         android:fillViewport="true">
 
-        <com.kevalpatel2106.emoticongifkeyboard.widget.EmoticonTextView
-            android:id="@+id/selected_emoticons_tv"
-            style="@style/Base.TextAppearance.AppCompat.Medium"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:textColor="@android:color/white"
-            app:emojiconSize="30sp"/>
+            android:orientation="vertical">
+
+            <com.kevalpatel2106.emoticongifkeyboard.widget.EmoticonTextView
+                android:id="@+id/selected_emoticons_tv"
+                style="@style/Base.TextAppearance.AppCompat.Medium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textColor="@android:color/white"
+                app:emojiconSize="30sp"/>
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/selected_git_iv"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:padding="10dp"
+                android:textColor="@android:color/white"/>
+        </LinearLayout>
     </ScrollView>
 </RelativeLayout>

@@ -20,10 +20,12 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatImageView;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
+import com.bumptech.glide.Glide;
 import com.kevalpatel2106.emoticongifkeyboard.EmoticonGIFKeyboardFragment;
 import com.kevalpatel2106.emoticongifkeyboard.emoticons.Emoticon;
 import com.kevalpatel2106.emoticongifkeyboard.emoticons.EmoticonSelectListener;
@@ -54,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        final AppCompatImageView gifImageView = findViewById(R.id.selected_git_iv);
 
         //Set the emoticon text view.
         final EmoticonTextView textView = findViewById(R.id.selected_emoticons_tv);
@@ -110,7 +112,6 @@ public class MainActivity extends AppCompatActivity {
 
         //Create GIF config
         EmoticonGIFKeyboardFragment.GIFConfig gifConfig = new EmoticonGIFKeyboardFragment
-
                 /*
                   Set the desired GIF provider. Here we are using GIPHY to provide GIFs.
                   Create Giphy GIF provider by passing your key.
@@ -126,6 +127,11 @@ public class MainActivity extends AppCompatActivity {
                     public void onGifSelected(@NonNull Gif gif) {
                         //Do something with the selected GIF.
                         Log.d(TAG, "onGifSelected: " + gif.getGifUrl());
+                        Glide.with(MainActivity.this)
+                                .load(gif.getGifUrl())
+                                .asGif()
+                                .placeholder(R.mipmap.ic_launcher)
+                                .into(gifImageView);
                     }
                 });
 
@@ -151,6 +157,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 mEmoticonGIFKeyboardFragment.toggle();
                 toggleKeyboardVisibility(MainActivity.this);
+            }
+        });
+
+        //Send button
+        findViewById(R.id.emoji_send_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                textView.setText(editText.getText());
+                editText.setText("");
             }
         });
     }
