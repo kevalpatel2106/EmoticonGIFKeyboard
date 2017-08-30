@@ -30,9 +30,26 @@
 
     <include layout="@layout/layout_divider"/>
 
-    <!--Emoticons grid-->
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/emoji_gridView"
+    <ViewFlipper
+        android:id="@+id/recent_emoticon_flipper"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content">
+
+        <!--Emoticons grid-->
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/emoji_gridView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <!--2. Emoticon not found-->
+        <TextView
+            android:id="@+id/error_tv"
+            style="@style/Base.TextAppearance.AppCompat.Small"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="No emoji to display."/>
+    </ViewFlipper>
 </LinearLayout>

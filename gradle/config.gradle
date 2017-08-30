@@ -28,7 +28,7 @@ ext {
             publishVersion: '1.0',
             description   : 'Emoticons and GIF picker.',
             website       : 'https://github.com/kevalpatel2106/EmoticonGIFKeyboard',
-            licences      : 'Apache 2.0',
+            licences      : 'Apache-2.0',
     ]
 
     javaCompatibility = [

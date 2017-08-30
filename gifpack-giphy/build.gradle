@@ -15,7 +15,7 @@
  */
 
 apply plugin: 'com.android.library'
-apply plugin: 'bintray-release'
+apply plugin: 'com.github.dcendents.android-maven'
 apply from: '../gradle/config.gradle'
 
 android {
@@ -32,7 +32,7 @@ android {
         minSdkVersion buidlConfig.min
         targetSdkVersion buidlConfig.target
 
-        consumerProguardFiles 'proguard-rules.pro','proguard-rules-remove-logs.pro'
+        consumerProguardFiles 'proguard-rules.pro','../proguard-rules-remove-logs.pro'
     }
 
     packagingOptions packageExcludes
@@ -43,21 +43,13 @@ android {
     }
 }
 
-publish {
-    artifactId = "gifpack-giphy"
-    userOrg = bintrayConfig.userOrg
-    groupId = bintrayConfig.groupId
-    publishVersion = bintrayConfig.publishVersion
-    description = bintrayConfig.description
-    website = bintrayConfig.website
-    licences = bintrayConfig.licences
-}
-
 dependencies {
     implementation project(':emoticongifkeyboard')
-    debugImplementation 'com.android.support:support-annotations:26.0.1'
+    implementation 'com.android.support:support-annotations:26.0.1'
     implementation('com.squareup.retrofit2:retrofit:2.3.0', {
         exclude group: 'com.android.support', module: 'support-annotations'
         exclude group: 'com.android.support', module: 'support-v4'
     })
 }
+
+apply from: '../gradle/gradle-mvn-push.gradle'

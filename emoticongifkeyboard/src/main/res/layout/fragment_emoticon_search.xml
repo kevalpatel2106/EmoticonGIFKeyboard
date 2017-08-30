@@ -37,7 +37,7 @@
             android:paddingBottom="@dimen/search_emoticon_recycler_view_padding"
             android:paddingTop="@dimen/search_emoticon_recycler_view_padding"/>
 
-        <!--2. Gif not found-->
+        <!--2. Emoticon not found-->
         <TextView
             android:id="@+id/error_tv"
             style="@style/Base.TextAppearance.AppCompat.Small"

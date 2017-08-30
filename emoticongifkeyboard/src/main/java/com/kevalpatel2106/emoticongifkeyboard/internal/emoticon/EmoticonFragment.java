@@ -28,6 +28,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ViewFlipper;
 
 import com.kevalpatel2106.emoticongifkeyboard.R;
 import com.kevalpatel2106.emoticongifkeyboard.emoticons.Emoticon;
@@ -78,6 +79,8 @@ public final class EmoticonFragment extends Fragment implements EmoticonAdapter.
      */
     private RecyclerView mRecyclerView;
 
+    private ViewFlipper mViewFlipper;
+
     /**
      * Public constructor. Don't call constructor to create new instance. Use {@link #getNewInstance()}
      * instead.
@@ -120,10 +123,12 @@ public final class EmoticonFragment extends Fragment implements EmoticonAdapter.
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mViewFlipper = view.findViewById(R.id.recent_emoticon_flipper);
 
         //Set the grid view
         mEmoticons = new ArrayList<>();
         mEmoticons.addAll(getEmoticonsList(mEmoticonRecentManager.getLastCategory()));
+        mViewFlipper.setDisplayedChild(mEmoticons.isEmpty() ? 1 : 0);
         mEmoticonAdapter = new EmoticonAdapter(mContext, mEmoticons, mEmoticonProvider, this);
 
         //Emoticon grid.
