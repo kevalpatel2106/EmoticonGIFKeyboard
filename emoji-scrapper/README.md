@@ -67,7 +67,7 @@ This is an open sourced java project to scrap the [Emojipedia](http://emojipedia
 
 ## What if I don't want to spend time to scrap the website?🤔
 - Scrapping Emojopedia and get all the emojis from the website will take almost 2 -3 hours 🕑 (depends on your internet connectivity).😟😟 
-- We know that you don't have time for that. Don't worry!!! You can download the scrapped data from the website from [here](https://mega.nz/#F!7IgGmaoY!nQIX7zW1iBaSSS8W-HY4Bg).
+- We know that you don't have time for that. Don't worry!!! You can download the scrapped data from from [emoji-scrapper-out.zip](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/releases).
 
 ## Legal:
 This code is open source and freely available for use. However the data scrapped from the [Emojipedia](http://emojipedia.org) website are subjected to [Emojipedia](http://emojipedia.org) terms and conditions. Visit [Emojipedia](http://emojipedia.org) to know more.
