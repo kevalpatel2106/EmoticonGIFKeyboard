@@ -24,6 +24,6 @@ include ':app',
         ':gifpack-tenor',
         ':emoticonpack-emojidex',
         ':emoticonpack-facebook',
-        ':emoticonpack-messanger',
+        ':emoticonpack-messenger',
         ':emoticonpack-windows',
         ':emoticonpack-samsung'

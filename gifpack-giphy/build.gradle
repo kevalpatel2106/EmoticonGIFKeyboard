@@ -32,6 +32,9 @@ android {
         minSdkVersion buidlConfig.min
         targetSdkVersion buidlConfig.target
 
+        versionCode 1
+        versionName "v" + libraryVersion
+
         consumerProguardFiles 'proguard-rules.pro','../proguard-rules-remove-logs.pro'
     }
 
@@ -52,4 +55,5 @@ dependencies {
     })
 }
 
-apply from: '../gradle/gradle-mvn-push.gradle'
+apply from: '../gradle/install-bintray.gradle'
+apply from: '../gradle/bintray.gradle'

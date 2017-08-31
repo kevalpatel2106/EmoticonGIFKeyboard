@@ -32,7 +32,10 @@ android {
         minSdkVersion buidlConfig.min
         targetSdkVersion buidlConfig.target
 
-        consumerProguardFiles 'proguard-rules.pro','../proguard-rules-remove-logs.pro'
+        versionCode 1
+        versionName "v" + libraryVersion
+
+        consumerProguardFiles 'proguard-rules.pro', '../proguard-rules-remove-logs.pro'
     }
 
     packagingOptions packageExcludes
@@ -63,4 +66,5 @@ dependencies {
     implementation 'com.android.support:support-annotations:26.0.1'
 }
 
-apply from: '../gradle/gradle-mvn-push.gradle'
+apply from: '../gradle/install-bintray.gradle'
+apply from: '../gradle/bintray.gradle'

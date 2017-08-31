@@ -24,8 +24,8 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.0-beta3'
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.4'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.4.1'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -40,6 +40,26 @@ allprojects {
             dirs 'libs'
         }
     }
+}
+
+ext {
+    //For bintray and jcenter distribution
+    bintrayRepo = 'EmoticonGIFKeyboard'
+
+    publishedGroupId = 'com.kevalpatel2106'
+    libraryDescription = 'An advance Emoticons & GIF keyboard.'
+
+    siteUrl = 'https://github.com/kevalpatel2106/EmoticonGIFKeyboard'
+    gitUrl = 'https://github.com/kevalpatel2106/EmoticonGIFKeyboard.git'
+
+    libraryVersion = '1.0'
+
+    developerId = 'kevalpatel2106'
+    developerName = 'Keval Patel'
+    developerEmail = 'kevalpatel2106@gmail.com'
+    licenseName = 'The Apache Software License, Version 2.0'  //Example for license
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
 }
 
 task clean(type: Delete) {

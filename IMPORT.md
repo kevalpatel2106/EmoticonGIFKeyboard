@@ -16,7 +16,7 @@
 ```
 <dependency>
   <groupId>com.kevalpatel2106</groupId>
-  <artifactId>passcodeview</artifactId>
+  <artifactId>emoticongifkeyboard</artifactId>
   <version>[LATEST VERSION]</version>
   <type>pom</type>
 </dependency>

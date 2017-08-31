@@ -25,12 +25,15 @@ android {
     compileOptions {
         sourceCompatibility javaCompatibility.sourceCompatibility
         targetCompatibility javaCompatibility.targetCompatibility
-    }
+   }
 
     defaultConfig {
         //sdks
         minSdkVersion buidlConfig.min
         targetSdkVersion buidlConfig.target
+
+        versionCode 1
+        versionName "v" + libraryVersion
 
         consumerProguardFiles 'proguard-rules.pro','../proguard-rules-remove-logs.pro'
     }
@@ -43,8 +46,15 @@ android {
     }
 }
 
+ext {
+    bintrayName = 'emoticonpack-twitter'
+    libraryName = 'Emoticon Pack Twitter'
+    artifact = 'emoticonpack-twitter'//This artifact name should be the same with library module name
+}
+
 dependencies {
     implementation project(':emoticongifkeyboard')
 }
 
-apply from: '../gradle/gradle-mvn-push.gradle'
+apply from: '../gradle/install-bintray.gradle'
+apply from: '../gradle/bintray.gradle'

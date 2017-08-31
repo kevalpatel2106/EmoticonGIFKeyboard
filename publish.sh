@@ -1,0 +1,1 @@
+                ./gradlew clean build :emoticongifkeyboard:bU  :emoticonpack-ios:bU :emoticonpack-google:bU :emoticonpack-twitter:bU :emoticonpack-emojione:bU :emoticonpack-emojidex:bU :emoticonpack-facebook:bU :emoticonpack-messenge:bU :emoticonpack-windows:bU :emoticonpack-samsung:bU :gifpack-tenor:bU :gifpack-giphy:bU

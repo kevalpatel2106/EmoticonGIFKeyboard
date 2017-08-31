@@ -22,15 +22,6 @@ ext {
             buildToolVersion: '26.0.0',
     ]
 
-    bintrayConfig = [
-            userOrg       : 'kevalpatel2106',
-            groupId       : 'com.kevalpatel2106',
-            publishVersion: '1.0',
-            description   : 'Emoticons and GIF picker.',
-            website       : 'https://github.com/kevalpatel2106/EmoticonGIFKeyboard',
-            licences      : 'Apache-2.0',
-    ]
-
     javaCompatibility = [
             sourceCompatibility: JavaVersion.VERSION_1_8,
             targetCompatibility: JavaVersion.VERSION_1_8,
