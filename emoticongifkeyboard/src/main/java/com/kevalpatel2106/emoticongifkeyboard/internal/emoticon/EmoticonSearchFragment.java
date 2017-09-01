@@ -53,7 +53,7 @@ import java.util.List;
  *
  * @author 'https://github.com/kevalpatel2106'
  */
-public final class EmoticonSearchFragment extends Fragment implements EmoticonAdapter.ItemSelectListener {
+public final class EmoticonSearchFragment extends Fragment implements EmoticonSearchAdapter.ItemSelectListener {
     private Context mContext;
 
     /**
@@ -64,7 +64,7 @@ public final class EmoticonSearchFragment extends Fragment implements EmoticonAd
     /**
      * Emoticon adapter
      */
-    private EmoticonAdapter mAdapter;
+    private EmoticonSearchAdapter mAdapter;
 
     /**
      * Listener to notify when emoticons selected.
@@ -138,7 +138,7 @@ public final class EmoticonSearchFragment extends Fragment implements EmoticonAd
         //Set the list.
         //When the fragment initialize display list of recent emoticons.
         mEmoticons = EmoticonRecentManager.getInstance(mContext).getRecentEmoticons();
-        mAdapter = new EmoticonAdapter(getActivity(), mEmoticons, mEmoticonProvider, this);
+        mAdapter = new EmoticonSearchAdapter(getActivity(), mEmoticons, mEmoticonProvider, this);
         mRecyclerView = view.findViewById(R.id.emoticon_search_list);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),
                 LinearLayoutManager.HORIZONTAL, false));

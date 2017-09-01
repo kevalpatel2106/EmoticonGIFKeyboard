@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ Copyright 2017 Keval Patel.
   ~
@@ -14,25 +15,26 @@
   ~  limitations under the License.
   -->
 
-<LinearLayout
+<ViewFlipper
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/recent_emoticon_flipper"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/emoticon_gif_fragments_height"
-    android:background="@color/background_light"
-    android:orientation="vertical"
-    tools:context=".internal.emoticon.EmoticonFragment">
+    android:layout_height="wrap_content">
 
-    <!--Tab titles of emoticons category-->
-    <include
-        layout="@layout/tab_emoticons"
-        android:background="@color/background_dark"/>
-
-    <include layout="@layout/layout_divider"/>
-
-    <!--View pager to display emoticons-->
-    <android.support.v4.view.ViewPager
-        android:id="@+id/emoji_category_view_pager"
+    <!--Emoticons grid-->
+    <GridView
+        android:id="@+id/emoticon_list_grid"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-</LinearLayout>
+
+    <!--2. Emoticon not found-->
+    <TextView
+        android:id="@+id/error_tv"
+        style="@style/Base.TextAppearance.AppCompat.Small"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="No emoji to display."/>
+</ViewFlipper>

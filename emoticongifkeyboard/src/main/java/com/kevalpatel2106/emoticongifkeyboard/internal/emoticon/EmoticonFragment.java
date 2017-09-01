@@ -20,23 +20,18 @@ package com.kevalpatel2106.emoticongifkeyboard.internal.emoticon;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ViewFlipper;
 
 import com.kevalpatel2106.emoticongifkeyboard.R;
-import com.kevalpatel2106.emoticongifkeyboard.emoticons.Emoticon;
 import com.kevalpatel2106.emoticongifkeyboard.emoticons.EmoticonProvider;
 import com.kevalpatel2106.emoticongifkeyboard.emoticons.EmoticonSelectListener;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -44,18 +39,16 @@ import java.util.List;
  *
  * @author 'https://github.com/kevalpatel2106'
  */
-public final class EmoticonFragment extends Fragment implements EmoticonAdapter.ItemSelectListener {
+public final class EmoticonFragment extends Fragment {
+    /***
+     * Total number of tabs in emoticons.
+     */
+    private static final int TOTAL_TABS = 9;
+
+    /**
+     * Instance of caller.
+     */
     private Context mContext;
-
-    /**
-     * Array list to hold currently displaying emoticons list
-     */
-    private ArrayList<Emoticon> mEmoticons;
-
-    /**
-     * Adapter to display emoticon grids.
-     */
-    private EmoticonAdapter mEmoticonAdapter;
 
     /**
      * Listener to notify when emoticons selected.
@@ -74,12 +67,7 @@ public final class EmoticonFragment extends Fragment implements EmoticonAdapter.
     @Nullable
     private EmoticonProvider mEmoticonProvider;
 
-    /**
-     * Recycler view to display the grid of emoticons.
-     */
-    private RecyclerView mRecyclerView;
-
-    private ViewFlipper mViewFlipper;
+    private ViewPager mViewPager;
 
     /**
      * Public constructor. Don't call constructor to create new instance. Use {@link #getNewInstance()}
@@ -120,35 +108,16 @@ public final class EmoticonFragment extends Fragment implements EmoticonAdapter.
         return inflater.inflate(R.layout.fragment_emoticon, container, false);
     }
 
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        mViewFlipper = view.findViewById(R.id.recent_emoticon_flipper);
 
-        //Set the grid view
-        mEmoticons = new ArrayList<>();
-        mEmoticons.addAll(getEmoticonsList(mEmoticonRecentManager.getLastCategory()));
-        mViewFlipper.setDisplayedChild(mEmoticons.isEmpty() ? 1 : 0);
-        mEmoticonAdapter = new EmoticonAdapter(mContext, mEmoticons, mEmoticonProvider, this);
-
-        //Emoticon grid.
-        mRecyclerView = view.findViewById(R.id.emoji_gridView);
-        mRecyclerView.setAdapter(mEmoticonAdapter);
-        mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(),
-                getResources().getInteger(R.integer.emoticon_recycler_view_span_size)));
-
-        //Set headers
-        setTabs(view);
-    }
-
-    /**
-     * Set the tabs with categories of emoticons and back space button.
-     *
-     * @param rootView Root view.
-     */
     @SuppressLint("WrongConstant")
-    private void setTabs(@NonNull View rootView) {
-        final View[] emojiTabs = new View[9];
+    @Override
+    public void onViewCreated(View rootView, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(rootView, savedInstanceState);
+
+        mViewPager = rootView.findViewById(R.id.emoji_category_view_pager);
+        mViewPager.setAdapter(new EmoticonCategoryViewpagerAdapter(getChildFragmentManager()));
+
+        final View[] emojiTabs = new View[TOTAL_TABS];
         emojiTabs[EmoticonsCategories.RECENT] = rootView.findViewById(R.id.emojis_tab_0_recents);
         emojiTabs[EmoticonsCategories.PEOPLE] = rootView.findViewById(R.id.emojis_tab_1_people);
         emojiTabs[EmoticonsCategories.NATURE] = rootView.findViewById(R.id.emojis_tab_2_nature);
@@ -167,23 +136,39 @@ public final class EmoticonFragment extends Fragment implements EmoticonAdapter.
                 for (View emojiTab : emojiTabs) emojiTab.setSelected(false);
                 v.setSelected(true);
 
-                //Update the grid with emoticons for that category
-                mEmoticons.clear();
-                //noinspection WrongConstant
-                mEmoticons.addAll(getEmoticonsList(position));
-                mEmoticonAdapter.notifyDataSetChanged();
-
-                //Scroll the list to top.
-                mRecyclerView.scrollToPosition(0);
+                mViewPager.setCurrentItem(position);
 
                 //Save the selected category
-                //noinspection WrongConstant
                 mEmoticonRecentManager.setLastCategory(position);
             });
         }
 
+        //Add the view pager listener to handle page change.
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                //Do nothing
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                //Mark current tab as selected.
+                for (View emojiTab : emojiTabs) emojiTab.setSelected(false);
+                emojiTabs[position].setSelected(true);
+
+                //Save the selected category
+                //noinspection WrongConstant
+                mEmoticonRecentManager.setLastCategory(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                //Do nothing
+            }
+        });
         //Select recent tabs selected while creating new instance
         emojiTabs[mEmoticonRecentManager.getLastCategory()].setSelected(true);
+        mViewPager.setCurrentItem(mEmoticonRecentManager.getLastCategory());
     }
 
     /**
@@ -197,42 +182,6 @@ public final class EmoticonFragment extends Fragment implements EmoticonAdapter.
     }
 
     /**
-     * Get the list  of {@link Emoticon} for the selected category.
-     *
-     * @param category category id.
-     * @return List of {@link Emoticon}
-     */
-    private List<Emoticon> getEmoticonsList(@EmoticonsCategories.EmoticonsCategory int category) {
-        switch (category) {
-            case EmoticonsCategories.RECENT:
-                return mEmoticonRecentManager.getRecentEmoticons();
-            case EmoticonsCategories.PEOPLE:
-            case EmoticonsCategories.NATURE:
-            case EmoticonsCategories.FOOD:
-            case EmoticonsCategories.ACTIVITY:
-            case EmoticonsCategories.TRAVEL:
-            case EmoticonsCategories.OBJECTS:
-            case EmoticonsCategories.SYMBOLS:
-            case EmoticonsCategories.FLAGS:
-                return new EmoticonDbHelper(mContext).getEmoticons(category, mEmoticonProvider);
-            default:
-                //This should
-                throw new IllegalStateException("Invalid position.");
-        }
-    }
-
-
-    @Override
-    public void OnEmoticonSelected(@NonNull Emoticon emoticon) {
-        //Notify the emoticon
-        if (mEmoticonSelectListener != null)
-            mEmoticonSelectListener.emoticonSelected(emoticon);
-
-        //Save the emoticon to the recent list
-        mEmoticonRecentManager.add(emoticon);
-    }
-
-    /**
      * Set the {@link EmoticonProvider} to render different images for unicode. If the value is null,
      * system emoticon images will render.
      *
@@ -240,5 +189,35 @@ public final class EmoticonFragment extends Fragment implements EmoticonAdapter.
      */
     public void setEmoticonProvider(@Nullable EmoticonProvider emoticonProvider) {
         mEmoticonProvider = emoticonProvider;
+    }
+
+    /**
+     * An adapter class to bind the view pager with {@link EmoticonGridFragment} to display the
+     * grid of {@link com.kevalpatel2106.emoticongifkeyboard.emoticons.Emoticon} for given category.
+     *
+     * @see FragmentStatePagerAdapter
+     */
+    private class EmoticonCategoryViewpagerAdapter extends FragmentStatePagerAdapter {
+
+        /**
+         * Constructor.
+         *
+         * @param fm {@link FragmentManager}
+         */
+        EmoticonCategoryViewpagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return EmoticonGridFragment.newInstance(position,   //Position. Same as emoticon category id
+                    mEmoticonSelectListener,    //Callback listener
+                    mEmoticonProvider);         //Emoticon icon provider.
+        }
+
+        @Override
+        public int getCount() {
+            return TOTAL_TABS;
+        }
     }
 }
