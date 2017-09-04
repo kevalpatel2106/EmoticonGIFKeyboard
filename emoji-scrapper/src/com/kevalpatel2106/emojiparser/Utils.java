@@ -38,8 +38,8 @@ import static com.kevalpatel2106.emojiparser.Utils.EmoticonsCategories.TRAVEL;
  */
 class Utils {
     static final String CURRENT_DIR_PATH = System.getProperty("user.dir") + "/out";
-    private static final int IMG_WIDTH = 48;
-    private static final int IMG_HEIGHT = 48;
+    private static final int IMG_WIDTH = 60;
+    private static final int IMG_HEIGHT = 60;
 
     static String removeFirstEmojiFromText(String textWithEmojiFirst) {
         return textWithEmojiFirst.substring(textWithEmojiFirst.indexOf(" ") + 1);
