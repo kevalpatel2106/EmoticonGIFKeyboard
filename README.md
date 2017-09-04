@@ -24,7 +24,7 @@
 ## How to import this library?
 - ### Gradle Dependency:
   * Add below lines to `app/build.gradle` file of your project.
-  ```
+  ```groovy
   dependencies {
       compile 'com.kevalpatel2106:emoticongifkeyboard:1.0'
   }
@@ -38,7 +38,7 @@
   * Set the custom emoticon icon provider using `EmoticonConfig#setEmoticonProvider()`. If you don't set any icon provider here, library will render system emoticons. You can pic custom emoticon icons from [here](https://github.com/kevalpatel2106/EmoticonGIFKeyboard#emoticon-icon-packs).
   * Set the `EmoticonSelectListener` using `EmoticonConfig#setEmoticonSelectListener()`. This will notify you when user selects any emoticon from list or user preses back button.
 
-  ```
+  ```java
   EmoticonGIFKeyboardFragment.EmoticonConfig emoticonConfig = new EmoticonGIFKeyboardFragment.EmoticonConfig()
           .setEmoticonProvider(IosEmoticonProvider.create())
           /*
@@ -66,7 +66,7 @@
     It is required to set GIF provider before adding fragment into container.
   * Implement GIF select listener using `GIFConfig#setGifSelectListener()`. This will notify you when user selects new GIF.
 
-  ```
+  ```java
   //Create GIF config
   EmoticonGIFKeyboardFragment.GIFConfig gifConfig = new EmoticonGIFKeyboardFragment
 
@@ -88,7 +88,7 @@
   * Create new `EmoticonGIFKeyboardFragment` by passing `EmoticonConfig` and `GIFConfig`. If you pass null to `EmoticonConfig`, emoticon functionality will be disabled. Also, if you pass `GIFConfig` as null, GIF functionality will be disabled.
   * Add the generated fragment to the container.
 
-  ```
+  ```java
   EmoticonGIFKeyboardFragment emoticonGIFKeyboardFragment = EmoticonGIFKeyboardFragment
           .getNewInstance(findViewById(R.id.keyboard_container), emoticonConfig, gifConfig);
 
@@ -104,7 +104,7 @@
   * Open keyboard view by calling `EmoticonGIFKeyboardFragment#open()` and close it by calling `EmoticonGIFKeyboardFragment#close()`.
   * Handle back button press events by using `EmoticonGIFKeyboardFragment#handleBackPressed()` in your activity.
 
-  ```
+  ```java
     @Override
     public void onBackPressed() {
       if (!mEmoticonGIFKeyboardFragment.handleBackPressed())
