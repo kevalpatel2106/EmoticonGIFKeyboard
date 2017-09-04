@@ -43,6 +43,8 @@ public class Main {
     private static final List<String> SUPPORTED_VENDOR = Arrays.asList(
             "Apple",
             "Google",
+            "Android 7.0",
+            "HTC",
             "Microsoft",
             "Samsung",
             "Facebook",

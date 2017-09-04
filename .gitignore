@@ -13,7 +13,6 @@
 /.idea/markdown-navigator.xml
 /.idea/misc.xml
 /.idea/dictionaries/
-/emoticon-scrapper/.idea/workspace.xml
-/emoticon-scrapper/out/
-/emoticon-scrapper/out/production/
-!/emoticon-scrapper/mEmoticon-scrapper.iml
+/emoji-scrapper/out/
+!/emoji-scrapper/emoticon-scrapper.iml
+/emoji-scrapper/.idea/workspace.xml
