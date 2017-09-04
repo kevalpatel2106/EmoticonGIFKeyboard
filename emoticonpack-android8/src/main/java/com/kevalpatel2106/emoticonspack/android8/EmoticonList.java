@@ -14,9 +14,9 @@
  *  limitations under the License.
  */
 
-package com.kevalpatel2106.emoticonspack.google;
+package com.kevalpatel2106.emoticonspack.android8;
 
-import com.kevalpatel2106.emoticonpack.google.R;
+import com.kevalpatel2106.emoticonpack.android8.R;
 
 import java.util.HashMap;
 

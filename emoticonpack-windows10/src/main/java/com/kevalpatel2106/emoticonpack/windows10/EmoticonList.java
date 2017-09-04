@@ -14,7 +14,7 @@
  *  limitations under the License.
  */
 
-package com.kevalpatel2106.emoticonpack.windows;
+package com.kevalpatel2106.emoticonpack.windows10;
 
 import java.util.HashMap;
 

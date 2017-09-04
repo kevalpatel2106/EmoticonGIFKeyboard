@@ -14,28 +14,28 @@
  *  limitations under the License.
  */
 
-package com.kevalpatel2106.emoticonspack.google;
+package com.kevalpatel2106.emoticonpack.windows10;
 
 import com.kevalpatel2106.emoticongifkeyboard.emoticons.EmoticonProvider;
 
 /**
  * Created by Keval Patel on 21/08/17.
- * Google (Android 8.0) emoticon icon pack.
+ * Windows 10 emoticon icon pack.
  *
  * @author 'https://github.com/kevalpatel2106'
  */
 
 @SuppressWarnings("WeakerAccess")
-public class GoogleEmoticonProvider implements EmoticonProvider {
+public class WindowsEmoticonProvider implements EmoticonProvider {
 
-    private GoogleEmoticonProvider() {
+    private WindowsEmoticonProvider() {
     }
 
     /**
-     * return {@link GoogleEmoticonProvider}
+     * return {@link WindowsEmoticonProvider}
      */
-    public static GoogleEmoticonProvider create() {
-        return new GoogleEmoticonProvider();
+    public static WindowsEmoticonProvider create() {
+        return new WindowsEmoticonProvider();
     }
 
     /**

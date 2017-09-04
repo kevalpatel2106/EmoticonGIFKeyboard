@@ -140,8 +140,6 @@ public class Main {
                         categoryUrl.replace(BASE_URL, "").replace("/", ""));
 
                 if (emoji != null) mEmojis.add(emoji);
-
-                break;
             }
         } catch (IOException e) {
             System.out.println("Category page loading failed...Trying again...");
