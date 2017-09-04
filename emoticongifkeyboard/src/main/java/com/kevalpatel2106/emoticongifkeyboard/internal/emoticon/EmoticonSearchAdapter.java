@@ -40,7 +40,7 @@ import java.util.List;
  * @author 'https://github.com/kevalpatel2106'
  */
 
-final class EmoticonAdapter extends RecyclerView.Adapter<EmoticonAdapter.ViewHolder> {
+final class EmoticonSearchAdapter extends RecyclerView.Adapter<EmoticonSearchAdapter.ViewHolder> {
 
     /**
      * Context
@@ -61,7 +61,7 @@ final class EmoticonAdapter extends RecyclerView.Adapter<EmoticonAdapter.ViewHol
     private final EmoticonProvider mEmoticonProvider;
 
     /**
-     * {@link EmoticonAdapter.ItemSelectListener} to get callbacks when any emoticon gets select.
+     * {@link EmoticonSearchAdapter.ItemSelectListener} to get callbacks when any emoticon gets select.
      */
     @NonNull
     private final ItemSelectListener mListener;
@@ -73,13 +73,13 @@ final class EmoticonAdapter extends RecyclerView.Adapter<EmoticonAdapter.ViewHol
      * @param data             List of {@link Emoticon} to display.
      * @param emoticonProvider {@link EmoticonProvider} to display custom emoticon icons. To display
      *                         system emoticons pass null.
-     * @param listener         {@link EmoticonAdapter.ItemSelectListener} to get callbacks when any
+     * @param listener         {@link EmoticonSearchAdapter.ItemSelectListener} to get callbacks when any
      *                         emoticon gets select.
      */
-    EmoticonAdapter(@NonNull Context context,
-                    @NonNull List<Emoticon> data,
-                    @Nullable EmoticonProvider emoticonProvider,
-                    @NonNull ItemSelectListener listener) {
+    EmoticonSearchAdapter(@NonNull Context context,
+                          @NonNull List<Emoticon> data,
+                          @Nullable EmoticonProvider emoticonProvider,
+                          @NonNull ItemSelectListener listener) {
         //Validate inputs
         //noinspection ConstantConditions
         if (context == null || data == null || listener == null)
@@ -92,7 +92,7 @@ final class EmoticonAdapter extends RecyclerView.Adapter<EmoticonAdapter.ViewHol
     }
 
     @Override
-    public EmoticonAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public EmoticonSearchAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new ViewHolder(LayoutInflater.from(mContext)
                 .inflate(R.layout.item_emojicon, parent, false));
     }

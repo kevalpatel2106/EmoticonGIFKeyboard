@@ -8,8 +8,8 @@
 ### Gradle Dependency:
 * Add below lines to `app/build.gradle` file of your project.
 ```
- dependencies {
-      compile 'com.kevalpatel2106:moticon-gif-keyboard:1.0'
+dependencies {
+    compile 'com.kevalpatel2106:emoticongifkeyboard:1.0'
 }
 ```
 ### Maven Dependency:
@@ -17,7 +17,7 @@
 <dependency>
   <groupId>com.kevalpatel2106</groupId>
   <artifactId>emoticongifkeyboard</artifactId>
-  <version>[LATEST VERSION]</version>
+  <version>[latest version]</version>
   <type>pom</type>
 </dependency>
 ```

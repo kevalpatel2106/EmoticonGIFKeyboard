@@ -1,5 +1,5 @@
 # GIF Pack - TENOR
-[ ![Download](https://api.bintray.com/packages/kevalpatel2106/maven/gifpack-tenor/images/download.svg) ](https://bintray.com/kevalpatel2106/maven/gifpack-tenor/_latestVersion) [![API](https://img.shields.io/badge/API-16%2B-orange.svg?style=flat)](https://android-arsenal.com/api?level=16) [![Javadoc](https://img.shields.io/badge/Javadoc-EmoticonGIFKeyboard-blue.svg)](http://kevalpatel2106.github.io/EmoticonGIFKeyboard) <a href="https://www.paypal.me/kevalpatel2106"> <img src="https://img.shields.io/badge/paypal-donate-yellow.svg" /></a> ![Tenor](https://img.shields.io/badge/GIF%20Service-Tenor-orange.svg)
+[ ![Download](https://api.bintray.com/packages/kevalpatel2106/EmoticonGIFKeyboard/gifpack-tenor/images/download.svg) ](https://bintray.com/kevalpatel2106/EmoticonGIFKeyboard/gifpack-tenor/_latestVersion) [![API](https://img.shields.io/badge/API-16%2B-orange.svg?style=flat)](https://android-arsenal.com/api?level=16) [![Javadoc](https://img.shields.io/badge/Javadoc-EmoticonGIFKeyboard-blue.svg)](http://kevalpatel2106.github.io/EmoticonGIFKeyboard) <a href="https://www.paypal.me/kevalpatel2106"> <img src="https://img.shields.io/badge/paypal-donate-yellow.svg" /></a> ![Tenor](https://img.shields.io/badge/GIF%20Service-Tenor-orange.svg)
 
 ![Tenor Banner](/gifpack-tenor/art/headerbannergif.gif)
 

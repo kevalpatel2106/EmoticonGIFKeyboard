@@ -1,5 +1,5 @@
 # GIF Pack - GIPHY
-[ ![Download](https://api.bintray.com/packages/kevalpatel2106/maven/gifpack-giphy/images/download.svg) ](https://bintray.com/kevalpatel2106/maven/gifpack-giphy/_latestVersion) [![API](https://img.shields.io/badge/API-16%2B-orange.svg?style=flat)](https://android-arsenal.com/api?level=16) [![Javadoc](https://img.shields.io/badge/Javadoc-EmoticonGIFKeyboard-blue.svg)](http://kevalpatel2106.github.io/EmoticonGIFKeyboard) <a href="https://www.paypal.me/kevalpatel2106"> <img src="https://img.shields.io/badge/paypal-donate-yellow.svg" /></a> ![Giphy](https://img.shields.io/badge/GIF%20Service-Giphy-orange.svg)
+[ ![Download](https://api.bintray.com/packages/kevalpatel2106/EmoticonGIFKeyboard/gifpack-giphy/images/download.svg) ](https://bintray.com/kevalpatel2106/EmoticonGIFKeyboard/gifpack-giphy/_latestVersion) [![API](https://img.shields.io/badge/API-16%2B-orange.svg?style=flat)](https://android-arsenal.com/api?level=16) [![Javadoc](https://img.shields.io/badge/Javadoc-EmoticonGIFKeyboard-blue.svg)](http://kevalpatel2106.github.io/EmoticonGIFKeyboard) <a href="https://www.paypal.me/kevalpatel2106"> <img src="https://img.shields.io/badge/paypal-donate-yellow.svg" /></a> ![Giphy](https://img.shields.io/badge/GIF%20Service-Giphy-orange.svg)
 
 ![Giphy Banner](/gifpack-giphy/art/giphyseriesc.gif)
 

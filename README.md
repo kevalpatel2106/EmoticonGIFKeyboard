@@ -1,5 +1,5 @@
 # EmoticonGIFKeyboard
-[![API](https://img.shields.io/badge/API-16%2B-orange.svg?style=flat)](https://android-arsenal.com/api?level=16) [![Javadoc](https://img.shields.io/badge/Javadoc-EmoticonGIFKeyboard-blue.svg)](http://kevalpatel2106.github.io/EmoticonGIFKeyboard) <a href="https://www.paypal.me/kevalpatel2106"> <img src="https://img.shields.io/badge/paypal-donate-yellow.svg" /></a>
+[ ![Download](https://api.bintray.com/packages/kevalpatel2106/EmoticonGIFKeyboard/emoticongifkeyboard/images/download.svg) ](https://bintray.com/kevalpatel2106/EmoticonGIFKeyboard/emoticongifkeyboard/_latestVersion) [![API](https://img.shields.io/badge/API-16%2B-orange.svg?style=flat)](https://android-arsenal.com/api?level=16) [![Javadoc](https://img.shields.io/badge/Javadoc-EmoticonGIFKeyboard-blue.svg)](http://kevalpatel2106.github.io/EmoticonGIFKeyboard) <a href="https://www.paypal.me/kevalpatel2106"> <img src="https://img.shields.io/badge/paypal-donate-yellow.svg" /></a> [![Androidweekly](https://img.shields.io/badge/Android%20Weekly-%23273-green.svg)](http://androidweekly.net/issues/issue-273)
 
 ###### 🙌 An advance Emoticons & GIF keyboard. 🙌
 **EmoticonGIFKeyboard** is an easy to integrate, customizable and lightweight library to add support for emojis and GIFs.
@@ -26,7 +26,7 @@
   * Add below lines to `app/build.gradle` file of your project.
   ```
   dependencies {
-      compile 'com.kevalpatel2106:emoticon-gif-keyboard:1.0'
+      compile 'com.kevalpatel2106:emoticongifkeyboard:1.0'
   }
   ```
 - To integrate using maven visit this [page](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/blob/master/IMPORT.md).
@@ -128,24 +128,24 @@
 
 
 ## Emoticon icon packs
-|Icon Pack Name|Icon|Module|Gradle Dependency|
+|Icon|Emoticon Pack|Gradle Dependency|Version|
 |:---:|:---:|:---:|:---:|
-|Apple|![Grinning Emoji](/emoticonpack-ios/art/grinning-face_1f600.png)|[Apple](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/tree/master/emoticonpack-ios)|`compile 'com.kevalpatel2106:emoticonpack-ios:<latest>`|
-|Google|![Grinning Emoji](/emoticonpack-google/art/grinning-face_1f600.png)|[Google](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/tree/master/emoticonpack-google)|`compile 'com.kevalpatel2106:emoticonpack-google:<latest>`|
-|Facebook|![Grinning Emoji](/emoticonpack-facebook/art/grinning-face_1f600.png)|[Facebook](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/tree/master/emoticonpack-facebook)|`compile 'com.kevalpatel2106:emoticonpack-facebook:<latest>`|
-|Twitter|![Grinning Emoji](/emoticonpack-twitter/art/grinning-face_1f600.png)|[Twitter](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/tree/master/emoticonpack-twitter)|`compile 'com.kevalpatel2106:emoticonpack-twitter:<latest>`|
-|Samsung|![Grinning Emoji](/emoticonpack-samsung/art/grinning-face_1f600.png)|[Samsung](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/tree/master/emoticonpack-samsung)|`compile 'com.kevalpatel2106:emoticonpack-samsung:<latest>`|
-|Windows|![Grinning Emoji](/emoticonpack-windows/art/grinning-face_1f600.png)|[Windows](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/tree/master/emoticonpack-windows)|`compile 'com.kevalpatel2106:emoticonpack-windows:<latest>`|
-|Messenger|![Grinning Emoji](/emoticonpack-messenger/art/grinning-face_1f600.png)|[Messenger](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/tree/master/emoticonpack-messenger)|`compile 'com.kevalpatel2106:emoticonpack-messenger:<latest>`|
-|Emojidex|![Grinning Emoji](/emoticonpack-emojidex/art/grinning-face_1f600.png)|[Emojidex](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/tree/master/emoticonpack-emojidex)|`compile 'com.kevalpatel2106:emoticonpack-emojidex:<latest>`|
-|EmojiOne|![Grinning Emoji](/emoticonpack-emojione/art/grinning-face_1f600.png)|[EmojiOne](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/tree/master/emoticonpack-emojione)|`compile 'com.kevalpatel2106:emoticonpack-emojione:<latest>`|
+|![Grinning Emoji](/emoticonpack-ios/art/grinning-face_1f600.png)|[Apple](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/tree/master/emoticonpack-ios)|`compile 'com.kevalpatel2106:emoticonpack-ios:<latest>`|[ ![Download](https://api.bintray.com/packages/kevalpatel2106/EmoticonGIFKeyboard/emoticonpack-ios/images/download.svg) ](https://bintray.com/kevalpatel2106/EmoticonGIFKeyboard/emoticonpack-ios/_latestVersion)|
+|![Grinning Emoji](/emoticonpack-google/art/grinning-face_1f600.png)|[Google](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/tree/master/emoticonpack-google)|`compile 'com.kevalpatel2106:emoticonpack-google:<latest>`|[ ![Download](https://api.bintray.com/packages/kevalpatel2106/EmoticonGIFKeyboard/emoticonpack-google/images/download.svg) ](https://bintray.com/kevalpatel2106/EmoticonGIFKeyboard/emoticonpack-google/_latestVersion)|
+|![Grinning Emoji](/emoticonpack-facebook/art/grinning-face_1f600.png)|[Facebook](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/tree/master/emoticonpack-facebook)|`compile 'com.kevalpatel2106:emoticonpack-facebook:<latest>`|[ ![Download](https://api.bintray.com/packages/kevalpatel2106/EmoticonGIFKeyboard/emoticonpack-facebook/images/download.svg) ](https://bintray.com/kevalpatel2106/EmoticonGIFKeyboard/emoticonpack-facebook/_latestVersion)|
+|![Grinning Emoji](/emoticonpack-twitter/art/grinning-face_1f600.png)|[Twitter](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/tree/master/emoticonpack-twitter)|`compile 'com.kevalpatel2106:emoticonpack-twitter:<latest>`|[ ![Download](https://api.bintray.com/packages/kevalpatel2106/EmoticonGIFKeyboard/emoticonpack-twitter/images/download.svg) ](https://bintray.com/kevalpatel2106/EmoticonGIFKeyboard/emoticonpack-twitter/_latestVersion)|
+|![Grinning Emoji](/emoticonpack-samsung/art/grinning-face_1f600.png)|[Samsung](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/tree/master/emoticonpack-samsung)|`compile 'com.kevalpatel2106:emoticonpack-samsung:<latest>`|[ ![Download](https://api.bintray.com/packages/kevalpatel2106/EmoticonGIFKeyboard/emoticonpack-samsung/images/download.svg) ](https://bintray.com/kevalpatel2106/EmoticonGIFKeyboard/emoticonpack-samsung/_latestVersion)|
+|![Grinning Emoji](/emoticonpack-windows/art/grinning-face_1f600.png)|[Windows](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/tree/master/emoticonpack-windows)|`compile 'com.kevalpatel2106:emoticonpack-windows:<latest>`|[ ![Download](https://api.bintray.com/packages/kevalpatel2106/EmoticonGIFKeyboard/emoticonpack-windows/images/download.svg) ](https://bintray.com/kevalpatel2106/EmoticonGIFKeyboard/emoticonpack-windows/_latestVersion)|
+|![Grinning Emoji](/emoticonpack-messenger/art/grinning-face_1f600.png)|[Messenger](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/tree/master/emoticonpack-messenger)|`compile 'com.kevalpatel2106:emoticonpack-messenger:<latest>`|[ ![Download](https://api.bintray.com/packages/kevalpatel2106/EmoticonGIFKeyboard/emoticonpack-messenger/images/download.svg) ](https://bintray.com/kevalpatel2106/EmoticonGIFKeyboard/emoticonpack-messenger/_latestVersion)|
+|![Grinning Emoji](/emoticonpack-emojidex/art/grinning-face_1f600.png)|[Emojidex](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/tree/master/emoticonpack-emojidex)|`compile 'com.kevalpatel2106:emoticonpack-emojidex:<latest>`|[ ![Download](https://api.bintray.com/packages/kevalpatel2106/EmoticonGIFKeyboard/emoticonpack-emojidex/images/download.svg) ](https://bintray.com/kevalpatel2106/EmoticonGIFKeyboard/emoticonpack-emojidex/_latestVersion)|
+|![Grinning Emoji](/emoticonpack-emojione/art/grinning-face_1f600.png)|[EmojiOne](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/tree/master/emoticonpack-emojione)|`compile 'com.kevalpatel2106:emoticonpack-emojione:<latest>`|[ ![Download](https://api.bintray.com/packages/kevalpatel2106/EmoticonGIFKeyboard/emoticonpack-emojione/images/download.svg) ](https://bintray.com/kevalpatel2106/EmoticonGIFKeyboard/emoticonpack-emojione/_latestVersion)|
 
 
 ## GIF Packs
-|GIF Provider|Module|Dependency|
-|:---:|:---:|:---:|
-|[giphy.com](https://giphy.com)|[Giphy](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/tree/master/gifpack-giphy)|`compile 'com.kevalpatel2106:gifpack-giphy:<latest>`|
-|[tenor.com](https://tenor.com)|[Tenor](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/tree/master/gifpack-tenor)|`compile 'com.kevalpatel2106:gifpack-tenor:<latest>`|
+|GIF Provider|Module|Dependency|Version|
+|:---:|:---:|:---:|:---:|
+|[giphy.com](https://giphy.com)|[Giphy](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/tree/master/gifpack-giphy)|`compile 'com.kevalpatel2106:gifpack-giphy:<latest>`|[ ![Download](https://api.bintray.com/packages/kevalpatel2106/EmoticonGIFKeyboard/gifpack-giphy/images/download.svg) ](https://bintray.com/kevalpatel2106/EmoticonGIFKeyboard/gifpack-giphy/_latestVersion)|
+|[tenor.com](https://tenor.com)|[Tenor](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/tree/master/gifpack-tenor)|`compile 'com.kevalpatel2106:gifpack-tenor:<latest>`|[ ![Download](https://api.bintray.com/packages/kevalpatel2106/EmoticonGIFKeyboard/gifpack-tenor/images/download.svg) ](https://bintray.com/kevalpatel2106/EmoticonGIFKeyboard/gifpack-tenor/_latestVersion)|
 
 
 ## Acknowledgements
