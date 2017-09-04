@@ -52,6 +52,7 @@ dependencies {
     implementation project(':gifpack-giphy')
     implementation project(':emoticonpack-ios')
     implementation project(':emoticonpack-android8')
+    implementation project(':emoticonpack-android7')
     implementation project(':emoticonpack-twitter')
     implementation project(':emoticonpack-emojione')
     implementation project(':gifpack-tenor')
@@ -59,6 +60,7 @@ dependencies {
     implementation project(':emoticonpack-facebook')
     implementation project(':emoticonpack-messenger')
     implementation project(':emoticonpack-windows10')
+    implementation project(':emoticonpack-windows8')
     implementation project(':emoticonpack-samsung')
 
     implementation('com.android.support:recyclerview-v7:26.0.1', {

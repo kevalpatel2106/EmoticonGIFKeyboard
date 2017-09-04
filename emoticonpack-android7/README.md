@@ -1,20 +1,20 @@
-# Emoticon Pack - Microsoft Windows
-[ ![Download](https://api.bintray.com/packages/kevalpatel2106/EmoticonGIFKeyboard/emoticonpack-windows10/images/download.svg) ](https://bintray.com/kevalpatel2106/EmoticonGIFKeyboard/emoticonpack-windows10/_latestVersion) [![API](https://img.shields.io/badge/API-16%2B-orange.svg?style=flat)](https://android-arsenal.com/api?level=16) [![Javadoc](https://img.shields.io/badge/Javadoc-EmoticonGIFKeyboard-blue.svg)](http://kevalpatel2106.github.io/EmoticonGIFKeyboard) <a href="https://www.paypal.me/kevalpatel2106"> <img src="https://img.shields.io/badge/paypal-donate-yellow.svg" /></a> ![Windows 10](https://img.shields.io/badge/Windows%2010-1653%20Icons-orange.svg)
+# Emoticon Pack - Google Android 7.0 (Nougat)
+[ ![Download](https://api.bintray.com/packages/kevalpatel2106/EmoticonGIFKeyboard/emoticonpack-android7/images/download.svg) ](https://bintray.com/kevalpatel2106/EmoticonGIFKeyboard/emoticonpack-android7/_latestVersion) [![API](https://img.shields.io/badge/API-16%2B-orange.svg?style=flat)](https://android-arsenal.com/api?level=16) ![Javadoc](https://img.shields.io/badge/Javadoc-EmoticonGIFKeyboard-blue.svg)](http://kevalpatel2106.github.io/EmoticonGIFKeyboard) <a href="https://www.paypal.me/kevalpatel2106"> <img src="https://img.shields.io/badge/paypal-donate-yellow.svg" /></a> [![Google Android 8.0](https://img.shields.io/badge/Android%208-1869%20Icons-brightgreen.svg)
 
-This emoticon icon pack contains emoticons graphics from **Microsoft Windows 10 Creators Update**. You can find complete list of emoticons icons from [here](https://emojipedia.org/microsoft/windows-10-creators-update/).
+This emoticon icon pack contains emoticons graphics from **Android 7.0 Nougat**. You can find complete list of emoticons icons from [here](https://emojipedia.org/google/android-7.0/).
 
 ## How to use?
 - Add below lines to `app/build.gradle` file of your project.
     ```
     dependencies {
-       compile 'com.kevalpatel2106:emoticonpack-windows10:<latest>
+       compile 'com.kevalpatel2106:emoticonpack-android7:<latest>
     }
     ```
 - This gif pack is plugin for [EmoticonGIFKeyboard](https://github.com/kevalpatel2106/EmoticonGIFKeyboard).
-- Set `WindowsEmoticonProvider` as emoticon provider in `EmoticonConfig`.
+- Set `Android7EmoticonProvider` as emoticon provider in `EmoticonConfig`.
   ```
     EmoticonGIFKeyboardFragment.EmoticonConfig emoticonConfig = new EmoticonGIFKeyboardFragment.EmoticonConfig()
-                .setEmoticonProvider(WindowsEmoticonProvider.create())
+                .setEmoticonProvider(Android7EmoticonProvider.create())
   ```
 
 

@@ -140,6 +140,8 @@ public class Main {
                         categoryUrl.replace(BASE_URL, "").replace("/", ""));
 
                 if (emoji != null) mEmojis.add(emoji);
+
+                System.out.println("Emojis parsed: "  + mEmojis.size());
             }
         } catch (IOException e) {
             System.out.println("Category page loading failed...Trying again...");
@@ -205,9 +207,13 @@ public class Main {
             for (int i = 0; i < vendorNames.size(); i++) {
                 //Vendor name
                 String vendorName = vendorNames.get(i).getElementsByTag("a").text();
-                String vendorImage = vendorImageUrls.get(i).getElementsByTag("img").attr("src");
-                if (!vendorImage.startsWith("http"))
+
+                String vendorImage;
+                if (vendorImageUrls.get(i).getElementsByTag("img").hasAttr("data-src")) {
                     vendorImage = vendorImageUrls.get(i).getElementsByTag("img").attr("data-src");
+                }else {
+                    vendorImage = vendorImageUrls.get(i).getElementsByTag("img").attr("src");
+                }
 
                 //Check if the vendor is among supported vendors
                 if (SUPPORTED_VENDOR.contains(vendorName)) {
@@ -242,15 +248,15 @@ public class Main {
                                        String vendor,
                                        ArrayList<String> codePoints) throws IOException {
         File originalImageFile = Utils.getImageFile(vendor, codePoints);
-        File resizedImageFile = Utils.getResizedImageFile(vendor, codePoints);
+//        File resizedImageFile = Utils.getResizedImageFile(vendor, codePoints);
 
         //Prepare full scale image
         BufferedImage originalImg = ImageIO.read(new URL(url));
         ImageIO.write(originalImg, "png", originalImageFile);
 
         //Prepare resized image also
-        BufferedImage resizedImg = Utils.resizeImage(originalImg);
-        ImageIO.write(resizedImg, "png", resizedImageFile);
+//        BufferedImage resizedImg = Utils.resizeImage(originalImg);
+//        ImageIO.write(resizedImg, "png", resizedImageFile);
 
         return originalImageFile;
     }

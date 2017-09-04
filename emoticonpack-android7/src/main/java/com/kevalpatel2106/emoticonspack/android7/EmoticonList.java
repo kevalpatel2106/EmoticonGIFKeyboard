@@ -14,18 +14,14 @@
  *  limitations under the License.
  */
 
-include ':app',
-        ':emoticongifkeyboard',
-        ':gifpack-giphy',
-        ':emoticonpack-ios',
-        ':emoticonpack-android8',
-        ':emoticonpack-android7',
-        ':emoticonpack-twitter',
-        ':emoticonpack-emojione',
-        ':gifpack-tenor',
-        ':emoticonpack-emojidex',
-        ':emoticonpack-facebook',
-        ':emoticonpack-messenger',
-        ':emoticonpack-windows10',
-        ':emoticonpack-windows8',
-        ':emoticonpack-samsung'
+package com.kevalpatel2106.emoticonspack.android7;
+
+import java.util.HashMap;
+
+class EmoticonList {
+    static final HashMap<String, Integer> EMOTICONS = new HashMap<>();
+
+    static {
+
+    }
+}
