@@ -1,3 +1,3 @@
 Manifest-Version: 1.0
-Main-Class: com.kevalpatel2106.emojiparser.Main
+Main-Class: com.kevalpatel2106.emojiscrapper.Main
 

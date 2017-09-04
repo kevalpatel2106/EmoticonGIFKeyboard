@@ -24,7 +24,7 @@
 ## How to import this library?
 - ### Gradle Dependency:
   * Add below lines to `app/build.gradle` file of your project.
-  ```
+  ```groovy
   dependencies {
       compile 'com.kevalpatel2106:emoticongifkeyboard:1.0'
   }
@@ -38,7 +38,7 @@
   * Set the custom emoticon icon provider using `EmoticonConfig#setEmoticonProvider()`. If you don't set any icon provider here, library will render system emoticons. You can pic custom emoticon icons from [here](https://github.com/kevalpatel2106/EmoticonGIFKeyboard#emoticon-icon-packs).
   * Set the `EmoticonSelectListener` using `EmoticonConfig#setEmoticonSelectListener()`. This will notify you when user selects any emoticon from list or user preses back button.
 
-  ```
+  ```java
   EmoticonGIFKeyboardFragment.EmoticonConfig emoticonConfig = new EmoticonGIFKeyboardFragment.EmoticonConfig()
           .setEmoticonProvider(IosEmoticonProvider.create())
           /*
@@ -66,7 +66,7 @@
     It is required to set GIF provider before adding fragment into container.
   * Implement GIF select listener using `GIFConfig#setGifSelectListener()`. This will notify you when user selects new GIF.
 
-  ```
+  ```java
   //Create GIF config
   EmoticonGIFKeyboardFragment.GIFConfig gifConfig = new EmoticonGIFKeyboardFragment
 
@@ -88,7 +88,7 @@
   * Create new `EmoticonGIFKeyboardFragment` by passing `EmoticonConfig` and `GIFConfig`. If you pass null to `EmoticonConfig`, emoticon functionality will be disabled. Also, if you pass `GIFConfig` as null, GIF functionality will be disabled.
   * Add the generated fragment to the container.
 
-  ```
+  ```java
   EmoticonGIFKeyboardFragment emoticonGIFKeyboardFragment = EmoticonGIFKeyboardFragment
           .getNewInstance(findViewById(R.id.keyboard_container), emoticonConfig, gifConfig);
 
@@ -104,7 +104,7 @@
   * Open keyboard view by calling `EmoticonGIFKeyboardFragment#open()` and close it by calling `EmoticonGIFKeyboardFragment#close()`.
   * Handle back button press events by using `EmoticonGIFKeyboardFragment#handleBackPressed()` in your activity.
 
-  ```
+  ```java
     @Override
     public void onBackPressed() {
       if (!mEmoticonGIFKeyboardFragment.handleBackPressed())
@@ -131,11 +131,11 @@
 |Icon|Emoticon Pack|Gradle Dependency|Version|
 |:---:|:---:|:---:|:---:|
 |![Grinning Emoji](/emoticonpack-ios/art/grinning-face_1f600.png)|[Apple](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/tree/master/emoticonpack-ios)|`compile 'com.kevalpatel2106:emoticonpack-ios:<latest>`|[ ![Download](https://api.bintray.com/packages/kevalpatel2106/EmoticonGIFKeyboard/emoticonpack-ios/images/download.svg) ](https://bintray.com/kevalpatel2106/EmoticonGIFKeyboard/emoticonpack-ios/_latestVersion)|
-|![Grinning Emoji](/emoticonpack-google/art/grinning-face_1f600.png)|[Google](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/tree/master/emoticonpack-google)|`compile 'com.kevalpatel2106:emoticonpack-google:<latest>`|[ ![Download](https://api.bintray.com/packages/kevalpatel2106/EmoticonGIFKeyboard/emoticonpack-google/images/download.svg) ](https://bintray.com/kevalpatel2106/EmoticonGIFKeyboard/emoticonpack-google/_latestVersion)|
+|![Grinning Emoji](/emoticonpack-android8/art/grinning-face_1f600.png)|[Android 8.0](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/tree/master/emoticonpack-android8)|`compile 'com.kevalpatel2106:emoticonpack-android8:<latest>`|[ ![Download](https://api.bintray.com/packages/kevalpatel2106/EmoticonGIFKeyboard/emoticonpack-android8/images/download.svg) ](https://bintray.com/kevalpatel2106/EmoticonGIFKeyboard/emoticonpack-android8/_latestVersion)|
 |![Grinning Emoji](/emoticonpack-facebook/art/grinning-face_1f600.png)|[Facebook](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/tree/master/emoticonpack-facebook)|`compile 'com.kevalpatel2106:emoticonpack-facebook:<latest>`|[ ![Download](https://api.bintray.com/packages/kevalpatel2106/EmoticonGIFKeyboard/emoticonpack-facebook/images/download.svg) ](https://bintray.com/kevalpatel2106/EmoticonGIFKeyboard/emoticonpack-facebook/_latestVersion)|
 |![Grinning Emoji](/emoticonpack-twitter/art/grinning-face_1f600.png)|[Twitter](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/tree/master/emoticonpack-twitter)|`compile 'com.kevalpatel2106:emoticonpack-twitter:<latest>`|[ ![Download](https://api.bintray.com/packages/kevalpatel2106/EmoticonGIFKeyboard/emoticonpack-twitter/images/download.svg) ](https://bintray.com/kevalpatel2106/EmoticonGIFKeyboard/emoticonpack-twitter/_latestVersion)|
 |![Grinning Emoji](/emoticonpack-samsung/art/grinning-face_1f600.png)|[Samsung](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/tree/master/emoticonpack-samsung)|`compile 'com.kevalpatel2106:emoticonpack-samsung:<latest>`|[ ![Download](https://api.bintray.com/packages/kevalpatel2106/EmoticonGIFKeyboard/emoticonpack-samsung/images/download.svg) ](https://bintray.com/kevalpatel2106/EmoticonGIFKeyboard/emoticonpack-samsung/_latestVersion)|
-|![Grinning Emoji](/emoticonpack-windows/art/grinning-face_1f600.png)|[Windows](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/tree/master/emoticonpack-windows)|`compile 'com.kevalpatel2106:emoticonpack-windows:<latest>`|[ ![Download](https://api.bintray.com/packages/kevalpatel2106/EmoticonGIFKeyboard/emoticonpack-windows/images/download.svg) ](https://bintray.com/kevalpatel2106/EmoticonGIFKeyboard/emoticonpack-windows/_latestVersion)|
+|![Grinning Emoji](/emoticonpack-windows10/art/grinning-face_1f600.png)|[Windows 10](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/tree/master/emoticonpack-windows10)|`compile 'com.kevalpatel2106:emoticonpack-windows10:<latest>`|[ ![Download](https://api.bintray.com/packages/kevalpatel2106/EmoticonGIFKeyboard/emoticonpack-windows10/images/download.svg) ](https://bintray.com/kevalpatel2106/EmoticonGIFKeyboard/emoticonpack-windows10/_latestVersion)|
 |![Grinning Emoji](/emoticonpack-messenger/art/grinning-face_1f600.png)|[Messenger](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/tree/master/emoticonpack-messenger)|`compile 'com.kevalpatel2106:emoticonpack-messenger:<latest>`|[ ![Download](https://api.bintray.com/packages/kevalpatel2106/EmoticonGIFKeyboard/emoticonpack-messenger/images/download.svg) ](https://bintray.com/kevalpatel2106/EmoticonGIFKeyboard/emoticonpack-messenger/_latestVersion)|
 |![Grinning Emoji](/emoticonpack-emojidex/art/grinning-face_1f600.png)|[Emojidex](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/tree/master/emoticonpack-emojidex)|`compile 'com.kevalpatel2106:emoticonpack-emojidex:<latest>`|[ ![Download](https://api.bintray.com/packages/kevalpatel2106/EmoticonGIFKeyboard/emoticonpack-emojidex/images/download.svg) ](https://bintray.com/kevalpatel2106/EmoticonGIFKeyboard/emoticonpack-emojidex/_latestVersion)|
 |![Grinning Emoji](/emoticonpack-emojione/art/grinning-face_1f600.png)|[EmojiOne](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/tree/master/emoticonpack-emojione)|`compile 'com.kevalpatel2106:emoticonpack-emojione:<latest>`|[ ![Download](https://api.bintray.com/packages/kevalpatel2106/EmoticonGIFKeyboard/emoticonpack-emojione/images/download.svg) ](https://bintray.com/kevalpatel2106/EmoticonGIFKeyboard/emoticonpack-emojione/_latestVersion)|

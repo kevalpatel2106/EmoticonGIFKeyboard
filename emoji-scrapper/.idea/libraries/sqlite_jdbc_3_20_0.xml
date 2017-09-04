@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="sqlite-jdbc-3.20.0">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/sqlite-jdbc-3.20.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

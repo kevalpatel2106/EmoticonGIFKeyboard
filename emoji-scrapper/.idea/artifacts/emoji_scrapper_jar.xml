@@ -3,9 +3,9 @@
     <output-path>$PROJECT_DIR$/out/artifacts/emoji_scrapper_jar</output-path>
     <root id="archive" name="emoji-scrapper.jar">
       <element id="module-output" name="emoji-scrapper" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/gson-2.8.1.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/jsoup-1.10.3.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/sqlite-jdbc-3.20.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libs/gson-2.8.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libs/sqlite-jdbc-3.20.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libs/jsoup-1.10.3.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>
