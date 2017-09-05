@@ -22,7 +22,7 @@ class EmoticonList {
     static final HashMap<String, Integer> EMOTICONS = new HashMap<>();
 
     static {
-        EMOTICONS.put("😀", R.drawable.emoji_messenger_1f600);
+       EMOTICONS.put("😀", R.drawable.emoji_messenger_1f600);
         EMOTICONS.put("😁", R.drawable.emoji_messenger_1f601);
         EMOTICONS.put("😂", R.drawable.emoji_messenger_1f602);
         EMOTICONS.put("😃", R.drawable.emoji_messenger_1f603);
@@ -58,12 +58,15 @@ class EmoticonList {
         EMOTICONS.put("😒", R.drawable.emoji_messenger_1f612);
         EMOTICONS.put("😓", R.drawable.emoji_messenger_1f613);
         EMOTICONS.put("😔", R.drawable.emoji_messenger_1f614);
+        EMOTICONS.put("😕", R.drawable.emoji_messenger_1f615);
         EMOTICONS.put("😲", R.drawable.emoji_messenger_1f632);
+        EMOTICONS.put("😖", R.drawable.emoji_messenger_1f616);
         EMOTICONS.put("😞", R.drawable.emoji_messenger_1f61e);
         EMOTICONS.put("😟", R.drawable.emoji_messenger_1f61f);
         EMOTICONS.put("😤", R.drawable.emoji_messenger_1f624);
         EMOTICONS.put("😢", R.drawable.emoji_messenger_1f622);
         EMOTICONS.put("😭", R.drawable.emoji_messenger_1f62d);
+        EMOTICONS.put("😦", R.drawable.emoji_messenger_1f626);
         EMOTICONS.put("😧", R.drawable.emoji_messenger_1f627);
         EMOTICONS.put("😨", R.drawable.emoji_messenger_1f628);
         EMOTICONS.put("😩", R.drawable.emoji_messenger_1f629);
@@ -174,6 +177,7 @@ class EmoticonList {
         EMOTICONS.put("👀", R.drawable.emoji_messenger_1f440);
         EMOTICONS.put("👅", R.drawable.emoji_messenger_1f445);
         EMOTICONS.put("👄", R.drawable.emoji_messenger_1f444);
+        EMOTICONS.put("💋", R.drawable.emoji_messenger_1f48b);
         EMOTICONS.put("👓", R.drawable.emoji_messenger_1f453);
         EMOTICONS.put("👔", R.drawable.emoji_messenger_1f454);
         EMOTICONS.put("👕", R.drawable.emoji_messenger_1f455);
@@ -252,6 +256,7 @@ class EmoticonList {
         EMOTICONS.put("🐧", R.drawable.emoji_messenger_1f427);
         EMOTICONS.put("🐸", R.drawable.emoji_messenger_1f438);
         EMOTICONS.put("🐊", R.drawable.emoji_messenger_1f40a);
+        EMOTICONS.put("🐢", R.drawable.emoji_messenger_1f422);
         EMOTICONS.put("🐍", R.drawable.emoji_messenger_1f40d);
         EMOTICONS.put("🐲", R.drawable.emoji_messenger_1f432);
         EMOTICONS.put("🐉", R.drawable.emoji_messenger_1f409);
@@ -322,6 +327,7 @@ class EmoticonList {
         EMOTICONS.put("💧", R.drawable.emoji_messenger_1f4a7);
         EMOTICONS.put("🌊", R.drawable.emoji_messenger_1f30a);
         EMOTICONS.put("🎄", R.drawable.emoji_messenger_1f384);
+        EMOTICONS.put("✨", R.drawable.emoji_messenger_2728);
         EMOTICONS.put("🎋", R.drawable.emoji_messenger_1f38b);
         EMOTICONS.put("🎍", R.drawable.emoji_messenger_1f38d);
         EMOTICONS.put("🍇", R.drawable.emoji_messenger_1f347);
@@ -449,7 +455,6 @@ class EmoticonList {
         EMOTICONS.put("⛲", R.drawable.emoji_messenger_26f2);
         EMOTICONS.put("⛺", R.drawable.emoji_messenger_26fa);
         EMOTICONS.put("🌁", R.drawable.emoji_messenger_1f301);
-        EMOTICONS.put("🌃", R.drawable.emoji_messenger_1f303);
         EMOTICONS.put("🌄", R.drawable.emoji_messenger_1f304);
         EMOTICONS.put("🌅", R.drawable.emoji_messenger_1f305);
         EMOTICONS.put("🌆", R.drawable.emoji_messenger_1f306);
@@ -624,6 +629,8 @@ class EmoticonList {
         EMOTICONS.put("🔐", R.drawable.emoji_messenger_1f510);
         EMOTICONS.put("🔑", R.drawable.emoji_messenger_1f511);
         EMOTICONS.put("🔨", R.drawable.emoji_messenger_1f528);
+        EMOTICONS.put("🔫", R.drawable.emoji_messenger_1f52b);
+        EMOTICONS.put("🔧", R.drawable.emoji_messenger_1f527);
         EMOTICONS.put("🔩", R.drawable.emoji_messenger_1f529);
         EMOTICONS.put("🔗", R.drawable.emoji_messenger_1f517);
         EMOTICONS.put("💉", R.drawable.emoji_messenger_1f489);
@@ -687,6 +694,7 @@ class EmoticonList {
         EMOTICONS.put("♣️", R.drawable.emoji_messenger_2663);
         EMOTICONS.put("🃏", R.drawable.emoji_messenger_1f0cf);
         EMOTICONS.put("🀄", R.drawable.emoji_messenger_1f004);
+        EMOTICONS.put("🎴", R.drawable.emoji_messenger_1f3b4);
         EMOTICONS.put("🔇", R.drawable.emoji_messenger_1f507);
         EMOTICONS.put("🔈", R.drawable.emoji_messenger_1f508);
         EMOTICONS.put("🔉", R.drawable.emoji_messenger_1f509);
@@ -738,6 +746,7 @@ class EmoticonList {
         EMOTICONS.put("🔛", R.drawable.emoji_messenger_1f51b);
         EMOTICONS.put("🔜", R.drawable.emoji_messenger_1f51c);
         EMOTICONS.put("🔝", R.drawable.emoji_messenger_1f51d);
+        EMOTICONS.put("🔯", R.drawable.emoji_messenger_1f52f);
         EMOTICONS.put("♈", R.drawable.emoji_messenger_2648);
         EMOTICONS.put("♉", R.drawable.emoji_messenger_2649);
         EMOTICONS.put("♊", R.drawable.emoji_messenger_264a);
@@ -819,6 +828,7 @@ class EmoticonList {
         EMOTICONS.put("🆎", R.drawable.emoji_messenger_1f18e);
         EMOTICONS.put("🅱️", R.drawable.emoji_messenger_1f171);
         EMOTICONS.put("🆑", R.drawable.emoji_messenger_1f191);
+        EMOTICONS.put("🆒", R.drawable.emoji_messenger_1f192);
         EMOTICONS.put("🆓", R.drawable.emoji_messenger_1f193);
         EMOTICONS.put("ℹ️", R.drawable.emoji_messenger_2139);
         EMOTICONS.put("🆔", R.drawable.emoji_messenger_1f194);
@@ -873,6 +883,7 @@ class EmoticonList {
         EMOTICONS.put("🚩", R.drawable.emoji_messenger_1f6a9);
         EMOTICONS.put("🎌", R.drawable.emoji_messenger_1f38c);
         EMOTICONS.put("🇦🇪", R.drawable.emoji_messenger_1f1e6_1f1ea);
+        EMOTICONS.put("🇦🇹", R.drawable.emoji_messenger_1f1e6_1f1f9);
         EMOTICONS.put("🇦🇺", R.drawable.emoji_messenger_1f1e6_1f1fa);
         EMOTICONS.put("🇧🇪", R.drawable.emoji_messenger_1f1e7_1f1ea);
         EMOTICONS.put("🇧🇷", R.drawable.emoji_messenger_1f1e7_1f1f7);
@@ -893,6 +904,7 @@ class EmoticonList {
         EMOTICONS.put("🇮🇱", R.drawable.emoji_messenger_1f1ee_1f1f1);
         EMOTICONS.put("🇮🇳", R.drawable.emoji_messenger_1f1ee_1f1f3);
         EMOTICONS.put("🇮🇹", R.drawable.emoji_messenger_1f1ee_1f1f9);
+        EMOTICONS.put("🇯🇵", R.drawable.emoji_messenger_1f1ef_1f1f5);
         EMOTICONS.put("🇰🇷", R.drawable.emoji_messenger_1f1f0_1f1f7);
         EMOTICONS.put("🇲🇴", R.drawable.emoji_messenger_1f1f2_1f1f4);
         EMOTICONS.put("🇲🇽", R.drawable.emoji_messenger_1f1f2_1f1fd);
@@ -903,8 +915,10 @@ class EmoticonList {
         EMOTICONS.put("🇵🇭", R.drawable.emoji_messenger_1f1f5_1f1ed);
         EMOTICONS.put("🇵🇱", R.drawable.emoji_messenger_1f1f5_1f1f1);
         EMOTICONS.put("🇵🇷", R.drawable.emoji_messenger_1f1f5_1f1f7);
+        EMOTICONS.put("🇵🇹", R.drawable.emoji_messenger_1f1f5_1f1f9);
         EMOTICONS.put("🇷🇺", R.drawable.emoji_messenger_1f1f7_1f1fa);
         EMOTICONS.put("🇸🇦", R.drawable.emoji_messenger_1f1f8_1f1e6);
+        EMOTICONS.put("🇸🇪", R.drawable.emoji_messenger_1f1f8_1f1ea);
         EMOTICONS.put("🇸🇬", R.drawable.emoji_messenger_1f1f8_1f1ec);
         EMOTICONS.put("🇹🇷", R.drawable.emoji_messenger_1f1f9_1f1f7);
         EMOTICONS.put("🇺🇸", R.drawable.emoji_messenger_1f1fa_1f1f8);

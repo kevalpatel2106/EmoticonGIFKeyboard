@@ -73,8 +73,9 @@ public final class EmoticonUtils {
 
         final EmoticonSpan[] existingSpans = text.getSpans(0, text.length(), EmoticonSpan.class);
         final ArrayList<Integer> existingSpanPositions = new ArrayList<>(existingSpans.length);
-        for (EmoticonSpan existingSpan : existingSpans)
+        for (EmoticonSpan existingSpan : existingSpans) {
             existingSpanPositions.add(text.getSpanStart(existingSpan));
+        }
 
         //Get location and unicode of all emoticons.
         final List<EmoticonRange> findAllEmojis = findAllEmoticons(context, text, emoticonProvider);

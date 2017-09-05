@@ -33,7 +33,9 @@ import com.kevalpatel2106.emoticongifkeyboard.gifs.Gif;
 import com.kevalpatel2106.emoticongifkeyboard.gifs.GifSelectListener;
 import com.kevalpatel2106.emoticongifkeyboard.widget.EmoticonEditText;
 import com.kevalpatel2106.emoticongifkeyboard.widget.EmoticonTextView;
+import com.kevalpatel2106.emoticonpack.android8.Android8EmoticonProvider;
 import com.kevalpatel2106.emoticonpack.ios.IosEmoticonProvider;
+import com.kevalpatel2106.emoticonpack.windows10.Windows10EmoticonProvider;
 import com.kevalpatel2106.gifpack.giphy.GiphyGifProvider;
 
 public class MainActivity extends AppCompatActivity {
@@ -62,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         final EmoticonTextView textView = findViewById(R.id.selected_emoticons_tv);
         /*
           Set the custom emoticon icon provider. If you don't set any icon provider here, library
-          will render system emoticons. Here we are setting IOS emoticons icon pack.
+          will render system emoticons. Here we are setting iOS emoticons icon pack.
          */
         textView.setEmoticonProvider(IosEmoticonProvider.create());
 
@@ -71,9 +73,9 @@ public class MainActivity extends AppCompatActivity {
         final EmoticonEditText editText = findViewById(R.id.selected_emoticons_et);
         /*
           Set the custom emoticon icon provider. If you don't set any icon provider here, library
-          will render system emoticons. Here we are setting IOS emoticons icon pack.
+          will render system emoticons. Here we are setting Android 8.0 emoticons icon pack.
          */
-        editText.setEmoticonProvider(IosEmoticonProvider.create());
+        editText.setEmoticonProvider(Android8EmoticonProvider.create());
 
 
         //Set emoticon configuration.
@@ -81,9 +83,9 @@ public class MainActivity extends AppCompatActivity {
 
                 /*
                   Set the custom emoticon icon provider. If you don't set any icon provider here, library
-                  will render system emoticons. Here we are setting IOS emoticons icon pack.
+                  will render system emoticons. Here we are setting Windows 10 emoticons icon pack.
                  */
-                .setEmoticonProvider(IosEmoticonProvider.create())
+                .setEmoticonProvider(Windows10EmoticonProvider.create())
 
                 /*
                   Set the emoticon select listener. This will notify you when user selects any emoticon from

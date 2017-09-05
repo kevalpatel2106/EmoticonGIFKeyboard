@@ -64,16 +64,19 @@ class EmoticonList {
         EMOTICONS.put("😒", R.drawable.emoji_microsoft_1f612);
         EMOTICONS.put("😓", R.drawable.emoji_microsoft_1f613);
         EMOTICONS.put("😔", R.drawable.emoji_microsoft_1f614);
+        EMOTICONS.put("😕", R.drawable.emoji_microsoft_1f615);
         EMOTICONS.put("🙃", R.drawable.emoji_microsoft_1f643);
         EMOTICONS.put("🤑", R.drawable.emoji_microsoft_1f911);
         EMOTICONS.put("😲", R.drawable.emoji_microsoft_1f632);
         EMOTICONS.put("☹️", R.drawable.emoji_microsoft_2639);
         EMOTICONS.put("🙁", R.drawable.emoji_microsoft_1f641);
+        EMOTICONS.put("😖", R.drawable.emoji_microsoft_1f616);
         EMOTICONS.put("😞", R.drawable.emoji_microsoft_1f61e);
         EMOTICONS.put("😟", R.drawable.emoji_microsoft_1f61f);
         EMOTICONS.put("😤", R.drawable.emoji_microsoft_1f624);
         EMOTICONS.put("😢", R.drawable.emoji_microsoft_1f622);
         EMOTICONS.put("😭", R.drawable.emoji_microsoft_1f62d);
+        EMOTICONS.put("😦", R.drawable.emoji_microsoft_1f626);
         EMOTICONS.put("😧", R.drawable.emoji_microsoft_1f627);
         EMOTICONS.put("😨", R.drawable.emoji_microsoft_1f628);
         EMOTICONS.put("😩", R.drawable.emoji_microsoft_1f629);
@@ -136,6 +139,7 @@ class EmoticonList {
         EMOTICONS.put("👨‍💼", R.drawable.emoji_microsoft_1f468_200d_1f4bc);
         EMOTICONS.put("👩‍💼", R.drawable.emoji_microsoft_1f469_200d_1f4bc);
         EMOTICONS.put("👨‍🔬", R.drawable.emoji_microsoft_1f468_200d_1f52c);
+        EMOTICONS.put("👩‍🔬", R.drawable.emoji_microsoft_1f469_200d_1f52c);
         EMOTICONS.put("👨‍💻", R.drawable.emoji_microsoft_1f468_200d_1f4bb);
         EMOTICONS.put("👩‍💻", R.drawable.emoji_microsoft_1f469_200d_1f4bb);
         EMOTICONS.put("👨‍🎤", R.drawable.emoji_microsoft_1f468_200d_1f3a4);
@@ -280,6 +284,7 @@ class EmoticonList {
         EMOTICONS.put("👁️", R.drawable.emoji_microsoft_1f441);
         EMOTICONS.put("👅", R.drawable.emoji_microsoft_1f445);
         EMOTICONS.put("👄", R.drawable.emoji_microsoft_1f444);
+        EMOTICONS.put("💋", R.drawable.emoji_microsoft_1f48b);
         EMOTICONS.put("👓", R.drawable.emoji_microsoft_1f453);
         EMOTICONS.put("🕶️", R.drawable.emoji_microsoft_1f576);
         EMOTICONS.put("👔", R.drawable.emoji_microsoft_1f454);
@@ -373,6 +378,8 @@ class EmoticonList {
         EMOTICONS.put("🦉", R.drawable.emoji_microsoft_1f989);
         EMOTICONS.put("🐸", R.drawable.emoji_microsoft_1f438);
         EMOTICONS.put("🐊", R.drawable.emoji_microsoft_1f40a);
+        EMOTICONS.put("🐢", R.drawable.emoji_microsoft_1f422);
+        EMOTICONS.put("🦎", R.drawable.emoji_microsoft_1f98e);
         EMOTICONS.put("🐍", R.drawable.emoji_microsoft_1f40d);
         EMOTICONS.put("🐲", R.drawable.emoji_microsoft_1f432);
         EMOTICONS.put("🐉", R.drawable.emoji_microsoft_1f409);
@@ -467,6 +474,7 @@ class EmoticonList {
         EMOTICONS.put("💧", R.drawable.emoji_microsoft_1f4a7);
         EMOTICONS.put("🌊", R.drawable.emoji_microsoft_1f30a);
         EMOTICONS.put("🎄", R.drawable.emoji_microsoft_1f384);
+        EMOTICONS.put("✨", R.drawable.emoji_microsoft_2728);
         EMOTICONS.put("🎋", R.drawable.emoji_microsoft_1f38b);
         EMOTICONS.put("🎍", R.drawable.emoji_microsoft_1f38d);
         EMOTICONS.put("🍇", R.drawable.emoji_microsoft_1f347);
@@ -687,7 +695,6 @@ class EmoticonList {
         EMOTICONS.put("⛲", R.drawable.emoji_microsoft_26f2);
         EMOTICONS.put("⛺", R.drawable.emoji_microsoft_26fa);
         EMOTICONS.put("🌁", R.drawable.emoji_microsoft_1f301);
-        EMOTICONS.put("🌃", R.drawable.emoji_microsoft_1f303);
         EMOTICONS.put("🌄", R.drawable.emoji_microsoft_1f304);
         EMOTICONS.put("🌅", R.drawable.emoji_microsoft_1f305);
         EMOTICONS.put("🌆", R.drawable.emoji_microsoft_1f306);
@@ -922,7 +929,9 @@ class EmoticonList {
         EMOTICONS.put("🛠️", R.drawable.emoji_microsoft_1f6e0);
         EMOTICONS.put("🗡️", R.drawable.emoji_microsoft_1f5e1);
         EMOTICONS.put("⚔️", R.drawable.emoji_microsoft_2694);
+        EMOTICONS.put("🔫", R.drawable.emoji_microsoft_1f52b);
         EMOTICONS.put("🛡️", R.drawable.emoji_microsoft_1f6e1);
+        EMOTICONS.put("🔧", R.drawable.emoji_microsoft_1f527);
         EMOTICONS.put("🔩", R.drawable.emoji_microsoft_1f529);
         EMOTICONS.put("⚙️", R.drawable.emoji_microsoft_2699);
         EMOTICONS.put("🗜️", R.drawable.emoji_microsoft_1f5dc);
@@ -1002,6 +1011,7 @@ class EmoticonList {
         EMOTICONS.put("♣️", R.drawable.emoji_microsoft_2663);
         EMOTICONS.put("🃏", R.drawable.emoji_microsoft_1f0cf);
         EMOTICONS.put("🀄", R.drawable.emoji_microsoft_1f004);
+        EMOTICONS.put("🎴", R.drawable.emoji_microsoft_1f3b4);
         EMOTICONS.put("🔇", R.drawable.emoji_microsoft_1f507);
         EMOTICONS.put("🔈", R.drawable.emoji_microsoft_1f508);
         EMOTICONS.put("🔉", R.drawable.emoji_microsoft_1f509);
@@ -1066,6 +1076,7 @@ class EmoticonList {
         EMOTICONS.put("☪️", R.drawable.emoji_microsoft_262a);
         EMOTICONS.put("☮️", R.drawable.emoji_microsoft_262e);
         EMOTICONS.put("🕎", R.drawable.emoji_microsoft_1f54e);
+        EMOTICONS.put("🔯", R.drawable.emoji_microsoft_1f52f);
         EMOTICONS.put("♈", R.drawable.emoji_microsoft_2648);
         EMOTICONS.put("♉", R.drawable.emoji_microsoft_2649);
         EMOTICONS.put("♊", R.drawable.emoji_microsoft_264a);
@@ -1148,6 +1159,7 @@ class EmoticonList {
         EMOTICONS.put("🆎", R.drawable.emoji_microsoft_1f18e);
         EMOTICONS.put("🅱️", R.drawable.emoji_microsoft_1f171);
         EMOTICONS.put("🆑", R.drawable.emoji_microsoft_1f191);
+        EMOTICONS.put("🆒", R.drawable.emoji_microsoft_1f192);
         EMOTICONS.put("🆓", R.drawable.emoji_microsoft_1f193);
         EMOTICONS.put("ℹ️", R.drawable.emoji_microsoft_2139);
         EMOTICONS.put("🆔", R.drawable.emoji_microsoft_1f194);

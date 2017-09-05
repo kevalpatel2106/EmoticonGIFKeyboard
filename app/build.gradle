@@ -20,6 +20,7 @@ android {
     compileSdkVersion 26
     buildToolsVersion "26.0.1"
     defaultConfig {
+        multiDexEnabled true
         applicationId "com.kevalpatel2106.sample"
         minSdkVersion 16
         targetSdkVersion 26
@@ -65,6 +66,7 @@ dependencies {
     implementation project(':emoticonpack-htc')
     implementation project(':emoticonpack-lg')
 
+    implementation 'com.android.support:multidex:1.0.2'
     implementation('com.android.support:recyclerview-v7:26.0.1', {
         exclude group: 'com.android.support', module: 'support-annotations'
         exclude group: 'com.android.support', module: 'support-v4'

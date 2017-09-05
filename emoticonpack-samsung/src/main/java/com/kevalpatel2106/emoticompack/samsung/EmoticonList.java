@@ -64,16 +64,19 @@ class EmoticonList {
         EMOTICONS.put("😒", R.drawable.emoji_samsung_1f612);
         EMOTICONS.put("😓", R.drawable.emoji_samsung_1f613);
         EMOTICONS.put("😔", R.drawable.emoji_samsung_1f614);
+        EMOTICONS.put("😕", R.drawable.emoji_samsung_1f615);
         EMOTICONS.put("🙃", R.drawable.emoji_samsung_1f643);
         EMOTICONS.put("🤑", R.drawable.emoji_samsung_1f911);
         EMOTICONS.put("😲", R.drawable.emoji_samsung_1f632);
         EMOTICONS.put("☹️", R.drawable.emoji_samsung_2639);
         EMOTICONS.put("🙁", R.drawable.emoji_samsung_1f641);
+        EMOTICONS.put("😖", R.drawable.emoji_samsung_1f616);
         EMOTICONS.put("😞", R.drawable.emoji_samsung_1f61e);
         EMOTICONS.put("😟", R.drawable.emoji_samsung_1f61f);
         EMOTICONS.put("😤", R.drawable.emoji_samsung_1f624);
         EMOTICONS.put("😢", R.drawable.emoji_samsung_1f622);
         EMOTICONS.put("😭", R.drawable.emoji_samsung_1f62d);
+        EMOTICONS.put("😦", R.drawable.emoji_samsung_1f626);
         EMOTICONS.put("😧", R.drawable.emoji_samsung_1f627);
         EMOTICONS.put("😨", R.drawable.emoji_samsung_1f628);
         EMOTICONS.put("😩", R.drawable.emoji_samsung_1f629);
@@ -136,6 +139,7 @@ class EmoticonList {
         EMOTICONS.put("👨‍💼", R.drawable.emoji_samsung_1f468_200d_1f4bc);
         EMOTICONS.put("👩‍💼", R.drawable.emoji_samsung_1f469_200d_1f4bc);
         EMOTICONS.put("👨‍🔬", R.drawable.emoji_samsung_1f468_200d_1f52c);
+        EMOTICONS.put("👩‍🔬", R.drawable.emoji_samsung_1f469_200d_1f52c);
         EMOTICONS.put("👨‍💻", R.drawable.emoji_samsung_1f468_200d_1f4bb);
         EMOTICONS.put("👩‍💻", R.drawable.emoji_samsung_1f469_200d_1f4bb);
         EMOTICONS.put("👨‍🎤", R.drawable.emoji_samsung_1f468_200d_1f3a4);
@@ -294,6 +298,7 @@ class EmoticonList {
         EMOTICONS.put("👁️", R.drawable.emoji_samsung_1f441);
         EMOTICONS.put("👅", R.drawable.emoji_samsung_1f445);
         EMOTICONS.put("👄", R.drawable.emoji_samsung_1f444);
+        EMOTICONS.put("💋", R.drawable.emoji_samsung_1f48b);
         EMOTICONS.put("👓", R.drawable.emoji_samsung_1f453);
         EMOTICONS.put("🕶️", R.drawable.emoji_samsung_1f576);
         EMOTICONS.put("👔", R.drawable.emoji_samsung_1f454);
@@ -387,6 +392,8 @@ class EmoticonList {
         EMOTICONS.put("🦉", R.drawable.emoji_samsung_1f989);
         EMOTICONS.put("🐸", R.drawable.emoji_samsung_1f438);
         EMOTICONS.put("🐊", R.drawable.emoji_samsung_1f40a);
+        EMOTICONS.put("🐢", R.drawable.emoji_samsung_1f422);
+        EMOTICONS.put("🦎", R.drawable.emoji_samsung_1f98e);
         EMOTICONS.put("🐍", R.drawable.emoji_samsung_1f40d);
         EMOTICONS.put("🐲", R.drawable.emoji_samsung_1f432);
         EMOTICONS.put("🐉", R.drawable.emoji_samsung_1f409);
@@ -481,6 +488,7 @@ class EmoticonList {
         EMOTICONS.put("💧", R.drawable.emoji_samsung_1f4a7);
         EMOTICONS.put("🌊", R.drawable.emoji_samsung_1f30a);
         EMOTICONS.put("🎄", R.drawable.emoji_samsung_1f384);
+        EMOTICONS.put("✨", R.drawable.emoji_samsung_2728);
         EMOTICONS.put("🎋", R.drawable.emoji_samsung_1f38b);
         EMOTICONS.put("🎍", R.drawable.emoji_samsung_1f38d);
         EMOTICONS.put("🍇", R.drawable.emoji_samsung_1f347);
@@ -704,7 +712,6 @@ class EmoticonList {
         EMOTICONS.put("⛲", R.drawable.emoji_samsung_26f2);
         EMOTICONS.put("⛺", R.drawable.emoji_samsung_26fa);
         EMOTICONS.put("🌁", R.drawable.emoji_samsung_1f301);
-        EMOTICONS.put("🌃", R.drawable.emoji_samsung_1f303);
         EMOTICONS.put("🌄", R.drawable.emoji_samsung_1f304);
         EMOTICONS.put("🌅", R.drawable.emoji_samsung_1f305);
         EMOTICONS.put("🌆", R.drawable.emoji_samsung_1f306);
@@ -939,7 +946,9 @@ class EmoticonList {
         EMOTICONS.put("🛠️", R.drawable.emoji_samsung_1f6e0);
         EMOTICONS.put("🗡️", R.drawable.emoji_samsung_1f5e1);
         EMOTICONS.put("⚔️", R.drawable.emoji_samsung_2694);
+        EMOTICONS.put("🔫", R.drawable.emoji_samsung_1f52b);
         EMOTICONS.put("🛡️", R.drawable.emoji_samsung_1f6e1);
+        EMOTICONS.put("🔧", R.drawable.emoji_samsung_1f527);
         EMOTICONS.put("🔩", R.drawable.emoji_samsung_1f529);
         EMOTICONS.put("⚙️", R.drawable.emoji_samsung_2699);
         EMOTICONS.put("🗜️", R.drawable.emoji_samsung_1f5dc);
@@ -1018,6 +1027,7 @@ class EmoticonList {
         EMOTICONS.put("♣️", R.drawable.emoji_samsung_2663);
         EMOTICONS.put("🃏", R.drawable.emoji_samsung_1f0cf);
         EMOTICONS.put("🀄", R.drawable.emoji_samsung_1f004);
+        EMOTICONS.put("🎴", R.drawable.emoji_samsung_1f3b4);
         EMOTICONS.put("🔇", R.drawable.emoji_samsung_1f507);
         EMOTICONS.put("🔈", R.drawable.emoji_samsung_1f508);
         EMOTICONS.put("🔉", R.drawable.emoji_samsung_1f509);
@@ -1082,6 +1092,7 @@ class EmoticonList {
         EMOTICONS.put("☪️", R.drawable.emoji_samsung_262a);
         EMOTICONS.put("☮️", R.drawable.emoji_samsung_262e);
         EMOTICONS.put("🕎", R.drawable.emoji_samsung_1f54e);
+        EMOTICONS.put("🔯", R.drawable.emoji_samsung_1f52f);
         EMOTICONS.put("♈", R.drawable.emoji_samsung_2648);
         EMOTICONS.put("♉", R.drawable.emoji_samsung_2649);
         EMOTICONS.put("♊", R.drawable.emoji_samsung_264a);
@@ -1153,6 +1164,7 @@ class EmoticonList {
         EMOTICONS.put("🆎", R.drawable.emoji_samsung_1f18e);
         EMOTICONS.put("🅱️", R.drawable.emoji_samsung_1f171);
         EMOTICONS.put("🆑", R.drawable.emoji_samsung_1f191);
+        EMOTICONS.put("🆒", R.drawable.emoji_samsung_1f192);
         EMOTICONS.put("🆓", R.drawable.emoji_samsung_1f193);
         EMOTICONS.put("ℹ️", R.drawable.emoji_samsung_2139);
         EMOTICONS.put("🆔", R.drawable.emoji_samsung_1f194);
@@ -1220,6 +1232,7 @@ class EmoticonList {
         EMOTICONS.put("🇦🇶", R.drawable.emoji_samsung_1f1e6_1f1f6);
         EMOTICONS.put("🇦🇷", R.drawable.emoji_samsung_1f1e6_1f1f7);
         EMOTICONS.put("🇦🇸", R.drawable.emoji_samsung_1f1e6_1f1f8);
+        EMOTICONS.put("🇦🇹", R.drawable.emoji_samsung_1f1e6_1f1f9);
         EMOTICONS.put("🇦🇺", R.drawable.emoji_samsung_1f1e6_1f1fa);
         EMOTICONS.put("🇦🇼", R.drawable.emoji_samsung_1f1e6_1f1fc);
         EMOTICONS.put("🇦🇽", R.drawable.emoji_samsung_1f1e6_1f1fd);
@@ -1326,6 +1339,7 @@ class EmoticonList {
         EMOTICONS.put("🇯🇪", R.drawable.emoji_samsung_1f1ef_1f1ea);
         EMOTICONS.put("🇯🇲", R.drawable.emoji_samsung_1f1ef_1f1f2);
         EMOTICONS.put("🇯🇴", R.drawable.emoji_samsung_1f1ef_1f1f4);
+        EMOTICONS.put("🇯🇵", R.drawable.emoji_samsung_1f1ef_1f1f5);
         EMOTICONS.put("🇰🇪", R.drawable.emoji_samsung_1f1f0_1f1ea);
         EMOTICONS.put("🇰🇬", R.drawable.emoji_samsung_1f1f0_1f1ec);
         EMOTICONS.put("🇰🇭", R.drawable.emoji_samsung_1f1f0_1f1ed);
@@ -1364,6 +1378,7 @@ class EmoticonList {
         EMOTICONS.put("🇲🇶", R.drawable.emoji_samsung_1f1f2_1f1f6);
         EMOTICONS.put("🇲🇷", R.drawable.emoji_samsung_1f1f2_1f1f7);
         EMOTICONS.put("🇲🇸", R.drawable.emoji_samsung_1f1f2_1f1f8);
+        EMOTICONS.put("🇲🇹", R.drawable.emoji_samsung_1f1f2_1f1f9);
         EMOTICONS.put("🇲🇺", R.drawable.emoji_samsung_1f1f2_1f1fa);
         EMOTICONS.put("🇲🇻", R.drawable.emoji_samsung_1f1f2_1f1fb);
         EMOTICONS.put("🇲🇼", R.drawable.emoji_samsung_1f1f2_1f1fc);
@@ -1394,16 +1409,20 @@ class EmoticonList {
         EMOTICONS.put("🇵🇳", R.drawable.emoji_samsung_1f1f5_1f1f3);
         EMOTICONS.put("🇵🇷", R.drawable.emoji_samsung_1f1f5_1f1f7);
         EMOTICONS.put("🇵🇸", R.drawable.emoji_samsung_1f1f5_1f1f8);
+        EMOTICONS.put("🇵🇹", R.drawable.emoji_samsung_1f1f5_1f1f9);
+        EMOTICONS.put("🇵🇼", R.drawable.emoji_samsung_1f1f5_1f1fc);
         EMOTICONS.put("🇵🇾", R.drawable.emoji_samsung_1f1f5_1f1fe);
         EMOTICONS.put("🇶🇦", R.drawable.emoji_samsung_1f1f6_1f1e6);
         EMOTICONS.put("🇷🇪", R.drawable.emoji_samsung_1f1f7_1f1ea);
         EMOTICONS.put("🇷🇴", R.drawable.emoji_samsung_1f1f7_1f1f4);
+        EMOTICONS.put("🇷🇸", R.drawable.emoji_samsung_1f1f7_1f1f8);
         EMOTICONS.put("🇷🇺", R.drawable.emoji_samsung_1f1f7_1f1fa);
         EMOTICONS.put("🇷🇼", R.drawable.emoji_samsung_1f1f7_1f1fc);
         EMOTICONS.put("🇸🇦", R.drawable.emoji_samsung_1f1f8_1f1e6);
         EMOTICONS.put("🇸🇧", R.drawable.emoji_samsung_1f1f8_1f1e7);
         EMOTICONS.put("🇸🇨", R.drawable.emoji_samsung_1f1f8_1f1e8);
         EMOTICONS.put("🇸🇩", R.drawable.emoji_samsung_1f1f8_1f1e9);
+        EMOTICONS.put("🇸🇪", R.drawable.emoji_samsung_1f1f8_1f1ea);
         EMOTICONS.put("🇸🇬", R.drawable.emoji_samsung_1f1f8_1f1ec);
         EMOTICONS.put("🇸🇭", R.drawable.emoji_samsung_1f1f8_1f1ed);
         EMOTICONS.put("🇸🇮", R.drawable.emoji_samsung_1f1f8_1f1ee);
@@ -1427,6 +1446,10 @@ class EmoticonList {
         EMOTICONS.put("🇹🇬", R.drawable.emoji_samsung_1f1f9_1f1ec);
         EMOTICONS.put("🇹🇭", R.drawable.emoji_samsung_1f1f9_1f1ed);
         EMOTICONS.put("🇹🇯", R.drawable.emoji_samsung_1f1f9_1f1ef);
+        EMOTICONS.put("🇹🇰", R.drawable.emoji_samsung_1f1f9_1f1f0);
+        EMOTICONS.put("🇹🇱", R.drawable.emoji_samsung_1f1f9_1f1f1);
+        EMOTICONS.put("🇹🇲", R.drawable.emoji_samsung_1f1f9_1f1f2);
+        EMOTICONS.put("🇹🇳", R.drawable.emoji_samsung_1f1f9_1f1f3);
         EMOTICONS.put("🇹🇴", R.drawable.emoji_samsung_1f1f9_1f1f4);
         EMOTICONS.put("🇹🇷", R.drawable.emoji_samsung_1f1f9_1f1f7);
         EMOTICONS.put("🇹🇹", R.drawable.emoji_samsung_1f1f9_1f1f9);
@@ -1446,6 +1469,8 @@ class EmoticonList {
         EMOTICONS.put("🇻🇬", R.drawable.emoji_samsung_1f1fb_1f1ec);
         EMOTICONS.put("🇻🇮", R.drawable.emoji_samsung_1f1fb_1f1ee);
         EMOTICONS.put("🇻🇳", R.drawable.emoji_samsung_1f1fb_1f1f3);
+        EMOTICONS.put("🇻🇺", R.drawable.emoji_samsung_1f1fb_1f1fa);
+        EMOTICONS.put("🇼🇫", R.drawable.emoji_samsung_1f1fc_1f1eb);
         EMOTICONS.put("🇼🇸", R.drawable.emoji_samsung_1f1fc_1f1f8);
         EMOTICONS.put("🇽🇰", R.drawable.emoji_samsung_1f1fd_1f1f0);
         EMOTICONS.put("🇾🇪", R.drawable.emoji_samsung_1f1fe_1f1ea);
