@@ -38,18 +38,18 @@ before_script:
     - android list device
 
     # Create emulator with 1G RAM
-    - chmod +x ./misc/set_emulator_prop.sh
-    - bash ./misc/set_emulator_prop.sh
-
-    # Start emulator
-    - emulator -avd test -no-skin -no-audio -no-window &
-    - android-wait-for-emulator
-
-    - adb devices   #Display list of
-    - adb shell settings put global window_animation_scale 0.0 
-    - adb shell settings put global transition_animation_scale 0.0
-    - adb shell settings put global animator_duration_scale 0.0
-    - adb shell input keyevent 82 &
+#    - chmod +x ./misc/set_emulator_prop.sh
+#    - bash ./misc/set_emulator_prop.sh
+#
+#    # Start emulator
+#    - emulator -avd test -no-skin -no-audio -no-window &
+#    - android-wait-for-emulator
+#
+#    - adb devices   #Display list of
+#    - adb shell settings put global window_animation_scale 0.0 
+#    - adb shell settings put global transition_animation_scale 0.0
+#    - adb shell settings put global animator_duration_scale 0.0
+#    - adb shell input keyevent 82 &
 
 script:
     - ./gradlew :app:assembleDebug --continue --stacktrace
