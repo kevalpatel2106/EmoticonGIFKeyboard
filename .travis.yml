@@ -22,13 +22,13 @@ android:
         - extra-google-m2repository
         - extra-android-m2repository
 
-        - echo y | tools/android --silent update sdk --no-ui --all --filter build-tools-26.0.1
+        - echo y | $ANDROID_SDK/tools/android --silent update sdk --no-ui --all --filter build-tools-26.0.1
 
         #system images
         - sys-img-armeabi-v7a-android-21
 
 licenses:
-    - 'android-sdk-preview-license-52d11cd2'
+    - 'android-sdk-preview-license-.+'
     - 'android-sdk-license-.+'
     - 'google-gdk-license-.+'
 
