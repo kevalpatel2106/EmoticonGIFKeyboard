@@ -22,8 +22,6 @@ android:
         - extra-google-m2repository
         - extra-android-m2repository
 
-        - echo y | ${ANDROID_SDK}/tools/android --silent update sdk --no-ui --all --filter build-tools-26.0.1
-
         #system images
         - sys-img-armeabi-v7a-android-21
 
