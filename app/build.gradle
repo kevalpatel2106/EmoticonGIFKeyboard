@@ -62,6 +62,8 @@ dependencies {
     implementation project(':emoticonpack-windows10')
     implementation project(':emoticonpack-windows8')
     implementation project(':emoticonpack-samsung')
+    implementation project(':emoticonpack-htc')
+    implementation project(':emoticonpack-lg')
 
     implementation('com.android.support:recyclerview-v7:26.0.1', {
         exclude group: 'com.android.support', module: 'support-annotations'

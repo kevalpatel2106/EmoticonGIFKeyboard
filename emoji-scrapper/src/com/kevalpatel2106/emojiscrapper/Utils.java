@@ -16,22 +16,13 @@
 
 package com.kevalpatel2106.emojiscrapper;
 
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-
-import static com.kevalpatel2106.emojiscrapper.Utils.EmoticonsCategories.ACTIVITY;
-import static com.kevalpatel2106.emojiscrapper.Utils.EmoticonsCategories.FLAGS;
-import static com.kevalpatel2106.emojiscrapper.Utils.EmoticonsCategories.FOOD;
-import static com.kevalpatel2106.emojiscrapper.Utils.EmoticonsCategories.NATURE;
-import static com.kevalpatel2106.emojiscrapper.Utils.EmoticonsCategories.OBJECTS;
-import static com.kevalpatel2106.emojiscrapper.Utils.EmoticonsCategories.PEOPLE;
-import static com.kevalpatel2106.emojiscrapper.Utils.EmoticonsCategories.SYMBOLS;
-import static com.kevalpatel2106.emojiscrapper.Utils.EmoticonsCategories.TRAVEL;
 
 /**
  * Created by Keval on 24-Aug-17.

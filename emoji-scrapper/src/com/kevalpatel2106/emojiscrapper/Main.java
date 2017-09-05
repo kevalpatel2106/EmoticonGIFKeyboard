@@ -52,7 +52,8 @@ public class Main {
             "Messenger",
             "Twitter",
             "EmojiOne",
-            "emojidex");
+            "emojidex",
+            "LG");
 
     private static  ArrayList<Emoji> mEmojis = new ArrayList<>();
     private static final String BASE_URL = "http://emojipedia.org";
