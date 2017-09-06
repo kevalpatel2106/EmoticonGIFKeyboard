@@ -41,21 +41,21 @@ public class Main {
         return firstLength < secondLength ? 1 : firstLength == secondLength ? 0 : -1;
     };
     private static final List<String> SUPPORTED_VENDOR = Arrays.asList(
-            "Apple",
-            "Android 8.0",
-            "Android 7.0",
-            "HTC",
-            "Microsoft",
-            "Windows 8.1",
-            "Samsung",
-            "Facebook",
-            "Messenger",
-            "Twitter",
-            "EmojiOne",
-            "emojidex",
-            "LG");
+//            "Apple",
+//            "Android 8.0",
+            "Android 7.0"
+//            "HTC",
+//            "Microsoft",
+//            "Windows 8.1",
+//            "Samsung",
+//            "Facebook",
+//            "Messenger",
+//            "Twitter",
+//            "EmojiOne",
+//            "emojidex",
+            /*"LG"*/);
 
-    private static  ArrayList<Emoji> mEmojis = new ArrayList<>();
+    private static ArrayList<Emoji> mEmojis = new ArrayList<>();
     private static final String BASE_URL = "http://emojipedia.org";
     private static final String[] EMOJI_CATEGORIES_URL = new String[]{
             BASE_URL + "/people/",
@@ -101,7 +101,7 @@ public class Main {
         System.out.println("\n\n*******************************************");
         System.out.println("Saving to database..." + mEmojis.size());
         for (int i = 0, mEmojisSize = mEmojis.size(); i < mEmojisSize; i++) {
-            System.out.println(i+"");
+            System.out.println(i + "");
             Emoji emoji = mEmojis.get(i);
             if (emoji != null) {
                 System.out.println(emoji.unicode + " " + emoji.category + " " + emoji.codePoints + " " + emoji.tags);
@@ -142,7 +142,7 @@ public class Main {
 
                 if (emoji != null) mEmojis.add(emoji);
 
-                System.out.println("Emojis parsed: "  + mEmojis.size());
+                System.out.println("Emojis parsed: " + mEmojis.size());
             }
         } catch (IOException e) {
             System.out.println("Category page loading failed...Trying again...");
@@ -212,10 +212,14 @@ public class Main {
                 String vendorImage;
                 if (vendorImageUrls.get(i).getElementsByTag("img").hasAttr("data-src")) {
                     vendorImage = vendorImageUrls.get(i).getElementsByTag("img").attr("data-src");
-                }else {
+                } else {
                     vendorImage = vendorImageUrls.get(i).getElementsByTag("img").attr("src");
                 }
 
+                //Special case for android 7. If the icon is not in android 7, we need to look into android 5.0.
+                if (vendorName.equals("Android 5.0") && !emoji.imageUrls.containsKey("Android 7.0")) {
+                    vendorName = "Android 7.0";
+                }
                 //Check if the vendor is among supported vendors
                 if (SUPPORTED_VENDOR.contains(vendorName)) {
                     System.out.println(vendorName + " " + vendorImage);
