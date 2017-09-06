@@ -52,7 +52,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-v4'
         exclude group: 'com.android.support', module: 'appcompat-v7'
     })
-    implementation('com.android.support:recyclerview-v7:26.0.1', {
+    implementation('com.android.support:recyclerview-v7:26.0.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
         exclude group: 'com.android.support', module: 'support-v4'
         exclude group: 'com.android.support', module: 'appcompat-v7'
@@ -62,8 +62,8 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-v4'
         exclude group: 'com.android.support', module: 'appcompat-v7'
     })
-    implementation 'com.android.support:appcompat-v7:26.0.1'
-    implementation 'com.android.support:support-annotations:26.0.1'
+    implementation 'com.android.support:appcompat-v7:26.0.2'
+    implementation 'com.android.support:support-annotations:26.0.2'
 }
 
 apply from: '../gradle/install-bintray.gradle'

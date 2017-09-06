@@ -20,7 +20,7 @@ import com.kevalpatel2106.emoticongifkeyboard.emoticons.EmoticonProvider;
 
 /**
  * Created by Keval Patel on 21/08/17.
- * Google (Android 8.0) emoticon icon pack.
+ * Google Android 8.0 emoticon icon pack.
  *
  * @author 'https://github.com/kevalpatel2106'
  */

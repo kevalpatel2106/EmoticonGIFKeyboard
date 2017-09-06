@@ -249,15 +249,15 @@ public class Main {
                                        String vendor,
                                        ArrayList<String> codePoints) throws IOException {
         File originalImageFile = Utils.getImageFile(vendor, codePoints);
-//        File resizedImageFile = Utils.getResizedImageFile(vendor, codePoints);
+        File resizedImageFile = Utils.getResizedImageFile(vendor, codePoints);
 
-//        //Prepare full scale image
-//        BufferedImage originalImg = ImageIO.read(new URL(url));
-//        ImageIO.write(originalImg, "png", originalImageFile);
+        //Prepare full scale image
+        BufferedImage originalImg = ImageIO.read(new URL(url));
+        ImageIO.write(originalImg, "png", originalImageFile);
 
         //Prepare resized image also
-//        BufferedImage resizedImg = Utils.resizeImage(originalImg);
-//        ImageIO.write(resizedImg, "png", resizedImageFile);
+        BufferedImage resizedImg = Utils.resizeImage(originalImg);
+        ImageIO.write(resizedImg, "png", resizedImageFile);
 
         return originalImageFile;
     }
