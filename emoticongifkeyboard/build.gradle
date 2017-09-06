@@ -15,8 +15,9 @@
  */
 
 apply plugin: 'com.android.library'
-apply from: '../gradle/config.gradle'
 apply plugin: 'com.github.dcendents.android-maven'
+apply from: '../gradle/config.gradle'
+apply from: '../gradle/deps.gradle'
 
 android {
     compileSdkVersion buidlConfig.compile
@@ -39,31 +40,17 @@ android {
     }
 
     packagingOptions packageExcludes
-
-    // This is important, it will run lint checks but won't abort build
-    lintOptions {
-        abortOnError false
-    }
+    lintOptions lintOption
+    aaptOptions aaptOption
+    dexOptions dexOption
 }
 
 dependencies {
-    implementation('com.github.bumptech.glide:glide:3.8.0', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-        exclude group: 'com.android.support', module: 'support-v4'
-        exclude group: 'com.android.support', module: 'appcompat-v7'
-    })
-    implementation('com.android.support:recyclerview-v7:26.0.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-        exclude group: 'com.android.support', module: 'support-v4'
-        exclude group: 'com.android.support', module: 'appcompat-v7'
-    })
-    implementation('com.readystatesoftware.sqliteasset:sqliteassethelper:2.0.1', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-        exclude group: 'com.android.support', module: 'support-v4'
-        exclude group: 'com.android.support', module: 'appcompat-v7'
-    })
-    implementation 'com.android.support:appcompat-v7:26.0.2'
-    implementation 'com.android.support:support-annotations:26.0.2'
+    implementation(otherLib.sqliteassethelper, excludeGrp)
+    implementation supportLib.recyclerView
+    implementation supportLib.appCompat
+    implementation(otherLib.glide, excludeGrp)
+    implementation supportLib.annotations
 }
 
 apply from: '../gradle/install-bintray.gradle'

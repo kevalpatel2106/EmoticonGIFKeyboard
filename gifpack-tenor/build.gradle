@@ -17,6 +17,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply from: '../gradle/config.gradle'
+apply from: '../gradle/deps.gradle'
 
 android {
     compileSdkVersion buidlConfig.compile
@@ -25,7 +26,7 @@ android {
     compileOptions {
         sourceCompatibility javaCompatibility.sourceCompatibility
         targetCompatibility javaCompatibility.targetCompatibility
-   }
+    }
 
     defaultConfig {
         //sdks
@@ -35,24 +36,19 @@ android {
         versionCode 1
         versionName "v" + libraryVersion
 
-        consumerProguardFiles 'proguard-rules.pro','../proguard-rules-remove-logs.pro'
+        consumerProguardFiles 'proguard-rules.pro', '../proguard-rules-remove-logs.pro'
     }
 
     packagingOptions packageExcludes
-
-    // This is important, it will run lint checks but won't abort build
-    lintOptions {
-        abortOnError false
-    }
+    lintOptions lintOption
+    aaptOptions aaptOption
+    dexOptions dexOption
 }
 
 dependencies {
     implementation project(':emoticongifkeyboard')
-    implementation 'com.android.support:support-annotations:26.0.2'
-    implementation('com.squareup.retrofit2:retrofit:2.3.0', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-        exclude group: 'com.android.support', module: 'support-v4'
-    })
+    implementation(retrofitLib.retrofit, excludeGrp)
+    implementation supportLib.annotations
 }
 
 apply from: '../gradle/install-bintray.gradle'
