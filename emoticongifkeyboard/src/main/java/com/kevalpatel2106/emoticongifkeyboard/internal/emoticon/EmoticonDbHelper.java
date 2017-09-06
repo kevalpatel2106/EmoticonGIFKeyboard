@@ -80,7 +80,8 @@ final class EmoticonDbHelper extends SQLiteAssetHelper {
         Cursor cursor = sqLiteDatabase.query(EmoticonColumns.TABLE,
                 new String[]{EmoticonColumns.UNICODE, EmoticonColumns.CATEGORY},
                 EmoticonColumns.CATEGORY + "=?", new String[]{category + ""},
-                null, null, null);
+                null, null,
+                EmoticonColumns.ID + " ASC");
 
         ArrayList<Emoticon> emoticons = new ArrayList<>();
         while (cursor.moveToNext()) {
