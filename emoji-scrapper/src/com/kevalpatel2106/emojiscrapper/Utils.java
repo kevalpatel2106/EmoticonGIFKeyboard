@@ -78,7 +78,7 @@ class Utils {
 
         return new File(getImageDir(vendor).getAbsolutePath()
                 + "/emoji_"
-                + vendor.toLowerCase().replace(".","_") + "_"
+                + vendor.toLowerCase().replace(".", "_").replace(" ", "_") + "_"
                 + codePointStr.toLowerCase() + ".png");
     }
 
@@ -90,7 +90,7 @@ class Utils {
 
         return new File(getResizedImageDir(vendor).getAbsolutePath()
                 + "/emoji_"
-                + vendor.toLowerCase().replace(".","_") + "_"
+                + vendor.toLowerCase().replace(".", "_").replace(" ", "_") + "_"
                 + codePointStr.toLowerCase() + ".png");
     }
 

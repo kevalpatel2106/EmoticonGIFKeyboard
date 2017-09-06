@@ -1,0 +1,63 @@
+/*
+ * Copyright 2017 Keval Patel.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+
+ext {
+    def supportLibVersion = "26.0.2"
+    def retrofitVersion = "2.3.0"
+    def espressoVersion = "3.0.0"
+
+    //Exclude group for the test dependency
+    excludeGrp = {
+        exclude group: 'com.android.support', module: 'support-annotations'
+        exclude group: 'com.android.support', module: 'recyclerview-v7'
+        exclude group: 'com.android.support', module: 'cardview-v7'
+        exclude group: 'com.android.support', module: 'design'
+        exclude group: 'com.android.support', module: 'support-v4'
+    }
+
+    //Testing dependency
+    testLib = [
+            junit           : 'junit:junit:4.12',
+            rules           : 'com.android.support.test:rules:1.0',
+            runner          : 'com.android.support.test:runner:1.0',
+            esspresso       : 'com.android.support.test.espresso:espresso-core:' + espressoVersion,
+            esspressoIntents: 'com.android.support.test.espresso:espresso-intents:' + espressoVersion,
+            contrib         : 'com.android.support.test.espresso:espresso-contrib:' + espressoVersion,
+            idling          : 'com.android.support.test.espresso:espresso-idling-resource:' + espressoVersion,
+            uiAutomator     : 'com.android.support.test.uiautomator:uiautomator-v18:2.1.2',
+            mokitoCore      : 'org.mockito:mockito-core:2.8.47',
+            mokitoAndroid   : 'org.mockito:mockito-android:2.8.47',
+    ]
+
+    //Support library dependency
+    supportLib = [
+            annotations : 'com.android.support:support-annotations:' + supportLibVersion,
+            supportv4   : 'com.android.support:support-v4:' + supportLibVersion,
+            appCompat   : 'com.android.support:appcompat-v7:' + supportLibVersion,
+            recyclerView: 'com.android.support:recyclerview-v7:' + supportLibVersion,
+    ]
+
+    //retrofit dependency
+    retrofitLib = [
+            retrofit: 'com.squareup.retrofit2:retrofit:' + retrofitVersion,
+    ]
+
+    //Other libs
+    otherLib = [
+            glide            : 'com.github.bumptech.glide:glide:3.8.0',
+            sqliteassethelper: 'com.readystatesoftware.sqliteasset:sqliteassethelper:2.0.1',
+    ]
+}

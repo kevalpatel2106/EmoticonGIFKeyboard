@@ -16,5 +16,5 @@
   -->
 
 <lint>
-    <issue id="IconMissingDensityFolder" severity="ignore"/>
+    <issue id="IconMissingDensityFolder" severity="ignore" />
 </lint>

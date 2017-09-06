@@ -22,7 +22,7 @@ import static com.kevalpatel2106.emoticonpack.lg.EmoticonList.*;
 
 /**
  * Created by Keval Patel on 21/08/17.
- * Google (Android 8.0) emoticon icon pack.
+ * LG G5 emoticon icon pack.
  *
  * @author 'https://github.com/kevalpatel2106'
  */

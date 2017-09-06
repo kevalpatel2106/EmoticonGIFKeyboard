@@ -39,11 +39,9 @@ android {
     }
 
     packagingOptions packageExcludes
-
-    // This is important, it will run lint checks but won't abort build
-    lintOptions {
-        abortOnError false
-    }
+    lintOptions lintOption
+    aaptOptions aaptOption
+    dexOptions dexOption
 }
 
 dependencies {

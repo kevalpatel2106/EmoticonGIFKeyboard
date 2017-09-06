@@ -20,7 +20,7 @@ import com.kevalpatel2106.emoticongifkeyboard.emoticons.EmoticonProvider;
 
 /**
  * Created by Keval Patel on 21/08/17.
- * Windows 10 emoticon icon pack.
+ * Windows 8.1 emoticon icon pack.
  *
  * @author 'https://github.com/kevalpatel2106'
  */

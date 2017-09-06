@@ -33,6 +33,7 @@ import com.kevalpatel2106.emoticongifkeyboard.gifs.Gif;
 import com.kevalpatel2106.emoticongifkeyboard.gifs.GifSelectListener;
 import com.kevalpatel2106.emoticongifkeyboard.widget.EmoticonEditText;
 import com.kevalpatel2106.emoticongifkeyboard.widget.EmoticonTextView;
+import com.kevalpatel2106.emoticonpack.android7.Android7EmoticonProvider;
 import com.kevalpatel2106.emoticonpack.android8.Android8EmoticonProvider;
 import com.kevalpatel2106.emoticonpack.ios.IosEmoticonProvider;
 import com.kevalpatel2106.emoticonpack.windows10.Windows10EmoticonProvider;
@@ -66,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
           Set the custom emoticon icon provider. If you don't set any icon provider here, library
           will render system emoticons. Here we are setting iOS emoticons icon pack.
          */
-        textView.setEmoticonProvider(IosEmoticonProvider.create());
+        textView.setEmoticonProvider(Android8EmoticonProvider.create());
 
 
         //Set the emoticon edit text.
@@ -85,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
                   Set the custom emoticon icon provider. If you don't set any icon provider here, library
                   will render system emoticons. Here we are setting Windows 10 emoticons icon pack.
                  */
-                .setEmoticonProvider(Windows10EmoticonProvider.create())
+                .setEmoticonProvider(Android7EmoticonProvider.create())
 
                 /*
                   Set the emoticon select listener. This will notify you when user selects any emoticon from

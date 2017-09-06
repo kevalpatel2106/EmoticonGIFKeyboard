@@ -22,7 +22,7 @@ class EmoticonList {
     static final HashMap<String, Integer> EMOTICONS = new HashMap<>();
 
     static {
-           EMOTICONS.put("😀", R.drawable.emoji_android_8_0_1f600);
+        EMOTICONS.put("😀", R.drawable.emoji_android_8_0_1f600);
         EMOTICONS.put("😁", R.drawable.emoji_android_8_0_1f601);
         EMOTICONS.put("😂", R.drawable.emoji_android_8_0_1f602);
         EMOTICONS.put("🤣", R.drawable.emoji_android_8_0_1f923);
