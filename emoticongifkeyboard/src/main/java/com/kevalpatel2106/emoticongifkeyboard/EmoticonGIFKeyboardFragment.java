@@ -186,33 +186,49 @@ public final class EmoticonGIFKeyboardFragment extends Fragment implements Fragm
 
         //Set backspace button
         mBackSpaceBtn = view.findViewById(R.id.emojis_backspace);
-        mBackSpaceBtn.setOnClickListener(view1 -> {
-            if (mEmoticonSelectListener != null) mEmoticonSelectListener.onBackSpace();
+        mBackSpaceBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view1) {
+                if (mEmoticonSelectListener != null) mEmoticonSelectListener.onBackSpace();
 
-            //dispatch back space event
-            final KeyEvent event = new KeyEvent(0, 0, 0,
-                    KeyEvent.KEYCODE_DEL, 0, 0, 0, 0,
-                    KeyEvent.KEYCODE_ENDCALL);
-            getActivity().dispatchKeyEvent(event);
+                //dispatch back space event
+                final KeyEvent event = new KeyEvent(0, 0, 0,
+                        KeyEvent.KEYCODE_DEL, 0, 0, 0, 0,
+                        KeyEvent.KEYCODE_ENDCALL);
+                EmoticonGIFKeyboardFragment.this.getActivity().dispatchKeyEvent(event);
+            }
         });
 
         //Set emoticon button
         mEmoticonTabBtn = view.findViewById(R.id.btn_emoji_tab);
-        mEmoticonTabBtn.setOnClickListener(view12 -> replaceFragment(mEmoticonFragment, TAG_EMOTICON_FRAGMENT));
+        mEmoticonTabBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view12) {
+                EmoticonGIFKeyboardFragment.this.replaceFragment(mEmoticonFragment, TAG_EMOTICON_FRAGMENT);
+            }
+        });
         mEmoticonTabBtn.setVisibility(isEmoticonsEnable() && isGIFsEnable() ? View.VISIBLE : View.GONE);
 
         //Set GIF button
         mGifTabBtn = view.findViewById(R.id.btn_gif_tab);
-        mGifTabBtn.setOnClickListener(view13 -> replaceFragment(mGifFragment, TAG_GIF_FRAGMENT));
+        mGifTabBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view13) {
+                EmoticonGIFKeyboardFragment.this.replaceFragment(mGifFragment, TAG_GIF_FRAGMENT);
+            }
+        });
         mGifTabBtn.setVisibility(isEmoticonsEnable() && isGIFsEnable() ? View.VISIBLE : View.GONE);
 
         //Setup the search button.
         View searchBtn = view.findViewById(R.id.search_btn);
-        searchBtn.setOnClickListener(view14 -> {
-            if (mEmoticonTabBtn.isSelected()) {
-                replaceFragment(mEmoticonSearchFragment, TAG_EMOTICON_SEARCH_FRAGMENT);
-            } else {
-                replaceFragment(mGifSearchFragment, TAG_GIF_SEARCH_FRAGMENT);
+        searchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view14) {
+                if (mEmoticonTabBtn.isSelected()) {
+                    EmoticonGIFKeyboardFragment.this.replaceFragment(mEmoticonSearchFragment, TAG_EMOTICON_SEARCH_FRAGMENT);
+                } else {
+                    EmoticonGIFKeyboardFragment.this.replaceFragment(mGifSearchFragment, TAG_GIF_SEARCH_FRAGMENT);
+                }
             }
         });
 

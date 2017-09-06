@@ -131,15 +131,18 @@ public final class EmoticonFragment extends Fragment {
         //Set the click listener in each tab
         for (int i = 0; i < emojiTabs.length; i++) {
             final int position = i;
-            emojiTabs[i].setOnClickListener(v -> {
-                //Mark current tab as selected.
-                for (View emojiTab : emojiTabs) emojiTab.setSelected(false);
-                v.setSelected(true);
+            emojiTabs[i].setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //Mark current tab as selected.
+                    for (View emojiTab : emojiTabs) emojiTab.setSelected(false);
+                    v.setSelected(true);
 
-                mViewPager.setCurrentItem(position);
+                    mViewPager.setCurrentItem(position);
 
-                //Save the selected category
-                mEmoticonRecentManager.setLastCategory(position);
+                    //Save the selected category
+                    mEmoticonRecentManager.setLastCategory(position);
+                }
             });
         }
 

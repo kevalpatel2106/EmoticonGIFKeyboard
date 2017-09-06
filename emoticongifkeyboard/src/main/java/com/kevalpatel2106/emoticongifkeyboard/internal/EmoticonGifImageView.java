@@ -27,6 +27,7 @@ import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.MotionEvent;
+import android.view.View;
 
 import com.kevalpatel2106.emoticongifkeyboard.R;
 
@@ -78,10 +79,13 @@ public final class EmoticonGifImageView extends AppCompatImageView {
         mAccentDarkColor = getDarkColor(mAccentColor);
 
         //Set on touch listener to change the tint color when image is pressed.
-        setOnTouchListener((view, motionEvent) -> {
-            setColorFilter(motionEvent.getAction() == MotionEvent.ACTION_DOWN ?
-                    mAccentDarkColor : mAccentColor, PorterDuff.Mode.SRC_ATOP);
-            return false;
+        setOnTouchListener(new OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                EmoticonGifImageView.this.setColorFilter(motionEvent.getAction() == MotionEvent.ACTION_DOWN ?
+                        mAccentDarkColor : mAccentColor, PorterDuff.Mode.SRC_ATOP);
+                return false;
+            }
         });
 
         //Set the icon color to accent color

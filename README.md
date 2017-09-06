@@ -26,7 +26,7 @@
   * Add below lines to `app/build.gradle` file of your project.
   ```groovy
   dependencies {
-      compile 'com.kevalpatel2106:emoticongifkeyboard:1.0'
+      compile 'com.kevalpatel2106:emoticongifkeyboard:1.1'
   }
   ```
 - To integrate using maven visit this [page](https://github.com/kevalpatel2106/EmoticonGIFKeyboard/blob/master/IMPORT.md).

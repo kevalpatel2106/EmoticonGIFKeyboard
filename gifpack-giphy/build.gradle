@@ -47,7 +47,7 @@ android {
 
 dependencies {
     implementation project(':emoticongifkeyboard')
-    implementation(retrofitLib.retrofit, excludeGrp)
+    implementation(retrofitLib.retrofit)
     implementation supportLib.annotations
 }
 

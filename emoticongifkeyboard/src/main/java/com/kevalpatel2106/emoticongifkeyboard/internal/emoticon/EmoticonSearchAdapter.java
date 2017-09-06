@@ -116,7 +116,12 @@ final class EmoticonSearchAdapter extends RecyclerView.Adapter<EmoticonSearchAda
             } else {
                 holder.icon.setText(emoji.getUnicode());
             }
-            holder.icon.setOnClickListener(view -> mListener.OnEmoticonSelected(emoji));
+            holder.icon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mListener.OnEmoticonSelected(emoji);
+                }
+            });
         }
     }
 

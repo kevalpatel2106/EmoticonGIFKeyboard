@@ -94,7 +94,12 @@ final class GifGridAdapter extends ArrayAdapter<Gif> {
                     .centerCrop()
                     .into(holder.gifIv);
 
-            holder.gifIv.setOnClickListener(view -> mListener.OnListItemSelected(gif));
+            holder.gifIv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mListener.OnListItemSelected(gif);
+                }
+            });
         }
         return v;
     }

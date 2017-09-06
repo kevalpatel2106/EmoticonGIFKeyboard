@@ -19,15 +19,6 @@ ext {
     def retrofitVersion = "2.3.0"
     def espressoVersion = "3.0.0"
 
-    //Exclude group for the test dependency
-    excludeGrp = {
-        exclude group: 'com.android.support', module: 'support-annotations'
-        exclude group: 'com.android.support', module: 'recyclerview-v7'
-        exclude group: 'com.android.support', module: 'cardview-v7'
-        exclude group: 'com.android.support', module: 'design'
-        exclude group: 'com.android.support', module: 'support-v4'
-    }
-
     //Testing dependency
     testLib = [
             junit           : 'junit:junit:4.12',

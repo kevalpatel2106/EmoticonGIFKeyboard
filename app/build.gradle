@@ -69,7 +69,6 @@ dependencies {
     implementation project(':emoticonpack-lg')
 
     implementation 'com.android.support:multidex:1.0.2'
-    implementation(otherLib.glide, excludeGrp)
-    implementation supportLib.recyclerView
+    implementation(otherLib.glide)
     implementation supportLib.appCompat
 }

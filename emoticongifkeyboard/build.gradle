@@ -46,10 +46,10 @@ android {
 }
 
 dependencies {
-    implementation(otherLib.sqliteassethelper, excludeGrp)
+    implementation(otherLib.sqliteassethelper)
     implementation supportLib.recyclerView
     implementation supportLib.appCompat
-    implementation(otherLib.glide, excludeGrp)
+    implementation(otherLib.glide)
     implementation supportLib.annotations
 }
 

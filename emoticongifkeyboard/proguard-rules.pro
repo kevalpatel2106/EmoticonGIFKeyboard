@@ -30,5 +30,3 @@
     **[] $VALUES;
     public *;
 }
-
--injars library.jar(!META-INF/MANIFEST.MF)

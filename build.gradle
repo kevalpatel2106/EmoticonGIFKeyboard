@@ -52,7 +52,7 @@ ext {
     siteUrl = 'https://github.com/kevalpatel2106/EmoticonGIFKeyboard'
     gitUrl = 'https://github.com/kevalpatel2106/EmoticonGIFKeyboard.git'
 
-    libraryVersion = '1.0'
+    libraryVersion = '1.1'
 
     developerId = 'kevalpatel2106'
     developerName = 'Keval Patel'
