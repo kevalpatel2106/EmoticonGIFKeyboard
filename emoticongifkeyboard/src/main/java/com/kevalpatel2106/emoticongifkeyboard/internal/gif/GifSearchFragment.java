@@ -26,6 +26,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -147,36 +148,56 @@ public final class GifSearchFragment extends Fragment implements GifSearchAdapte
                 LinearLayoutManager.HORIZONTAL, false));
         mRecyclerView.setAdapter(mGifGridAdapter);
 
-        //Start loading trending GIFs
-        mTrendingGifTask = new TrendingGifTask();
-        mTrendingGifTask.execute();
-
         //Set the search interface
         mSearchEt = view.findViewById(R.id.search_box_et);
-        view.findViewById(R.id.search_btn).setOnClickListener(view1 -> searchGif(mSearchEt.getText().toString()));
         mSearchEt.requestFocus();
-        mSearchEt.setOnEditorActionListener((textView, i, keyEvent) -> {
-            searchGif(mSearchEt.getText().toString());
-            return true;
+        view.findViewById(R.id.search_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view1) {
+                GifSearchFragment.this.searchGif(mSearchEt.getText().toString());
+            }
+        });
+        mSearchEt.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                GifSearchFragment.this.searchGif(mSearchEt.getText().toString());
+                return true;
+            }
         });
 
         //Set up button
         EmoticonGifImageView backBtn = view.findViewById(R.id.up_arrow);
-        backBtn.setOnClickListener(view12 -> {
-            hideKeyboard();
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view12) {
+                GifSearchFragment.this.hideKeyboard();
 
-            mSearchEt.setText("");
+                mSearchEt.setText("");
 
-            //Pop fragment from the back stack
-            getFragmentManager().popBackStackImmediate(EmoticonGIFKeyboardFragment.TAG_GIF_FRAGMENT, 0);
+                //Pop fragment from the back stack
+                GifSearchFragment.this.getFragmentManager().popBackStackImmediate(EmoticonGIFKeyboardFragment.TAG_GIF_FRAGMENT, 0);
+            }
         });
 
         showKeyboard();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        mSearchEt.setText("");
+        //Start loading trending GIFs
+        if (mTrendingGifTask != null)
+            mTrendingGifTask.cancel(true);
+        mTrendingGifTask = new TrendingGifTask();
+        mTrendingGifTask.execute();
+
+    }
+
     /**
      * Show the keyboard.
      */
+
     private void showKeyboard() {
         //Show the keyboard
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);

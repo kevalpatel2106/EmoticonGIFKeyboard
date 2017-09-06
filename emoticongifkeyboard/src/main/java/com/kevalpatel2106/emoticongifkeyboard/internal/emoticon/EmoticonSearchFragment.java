@@ -28,11 +28,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 import com.kevalpatel2106.emoticongifkeyboard.EmoticonGIFKeyboardFragment;
@@ -137,7 +139,7 @@ public final class EmoticonSearchFragment extends Fragment implements EmoticonSe
 
         //Set the list.
         //When the fragment initialize display list of recent emoticons.
-        mEmoticons = EmoticonRecentManager.getInstance(mContext).getRecentEmoticons();
+        mEmoticons = new ArrayList<>();
         mAdapter = new EmoticonSearchAdapter(getActivity(), mEmoticons, mEmoticonProvider, this);
         mRecyclerView = view.findViewById(R.id.emoticon_search_list);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),
@@ -147,9 +149,12 @@ public final class EmoticonSearchFragment extends Fragment implements EmoticonSe
         //Set the search interface
         mSearchEt = view.findViewById(R.id.search_box_et);
         mSearchEt.requestFocus();
-        mSearchEt.setOnEditorActionListener((textView, i, keyEvent) -> {
-            searchEmoticon(mSearchEt.getText().toString());
-            return true;
+        mSearchEt.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                searchEmoticon(mSearchEt.getText().toString());
+                return true;
+            }
         });
         mSearchEt.addTextChangedListener(new TextWatcher() {
             @Override
@@ -170,17 +175,28 @@ public final class EmoticonSearchFragment extends Fragment implements EmoticonSe
 
         //Set up button
         EmoticonGifImageView backBtn = view.findViewById(R.id.up_arrow);
-        backBtn.setOnClickListener(view1 -> {
-            hideKeyboard();
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view1) {
+                EmoticonSearchFragment.this.hideKeyboard();
 
-            mSearchEt.setText("");
+                mSearchEt.setText("");
 
-            //Pop fragment from the back stack
-            getFragmentManager().popBackStackImmediate(EmoticonGIFKeyboardFragment.TAG_EMOTICON_FRAGMENT, 0);
+                //Pop fragment from the back stack
+                EmoticonSearchFragment.this.getFragmentManager().popBackStackImmediate(EmoticonGIFKeyboardFragment.TAG_EMOTICON_FRAGMENT, 0);
+            }
         });
 
         //Open the keyboard.
         showKeyboard();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mEmoticons.clear();
+        mEmoticons.addAll(EmoticonRecentManager.getInstance(mContext).getRecentEmoticons());
+        mSearchEt.setText("");
     }
 
     @Override

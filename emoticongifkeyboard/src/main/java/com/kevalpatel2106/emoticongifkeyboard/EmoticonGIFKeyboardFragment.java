@@ -413,6 +413,10 @@ public final class EmoticonGIFKeyboardFragment extends Fragment implements Fragm
      */
     public synchronized void close() {
         if (mRootView != null) mRootView.setVisibility(View.GONE);
+
+        //Display the emoticons picker
+        replaceFragment(mEmoticonFragment, TAG_EMOTICON_FRAGMENT);
+
     }
 
     /**
