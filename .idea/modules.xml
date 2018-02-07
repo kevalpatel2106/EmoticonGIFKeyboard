@@ -3,23 +3,41 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/EmoticonGIFKeyboard.iml" filepath="$PROJECT_DIR$/EmoticonGIFKeyboard.iml" />
+      <module fileurl="file://F:\git-clone\EmoticonGIFKeyboard\EmoticonGIFKeyboard.iml" filepath="F:\git-clone\EmoticonGIFKeyboard\EmoticonGIFKeyboard.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://F:\git-clone\EmoticonGIFKeyboard\app\app.iml" filepath="F:\git-clone\EmoticonGIFKeyboard\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/emoticongifkeyboard/emoticongifkeyboard.iml" filepath="$PROJECT_DIR$/emoticongifkeyboard/emoticongifkeyboard.iml" />
+      <module fileurl="file://F:\git-clone\EmoticonGIFKeyboard\emoticongifkeyboard\emoticongifkeyboard.iml" filepath="F:\git-clone\EmoticonGIFKeyboard\emoticongifkeyboard\emoticongifkeyboard.iml" />
       <module fileurl="file://$PROJECT_DIR$/emoticonpack-android7/emoticonpack-android7.iml" filepath="$PROJECT_DIR$/emoticonpack-android7/emoticonpack-android7.iml" />
+      <module fileurl="file://F:\git-clone\EmoticonGIFKeyboard\emoticonpack-android7\emoticonpack-android7.iml" filepath="F:\git-clone\EmoticonGIFKeyboard\emoticonpack-android7\emoticonpack-android7.iml" />
       <module fileurl="file://$PROJECT_DIR$/emoticonpack-android8/emoticonpack-android8.iml" filepath="$PROJECT_DIR$/emoticonpack-android8/emoticonpack-android8.iml" />
+      <module fileurl="file://F:\git-clone\EmoticonGIFKeyboard\emoticonpack-android8\emoticonpack-android8.iml" filepath="F:\git-clone\EmoticonGIFKeyboard\emoticonpack-android8\emoticonpack-android8.iml" />
       <module fileurl="file://$PROJECT_DIR$/emoticonpack-emojidex/emoticonpack-emojidex.iml" filepath="$PROJECT_DIR$/emoticonpack-emojidex/emoticonpack-emojidex.iml" />
+      <module fileurl="file://F:\git-clone\EmoticonGIFKeyboard\emoticonpack-emojidex\emoticonpack-emojidex.iml" filepath="F:\git-clone\EmoticonGIFKeyboard\emoticonpack-emojidex\emoticonpack-emojidex.iml" />
       <module fileurl="file://$PROJECT_DIR$/emoticonpack-emojione/emoticonpack-emojione.iml" filepath="$PROJECT_DIR$/emoticonpack-emojione/emoticonpack-emojione.iml" />
+      <module fileurl="file://F:\git-clone\EmoticonGIFKeyboard\emoticonpack-emojione\emoticonpack-emojione.iml" filepath="F:\git-clone\EmoticonGIFKeyboard\emoticonpack-emojione\emoticonpack-emojione.iml" />
       <module fileurl="file://$PROJECT_DIR$/emoticonpack-facebook/emoticonpack-facebook.iml" filepath="$PROJECT_DIR$/emoticonpack-facebook/emoticonpack-facebook.iml" />
+      <module fileurl="file://F:\git-clone\EmoticonGIFKeyboard\emoticonpack-facebook\emoticonpack-facebook.iml" filepath="F:\git-clone\EmoticonGIFKeyboard\emoticonpack-facebook\emoticonpack-facebook.iml" />
       <module fileurl="file://$PROJECT_DIR$/emoticonpack-htc/emoticonpack-htc.iml" filepath="$PROJECT_DIR$/emoticonpack-htc/emoticonpack-htc.iml" />
+      <module fileurl="file://F:\git-clone\EmoticonGIFKeyboard\emoticonpack-htc\emoticonpack-htc.iml" filepath="F:\git-clone\EmoticonGIFKeyboard\emoticonpack-htc\emoticonpack-htc.iml" />
       <module fileurl="file://$PROJECT_DIR$/emoticonpack-ios/emoticonpack-ios.iml" filepath="$PROJECT_DIR$/emoticonpack-ios/emoticonpack-ios.iml" />
+      <module fileurl="file://F:\git-clone\EmoticonGIFKeyboard\emoticonpack-ios\emoticonpack-ios.iml" filepath="F:\git-clone\EmoticonGIFKeyboard\emoticonpack-ios\emoticonpack-ios.iml" />
       <module fileurl="file://$PROJECT_DIR$/emoticonpack-lg/emoticonpack-lg.iml" filepath="$PROJECT_DIR$/emoticonpack-lg/emoticonpack-lg.iml" />
+      <module fileurl="file://F:\git-clone\EmoticonGIFKeyboard\emoticonpack-lg\emoticonpack-lg.iml" filepath="F:\git-clone\EmoticonGIFKeyboard\emoticonpack-lg\emoticonpack-lg.iml" />
       <module fileurl="file://$PROJECT_DIR$/emoticonpack-messenger/emoticonpack-messenger.iml" filepath="$PROJECT_DIR$/emoticonpack-messenger/emoticonpack-messenger.iml" />
+      <module fileurl="file://F:\git-clone\EmoticonGIFKeyboard\emoticonpack-messenger\emoticonpack-messenger.iml" filepath="F:\git-clone\EmoticonGIFKeyboard\emoticonpack-messenger\emoticonpack-messenger.iml" />
       <module fileurl="file://$PROJECT_DIR$/emoticonpack-samsung/emoticonpack-samsung.iml" filepath="$PROJECT_DIR$/emoticonpack-samsung/emoticonpack-samsung.iml" />
+      <module fileurl="file://F:\git-clone\EmoticonGIFKeyboard\emoticonpack-samsung\emoticonpack-samsung.iml" filepath="F:\git-clone\EmoticonGIFKeyboard\emoticonpack-samsung\emoticonpack-samsung.iml" />
       <module fileurl="file://$PROJECT_DIR$/emoticonpack-twitter/emoticonpack-twitter.iml" filepath="$PROJECT_DIR$/emoticonpack-twitter/emoticonpack-twitter.iml" />
+      <module fileurl="file://F:\git-clone\EmoticonGIFKeyboard\emoticonpack-twitter\emoticonpack-twitter.iml" filepath="F:\git-clone\EmoticonGIFKeyboard\emoticonpack-twitter\emoticonpack-twitter.iml" />
       <module fileurl="file://$PROJECT_DIR$/emoticonpack-windows10/emoticonpack-windows10.iml" filepath="$PROJECT_DIR$/emoticonpack-windows10/emoticonpack-windows10.iml" />
+      <module fileurl="file://F:\git-clone\EmoticonGIFKeyboard\emoticonpack-windows10\emoticonpack-windows10.iml" filepath="F:\git-clone\EmoticonGIFKeyboard\emoticonpack-windows10\emoticonpack-windows10.iml" />
       <module fileurl="file://$PROJECT_DIR$/emoticonpack-windows8/emoticonpack-windows8.iml" filepath="$PROJECT_DIR$/emoticonpack-windows8/emoticonpack-windows8.iml" />
+      <module fileurl="file://F:\git-clone\EmoticonGIFKeyboard\emoticonpack-windows8\emoticonpack-windows8.iml" filepath="F:\git-clone\EmoticonGIFKeyboard\emoticonpack-windows8\emoticonpack-windows8.iml" />
       <module fileurl="file://$PROJECT_DIR$/gifpack-giphy/gifpack-giphy.iml" filepath="$PROJECT_DIR$/gifpack-giphy/gifpack-giphy.iml" />
+      <module fileurl="file://F:\git-clone\EmoticonGIFKeyboard\gifpack-giphy\gifpack-giphy.iml" filepath="F:\git-clone\EmoticonGIFKeyboard\gifpack-giphy\gifpack-giphy.iml" />
       <module fileurl="file://$PROJECT_DIR$/gifpack-tenor/gifpack-tenor.iml" filepath="$PROJECT_DIR$/gifpack-tenor/gifpack-tenor.iml" />
+      <module fileurl="file://F:\git-clone\EmoticonGIFKeyboard\gifpack-tenor\gifpack-tenor.iml" filepath="F:\git-clone\EmoticonGIFKeyboard\gifpack-tenor\gifpack-tenor.iml" />
     </modules>
   </component>
 </project>
