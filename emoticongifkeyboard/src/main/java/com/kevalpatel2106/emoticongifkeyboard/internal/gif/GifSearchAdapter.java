@@ -25,6 +25,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.kevalpatel2106.emoticongifkeyboard.R;
 import com.kevalpatel2106.emoticongifkeyboard.gifs.Gif;
 
@@ -63,19 +64,17 @@ final class GifSearchAdapter extends RecyclerView.Adapter<GifSearchAdapter.GifVi
     }
 
     @Override
-    public GifViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public GifViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new GifViewHolder(LayoutInflater.from(mContext).inflate(R.layout.item_gif_search, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(GifViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull GifViewHolder holder, int position) {
         final Gif gif = mData.get(position);
         if (gif != null) {
             Glide.with(mContext)
                     .load(gif.getPreviewGifUrl())
-                    .asGif()
-                    .crossFade()
-                    .centerCrop()
+                    .apply(new RequestOptions().centerCrop())
                     .into(holder.gifIv);
 
             holder.gifIv.setOnClickListener(new View.OnClickListener() {

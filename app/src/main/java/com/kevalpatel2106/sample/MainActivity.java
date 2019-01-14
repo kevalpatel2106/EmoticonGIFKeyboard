@@ -26,6 +26,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.kevalpatel2106.emoticongifkeyboard.EmoticonGIFKeyboardFragment;
 import com.kevalpatel2106.emoticongifkeyboard.emoticons.Emoticon;
 import com.kevalpatel2106.emoticongifkeyboard.emoticons.EmoticonSelectListener;
@@ -132,8 +133,7 @@ public class MainActivity extends AppCompatActivity {
                         Log.d(TAG, "onGifSelected: " + gif.getGifUrl());
                         Glide.with(MainActivity.this)
                                 .load(gif.getGifUrl())
-                                .asGif()
-                                .placeholder(R.mipmap.ic_launcher)
+                                .apply(new RequestOptions().placeholder(R.mipmap.ic_launcher))
                                 .into(gifImageView);
                     }
                 });

@@ -20,7 +20,6 @@ apply from: '../gradle/config.gradle'
 
 android {
     compileSdkVersion buidlConfig.compile
-    buildToolsVersion buidlConfig.buildToolVersion
 
     compileOptions {
         sourceCompatibility javaCompatibility.sourceCompatibility

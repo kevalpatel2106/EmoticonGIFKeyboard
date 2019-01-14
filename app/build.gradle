@@ -20,8 +20,6 @@ apply from: '../gradle/deps.gradle'
 
 android {
     compileSdkVersion buidlConfig.compile
-    buildToolsVersion buidlConfig.buildToolVersion
-
     compileOptions {
         sourceCompatibility javaCompatibility.sourceCompatibility
         targetCompatibility javaCompatibility.targetCompatibility
@@ -68,7 +66,7 @@ dependencies {
     implementation project(':emoticonpack-htc')
     implementation project(':emoticonpack-lg')
 
-    implementation 'com.android.support:multidex:1.0.2'
+    implementation 'com.android.support:multidex:1.0.3'
     implementation(otherLib.glide)
     implementation supportLib.appCompat
 }

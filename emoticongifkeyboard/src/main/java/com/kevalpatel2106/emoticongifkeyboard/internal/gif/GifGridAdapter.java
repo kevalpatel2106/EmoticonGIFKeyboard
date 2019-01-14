@@ -25,6 +25,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.kevalpatel2106.emoticongifkeyboard.R;
 import com.kevalpatel2106.emoticongifkeyboard.gifs.Gif;
 
@@ -89,9 +90,7 @@ final class GifGridAdapter extends ArrayAdapter<Gif> {
         if (gif != null) {
             Glide.with(mContext)
                     .load(gif.getPreviewGifUrl())
-                    .asGif()
-                    .crossFade()
-                    .centerCrop()
+                    .apply(new RequestOptions().centerCrop())
                     .into(holder.gifIv);
 
             holder.gifIv.setOnClickListener(new View.OnClickListener() {

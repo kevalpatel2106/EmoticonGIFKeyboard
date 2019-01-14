@@ -17,9 +17,8 @@
 ext {
     buidlConfig = [
             min             : 16,
-            target          : 26,
-            compile         : 26,
-            buildToolVersion: '26.0.0',
+            target          : 28,
+            compile         : 28,
     ]
 
     javaCompatibility = [

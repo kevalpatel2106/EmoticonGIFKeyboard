@@ -21,7 +21,6 @@ apply from: '../gradle/deps.gradle'
 
 android {
     compileSdkVersion buidlConfig.compile
-    buildToolsVersion buidlConfig.buildToolVersion
 
     compileOptions {
         sourceCompatibility javaCompatibility.sourceCompatibility

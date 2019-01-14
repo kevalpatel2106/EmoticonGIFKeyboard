@@ -3,30 +3,11 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
+        <compositeConfiguration>
+          <compositeBuild compositeDefinitionSource="SCRIPT" />
+        </compositeConfiguration>
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="modules">
-          <set>
-            <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/emoticongifkeyboard" />
-            <option value="$PROJECT_DIR$/emoticonpack-android7" />
-            <option value="$PROJECT_DIR$/emoticonpack-android8" />
-            <option value="$PROJECT_DIR$/emoticonpack-emojidex" />
-            <option value="$PROJECT_DIR$/emoticonpack-emojione" />
-            <option value="$PROJECT_DIR$/emoticonpack-facebook" />
-            <option value="$PROJECT_DIR$/emoticonpack-htc" />
-            <option value="$PROJECT_DIR$/emoticonpack-ios" />
-            <option value="$PROJECT_DIR$/emoticonpack-lg" />
-            <option value="$PROJECT_DIR$/emoticonpack-messenger" />
-            <option value="$PROJECT_DIR$/emoticonpack-samsung" />
-            <option value="$PROJECT_DIR$/emoticonpack-twitter" />
-            <option value="$PROJECT_DIR$/emoticonpack-windows10" />
-            <option value="$PROJECT_DIR$/emoticonpack-windows8" />
-            <option value="$PROJECT_DIR$/gifpack-giphy" />
-            <option value="$PROJECT_DIR$/gifpack-tenor" />
-          </set>
-        </option>
         <option name="resolveModulePerSourceSet" value="false" />
       </GradleProjectSettings>
     </option>
